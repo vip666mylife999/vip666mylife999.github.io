@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang='en-US'>
+<head>
+<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+<base href="https://vip666mylife999.github.io/">
+<link rel="icon" href="assets/hcpp-icon.png">
+<link rel="stylesheet" type="text/css" href="assets/style.css?v=26-1">
+<link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<title>h/cpp - Standard Library Sequence Containers</title>
+<meta name="description" content="Learn about C++'s standard sequence containers: vector, array, deque, list, forward_list.">
+<meta name="keyword" content="cpp data structure container storage complexity contiguous random access node-based key value linked-list vector array deque list forward_list">
+<meta name="author" content="André Müller">
+<meta name="date" content="2021-02-02">
+<meta name="copyright" content="2019-2021&ensp;André Müller">
+<meta name="hcpp-page-category" content="cat-article">
+<meta name="hcpp-tags" content="C++ C++11 C++17 article beginner-level containers std-library ">
+</head>
+<body>
+<div id="top-nav"><div id="titlebar" class="boxed-wide"><div id="main-branding">
+<a href="index.html"  id="main-logo" title="home"><span class="hwide"><img src="assets/hcpp.svg" style="max-width:100%;height:40;"></img></span>
+<span class="hslim"><img src="assets/hcpp-square.svg" style="max-width:100%;height:40;"></img></span></a>
+
+<div id="main-title">
+<a href="index.html"  title="home">hacking&nbsp;C++</a>
+</div></div>
+<div id="main-menu"><div class="entry "><a href="tags/news.html">News</a></div>
+<div class="submenu "><a>Learning</a><div class="submenu-dropdown">
+<a href="cpp/beginners_guide.html" >Beginner's Guide to C++</a>
+
+<hr>
+
+<a href="cpp/std/containers.html" >Standard Library Containers</a>
+
+
+<a href="cpp/std/algorithms.html" >Standard Library Algorithms</a>
+
+<hr>
+
+<a href="cpp/cheat_sheets.html" >Infographics / Cheat Sheets</a>
+
+
+<a href="tags/article.html" >All Articles</a>
+
+<hr>
+
+<a href="dev/web_learning.html" >Online Learning</a>
+
+
+<a href="cpp/books.html" >Books</a>
+</div></div>
+<div class="submenu "><a>Links</a><div class="submenu-dropdown">
+<a href="cpp/community.html" >Community Resources</a>
+
+
+<a href="cpp/tools/ecosystem.html" >Tool Ecosystem</a>
+
+<hr>
+
+<a href="tags/list.html" >All Resource Lists</a>
+
+<hr>
+
+<a href="dev/vim_plugins.html" >VIM Plugins</a>
+</div></div>
+<div class="submenu "><a>About</a><div class="submenu-dropdown">
+<a href="about.html" >Why &amp; Who</a>
+
+
+<a href="privacy.html" >Privacy</a>
+</div></div></div>
+<div id="main-socialbar">
+<a href="https://twitter.com/hackingcpp" ><span class="cat-twitter"></span></a>
+</div>
+<div class="navlinks" id="nav-path"></div>
+<div id="searchbar"><div id="searchbox"><input id="search-input"></input>
+<button id="search-clear"></button>
+<button id="search-run"></button>
+<button id="search-close"></button></div></div>
+<div class="hamburger " id="main-hamburger"><button title=""></button><div class="hamburger-dropdown"><a class="nav-icon-collapse-all" onclick="collapse_all_major_folds()">Collapse <strong>All</strong> Levels</a>
+
+<a class="nav-icon-collapse" onclick="collapse_major_folds()">Collapse Top Level</a>
+
+<a class="nav-icon-expand" onclick="expand_major_folds()">Expand Top Level</a>
+
+<a class="nav-icon-expand-all" onclick="expand_all_major_folds()">Expand <strong>All</strong> Levels</a>
+
+<hr>
+
+<a href="tags/news.html" class="cat-news" >News</a>
+
+
+<a href="tags/featured.html" class="cat-featured" >Featured</a>
+
+
+<a href="tags/article.html" class="cat-article" >Articles</a>
+
+
+<a href="cpp/beginners_guide.html" class="cat-guide" >Beginner's Guide to C++</a>
+
+
+<a href="tags/list.html" class="cat-list" >Lists</a>
+
+<hr>
+
+<a href="https://twitter.com/hackingcpp" ><span class="cat-twitter"></span> @hackingcpp</a>
+
+
+<a href="about.html" class="cat-about" >About</a>
+
+
+<a href="privacy.html" class="cat-contact" >Privacy</a>
+
+
+<a href="index.html" class="cat-home" >Home</a>
+</div></div></div>
+<nav id="guide-bar" class="boxed-wide"><div class="guide-nav">
+<div class="go-prev"><a href="cpp/std/iterators_intro.html"><span class="hwide">Iterators</span></a></div>
+<div class="go-up"><a href="cpp/beginners_guide.html#std-lib-containers">Beginner's Guide <span class="hxwide">/ Containers</span></a></div>
+<div class="go-next"><a href="cpp/std/sequence_views.html"><span class="hwide">Views</span></a></div>
+</div></nav></div>
+<div id="drawer-top" class="boxed-wide"><div id="search-results"><div id="search-header"><h1 class="cat-search" id="search-title"></h1></div>
+<div id="search-locations"><ul class="resources" id="search-location-items"></ul></div>
+<div id="search-footer"></div></div></div>
+<div id="drawer-left"><div id="drawer-left-heading"><a class="cat-guide" href="cpp/beginners_guide.html#intro">Beginner's Guide</a></div>
+<div id="drawer-left-content"><div class="tree-fold plain" ><h5>First Steps</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/tools/beginner_dev_setup.html" >Development Setup</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/hello_world.html" >Hello World</a>
+</li>
+
+<li>
+<a href="cpp/std/io_basics.html" >Input &amp; Output <small>(Basics)</small></a>
+</li>
+
+<li>
+<a href="cpp/lang/fundamental_types.html" >Fundamental Types</a>
+</li>
+
+<li>
+<a href="cpp/std/vector_intro.html" >std::vector Introduction</a>
+</li>
+
+<li>
+<a href="cpp/lang/enumerations.html" >Enumerations</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/lang/control_flow_basics.html" >Control Flow <small>(Basics)</small></a>
+</li>
+
+<li>
+<a href="cpp/lang/type_system_basics.html" >Type System <small>(Basics)</small></a>
+</li>
+
+<li>
+<a href="cpp/lang/function_basics.html" >Functions <small>(Basics)</small></a>
+</li>
+
+<li>
+<a href="cpp/lang/memory_basics.html" >Memory <small>(Basics)</small></a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/std/string_basics.html" >String <small>(Basics)</small></a>
+</li>
+
+<li>
+<a href="cpp/lang/references.html" >References</a>
+</li>
+
+<li>
+<a href="cpp/lang/aggregates.html" >Simple Aggregates</a>
+</li>
+
+<li>
+<a href="cpp/lang/function_call_mechanics.html" >Function Call Mechanics</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Input &amp; Output</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/command_line_arguments.html" >Command Line Arguments</a>
+</li>
+
+<li>
+<a href="cpp/std/file_streams.html" >File Input &amp; Output</a>
+</li>
+
+<li>
+<a href="cpp/std/io_streams.html" >Stream Input &amp; Output</a>
+</li>
+
+<li>
+<a href="cpp/std/istream_recover_from_errors.html" >Recover From Input Errors</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Custom Types &ndash; Part 1</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/custom_type_basics.html" >Simple Classes / Custom Types</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/lang/pointers.html" >Pointers</a>
+</li>
+
+<li>
+<a href="cpp/lang/destructors.html" >Destructors</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/lang/exceptions.html" >Exceptions</a>
+</li>
+
+<li>
+<a href="cpp/lang/noexcept.html" >Noexcept</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Diagnostics</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/tools/compiler_warnings.html" >Compiler Warnings</a>
+</li>
+
+<li>
+<a href="cpp/tools/gdb_intro.html" >Debugging With gdb</a>
+</li>
+
+<li>
+<a href="cpp/tools/asan.html" >Address Sanitizer</a>
+</li>
+
+<li>
+<a href="cpp/tools/ubsan.html" >Undefined Behavior Sanitizer</a>
+</li>
+
+<li>
+<a href="cpp/tools/valgrind.html" >valgrind</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Standard Library</h5></div>
+<div class="content " ><div class="tree-fold plain" ><h6>Containers &amp; Views</h6></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/std/iterators_intro.html" >Iterators</a>
+</li>
+
+<li>
+<a href="cpp/std/sequence_containers.html" >Sequence Containers</a>
+</li>
+
+<li>
+<a href="cpp/std/sequence_views.html" >Sequence Views</a>
+</li>
+
+<li>
+<a href="cpp/std/associative_containers.html" >Associative Containers</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h6>Standard Algorithms</h6></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/std/algorithms/intro.html" >Basic Paradigms</a>
+</li>
+
+<li>
+<a href="cpp/std/container_traversal.html" >Container Traversal</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/std/algorithms/min_max.html" >Minimum / Maximum</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/existence_queries.html" >Existence Queries</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/finding.html" >Finding Elements</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/comparing_ranges.html" >Comparing Ranges</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/design/function_objects.html" >Function Objects</a>
+</li>
+
+<li>
+<a href="cpp/lang/lambda_basics.html" >Lambdas <small>(Basics)</small></a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/std/algorithms/reordering.html" >Sequence Reordering</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/element_modification.html" >Changing Elements</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/numeric.html" >Numeric Algorithms</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/sorted_sequence_operations.html" >Sorted Sequence Operations</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h6>Utilities</h6></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/std/special_containers.html" >Special Containers</a>
+</li>
+
+<li>
+<a href="cpp/std/special_iterators.html" >Special Iterators</a>
+</li>
+
+<li>
+<a href="cpp/std/random.html" >Random Numbers</a>
+</li></ul></div></div>
+<div class="tree-fold plain" ><h5>Code Organization</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/separate_compilation.html" >Separate Compilation</a>
+</li>
+
+<li>
+<a href="cpp/lang/namespaces.html" >Namespaces</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Custom Types &ndash; Part 2</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/friends.html" >Friends</a>
+</li>
+
+<li>
+<a href="cpp/lang/comparisons.html" >Comparisons</a>
+</li>
+
+<li>
+<a href="cpp/design/literal_types.html" >Literal Types</a>
+</li>
+
+<li>
+<a href="cpp/design/arithmetic_types.html" >Arithmetic Types</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/std/unique_ownership.html" >Unique Resource Ownership</a>
+</li>
+
+<li>
+<a href="cpp/design/node_based_data_structures.html" >Node-Based Data Structures</a>
+</li>
+
+<li>
+<a href="cpp/lang/special_class_members.html" >Special Class Members</a>
+</li>
+
+<li>
+<a href="cpp/std/shared_ownership.html" >Shared Resource Ownership</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/lang/object_oriented_programming.html" >Object Oriented Programming</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/lang/move_semantics.html" >Move Semantics</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Generic Programming</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/templates.html" >Templates</a>
+</li>
+
+<li>
+<a href="cpp/lang/type_casts.html" >Type Casts</a>
+</li>
+
+<li>
+<a href="cpp/lang/type_deduction.html" >Type Deduction</a>
+</li>
+
+<li>
+<a href="cpp/std/type_traits.html" >Type Traits</a>
+</li>
+
+<li>
+<a href="cpp/lang/perfect_forwarding.html" >Perfect Forwarding</a>
+</li>
+
+<li>
+<a href="cpp/lang/concepts.html" >Concepts &amp; Constrained Templates</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Memory Management</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/pointer_arithmetic.html" >Pointer Arithmetic</a>
+</li>
+
+<li>
+<a href="cpp/lang/c_arrays.html" >C-Style Arrays</a>
+</li>
+
+<li>
+<a href="cpp/lang/manual_memory_management.html" >Manual Memory Management</a>
+</li>
+
+<li>
+<a href="cpp/design/allocators.html" >Allocators</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Software Design Basics</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/design/principles.html" >Design Principles</a>
+</li>
+
+<li>
+<a href="cpp/design/function_interface_example1.html" >Design Study: Function Interfaces</a>
+</li>
+
+<li>
+<a href="cpp/design/angle_axis_rotation.html" >Design Study: Angle-Axis Rotation</a>
+</li>
+
+<li>
+<a href="cpp/design/traversal_approaches.html" >Traversal Approaches</a>
+</li>
+
+<li>
+<a href="cpp/design/pimpl.html" >The PIMPL Idiom</a>
+</li></ul></div></div>
+<button id="drawer-left-toggle" title=""></button></div>
+<div id="main-content" class="boxed-wide "><article class="boxed-normal ">
+<header class="plain">
+<h1>
+<span class="hwide">Standard Sequence Containers</span><span class="hslim">Sequence Containers</span><span class="hnavi">Sequ.Containers</span></h1>
+<nav id="page-navbar" class=""></nav>
+<div class="panel-col "{style=""><table class="vstriped min-hborders"><tbody><tr><td><h6><a class="" href="cpp/std/sequence_containers.html#array" onclick="reveal_anchor()">
+
+<code>array&lt;<em>T</em>,<em>size</em>&gt;</code>
+</a></h6></td>
+<td><div class="block ">
+
+<a href="cpp/std/sequence_containers.png"class="img " ><img src="cpp/std/array_thumb.svg"style="max-width:100%;max-width: 180px; width: 100%;"></img></a></div>
+<p>fixed-size contiguous array</p></td></tr>
+<tr><td><h6><a class="" href="cpp/std/sequence_containers.html#vector" onclick="reveal_anchor()">
+
+<code>vector&lt;<em>T</em>&gt;</code>
+</a></h6></td>
+<td><div class="block ">
+
+<a href="cpp/std/sequence_containers.png"class="img " ><img src="cpp/std/vector_thumb.svg"style="max-width:100%;max-width: 200px; width: 100%;"></img></a></div>
+<p>dynamic contiguous array; armortized <em>O</em>(1) growth strategy;<br>
+C++'s <q>default</q> container</p></td></tr>
+<tr><td><h6><a class="" href="cpp/std/sequence_containers.html#deque" onclick="reveal_anchor()">
+
+<code>deque&lt;<em>T</em>&gt;</code>
+</a></h6></td>
+<td><div class="block ">
+
+<a href="cpp/std/sequence_containers.png"class="img " ><img src="cpp/std/deque_thumb.svg"style="max-width:100%;max-width: 240px; width: 100%;"></img></a></div>
+<p>double-ended queue; fast insert/erase at both ends</p></td></tr>
+<tr><td><h6><a class="" href="cpp/std/sequence_containers.html#list" onclick="reveal_anchor()">
+
+<code>list&lt;<em>T</em>&gt;</code>
+</a></h6></td>
+<td><div class="block ">
+
+<a href="cpp/std/sequence_containers.png"class="img " ><img src="cpp/std/list_thumb.svg"style="max-width:100%;max-width: 290px; width: 100%;"></img></a></div>
+<p>doubly-linked list; <em>O</em>(1) insert, erase &amp; splicing;<br>
+in practice often slower than vector</p></td></tr>
+<tr><td><h6><a class="" href="cpp/std/sequence_containers.html#forward_list" onclick="reveal_anchor()">
+
+<code>forward_list&lt;<em>T</em>&gt;</code>
+</a></h6></td>
+<td><div class="block ">
+
+<a href="cpp/std/sequence_containers.png"class="img " ><img src="cpp/std/forward_list_thumb.svg"style="max-width:100%;max-width: 300px; width: 100%;"></img></a></div>
+<p>singly-linked list; <em>O</em>(1) insert, erase &amp; splicing; needs less memory than <code>list</code>;
+in practice often slower than vector</p></td></tr></tbody></table></div>
+</header>
+<section class="main plain"><h2 class="hfold " open><span class="nav-none">Common Features</span>
+<span class="nav-only">Common</span></h2>
+<div class="content " ><div class="panel-fold " open><h3><span class="hwide">Regularity: Copy, Assign, Compare</span>
+<span class="hslim">Regularity: Copy, Assign, Compare</span>
+<span class="hnavi">Regularity</span></h3>
+<a class="nav " id="regularity" keywords="regularity regular regularity deep ownership copy copying assign assignment compare comparing"></a></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><h5 class="nav-none">All standard sequence containers are <em>regular</em> types:</h5>
+<ul>
+<li><strong>deeply copyable</strong>: copying creates a new container object and copies all contained values</li>
+
+<li><strong>deeply assignable</strong>: all contained objects are copied from source to assignment target</li>
+
+<li><strong>deeply comparable</strong>: comparing two containers compares the contained objects</li>
+
+<li><strong>deep ownership</strong>: destroying the container destroys all contained objects</li></ul></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; a {4,7,1,9};
+<hr><span class="c6 ">std::</span>vector&lt;int&gt; b {1,2,3};
+bool equal1 = (a <span class="e1">==</span> b);  <span class="comment ">// false</span>
+a <span class="e1">=</span> b;  <span class="comment ">// copy assignment &rArr; b: <ul class="array x2"><li class="">4</li><li class="">7</li><li class="">1</li><li class="">9</li></ul></span>
+bool equal2 = (a <span class="e1">==</span> b);  <span class="comment ">// true</span>
+a[0] = 3;     <span class="comment ">// a: <ul class="array x2"><li class="x2i">3</li><li class="">7</li><li class="">1</li><li class="">9</li></ul> b: <ul class="array x2"><li class="">4</li><li class="">7</li><li class="">1</li><li class="">9</li></ul></span>
+bool equal3 = (a <span class="e1">==</span> b);  <span class="comment ">// false</span>
+<hr><span class="comment ">// different ways of making exact copies,</span>
+<span class="comment ">// i.e., <em>copy-constructing</em> new containers:</span>
+<span class="c6 ">std::</span>vector&lt;int&gt; a2 <span class="e1">{</span>a<span class="e1">}</span>;
+<span class="c6 ">std::</span>vector&lt;int&gt; a3 <span class="e1">(</span>a<span class="e1">)</span>;
+<span class="c6 ">std::</span>vector&lt;int&gt; a4 <span class="e1">=</span> a;
+<strong>auto</strong> a5 <span class="e1">{</span>a<span class="e1">}</span>;
+<strong>auto</strong> a6 <span class="e1">(</span>a<span class="e1">)</span>;
+<strong>auto</strong> a7 <span class="e1">=</span> a;</code></pre>
+</div></div>
+<div class="panel-fold " open><h3><span class="nav-none">Type Argument Deduction</span>
+<span class="nav-only">Type Deduction</span>
+<div class="labels "><a class="lbl " href="tags/c++17.html">C++17</a></div></h3>
+<a class="nav " id="ctad" keywords="ctad ctad"></a></div>
+<div class="panel-col "{style=""><div class="panel "><p>As of C++17 the element type can be deduced from constructor calls.</p></div>
+<div class="panel-row first-wide"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 hwide">std::</span>vector v {1, 2, 3, 4};
+<span class="c6 hwide">std::</span>vector v {1.<span class="e2">f</span>, 2.3<span class="e2">f</span><span class="hwide">, 4.5<span class="e2">f</span></span>};
+<span class="c6 hwide">std::</span>vector v {1<span class="e2">.</span>, 2<span class="e2">.</span>3, 4<span class="e2">.</span>6};
+<hr>struct p2 { int x; int y; };
+<span class="c6 hwide">std::</span>vector v {<span class="c2">p2{1,2}</span>};</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code><span class="c6 hwide">std::</span>vector&lt;int&gt;
+<span class="c6 hwide">std::</span>vector&lt;float&gt;
+<span class="c6 hwide">std::</span>vector&lt;double&gt;
+<hr>
+<span class="c6 hwide">std::</span>vector&lt;p2&gt;</code></pre>
+</div></div></div>
+<div class="panel-fold " open><h3><span class="nav-none">Common Interface Parts</span>
+<span class="nav-only">Interface</span></h3></div>
+<div class="panel hvtight bg-filled "><div class="panel-fold " open><h4 class="nav-none">Iterators for Forward Traversal</h4></div>
+<div class="panel "><p>can be obtained from all standard sequence containers either with
+member functions:</p>
+<ul class="defn "><li><code><em>container</em><strong>.begin</strong>()
+</code>&rarr; <em>@first_element</em>
+</li>
+<li><code><em>container</em><strong>.end</strong>()
+</code>&rarr; <em>@one_behind_last_element</em>
+</li></ul>
+<p>or with free-standing functions:&emsp;<a class="lbl " href="tags/c++11.html">C++11</a></p>
+<ul class="defn "><li><code><span class="c6 ">std::</span><strong>begin</strong>(<em>container</em>)
+</code>&rarr; <em>@first_element</em>
+</li>
+<li><code><span class="c6 ">std::</span><strong>end</strong>(<em>container</em>)
+</code>&rarr; <em>@one_behind_last_element</em>
+</li></ul>
+<p>If you are not familiar with what iterators are,
+please refer to <a class="" href="cpp/std/iterators_intro.html" title="click to go to page &quot;Iterators (Introduction)&quot;">
+
+this article
+</a>.</p></div>
+<div class="panel-fold " ><h4 class="nav-none">Const Iterators for Forward Traversal</h4></div>
+<div class="panel "><p>can be obtained from all standard sequence containers either with
+member functions:</p>
+<ul class="defn "><li><code><em>container</em><strong>.<span class="e1">c</span>begin</strong>()
+</code>&rarr; <em>const@first_element</em>
+</li>
+<li><code><em>container</em><strong>.<span class="e1">c</span>end</strong>()
+</code>&rarr; <em>const@one_behind_last_element</em>
+</li></ul>
+<p>or with free-standing functions:&emsp;<a class="lbl " href="tags/c++11.html">C++11</a></p>
+<ul class="defn "><li><code><span class="c6 ">std::</span><strong><span class="e1">c</span>begin</strong>(<em>container</em>)
+</code>&rarr; <em>const@first_element</em>
+</li>
+<li><code><span class="c6 ">std::</span><strong><span class="e1">c</span>end</strong>(<em>container</em>)
+</code>&rarr; <em>const@one_behind_last_element</em>
+</li></ul></div>
+<div class="panel-fold " open><h4 class="nav-none">Emptiness Query</h4></div>
+<div class="panel "><p>either with member function</p>
+<ul class="defn "><li><code>container.<strong>empty</strong>()
+</code>&rarr; <em>true</em>, if container has no elements
+</li></ul>
+<p>or with free-standing function:&emsp;<a class="lbl " href="tags/c++11.html">C++11</a></p>
+<ul class="defn "><li><code><span class="c6 ">std::</span><strong>empty</strong>(<em>container</em>)
+</code>&rarr; <em>true</em>, if container has no elements
+</li></ul></div>
+<div class="panel-fold " open><h4 class="nav-none">Type Interface</h4></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><ul>
+<li><code>container::<strong>value_type</strong></code></li>
+
+<li><code>container::<strong>size_type</strong></code></li>
+
+<li><code>container::<strong>iterator</strong></code></li>
+
+<li><code>container::<strong>const_iterator</strong></code></li>
+&hellip;</ul></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>using con_t = <span class="c6 ">std::</span>vector&lt;double&gt;;
+con_t::size_type i = 0;         <span class="comment ">// std::size_t</span>
+auto x = con_t::value_type{0};  <span class="comment ">// double</span></code></pre>
+</div></div></div></div>
+<h2 class="hfold " open><span class="nav-none"><code>array&lt;<em>T</em>,<em>size</em>&gt;</code></span>
+<span class="nav-only"><code>array</code></span></h2>
+<div class="content " ><a class="nav " id="array" keywords="array std::array array"></a>
+<div class="panel-col "{style=""><div class="panel "><ul class="symbols ">
+<li class="cat-positive">overhead-free random access</li>
+
+<li class="cat-positive">fast traversal; good for linear searches</li>
+
+<li class="cat-neutral"><code class="inset "><em>size</em></code> has to be a constant expression (= known at compile time)</li>
+
+<li class="cat-neutral">does not support size-changing operations (resize, insert, ersase, &hellip;)</li>
+
+<li class="cat-negative">potentially slow if element type has high copy/assignment cost
+(reordering elements requires copying/moving them)</li></ul></div>
+<div class="panel-row first-xwide"{style=""><div class="panel cs-light vstretch">
+<pre class="notranslate"><code><span class="c6">#include &lt;array&gt;</span>
+<span class="c6 ">std::</span><strong>array&lt;int,6&gt;</strong> a <span class="e1">{</span>4,8,15,16,23,42<span class="e1">}</span>;
+<span class="c0">cout &lt;&lt;</span> a.<span class="e1">size</span>();   <span class="comment ">// 6</span>
+<span class="c0">cout &lt;&lt;</span> a.<span class="e1">[0]</span>;      <span class="comment ">// 4</span>
+<span class="c0">cout &lt;&lt;</span> a.<span class="e1">[3]</span>;      <span class="comment ">// 16</span>
+<span class="c0">cout &lt;&lt;</span> a.<span class="e1">front</span>();  <span class="comment ">// 4</span>
+<span class="c0">cout &lt;&lt;</span> a.<span class="e1">back</span>();   <span class="comment ">// 42</span>
+<hr>array&lt;int,<span class="e1">3</span>&gt; b {7,8,9};
+<s>a = b;</s>  <span class="comment ">// <span class="sym-err"></span><span class="hwide e-err"> COMPILER ERROR:</span> <span class="c-err">types don't match!</span></span></code></pre>
+</div>
+<div class="panel "><p><span class="e1">STACK</span></p>
+<table class="memory ";><tbody><tr><td></td></tr>
+<tr><td class="b1">42</td></tr>
+<tr><td class="b1">23</td></tr>
+<tr><td class="b1">16</td></tr>
+<tr><td class="b1">15</td></tr>
+<tr><td class="b1">8</td></tr>
+<tr><td class="b1">4</td></tr>
+<tr><td class="b0">&hellip;</td></tr></tbody></table></div></div></div></div>
+<h2 class="hfold " open><span class="nav-none"><code>vector&lt;<em>T</em>&gt;</code></span>
+<span class="nav-only"><code>vector</code></span></h2>
+<div class="content " ><a class="nav " id="vector" keywords="vector std::vector vector"></a>
+<div class="panel "><h5 class="nav-none">C++'s <q>default</q> container&emsp;
+<img src="cpp/std/vector_thumb.svg" style="max-width:100%;max-width: 220px; width: 100%;"></img></h5>
+<ul class="symbols ">
+<li class="cat-positive">overhead-free random access</li>
+
+<li class="cat-positive">fast traversal; good for linear searches</li>
+
+<li class="cat-positive">insertion at the end in amortized constant time</li>
+
+<li class="cat-negative">potentially slow if insert/erase operations
+at front and/or random positions dominate</li>
+
+<li class="cat-negative">potentially slow if element type has high copy/assignment cost
+(reordering elements requires copying/moving them)</li>
+
+<li class="cat-negative">potentially long allocation times for very large amount
+of fundamental (<code>int</code>, <code>double</code>, &hellip;) values
+<small>(can be eliminated with <a class="" href="cpp/std/vector.html#no-init-wrapper" title="click to go to page &quot;std::vector&quot;">
+
+zero-overhead-zero-init wrappers
+</a>)</small></li></ul></div>
+<div class="panel-fold " ><h3>Quick Recap</h3></div>
+<div class="panel-col "{style=""><div class="panel-row "{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6">#include &lt;vector&gt;</span>
+<hr><span class="hwide"><span class="c6 ">std::</span></span><strong>vector&lt;int&gt;</strong> v<span class="e1"> {</span>2,4,5<span class="e1">}</span>;
+v.<span class="e1">push_back</span>(6);
+v.<span class="e1">pop_back</span>();
+v<span class="e1">[</span>1<span class="e1">]</span> = 3;
+<hr>cout &lt;&lt; v<span class="e1">[</span>2<span class="e1">]</span>;
+for(int x <span class="e1">:</span> v) <span class="hslim-br"></span><span class="hslim">  </span>cout &lt;&lt; x &lt;&lt; ' '
+<hr>v.<span class="e1">reserve</span>(8);
+v.<span class="e1">resize</span>(5, 0);
+cout &lt;&lt; v.<span class="e1">capacity</span>();
+cout &lt;&lt; v.<span class="e1">size</span>();</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code>
+<hr><ul class="array x2"><li class="">2</li><li class="">4</li><li class="">5</li></ul>
+<ul class="array x2"><li class="">2</li><li class="">4</li><li class="">5</li><li class="x2i">6</li></ul>
+<ul class="array x2"><li class="">2</li><li class="">4</li><li class="">5</li><li class="x0 dotted"> </li></ul>
+<ul class="array x2"><li class="">2</li><li class="x2i">3</li><li class="">5</li></ul>
+<hr><span class="hwide">prints </span><span class="e2">5</span><span class="hslim-br"></span><span class="hslim"></span>
+<span class="hwide">prints </span><span class="e2">2 3 5</span>
+<hr><ul class="array "><li class="x2">2</li><li class="x2">3</li><li class="x2">5</li><li class="x0 dotted"> </li><li class="x0 dotted"> </li><li class="x0 dotted"> </li><li class="x0 dotted"> </li><li class="x0 dotted"> </li></ul>
+<ul class="array "><li class="x2">2</li><li class="x2">3</li><li class="x2">5</li><li class="x2">0</li><li class="x2">0</li><li class="x0 dotted">0</li><li class="x0 dotted"> </li><li class="x0 dotted"> </li></ul>
+<span class="comment ">prints 8</span>
+<span class="comment ">prints 5</span></code></pre>
+</div></div>
+<div class="panel "><div class="max-half-width">
+<img style="max-width:100%;" src="cpp/std/vector_memory_layout2.svg"></img>
+</div></div></div>
+<div class="panel-fold " ><h3>Iterator Ranges</h3></div>
+<div class="panel hvtight bg-filled "><div class="panel-row responsive"{style=""><div class="panel "><h5 class="nav-none">= pair <code><span class="e2">[p,q)</span></code> of iterators</h5>
+<div class="pad-small"><img src="cpp/std/iterator_range.svg" style="max-width:100%;width:210px;"></img></div>
+<div class="panel "><p class="cat-important">end-of-range iterator <code><strong>q</strong></code>
+points one <strong>behind</strong> the last element 
+in the range</p></div></div>
+<div class="panel "><img src="cpp/std/iterator_ranges_examples_crop.svg" style="max-width:100%;width:100%;max-width:350px;"></img></div></div>
+<div class="panel-col "{style=""><div class="panel title vcompact "><h6 class="nav-none">Making Vectors From Ranges</h6></div>
+<div class="panel-row first-wide"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code>vector&lt;int&gt; u {0,1,2,3};<span class="hwide-br"></span><span class="hwide"></span>
+vector&lt;int&gt; v {<span class="e2">begin(u)</span>,<span class="hslim-br"></span><span class="hslim">              </span> <span class="e2">begin(u)+2</span>};</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code><span class="hslim-br"></span><span class="hslim"></span>u: <ul class="array x2"><li class="x2i ">0</li><li class="x2i ">1</li><li class="">2</li><li class="">3</li></ul>
+   <ul class="array plain"><li class=""><span class="sym-iter-up e2"></span></li><li class=""></li><li class=""><span class="sym-iter-up e2"></span></li><li class=""></li></ul>
+v: <ul class="array x2"><li class="">0</li><li class="">1</li></ul></code></pre>
+</div></div></div>
+<div class="panel-col "{style=""><div class="panel title vcompact "><h6 class="nav-none">Assigning Ranges To A Vector</h6></div>
+<div class="panel-row first-wide"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code>vector&lt;int&gt; u {0, 1, 2, 3};
+vector&lt;int&gt; w; <span class="annotation">&hellip;</span>
+w.<span class="e1">assign</span>(<span class="e2">begin(u)+1</span>,<span class="hslim-br"></span><span class="hslim">        </span> <span class="e2">end(u)</span>);</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code>u: <ul class="array "><li class="x2 ">0</li><li class="x2i ">1</li><li class="x2i ">2</li><li class="x2i ">3</li><li class="x0 dotted"> </li></ul>
+   <ul class="array plain"><li class=""></li><li class=""><span class="sym-iter-up e2"></span></li><li class=""></li><li class=""></li><li class=""><span class="sym-iter-up e2"></span></li></ul>
+w: <ul class="array "><li class="x2 ">1</li><li class="x2 ">2</li><li class="x2 ">3</li></ul><span class="hslim-br"></span><span class="hslim"></span></code></pre>
+</div></div></div></div>
+<div class="panel-fold " ><h3>Insert Elements</h3></div>
+<div class="panel hvtight bg-filled "><div class="panel-fold vexpand" open><h4 class="nav-none">Insert At The End (Fastest)</h4>
+<ul class="defn "><li><code><strong>.push_back</strong>(<em>element</em>)
+</code></li>
+<li><code><strong>.push_back</strong>({<em>elem1</em>,<em>elem2</em>,&hellip;})
+</code></li></ul></div>
+<div class="panel-row first-wide"{style=""><div class="panel cs-light vstretch">
+<pre class="notranslate"><code>vector&lt;int&gt; v {1,2,3};
+v.<span class="e1">push_back</span>(4);
+v.<span class="e1">push_back</span>({5,6});</code></pre>
+</div>
+<div class="panel comments cs-light vstretch">
+<pre class="notranslate"><code><ul class="array "><li class="x2i ">1</li><li class="x2i ">2</li><li class="x2i ">3</li></ul>
+<ul class="array "><li class="x2 ">1</li><li class="x2 ">2</li><li class="x2 ">3</li><li class="x2i ">4</li></ul>
+<ul class="array "><li class="x2 ">1</li><li class="x2 ">2</li><li class="x2 ">3</li><li class="x2 ">4</li><li class="x2i ">5</li><li class="x2i ">6</li></ul></code></pre>
+</div></div>
+<div class="panel-fold vexpand" open><h4 class="nav-none">Insert Anywhere (Potentially Slow)</h4>
+<p class="if-opened">insert positions are specified with <a class="" href="cpp/std/vector.html#iterators" onclick="reveal_anchor()">
+
+iterators
+</a></p>
+<ul class="defn "><li><code><strong>.insert</strong>(<em>@insert_pos</em>, <em>element</em>)
+</code></li>
+<li><code><strong>.insert</strong>(<em>@insert_pos</em>, {<em>elem1</em>,<em>elem2</em>,&hellip;})
+</code></li></ul></div>
+<div class="panel-row first-wide"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code>vector&lt;int&gt; v {1,2,3};
+
+<hr>v.<span class="e1">insert</span>(<span class="e2">begin(v)+1</span>, 5);
+
+<hr>v.<span class="e1">insert</span>(<span class="e2">begin(v)</span>, {7,8}); 
+
+<hr>v.<span class="e1">insert</span>(<span class="e2">end(v)</span>, 9);
+</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code>
+  <ul class="array "><li class="x2i ">1</li><li class="x2i ">2</li><li class="x2i ">3</li></ul>
+<hr>  <ul class="array plain"><li class=""></li><li class=""><span class="sym-iter-up e2"></span></li><li class=""></li></ul>
+&rArr; <ul class="array "><li class="x2 ">1</li><li class="x2i ">5</li><li class="x2 ">2</li><li class="x2 ">3</li></ul>
+<hr>  <ul class="array plain"><li class=""><span class="sym-iter-up e2"></span></li><li class=""></li></ul>
+&rArr; <ul class="array "><li class="x2i ">7</li><li class="x2i ">8</li><li class="x2 ">1</li><li class="x2 ">5</li><li class="x2 ">2</li><li class="x2 ">3</li><li class="dotted"> </li></ul>
+<hr>  <ul class="array plain"><li class=""></li><li class=""></li><li class=""></li><li class=""></li><li class=""></li><li class=""></li><li class=""><span class="sym-iter-up e2"></span></li></ul>
+&rArr; <ul class="array "><li class="x2 ">7</li><li class="x2 ">8</li><li class="x2 ">1</li><li class="x2 ">5</li><li class="x2 ">2</li><li class="x2 ">3</li><li class="x2i ">9</li></ul></code></pre>
+</div></div>
+<div class="panel-fold vexpand" open><h4 class="nav-none">Insert From <a class="" href="cpp/std/vector.html#iterator-ranges" onclick="reveal_anchor()">
+
+Iterator Range
+</a></h4>
+<ul class="defn "><li><code><strong>.insert</strong>(<em>@insert_pos</em>, @first, @last)
+</code></li></ul></div>
+<div class="panel-row first-wide"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code>vector&lt;int&gt; y {4,5,6,7,8};
+vector&lt;int&gt; x {1,2};
+x.<strong>insert</strong>(<span class="e1">begin(x)</span>, 
+         <span class="e2">begin(y)</span>, <span class="hslim-br"></span><span class="hslim">         </span><span class="e2">begin(y)+3</span>);
+
+</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code>   <ul class="array plain"><li class=""><span class="sym-iter-dn e1"></span></li><li class=""></li></ul>
+x: <ul class="array x2"><li class="x1 ">1</li><li class="">2</li></ul>
+y: <ul class="array "><li class="x2i ">4</li><li class="x2i ">5</li><li class="x2i ">6</li><li class="x2 ">7</li><li class="x2 ">8</li></ul>
+   <ul class="array plain"><li class=""><span class="sym-iter-up e2"></span></li><li class=""></li><li class=""></li><li class=""><span class="sym-iter-up e2"></span></li><li class=""></li><span class="hslim-br"></span><span class="hslim"></span></ul>
+<hr>x: <ul class="array "><li class="x2i ">4</li><li class="x2i ">5</li><li class="x2i ">6</li><li class="x2 ">1</li><li class="x2 ">2</li></ul></code></pre>
+</div></div></div>
+<div class="panel-fold " ><h3><span class="nav-none"><span class="hwide">Insert &amp; Construct Elements In-Place</span>
+<span class="hslim">Insert Elements In-Place</span></span>
+<span class="nav-only">Insert In-Place</span>
+<div class="labels "><a class="lbl " href="tags/c++11.html">C++11</a></div></h3></div>
+<div class="panel-col "{style=""><div class="panel "><ul class="defn "><li><code><strong>.emplace_back</strong>(arg1, arg2, &hellip;)
+</code></li>
+<li><code><strong>.emplace</strong>(<em>@insert_pos</em>, arg1, arg2, &hellip;)
+</code></li></ul>
+<p>makes a new element with forwarded constructor arguments</p></div>
+<div class="panel-row first-wide"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code>struct <strong>p2d</strong> {
+  <strong>p2d</strong>(int x_, int y_):
+    x{x_}, y{y_} {}
+  int x, y;
+};
+vector&lt;p2d&gt; v <strong>{ </strong>p2d{2,3}<strong> }</strong>;
+<hr><span class="comment ">// insert copy</span>
+v.push_back( p2d{6,4} );
+<hr><span class="comment ">// construct in place with</span>
+<span class="comment ">// constructor &darr; &darr; arguments</span>
+v.<span class="e1">emplace_back</span>(9,7);
+<hr><span class="comment ">// iterator &darr; to first pos</span>
+v.<span class="e1">emplace</span>(<span class="e2">begin(v)</span>, 5,8);</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code><span class="comment ">custom </span>
+<span class="comment ">&larr; constructor</span>
+<span class="comment ">necessary for</span>
+<span class="comment ">emplace(_back)</span>
+
+<ul class="array nested"><li><ul class="array x2i"><li class="">2</li><li class="">3</li></li></ul></ul>
+<hr>
+<ul class="array nested"><li><ul class="array x2"><li>2</li><li>3</li></ul></li><li><ul class="array x2i"><li>6</li><li>4</li></ul></li></ul>
+<hr>
+
+<ul class="array nested"><li><ul class="array x2"><li>2</li><li>3</li></ul></li><li><ul class="array x2"><li>6</li><li>4</li></ul></li><li><ul class="array x2i"><li>9</li><li>7</li></ul></li></ul>
+<hr><span class="sym-iter-up e2"></span>
+<ul class="array nested"><li><ul class="array x2i"><li>5</li><li>8</li></ul></li><li><ul class="array x2"><li>2</li><li>3</li></ul></li><li><ul class="array x2"><li>6</li><li>4</li></ul></li><li><ul class="array x2"><li>9</li><li>7</li></ul></li></ul></code></pre>
+</div></div></div>
+<div class="panel-fold " ><h3>Erase Elements</h3></div>
+<div class="panel hvtight bg-filled "><div class="panel-col "{style=""><div class="panel title vcompact "><h4 class="nav-none">Erase At The End (Fast)</h4></div>
+<div class="panel-row first-wide"{style=""><div class="panel cs-light vstretch">
+<pre class="notranslate"><code>vector&lt;int&gt; v {1,2,3,4,5,6};
+v.<span class="e1">pop_back</span>();</code></pre>
+</div>
+<div class="panel comments cs-light vstretch">
+<pre class="notranslate"><code><ul class="array x2"><li class="">1</li><li class="">2</li><li class="">3</li><li class="">4</li><li class="">5</li><li class="">6</li></ul>
+<ul class="array x2"><li class="">1</li><li class="">2</li><li class="">3</li><li class="">4</li><li class="">5</li><li class="x0 dotted"> </li></ul></code></pre>
+</div></div></div>
+<div class="panel-col "{style=""><div class="panel title vcompact "><h4 class="nav-none">Erase Everything (Fast)</h4></div>
+<div class="panel-row first-wide"{style=""><div class="panel cs-light vstretch">
+<pre class="notranslate"><code>vector&lt;int&gt; v {1,2,3,4,5,6};
+v.<span class="e1">clear</span>();</code></pre>
+</div>
+<div class="panel comments cs-light vstretch">
+<pre class="notranslate"><code><ul class="array x2"><li class="">1</li><li class="">2</li><li class="">3</li><li class="">4</li><li class="">5</li><li class="">6</li></ul>
+<ul class="array x0 dotted"><li class=""> </li><li class=""> </li><li class=""> </li><li class=""> </li><li class=""> </li><li class=""> </li></ul></code></pre>
+</div></div></div>
+<div class="panel-fold vexpand" open><h4 class="nav-none">Erase Anywhere (Potentially Slow)</h4>
+<p class="if-opened">which elements to erase is specified with 
+<a class="" href="cpp/std/vector.html#iterators" onclick="reveal_anchor()">
+
+iterators
+</a> and
+<a class="" href="cpp/std/vector.html#iterator-ranges" onclick="reveal_anchor()">
+
+iterator ranges
+</a></p>
+<ul class="defn "><li><code><strong>.erase</strong>(<em>@position</em>)
+</code></li>
+<li><code><strong>.erase</strong>(<em>@range_begin</em>, <em>@range_end</em>)
+</code></li></ul></div>
+<div class="panel-col "{style=""><div class="panel-row first-wide"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code>vector&lt;int&gt; v {1,2,3,4,5,6};
+v.<span class="e1">erase</span>( <span class="e2">begin(v)+2</span> );
+</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code>  <ul class="array x2"><li class="">1</li><li class="">2</li><li class="x2i ">3</li><li class="">4</li><li class="">5</li><li class="">6</li></ul>
+  <ul class="array plain"><li class=""></li><li class=""></li><li class=""><span class="sym-iter-up e2"></span></li><li class=""></li></ul>
+&rArr; <ul class="array x2"><li class="">1</li><li class="">2</li><li class="">4</li><li class="">5</li><li class="">6</li><li class="x0 dotted"> </li></ul></code></pre>
+</div></div>
+<div class="panel-row first-wide"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code>vector&lt;int&gt; v {1,2,3,4,5,6};
+v.<span class="e1">erase</span>( <span class="e2">begin(v)+1</span>, <span class="hslim">         </span><span class="e2">begin(v)+4</span> );
+<span class="comment hwide"> </span></code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code>  <ul class="array x2"><li class="">1</li><li class="x2i ">2</li><li class="x2i ">3</li><li class="x2i ">4</li><li class="">5</li><li class="">6</li></ul>
+  <ul class="array plain"><li class=""></li><li class=""><span class="sym-iter-up e2"></span></li><li class=""></li><li class=""></li><li class=""><span class="sym-iter-up e2"></span></li><li class=""></li></ul>
+&rArr; <ul class="array x2"><li class="">1</li><li class="">5</li><li class="">6</li><li class="x0 dotted"> </li></ul></code></pre>
+</div></div></div>
+<div class="panel cat-info">Erasing does not affect the <em>capacity</em>, i.e.,
+none of the vector's memory is freed.</div></div>
+<div class="panel-fold " ><h3><span class="nav-none"><span class="hwide">Shrink The Capacity / Free Memory</span>
+<span class="hslim">Shrink The Capacity</span></span>
+<span class="nav-only">Shrinking</span></h3></div>
+<div class="panel hvtight bg-filled "><div class="panel cat-important">Erasing elements from a vector does never change the capacity 
+and thus never frees any memory.</div>
+<div class="panel-col "{style=""><div class="panel "><h6 class="cat-solution vcompact">Shrinking:</h6>
+<ul class="vcompact">
+<li>make temporary copy &rArr; copy does exactly fit the elements</li>
+
+<li>exchange memory buffers by swapping/moving</li>
+
+<li>temporary gets automatically destroyed</li></ul></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>vector&lt;int&gt; v;
+<hr><span class="comment ">// add a lot of elements &hellip;</span>
+<span class="comment ">// erase elements &hellip;</span>
+<hr><span class="comment ">// shrink: make a new copy and</span>
+<span class="comment ">// replace v's content with it:</span>
+v = vector&lt;int&gt;(v);       <span class="comment "><a class="lbl ">C++11-20</a></span>
+<span class="comment ">// or:</span>
+v.swap( vector&lt;int&gt;(v) ); <span class="comment "><a class="lbl ">C++98-20</a></span></code></pre>
+</div></div></div>
+<div class="panel-fold " ><h3 class="cat-warning"><span class="hwide">Attention After Insert/Erase!</span>
+<span class="hslim">After Insert/Erase</span>
+<span class="hnavi">Attention!</span></h3></div>
+<div class="panel hvtight bg-filled "><div class="panel-col "{style=""><div class="panel "><p>All iterators into a vector are invalidated if its 
+<em>capacity</em> is changed or elements are moved by 
+<code>insert</code>, <code>push_back</code>,
+<code>emplace</code>, <code>emplace_back</code>,
+<code>erase</code>, <code>=</code>, <code>assign</code>,
+<code>resize</code>, <code>reserve</code>.
+<small>(Swapping two vector's contents does not invalidate iterators,
+except for the <code>end</code> iterator.)</small></p></div>
+<div class="panel cs-light vstretch">
+<pre class="notranslate"><code>vector&lt;int&gt; v {0,1,2,3,5,6};
+auto i = begin(v) + 3;</code></pre>
+</div></div>
+<div class="panel-col "{style=""><div class="panel title vcompact vcompact"><h5 class="nav-none cat-wrong">Dangerous</h5>
+<p>use of iterator after <code>insert</code>/<code>erase</code>:</p></div>
+<div class="panel-row "{style=""><div class="panel cs-light vstretch">
+<pre class="notranslate"><code>v.<strong>insert</strong>(i,8);
+cout &lt;&lt; *i; <span class="comment ">// <span class="sym-problem"></span></span></code></pre>
+</div>
+<div class="panel cs-light vstretch">
+<pre class="notranslate"><code>v.<strong>erase</strong>(i);
+cout &lt;&lt; *i; <span class="comment ">// <span class="sym-problem"></span></span></code></pre>
+</div></div></div>
+<div class="panel-col "{style=""><div class="panel title vcompact vcompact"><h5 class="nav-none cat-right">Correct</h5>
+<ul>
+<li>use new valid iterator returned by <code>insert</code>/<code>erase</code></li>
+
+<li>the returned iterator refers to the original position</li></ul></div>
+<div class="panel-row "{style=""><div class="panel cs-light vstretch">
+<pre class="notranslate"><code><span class="e2">i =</span> v.<strong>insert</strong>(i,8);
+cout &lt;&lt; *i;</code></pre>
+</div>
+<div class="panel cs-light vstretch">
+<pre class="notranslate"><code><span class="e2">i =</span> v.<strong>erase</strong>(i);  
+cout &lt;&lt; *i;</code></pre>
+</div></div></div>
+<div class="panel-fold " ><h5 class="nav-none cat-info"><span class="hwide">Overview: Iterator Invalidating Operations</span>
+<span class="hslim">Iterator Invalidating Operations</span>
+<span class="hnavi">Invalidation</span></h5></div>
+<div class="panel-col "{style=""><table class="hborders vstriped vcompact"><thead><tr><th>Operations</th>
+<th>Invalidated Iterators</th></tr></thead>
+<tbody><tr><td><code class="inset ">const</code> (read only) operations</td>
+<td>none</td></tr>
+<tr><td><code>swap</code>, <code>std::swap</code></td>
+<td>only <code>end()</code></td></tr>
+<tr><td><code>reserve</code>, <code>shrink_to_fit</code></td>
+<td>if capacity changed: all<br>else: none</td></tr>
+<tr><td><code>push_back</code>, <code>emplace_back</code></td>
+<td>if capacity changed: all<br>else: only <code>end()</code></td></tr>
+<tr><td><code>insert</code>, <code>emplace</code></td>
+<td>if capacity changed: all<br>else: only at or after insertion point (incl. <code>end()</code>)</td></tr>
+<tr><td><code>resize</code></td>
+<td>if capacity changed: all<br>else: only <code>end()</code> and iterators to erased elements</td></tr>
+<tr><td><code>pop_back</code></td>
+<td>iterators to erased element and <code>end()</code></td></tr>
+<tr><td><code>erase</code></td>
+<td>iterators to erased elements and all after them (incl. <code>end()</code>)</td></tr>
+<tr><td><code>clear</code>, <code>operator=</code>, <code>assign</code></td>
+<td>all</td></tr></tbody></table></div></div></div>
+<h2 class="hfold " open><span class="nav-none"><code>deque&lt;<em>T</em>&gt;</code></span>
+<span class="nav-only"><code>deque</code></span></h2>
+<div class="content " ><a class="nav " id="deque" keywords="deque std::deque deque"></a>
+<div class="panel-col "{style=""><div class="panel "><h5 class="nav-none"><u>D</u>ouble <u>E</u>nded <u>Que</u>ue&emsp;
+<img src="cpp/std/deque_thumb.svg" style="max-width:100%;max-width: 250px; width: 100%;"></img></h5>
+<ul class="symbols ">
+<li class="cat-positive">constant-time random access (extremely small overhead)</li>
+
+<li class="cat-positive">fast traversal; good for linear searches</li>
+
+<li class="cat-positive">good insertion and deletion performance at <strong>both</strong> ends</li>
+
+<li class="cat-negative">potentially slow if insert/erase operations
+at random positions dominate</li>
+
+<li class="cat-negative">potentially slow if element type has high copy/assignment cost
+(reordering elements requires copying/moving them)</li>
+
+<li class="cat-negative">potentially long allocation times for very large amount
+of fundamental (<code>int</code>, <code>double</code>, &hellip;) values
+<small>(can be eliminated with <a class="" href="cpp/std/vector.html#no-init-wrapper" title="click to go to page &quot;std::vector&quot;">
+
+zero-overhead-zero-init wrappers
+</a>)</small></li></ul></div>
+<div class="panel-row "{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6">#include &lt;deque&gt;</span>
+<hr><span class="c6 hwide">std::</span><strong>deque&lt;int&gt;</strong> d <span class="e1">{</span>0,<span class="hwide"> </span>0,<span class="hwide"> </span>0<span class="e1">}</span>;
+<hr>d.push_back(1);
+<hr>d.<span class="e1">push_front</span>(2);
+<hr>vector&lt;int&gt; <span class="hslim-br"></span><span class="hslim">  </span>v {3,<span class="hwide"> </span>4,<span class="hwide"> </span>5,<span class="hwide"> </span>6};
+d.insert(begin(d),
+         begin(v), end(v));
+<hr>d.<span class="e1">pop_front</span>();
+<hr>
+d.erase(<span class="c2">begin(d)+2</span>, <span class="c2">begin(d)+5</span>);
+</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code>
+<hr><ul class="array x2i"><li class="">0</li><li class="">0</li><li class="">0</li></ul>
+<hr><ul class="array x2"><li class="">0</li><li class="">0</li><li class="">0</li><li class="x2i">1</li></ul>
+<hr><ul class="array x2"><li class="x2i">2</li><li class="">0</li><li class="">0</li><li class="">0</li><li class="">1</li></ul>
+<hr>v: <ul class="array "><li class="x2">3</li><li class="x2">4</li><li class="x2">5</li><li class="x2">6</li></ul><span class="hslim-br"></span><span class="hslim"></span>
+&rArr;
+d: <ul class="array "><li class="x2i">3</li><li class="x2i">4</li><li class="x2i">5</li><li class="x2i">6</li><li class="x2">2</li><li class="x2">0</li><li class="x2">0</li><li class="x2">0</li><li class="x2">1</li></ul><span class="hslim-br"></span><span class="hslim"></span>
+<hr><ul class="array x2"><li class="">4</li><li class="">5</li><li class="">6</li><li class="">2</li><li class="">0</li><li class="">0</li><li class="">0</li><li class="">1</li></ul>
+<hr><ul class="array x2"><li class="">4</li><li class="">5</li><li class="x2i">6</li><li class="x2i">2</li><li class="x2i">0</li><li class="">0</li><li class="">0</li><li class="">1</li></ul>
+<span class="e2">    <span class="sym-iter-up "></span>    <span class="sym-iter-up "></span></span>
+&rArr; <ul class="array x2"><li class="">4</li><li class="">5</li><li class="">0</li><li class="">0</li><li class="">1</li></ul></code></pre>
+</div></div></div></div>
+<h2 class="hfold " open><span class="nav-none"><code>list&lt;<em>T</em>&gt;</code></span>
+<span class="nav-only"><code>list</code></span></h2>
+<div class="content " ><a class="nav " id="list" keywords="list std::list list"></a>
+<div class="panel-col "{style=""><div class="panel "><h5 class="nav-none">Doubly-linked List&emsp;
+<img src="cpp/std/list_thumb.svg" style="max-width:100%;max-width: 300px; width: 100%;"></img></h5>
+<ul class="symbols ">
+<li class="cat-positive">restructuring operations don't require elements to be moved/copied
+(good for storing large objects with high copy/assignment cost)</li>
+
+<li class="cat-positive">constant-time splicing (of complete lists)</li>
+
+<li class="cat-negative">random access only in linear time</li>
+
+<li class="cat-negative">slow traversal due to bad memory locality</li></ul></div>
+<div class="panel-row "{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6">#include &lt;list&gt;</span>
+<span class="c6 ">std::</span><strong>list&lt;int&gt;</strong> l <span class="e1">{</span>3<span class="e1">}</span>;
+<hr>l.<strong>push_back</strong>(2);
+<hr>l.<strong>push_front</strong>(4);
+<hr>l.<span class="e1">splice</span>(begin(l)+1,
+<span class="hwide">         </span><span class="hslim">  </span><strong>list&lt;int&gt;{</strong>8, 4, 7<strong>}</strong>);
+<hr>l.<span class="e1">reverse</span>();
+<hr>l.<span class="e1">sort</span>();
+<hr>l.<span class="e1">unique</span>();</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code>
+<span class="mark x2">3</span>
+<hr><span class="mark x2">3</span><span class="hwide"> </span>&#8644;<span class="hwide"> </span><span class="mark x2i">2</span>
+<hr><span class="mark x2i">4</span><span class="hwide"> </span>&#8644;<span class="hwide"> </span><span class="mark x2">3</span><span class="hwide"> </span>&#8644;<span class="hwide"> </span><span class="mark x2">2</span>
+<hr>
+<span class="mark x2">4</span><span class="hwide"> </span>&#8644;<span class="hwide"> </span><span class="mark x2i">8</span><span class="hwide"> </span><span class="e2">&#8644;</span><span class="hwide"> </span><span class="mark x2i">4</span><span class="hwide"> </span><span class="e2">&#8644;</span><span class="hwide"> </span><span class="mark x2i">8</span><span class="hwide"> </span>&#8644;<span class="hwide"> </span><span class="mark x2">3</span><span class="hwide"> </span>&#8644;<span class="hwide"> </span><span class="mark x2">2</span>
+<hr><span class="mark x2">2</span><span class="hwide"> </span>&#8644;<span class="hwide"> </span><span class="mark x2">3</span><span class="hwide"> </span>&#8644;<span class="hwide"> </span><span class="mark x2">8</span><span class="hwide"> </span>&#8644;<span class="hwide"> </span><span class="mark x2">4</span><span class="hwide"> </span>&#8644;<span class="hwide"> </span><span class="mark x2">8</span><span class="hwide"> </span>&#8644;<span class="hwide"> </span><span class="mark x2">4</span>
+<hr><span class="mark x2">2</span><span class="hwide"> </span>&#8644;<span class="hwide"> </span><span class="mark x2">3</span><span class="hwide"> </span>&#8644;<span class="hwide"> </span><span class="mark x2">4</span><span class="hwide"> </span>&#8644;<span class="hwide"> </span><span class="mark x2">4</span><span class="hwide"> </span>&#8644;<span class="hwide"> </span><span class="mark x2">8</span><span class="hwide"> </span>&#8644;<span class="hwide"> </span><span class="mark x2">8</span>
+<hr><span class="mark x2">2</span><span class="hwide"> </span>&#8644;<span class="hwide"> </span><span class="mark x2">3</span><span class="hwide"> </span>&#8644;<span class="hwide"> </span><span class="mark x2">4</span><span class="hwide"> </span>&#8644;<span class="hwide"> </span><span class="mark x2">8</span></code></pre>
+</div></div></div></div>
+<h2 class="hfold " open><span class="nav-none"><code>forward_list &lt;<em>T</em>&gt;</code></span>
+<span class="nav-only"><code>forward_list</code></span></h2>
+<div class="content " ><a class="nav " id="forward_list" keywords="forward_list std::forward_list forward_list"></a>
+<div class="panel-col "{style=""><div class="panel "><h5 class="nav-none">Singly-linked List&emsp;
+<img src="cpp/std/forward_list_thumb.svg" style="max-width:100%;max-width: 320px; width: 100%;"></img></h5>
+<ul class="symbols ">
+<li class="cat-positive">uses less memory than <code>list</code></li>
+
+<li class="cat-positive">restructuring operations don't require elements to be moved/copied
+(good for storing large objects with high copy/assignment cost)</li>
+
+<li class="cat-positive">constant-time splicing (of complete lists)</li>
+
+<li class="cat-negative">random access only in linear time</li>
+
+<li class="cat-negative">slow traversal due to bad memory locality</li>
+
+<li class="cat-negative">only forward traversal possible</li>
+
+<li class="cat-negative">somewhat cumbersome interface due to forward-only links
+<ul class="vcompact">
+<li>no:  <code>size()</code>, <code>back()</code>, <code>push_back()</code>, <code>pop_back()</code>, <code>insert()</code></li>
+
+<li>instead:  <code>insert_after()</code>, <code>splice_after()</code>, <code>before_begin()</code></li></ul></li></ul></div>
+<div class="panel-row first-wide"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6">#include &lt;forward_list&gt;</span>
+<span class="c6 hwide">std::</span>forward_list&lt;int&gt; l <span class="e1">{</span>23,42,4<span class="e1">}</span>;
+<hr>l.<span class="e1">insert_after</span>(begin(l), 5);
+<hr>l.<span class="e1">insert_after</span>(<span class="hslim-br"></span><span class="hslim">  </span><span class="e2">before_begin</span>(l), 88);
+<hr>l.<span class="e1">erase_after</span>(begin(l));</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code>
+<span class="mark x2">23</span><span class="hwide"> </span>&rarr;<span class="hwide"> </span><span class="mark x2">42</span><span class="hwide"> </span>&rarr;<span class="hwide"> </span><span class="mark x2">4</span>
+<hr><span class="mark x2">23</span><span class="hwide"> </span>&rarr;<span class="hwide"> </span><span class="mark x2i">5</span><span class="hwide"> </span>&rarr;<span class="hwide"> </span><span class="mark x2">42</span><span class="hwide"> </span>&rarr;<span class="hwide"> </span><span class="mark x2">4</span>
+<hr><span class="mark x2i">88</span><span class="hwide"> </span>&rarr;<span class="hwide"> </span><span class="mark x2">23</span><span class="hwide"> </span>&rarr;<span class="hwide"> </span><span class="mark x2">5</span><span class="hwide"> </span>&rarr;<span class="hwide"> </span><span class="mark x2">42</span><span class="hwide"> </span>&rarr;<span class="hwide"> </span><span class="mark x2">4</span><span class="hslim-br"></span><span class="hslim"></span>
+<hr><span class="mark x2">88</span><span class="hwide"> </span>&rarr;<span class="hwide"> </span><span class="mark x2">5</span><span class="hwide"> </span>&rarr;<span class="hwide"> </span><span class="mark x2">42</span><span class="hwide"> </span>&rarr;<span class="hwide"> </span><span class="mark x2">4</span></code></pre>
+</div></div></div></div>
+<h2 class="hfold " open>Guidelines</h2>
+<div class="content " ><div class="panel "><h3 class="cat-guideline"><span class="hwide">Which Sequence Container Should I Use?</span>
+<span class="hslim">Which Sequence Container?</span>
+<span class="hnavi">Which?</span></h3>
+<h5>Default choice: <code>std::vector</code>!</h5>
+
+
+<a href="cpp/design/which_std_sequence_container_crop.svg"class="img " ><img src="cpp/design/which_std_sequence_container_crop.svg"style="max-width:100%;width:100%;"></img></a></div></div></section>
+<section class="epilog">
+<div class="panel-col bg-filled"{style=""><div class="guide-nav">
+<div class="go-prev"><a href="cpp/std/iterators_intro.html"><span class="hwide">Iterators</span></a></div>
+<div class="go-up"><a href="cpp/beginners_guide.html#std-lib-containers">Beginner's Guide <span class="hxwide">/ Containers</span></a></div>
+<div class="go-next"><a href="cpp/std/sequence_views.html"><span class="hwide">Views</span></a></div>
+</div></div>
+</section>
+<section class="epilog">
+<div class="panel-fold " open><h3 class="cat-link">Related <span class="if-closed">&hellip;</span></h3></div>
+<div class="panel "><ul class="resources "><li class="cat-article"><a href="cpp/std/vector.html">std::vector</a></li>
+
+<hr>
+<li class="cat-cppreference"><a href="https://en.cppreference.com/w/cpp/container">cppreference: Containers Library</a></li>
+<li class="cat-book"><a href="https://isocpp.org/files/papers/4-Tour-Algo-draft.pdf">A Tour of C++: Containers and Algorithms</a></li>
+
+<li class="cat-youtube"><a href="https://www.youtube.com/watch?v=24VAm8gzWq4&list=PLVFrD1dmDdvdUZA2jB-wvXY81SXXRWXkU"><q>5 Data Structures in 5 Minutes</q> <small>by Conor Hoekstra</small></a></li>
+<hr>
+
+<li>
+
+<a href="cpp/std/sequence_containers.png"class="img " ><img src="cpp/std/sequence_containers_thumb.png"style="max-width:100%;height:100px;"></img>Overview Sheet "Sequence Containers"</a></li></ul></div>
+</section>
+<section class="context">
+<ul class="linear-tags "><li><a href="tags/c++.html">C++</a></li><li><a href="tags/c++11.html">C++11</a></li><li><a href="tags/c++17.html">C++17</a></li><li><a href="tags/article.html">article</a></li><li><a href="tags/beginner-level.html">beginner-level</a></li><li><a href="tags/containers.html">containers</a></li><li><a href="tags/std-library.html">std-library</a></li></ul>
+</section>
+<section class="metadata">
+<p><span class="cat-date">Last updated: 2020-09-20</span></p>
+</section>
+</article></div>
+<footer>
+<div id="footer-top"><div id="footer-top-content"><div id="footer-top-left"><nav><ul class="plain ">
+<li>
+<a href="index.html" class="cat-home" >Home</a>
+</li>
+
+<li>
+<a href="tags/news.html" class="cat-news" >News</a>
+</li>
+
+<li>
+<a href="tags/article.html" class="cat-article" >Articles</a>
+</li>
+
+<li>
+<a href="tags/featured.html" class="cat-featured" >Featured</a>
+</li>
+
+<li>
+<a href="tags/guide.html" class="cat-guide" >Guides</a>
+</li>
+
+<li>
+<a href="tags/list.html" class="cat-list" >Lists</a>
+</li>
+
+<li>
+<a href="about.html" class="cat-about" >About</a>
+</li>
+
+<li>
+<a href="privacy.html" class="cat-contact" >Privacy</a>
+</li>
+
+<li>
+<a href="https://twitter.com/hackingcpp" class="cat-twitter" >Twitter</a>
+</li></ul></nav></div>
+<div id="footer-top-right"><h2 class="cat-tags nav-none">
+<a href="tags.html" >Tags</a>
+</h2>
+<ul class="topic-cloud "><li><a style="font-size:117.3739395094748%;" href="tags/algorithms.html">algorithms</a></li> <li><a style="font-size:74.685320232403%;" href="tags/allocators.html">allocators</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/arrays.html">arrays</a></li> <li><a style="font-size:154.85882183899798%;" href="tags/article.html">article</a></li> <li><a style="font-size:150.60732445608994%;" href="tags/beginner-level.html">beginner-level</a></li> <li><a style="font-size:60.0%;" href="tags/blogs.html">blogs</a></li> <li><a style="font-size:60.0%;" href="tags/books.html">books</a></li> <li><a style="font-size:60.0%;" href="tags/build-systems.html">build-systems</a></li> <li><a style="font-size:160.1565121053651%;" href="tags/c++.html">C++</a></li> <li><a style="font-size:60.0%;" href="tags/c++-standardization.html">C++-standardization</a></li> <li><a style="font-size:132.0592597418778%;" href="tags/c++11.html">C++11</a></li> <li><a style="font-size:118.74128092961203%;" href="tags/c++14.html">C++14</a></li> <li><a style="font-size:118.74128092961203%;" href="tags/c++17.html">C++17</a></li> <li><a style="font-size:124.50258791586917%;" href="tags/c++20.html">C++20</a></li> <li><a style="font-size:74.685320232403%;" href="tags/c++98.html">C++98</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/c-style.html">C-style</a></li> <li><a style="font-size:60.0%;" href="tags/c-vs-c++.html">C-vs-C++</a></li> <li><a style="font-size:60.0%;" href="tags/cat-casts.html">cat-casts</a></li> <li><a style="font-size:106.55136375888092%;" href="tags/classes.html">classes</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/code-editors.html">code-editors</a></li> <li><a style="font-size:74.685320232403%;" href="tags/code-formatters.html">code-formatters</a></li> <li><a style="font-size:74.685320232403%;" href="tags/command-line.html">command-line</a></li> <li><a style="font-size:106.55136375888092%;" href="tags/community.html">community</a></li> <li><a style="font-size:60.0%;" href="tags/comparisons.html">comparisons</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/compilers.html">compilers</a></li> <li><a style="font-size:60.0%;" href="tags/concepts.html">concepts</a></li> <li><a style="font-size:60.0%;" href="tags/conferences.html">conferences</a></li> <li><a style="font-size:60.0%;" href="tags/const.html">const</a></li> <li><a style="font-size:60.0%;" href="tags/constexpr.html">constexpr</a></li> <li><a style="font-size:110.802861141789%;" href="tags/containers.html">containers</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/control-flow.html">control-flow</a></li> <li><a style="font-size:114.34214226160506%;" href="tags/custom-types.html">custom-types</a></li> <li><a style="font-size:74.685320232403%;" href="tags/data-structures.html">data-structures</a></li> <li><a style="font-size:60.0%;" href="tags/debugging.html">debugging</a></li> <li><a style="font-size:104.05596069720902%;" href="tags/design.html">design</a></li> <li><a style="font-size:106.55136375888092%;" href="tags/diagnostics.html">diagnostics</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/exceptions.html">exceptions</a></li> <li><a style="font-size:89.370640464806%;" href="tags/featured.html">featured</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/file-io.html">file-io</a></li> <li><a style="font-size:60.0%;" href="tags/find.html">find</a></li> <li><a style="font-size:60.0%;" href="tags/find_if.html">find_if</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/functional-prog.html">functional-prog</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/functions.html">functions</a></li> <li><a style="font-size:60.0%;" href="tags/gallery.html">gallery</a></li> <li><a style="font-size:94.09825763003434%;" href="tags/generic-prog.html">generic-prog</a></li> <li><a style="font-size:60.0%;" href="tags/groups.html">groups</a></li> <li><a style="font-size:60.0%;" href="tags/guide.html">guide</a></li> <li><a style="font-size:74.685320232403%;" href="tags/guidelines.html">guidelines</a></li> <li><a style="font-size:60.0%;" href="tags/hash-map.html">hash-map</a></li> <li><a style="font-size:60.0%;" href="tags/hash-set.html">hash-set</a></li> <li><a style="font-size:60.0%;" href="tags/hashing.html">hashing</a></li> <li><a style="font-size:60.0%;" href="tags/header-files.html">header-files</a></li> <li><a style="font-size:74.685320232403%;" href="tags/heap.html">heap</a></li> <li><a style="font-size:60.0%;" href="tags/ides.html">ides</a></li> <li><a style="font-size:97.96100211184347%;" href="tags/idiom.html">idiom</a></li> <li><a style="font-size:97.96100211184347%;" href="tags/io.html">io</a></li> <li><a style="font-size:94.09825763003434%;" href="tags/iostreams.html">iostreams</a></li> <li><a style="font-size:74.685320232403%;" href="tags/iterators.html">iterators</a></li> <li><a style="font-size:74.685320232403%;" href="tags/language-mechanism.html">language-mechanism</a></li> <li><a style="font-size:60.0%;" href="tags/language-references.html">language-references</a></li> <li><a style="font-size:60.0%;" href="tags/learning.html">learning</a></li> <li><a style="font-size:60.0%;" href="tags/libraries.html">libraries</a></li> <li><a style="font-size:74.685320232403%;" href="tags/linker.html">linker</a></li> <li><a style="font-size:129.82704563832138%;" href="tags/list.html">list</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/low-level.html">low-level</a></li> <li><a style="font-size:60.0%;" href="tags/map.html">map</a></li> <li><a style="font-size:108.78357786243735%;" href="tags/memory.html">memory</a></li> <li><a style="font-size:120.02570076180908%;" href="tags/modern-c++.html">modern-C++</a></li> <li><a style="font-size:74.685320232403%;" href="tags/move-semantics.html">move-semantics</a></li> <li><a style="font-size:126.42995591581257%;" href="tags/news.html">news</a></li> <li><a style="font-size:74.685320232403%;" href="tags/oop.html">oop</a></li> <li><a style="font-size:60.0%;" href="tags/organizations.html">organizations</a></li> <li><a style="font-size:60.0%;" href="tags/package-manager.html">package-manager</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/paradigm.html">paradigm</a></li> <li><a style="font-size:60.0%;" href="tags/pattern.html">pattern</a></li> <li><a style="font-size:60.0%;" href="tags/people.html">people</a></li> <li><a style="font-size:60.0%;" href="tags/podcasts.html">podcasts</a></li> <li><a style="font-size:60.0%;" href="tags/pointers.html">pointers</a></li> <li><a style="font-size:60.0%;" href="tags/preprocessor.html">preprocessor</a></li> <li><a style="font-size:60.0%;" href="tags/profiling.html">profiling</a></li> <li><a style="font-size:74.685320232403%;" href="tags/randomness.html">randomness</a></li> <li><a style="font-size:60.0%;" href="tags/ranges.html">ranges</a></li> <li><a style="font-size:60.0%;" href="tags/references.html">references</a></li> <li><a style="font-size:60.0%;" href="tags/set.html">set</a></li> <li><a style="font-size:60.0%;" href="tags/social-media.html">social-media</a></li> <li><a style="font-size:60.0%;" href="tags/sorted-sequences.html">sorted-sequences</a></li> <li><a style="font-size:89.370640464806%;" href="tags/stack.html">stack</a></li> <li><a style="font-size:60.0%;" href="tags/standardization.html">standardization</a></li> <li><a style="font-size:114.34214226160506%;" href="tags/std-algorithms.html">std-algorithms</a></li> <li><a style="font-size:89.370640464806%;" href="tags/std-containers.html">std-containers</a></li> <li><a style="font-size:127.33164257664949%;" href="tags/std-library.html">std-library</a></li> <li><a style="font-size:60.0%;" href="tags/std-macros.html">std-macros</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/std-vector.html">std-vector</a></li> <li><a style="font-size:60.0%;" href="tags/strings.html">strings</a></li> <li><a style="font-size:60.0%;" href="tags/style.html">style</a></li> <li><a style="font-size:60.0%;" href="tags/taste.html">taste</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/templates.html">templates</a></li> <li><a style="font-size:60.0%;" href="tags/testing.html">testing</a></li> <li><a style="font-size:74.685320232403%;" href="tags/toolchain.html">toolchain</a></li> <li><a style="font-size:115.91222626883169%;" href="tags/tools.html">tools</a></li> <li><a style="font-size:74.685320232403%;" href="tags/traversal.html">traversal</a></li> <li><a style="font-size:117.3739395094748%;" href="tags/types.html">types</a></li> <li><a style="font-size:60.0%;" href="tags/user.html">user</a></li> <li><a style="font-size:60.0%;" href="tags/version-control.html">version-control</a></li> <li><a style="font-size:60.0%;" href="tags/views.html">views</a></li> <li><a style="font-size:60.0%;" href="tags/vim.html">VIM</a></li> <li><a style="font-size:60.0%;" href="tags/vim-plugins.html">VIM-plugins</a></li> <li><a style="font-size:60.0%;" href="tags/warnings.html">warnings</a></li> <li><a style="font-size:114.34214226160506%;" href="tags/websites.html">websites</a></li> 
+</ul></div></div></div>
+<div id="footer-bottom"><div id="footer-bottom-content">&copy;&nbsp;2019-2021&ensp;André&nbsp;Müller&emsp;&emsp;</div></div>
+</footer>
+<script src="assets/content.js?v=26-1"></script>
+</body>
+</html>

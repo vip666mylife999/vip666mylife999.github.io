@@ -1,0 +1,1924 @@
+<!DOCTYPE html>
+<html lang='en-US'>
+<head>
+<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+<base href="https://vip666mylife999.github.io/">
+<link rel="icon" href="assets/hcpp-icon.png">
+<link rel="stylesheet" type="text/css" href="assets/style.css?v=26">
+<link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<title>h/cpp - Standard Library Associative Containers</title>
+<meta name="description" content="Learn about C++'s standard associative containers modeling sets, key-value maps and hash sets/maps.">
+<meta name="keyword" content="cpp data structure container storage complexity map set order ordered ordering unordered hash access node-based key value">
+<meta name="author" content="André Müller">
+<meta name="date" content="2021-01-31">
+<meta name="copyright" content="2019-2021&ensp;André Müller">
+<meta name="hcpp-page-category" content="cat-article">
+<meta name="hcpp-tags" content="C++ C++20 article beginner-level containers hash-map hash-set hashing map set std-library ">
+</head>
+<body>
+<div id="top-nav"><div id="titlebar" class="boxed-wide"><div id="main-branding">
+<a href="index.html"  id="main-logo" title="home"><span class="hwide"><img src="assets/hcpp.svg" style="max-width:100%;height:40;"></img></span>
+<span class="hslim"><img src="assets/hcpp-square.svg" style="max-width:100%;height:40;"></img></span></a>
+
+<div id="main-title">
+<a href="index.html"  title="home">hacking&nbsp;C++</a>
+</div></div>
+<div id="main-menu"><div class="entry "><a href="tags/news.html">News</a></div>
+<div class="submenu "><a>Learning</a><div class="submenu-dropdown">
+<a href="cpp/beginners_guide.html" >Beginner's Guide to C++</a>
+
+<hr>
+
+<a href="cpp/std/containers.html" >Standard Library Containers</a>
+
+
+<a href="cpp/std/algorithms.html" >Standard Library Algorithms</a>
+
+<hr>
+
+<a href="cpp/cheat_sheets.html" >Infographics / Cheat Sheets</a>
+
+
+<a href="tags/article.html" >All Articles</a>
+
+<hr>
+
+<a href="dev/web_learning.html" >Online Learning</a>
+
+
+<a href="cpp/books.html" >Books</a>
+</div></div>
+<div class="submenu "><a>Links</a><div class="submenu-dropdown">
+<a href="cpp/community.html" >Community Resources</a>
+
+
+<a href="cpp/tools/ecosystem.html" >Tool Ecosystem</a>
+
+<hr>
+
+<a href="tags/list.html" >All Resource Lists</a>
+
+<hr>
+
+<a href="dev/vim_plugins.html" >VIM Plugins</a>
+</div></div>
+<div class="submenu "><a>About</a><div class="submenu-dropdown">
+<a href="about.html" >Why &amp; Who</a>
+
+
+<a href="privacy.html" >Privacy</a>
+</div></div></div>
+<div id="main-socialbar">
+<a href="https://twitter.com/hackingcpp" ><span class="cat-twitter"></span></a>
+</div>
+<div class="navlinks" id="nav-path"></div>
+<div id="searchbar"><div id="searchbox"><input id="search-input"></input>
+<button id="search-clear"></button>
+<button id="search-run"></button>
+<button id="search-close"></button></div></div>
+<div class="hamburger " id="main-hamburger"><button title=""></button><div class="hamburger-dropdown"><a class="nav-icon-collapse-all" onclick="collapse_all_major_folds()">Collapse <strong>All</strong> Levels</a>
+
+<a class="nav-icon-collapse" onclick="collapse_major_folds()">Collapse Top Level</a>
+
+<a class="nav-icon-expand" onclick="expand_major_folds()">Expand Top Level</a>
+
+<a class="nav-icon-expand-all" onclick="expand_all_major_folds()">Expand <strong>All</strong> Levels</a>
+
+<hr>
+
+<a href="tags/news.html" class="cat-news" >News</a>
+
+
+<a href="tags/featured.html" class="cat-featured" >Featured</a>
+
+
+<a href="tags/article.html" class="cat-article" >Articles</a>
+
+
+<a href="cpp/beginners_guide.html" class="cat-guide" >Beginner's Guide to C++</a>
+
+
+<a href="tags/list.html" class="cat-list" >Lists</a>
+
+<hr>
+
+<a href="https://twitter.com/hackingcpp" ><span class="cat-twitter"></span> @hackingcpp</a>
+
+
+<a href="about.html" class="cat-about" >About</a>
+
+
+<a href="privacy.html" class="cat-contact" >Privacy</a>
+
+
+<a href="index.html" class="cat-home" >Home</a>
+</div></div></div>
+<nav id="guide-bar" class="boxed-wide"><div class="guide-nav">
+<div class="go-prev"><a href="cpp/std/sequence_views.html"><span class="hwide">Views</span></a></div>
+<div class="go-up"><a href="cpp/beginners_guide.html#std-lib-containers">Beginner's Guide <span class="hxwide">/ Containers</span></a></div>
+<div class="go-next"><a href="cpp/std/algorithms/intro.html"><span class="hwide">Std.Algorithms</span></a></div>
+</div></nav></div>
+<div id="drawer-top" class="boxed-wide"><div id="search-results"><div id="search-header"><h1 class="cat-search" id="search-title"></h1></div>
+<div id="search-locations"><ul class="resources" id="search-location-items"></ul></div>
+<div id="search-footer"></div></div></div>
+<div id="drawer-left"><div id="drawer-left-heading"><a class="cat-guide" href="cpp/beginners_guide.html#intro">Beginner's Guide</a></div>
+<div id="drawer-left-content"><div class="tree-fold plain" ><h5>First Steps</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/tools/beginner_dev_setup.html" >Development Setup</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/hello_world.html" >Hello World</a>
+</li>
+
+<li>
+<a href="cpp/std/io_basics.html" >Input &amp; Output <small>(Basics)</small></a>
+</li>
+
+<li>
+<a href="cpp/lang/fundamental_types.html" >Fundamental Types</a>
+</li>
+
+<li>
+<a href="cpp/std/vector_intro.html" >std::vector Introduction</a>
+</li>
+
+<li>
+<a href="cpp/lang/enumerations.html" >Enumerations</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/lang/control_flow_basics.html" >Control Flow <small>(Basics)</small></a>
+</li>
+
+<li>
+<a href="cpp/lang/type_system_basics.html" >Type System <small>(Basics)</small></a>
+</li>
+
+<li>
+<a href="cpp/lang/function_basics.html" >Functions <small>(Basics)</small></a>
+</li>
+
+<li>
+<a href="cpp/lang/memory_basics.html" >Memory <small>(Basics)</small></a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/std/string_basics.html" >String <small>(Basics)</small></a>
+</li>
+
+<li>
+<a href="cpp/lang/references.html" >References</a>
+</li>
+
+<li>
+<a href="cpp/lang/aggregates.html" >Simple Aggregates</a>
+</li>
+
+<li>
+<a href="cpp/lang/function_call_mechanics.html" >Function Call Mechanics</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Input &amp; Output</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/command_line_arguments.html" >Command Line Arguments</a>
+</li>
+
+<li>
+<a href="cpp/std/file_streams.html" >File Input &amp; Output</a>
+</li>
+
+<li>
+<a href="cpp/std/io_streams.html" >Stream Input &amp; Output</a>
+</li>
+
+<li>
+<a href="cpp/std/istream_recover_from_errors.html" >Recover From Input Errors</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Custom Types &ndash; Part 1</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/custom_type_basics.html" >Simple Classes / Custom Types</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/lang/pointers.html" >Pointers</a>
+</li>
+
+<li>
+<a href="cpp/lang/destructors.html" >Destructors</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/lang/exceptions.html" >Exceptions</a>
+</li>
+
+<li>
+<a href="cpp/lang/noexcept.html" >Noexcept</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Diagnostics</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/tools/compiler_warnings.html" >Compiler Warnings</a>
+</li>
+
+<li>
+<a href="cpp/tools/gdb_intro.html" >Debugging With gdb</a>
+</li>
+
+<li>
+<a href="cpp/tools/asan.html" >Address Sanitizer</a>
+</li>
+
+<li>
+<a href="cpp/tools/ubsan.html" >Undefined Behavior Sanitizer</a>
+</li>
+
+<li>
+<a href="cpp/tools/valgrind.html" >valgrind</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Standard Library</h5></div>
+<div class="content " ><div class="tree-fold plain" ><h6>Containers &amp; Views</h6></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/std/iterators_intro.html" >Iterators</a>
+</li>
+
+<li>
+<a href="cpp/std/sequence_containers.html" >Sequence Containers</a>
+</li>
+
+<li>
+<a href="cpp/std/sequence_views.html" >Sequence Views</a>
+</li>
+
+<li>
+<a href="cpp/std/associative_containers.html" >Associative Containers</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h6>Standard Algorithms</h6></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/std/algorithms/intro.html" >Basic Paradigms</a>
+</li>
+
+<li>
+<a href="cpp/std/container_traversal.html" >Container Traversal</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/std/algorithms/min_max.html" >Minimum / Maximum</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/existence_queries.html" >Existence Queries</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/finding.html" >Finding Elements</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/comparing_ranges.html" >Comparing Ranges</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/design/function_objects.html" >Function Objects</a>
+</li>
+
+<li>
+<a href="cpp/lang/lambda_basics.html" >Lambdas <small>(Basics)</small></a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/std/algorithms/reordering.html" >Sequence Reordering</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/element_modification.html" >Changing Elements</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/numeric.html" >Numeric Algorithms</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/sorted_sequence_operations.html" >Sorted Sequence Operations</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h6>Utilities</h6></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/std/special_containers.html" >Special Containers</a>
+</li>
+
+<li>
+<a href="cpp/std/special_iterators.html" >Special Iterators</a>
+</li>
+
+<li>
+<a href="cpp/std/random.html" >Random Numbers</a>
+</li></ul></div></div>
+<div class="tree-fold plain" ><h5>Code Organization</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/separate_compilation.html" >Separate Compilation</a>
+</li>
+
+<li>
+<a href="cpp/lang/namespaces.html" >Namespaces</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Custom Types &ndash; Part 2</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/friends.html" >Friends</a>
+</li>
+
+<li>
+<a href="cpp/lang/comparisons.html" >Comparisons</a>
+</li>
+
+<li>
+<a href="cpp/design/literal_types.html" >Literal Types</a>
+</li>
+
+<li>
+<a href="cpp/design/arithmetic_types.html" >Arithmetic Types</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/std/unique_ownership.html" >Unique Resource Ownership</a>
+</li>
+
+<li>
+<a href="cpp/design/node_based_data_structures.html" >Node-Based Data Structures</a>
+</li>
+
+<li>
+<a href="cpp/lang/special_class_members.html" >Special Class Members</a>
+</li>
+
+<li>
+<a href="cpp/std/shared_ownership.html" >Shared Resource Ownership</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/lang/object_oriented_programming.html" >Object Oriented Programming</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/lang/move_semantics.html" >Move Semantics</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Generic Programming</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/templates.html" >Templates</a>
+</li>
+
+<li>
+<a href="cpp/lang/type_casts.html" >Type Casts</a>
+</li>
+
+<li>
+<a href="cpp/lang/type_deduction.html" >Type Deduction</a>
+</li>
+
+<li>
+<a href="cpp/std/type_traits.html" >Type Traits</a>
+</li>
+
+<li>
+<a href="cpp/lang/perfect_forwarding.html" >Perfect Forwarding</a>
+</li>
+
+<li>
+<a href="cpp/lang/concepts.html" >Concepts &amp; Constrained Templates</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Memory Management</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/pointer_arithmetic.html" >Pointer Arithmetic</a>
+</li>
+
+<li>
+<a href="cpp/lang/c_arrays.html" >C-Style Arrays</a>
+</li>
+
+<li>
+<a href="cpp/lang/manual_memory_management.html" >Manual Memory Management</a>
+</li>
+
+<li>
+<a href="cpp/design/allocators.html" >Allocators</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Software Design Basics</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/design/principles.html" >Design Principles</a>
+</li>
+
+<li>
+<a href="cpp/design/function_interface_example1.html" >Design Study: Function Interfaces</a>
+</li>
+
+<li>
+<a href="cpp/design/angle_axis_rotation.html" >Design Study: Angle-Axis Rotation</a>
+</li>
+
+<li>
+<a href="cpp/design/traversal_approaches.html" >Traversal Approaches</a>
+</li>
+
+<li>
+<a href="cpp/design/pimpl.html" >The PIMPL Idiom</a>
+</li></ul></div></div>
+<button id="drawer-left-toggle" title=""></button></div>
+<div id="main-content" class="boxed-wide "><article class="boxed-normal ">
+<header class="plain">
+<h1>
+<span class="hwide">Standard Associative Containers</span><span class="hslim">Associative Containers</span><span class="hnavi">Set/Map</span></h1>
+<nav id="page-navbar" class=""></nav>
+</header>
+<section class="main plain"><h2 class="hfold " open><span class="nav-none">Quick Overview</span>
+<span class="nav-only">Overview</span></h2>
+<div class="content " ><a class="nav " id="quick-overview" keywords="quick-overview "></a>
+<div class="panel-fold " open><h3>Sets</h3>
+<a class="nav " id="sets" keywords="sets "></a></div>
+<div class="panel hvtight bg-filled "><div class="panel "><table class="vborders vcompact"><tbody><tr><td class="vtop"><h6 class="nav-none">Ordered&nbsp;Sets</h6>
+<p><code>#include &lt;set&gt;</code></p>
+<img src="cpp/std/set_thumb.svg" style="max-width:100%;max-height: 90px;"></img></td>
+<td class="vtop"><h6 class="nav-none">Hash&nbsp;Sets</h6>
+<p><code>#include &lt;unordered_set&gt;</code></p>
+<img src="cpp/std/unordered_set_thumb.svg" style="max-width:100%;max-height: 90px;"></img></td></tr></tbody></table></div>
+<div class="panel-fold vexpand vcompact" open><h4><span class="nav-none"><code>set&lt;<em>Key</em>&gt; / unordered_set&lt;<em>Key</em>&gt;</code></span>
+<span class="nav-only">Unique Keys</span></h4>
+<p class="large">unique <a class="" href="cpp/std/associative_containers.html#comparators" onclick="reveal_anchor()">
+
+orderable
+</a> / <a class="" href="cpp/std/associative_containers.html#hashers" onclick="reveal_anchor()">
+
+hashable
+</a> keys</p></div>
+<div class="panel-row first-wide"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>set&lt;int&gt; s {9,2,8};
+<hr>s.<strong>insert</strong>(7);
+s.<strong>erase</strong>(8);
+<hr>if(s.<strong>find</strong>(7) != end(s)) {<span class="annotation">&hellip;</span>}
+if(s.<strong>contains</strong>(7)) {<span class="annotation">&hellip;</span>} <a class="lbl " href="tags/c++20.html">C++20</a>
+<hr><span class="comment ">// find returns an iterator:</span>
+auto <span class="e2">i</span> = s.find(7);
+if(<span class="c2">i</span> != end(s)) <span class="hslim-br"></span><span class="hslim">  </span><span class="e1">i =</span> s.erase(<span class="e2">i</span>);<span class="hwide-br"></span><span class="hwide"></span></code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code><span class="hl">{2, 8, 9}</span>
+<hr><span class="hl">{2, <span class="mark x2i">7</span>, 8, 9}</span>
+<span class="hl">{2, 7,<span class="mark x1"> </span>9}</span>
+<hr><i>true</i> <small>(7 found)</small>
+<i>true</i> <small>(7 found)</small>
+<hr><span class="hl">{2, <span class="mark x2">7</span>, 9}</span>
+    <span class="sym-iter-up e2"></span>i 
+<span class="hl">{2,<span class="mark x1">9</span>}</span>
+   <span class="sym-iter-up e1"></span>i <small>(after)</small></code></pre>
+</div></div>
+<div class="panel-fold vexpand vcompact" open><h4><span class="nav-none"><code><em>multi</em>set&lt;<em>Key</em>&gt; / unordered_<em>multi</em>set&lt;<em>Key</em>&gt;</code></span>
+<span class="nav-only">Multisets</span></h4>
+<p class="large">multiple <a class="" href="cpp/std/associative_containers.html#equivalence" onclick="reveal_anchor()">
+
+equivalent
+</a> keys possible</p></div>
+<div class="panel-row "{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>multiset&lt;int&gt; s;
+<span class="spacer"></span>s.<strong>insert</strong>(8);
+s.insert(7);
+s.insert(2);
+s.insert(7);
+s.<strong>erase</strong>(7);</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code><span class="hl">{}</span>
+<span class="spacer"></span><span class="hl">{<span class="mark x2i">8</span>}</span>
+<span class="hl">{<span class="mark x2i">7</span>, 8}</span>
+<span class="hl">{<span class="mark x2i">2</span>, 7, 8}</span>
+<span class="hl">{2, 7, <span class="mark x2i">7</span>, 8}</span>
+<span class="hl">{2,<span class="mark x1"> </span>8}</span></code></pre>
+</div></div></div>
+<div class="panel-fold " open><h3><span class="nav-none"><span class="nav-none">Key&rarr;Value Maps</span></span>
+<span class="nav-only">Maps</span></h3>
+<a class="nav " id="maps" keywords="maps "></a></div>
+<div class="panel hvtight bg-filled "><div class="panel "><table class="vborders vcompact"><tbody><tr><td class="vtop"><h6 class="nav-none">Ordered Key&rarr;Value&nbsp;Maps</h6>
+<p><code>#include &lt;map&gt;</code></p>
+<img src="cpp/std/map_thumb.svg" style="max-width:100%;max-height: 90px;"></img></td>
+<td class="vtop"><h6 class="nav-none">Hashed Key&rarr;Value&nbsp;Maps</h6>
+<p><code>#include &lt;unordered_map&gt;</code></p>
+<img src="cpp/std/unordered_map_thumb.svg" style="max-width:100%;max-height: 90px;"></img></td></tr></tbody></table></div>
+<div class="panel-fold " ><h5><span class="hwide">Maps store <span class="border o0"><code><span class="c6 ">std::</span>pair&lt;const <em>Key</em>,<em>Value</em>&gt;</code></span></span>
+<span class="hslim">Maps store <span class="border o0"><code>pair&lt;const <em>Key</em>,<em>Value</em>&gt;</code></span></span>
+<span class="hnavi">pair&lt;K,V&gt;</span></h5></div>
+<div class="panel-col "{style=""><div class="panel "><p>The standard library associative containers are based
+on nodes that are linked by pointers. Each node stores
+a pair of a key and a value.</p>
+<p><code><span class="c6 ">std::</span>pair&lt;First,Second&gt;</code>
+contains two values of different or same type</p></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6">#include &lt;utility&gt;</span>
+<span class="c6 ">std::</span>pair&lt;int,double&gt; p {4, 8.15};
+cout &lt;&lt; p<span class="e1">.first</span>  &lt;&lt;'\n';   <span class="comment ">// 4</span>
+cout &lt;&lt; p<span class="e1">.second</span> &lt;&lt;'\n';   <span class="comment ">// 8.15</span>
+<hr><span class="comment "><a class="lbl " href="tags/c++17.html">C++17</a> features:</span>
+<span class="c6 ">std::</span>pair p2 {4, 8.15};  <span class="comment ">// <span class="c6 hwide">std::</span>pair&lt;int,double&gt;</span>
+auto <span class="e1">[</span>fst,snd<span class="e1">]</span> = p2;    <span class="comment ">// <q>structured binding</q></span>
+cout &lt;&lt; fst &lt;&lt;" "&lt;&lt; snd &lt;&lt;'\n';  <span class="comment ">// 4 8.15</span></code></pre>
+</div></div>
+<div class="panel-fold vexpand vcompact" open><h4><span class="nav-none"><code>map&lt;<em>Key</em>,<em>Value</em>&gt; / unordered_map&lt;<em>Key</em>,<em>Value</em>&gt;</code></span>
+<span class="nav-only">Unique Keys</span></h4>
+<p class="large">unique <a class="" href="cpp/std/associative_containers.html#comparators" onclick="reveal_anchor()">
+
+orderable
+</a> / <a class="" href="cpp/std/associative_containers.html#hashers" onclick="reveal_anchor()">
+
+hashable
+</a> keys</p></div>
+<div class="panel-row first-wide"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>map&lt;int,<span class="c6 ">std::</span>string&gt; m;
+<hr>m.<strong>insert</strong>(<span class="e2">{</span>2, "B"<span class="e2">}</span>);       
+m.<strong>emplace</strong>(1, "A");
+<hr>m[2] = "Y";  <span class="comment ">// modify</span>
+m[3] = "C";  <span class="comment ">// insert!</span>
+<hr>auto i = m.<strong>find</strong>(2);
+if(i != <strong>end</strong>(m))
+  cout &lt;&lt; i-&gt;<strong>first</strong>
+       &lt;&lt; i-&gt;<strong>second</strong>;
+<hr>if(m.<strong>contains</strong>(2)) {<span class="annotation">&hellip;</span>}  <a class="lbl " href="tags/c++20.html">C++20</a>
+<hr>m.<strong>erase</strong>(2);
+auto <span class="c2">j</span> = m.find(3);
+if(<span class="c2">j</span> != end(m)) <span class="hslim-br"></span><span class="hslim">  </span><span class="e1">j =</span> m.<strong>erase</strong>(<span class="e2">j</span>);<span class="hwide-br"></span><span class="hwide"></span>
+<hr><span class="comment ">// <a class="lbl " href="tags/c++17.html">C++17</a> features:</span>
+m.<strong>insert_or_assign</strong>(4,"D");
+m.insert_or_assign(1,"X");
+m.<strong>try_emplace</strong>(4,"Z");
+m.try_emplace(5,"E");</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code><span class="hl">{ }</span>
+<hr><span class="hl">{<span class="mark x2i">2:B</span>}</span>
+<span class="hl">{<span class="mark x2i">1:A</span>,<span class="mark x7">2:B</span>}</span>
+<hr><span class="hl">{<span class="mark x7">1:A</span>,<span class="mark x2">2:</span><span class="mark x2i">Y</span>}</span>
+<span class="hl">{<span class="mark x7">1:A</span>,<span class="mark x7">2:Y</span>,<span class="mark x2i">3:C</span>}</span>
+<hr>&rarr; iterator
+if found
+2  <small>(key)</small>
+Y  <small>(value)</small>
+<hr><i>true</i> <small>(2 found)</small>
+<hr><span class="hl">{<span class="mark x7">1:A</span>,<span class="mark x2">3:C</span>}</span>
+     <span class="sym-iter-up e2"></span>j
+<span class="hl">{<span class="mark x7">1:A</span> <span class="mark x1"> </span>}</span>
+     <span class="sym-iter-up e1"></span>j <small>(after)</small>
+<hr>{1:A}
+<span class="hl">{<span class="mark x7">1:A</span>,<span class="mark x2i">4:D</span>}</span>
+<span class="hl">{<span class="mark x2">1:</span><span class="mark x2i">X</span>,<span class="mark x7">4:D</span>}</span>
+<span class="hl">{<span class="mark x7">1:X</span>,<span class="mark x7">4:D</span>}</span>
+<span class="hl">{<span class="mark x7">1:X</span>,<span class="mark x7">4:D</span>,<span class="mark x2i">5:E</span>}</span></code></pre>
+</div></div>
+<div class="panel-fold vexpand vcompact" open><h4><span class="nav-none"><code><em>multi</em>map&lt;<em>Key</em>,<em>Value</em>&gt; / unordered_<em>multi</em>map&lt;<em>Key</em>,<em>Value</em>&gt;</code></span>
+<span class="nav-only">Multimaps</span></h4>
+<p class="large">multiple <a class="" href="cpp/std/associative_containers.html#equivalence" onclick="reveal_anchor()">
+
+equivalent
+</a> keys possible</p></div>
+<div class="panel-row first-wide"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>map&lt;int,<span class="c6 ">std::</span>string&gt; m;
+<span class="spacer"></span>m.<strong>emplace</strong>(1, "A");
+m.<strong>insert</strong>(<span class="e2">{</span>2, "B"<span class="e2">}</span>);       
+m.emplace(1, "C");
+m.<strong>erase</strong>(1);</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code><span class="hl">{ }</span>
+<span class="spacer"></span><span class="hl">{<span class="mark x2i">1:A</span>}</span>
+<span class="hl">{<span class="mark x7">1:A</span>,<span class="mark x2i">2:B</span>}</span>
+<span class="hl">{<span class="mark x7">1:A</span>,<span class="mark x2i">1:C</span>,<span class="mark x7">2:B</span>}</span>
+<span class="hl">{<span class="mark x1"> </span><span class="mark x7">2:B</span>}</span></code></pre>
+</div></div></div>
+<div class="panel-fold " open><h3><span class="hwide">Standard Sets &amp; Maps Are Node-Based</span>
+<span class="hslim">Sets &amp; Maps Are Node-Based</span>
+<span class="hnavi">Nodes</span></h3>
+<a class="nav " id="node-based" keywords="node-based "></a></div>
+<div class="panel-col "{style=""><div class="panel "><h6 class="nav-none">Keys or key-value pairs are stored in nodes that
+are <q>linked</q> by pointers.</h6></div>
+<div class="panel-row responsive"{style=""><div class="panel vcompact"><h4 class="nav-none">Ordered Sets/Maps</h4>
+<p>usually implemented as balanced binary tree</p>
+<div class="block "><img src="cpp/std/map_layout.svg" style="max-width:100%;width:260px;"></img></div></div>
+<div class="panel vcompact"><h4 class="nav-none">Unordered Sets/Maps</h4>
+<p>implemented as hash table</p>
+<div class="block "><img src="cpp/std/unordered_map_layout.svg" style="max-width:100%;width:380px;"></img></div></div></div></div></div>
+<h2 class="hfold " open><span class="nav-none">Interface: How To</span>
+<span class="nav-only">How To</span></h2>
+<div class="content " ><a class="nav " id="how-to" keywords="how-to "></a>
+<div class="panel-fold " ><h3><span class="nav-none">Make New Sets&thinsp;/&thinsp;Maps</span>
+<span class="nav-only">Make</span></h3>
+<a class="nav " id="construction" keywords="construction constructor ctor"></a></div>
+<div class="panel hvtight bg-filled "><div class="panel-fold vexpand vcompact" open><h4><span class="nav-none">Make An Empty Set&thinsp;/&thinsp;Map</span>
+<span class="nav-only">Empty</span></h4>
+<ul class="defn "><li><code><strong>SetOrMapType</strong> variable;
+</code></li>
+<li><code><strong>SetOrMapType</strong> variable <span class="e1">{</span><span class="e1">}</span>;
+</code></li></ul></div>
+<div class="panel-row "{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 hwide">std::</span>set&lt;int&gt; s1;
+<span class="c6 hwide">std::</span>set&lt;int&gt; s2 <span class="e1">{}</span>;
+<span class="c6 hwide">std::</span>map&lt;int&gt; m1;
+<span class="c6 hwide">std::</span>map&lt;int&gt; m2 <span class="e1">{}</span>;</code></pre>
+</div>
+<div class="panel "><p class="cat-warning"><strong>This is a function declaration:</strong></p>
+<div class="block ">
+<pre class="notranslate"><code><span class="c6 hwide">std::</span>set&lt;int&gt; s3 <strong><span class="mark b1">()</span></strong>;</code></pre>
+</div></div></div>
+<div class="panel-fold vexpand vcompact" open><h4><span class="nav-none">Make Sets From Key Lists</span>
+<span class="nav-only">From List</span></h4>
+<ul class="defn ">
+<li><code><strong>set&lt;</strong><strong><em>KeyType</em></strong><strong>&gt;</strong><span class="e1">{</span><em>key1</em>,<em>key2</em>,&hellip;<span class="e1">}</span></code></li>
+
+<li><code><strong>set</strong><span class="e1">{</span><em>key1</em>,<em>key2</em>,&hellip;<span class="e1">}</span> &ensp;<a class="lbl " href="tags/c++17.html">C++17</a></code>
+&ensp;<small>(key&nbsp;type&nbsp;deduced)</small></li></ul></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 hwide">std::</span>set&lt;int&gt; s1 <span class="e1">{</span>12<span class="e1">}</span>;
+<span class="c6 hwide">std::</span>set&lt;int&gt; s2 <span class="e1">{</span>3,2,1,4,5<span class="e1">}</span>;
+<span class="spacer"></span><span class="c6 hwide">std::</span>set s3 <span class="e1">{</span>1, 2, 3, 4<span class="e1">}</span>;  <span class="hwide">      </span><span class="comment ">// set&lt;int&gt;</span>  <span class="hwide">  </span><a class="lbl " href="tags/c++17.html">C++17</a>
+<span class="c6 hwide">std::</span>set s4 <span class="e1">{</span>1.<span class="e2">f</span>, 2.3<span class="e2">f</span><span class="hwide">, 4.5<span class="e2">f</span></span><span class="e1">}</span>;   <span class="comment ">// set&lt;float&gt;</span> <span class="hwide"> </span><a class="lbl " href="tags/c++17.html">C++17</a>
+<span class="c6 hwide">std::</span>set s5 <span class="e1">{</span>1<span class="e2">.</span>, 2<span class="e2">.</span>3, 4<span class="e2">.</span>6<span class="e1">}</span>;  <span class="hwide">    </span><span class="comment ">// set&lt;double&gt;</span> <a class="lbl " href="tags/c++17.html">C++17</a></code></pre>
+</div>
+<div class="panel-fold vexpand vcompact" open><h4><span class="nav-none">Make Sets From Key Ranges</span>
+<span class="nav-only">From Range</span></h4>
+<ul class="defn ">
+<li><code><strong>set&lt;</strong><strong><em>Key</em></strong><strong>&gt;</strong><span class="e1">(</span><em>@keys_begin</em>,<em>@keys_end</em><span class="e1">)</span></code></li>
+
+<li><code><strong>set</strong><span class="e1">(</span><em>@keys_begin</em>,<em>@keys_end</em><span class="e1">)</span> &ensp;<a class="lbl " href="tags/c++17.html">C++17</a></code>
+&ensp;<small>(key&nbsp;type&nbsp;deduced)</small></li></ul></div>
+<div class="panel-row first-wide"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 hwide">std::</span>vector&lt;int&gt; v {2,3,1,4};<span class="hwide-br"></span><span class="hwide"></span>
+<span class="c6 hwide">std::</span>set&lt;int&gt; s <span class="e1">(</span><span class="e2">begin(v)</span>,<span class="e2">begin(v)+3</span><span class="e1">)</span>;</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code><span class="hslim-br"></span><span class="hslim"></span>v: <ul class="array x2"><li class="x2i ">2</li><li class="x2i ">3</li><li class="x2i ">1</li><li class="">4</li></ul>
+   <ul class="array plain"><li class=""><span class="sym-iter-up e2"></span></li><li class=""></li><li class=""></li><li class=""><span class="sym-iter-up e2"></span></li></ul>
+s: <span class="hl">{<span class="mark x2i">1</span>,<span class="mark x2i">2</span>,<span class="mark x2i">3</span>}</span></code></pre>
+</div></div></div>
+<div class="panel-fold " ><h3><span class="hwide">Insert Keys Into Sets</span>
+<span class="hslim">Sets: Insert Keys</span>
+<span class="hnavi">Set Insert</span></h3>
+<a class="nav " id="set-insert" keywords="set-insert "></a></div>
+<div class="panel hvtight bg-filled "><div class="panel-fold vexpand vcompact" open><h4><span class="nav-none">Insert Single Keys</span>
+<span class="nav-only">Single</span></h4>
+<ul class="defn "><li><code><strong>.insert</strong>(<em>key</em>)
+</code>&rarr; <code>pair&lt;<em>@pos</em>,insert_success&gt;</code>
+</li></ul></div>
+<div class="panel-row first-wide"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 hwide">std::</span>set&lt;int&gt; s;
+s.insert(3)
+auto r1 = s.insert(7);
+cout &lt;&lt; r1.second;
+cout &lt;&lt; <span class="e1">*</span>r1.first;
+<span class="spacer"></span>auto r2 = s.insert(7);
+cout &lt;&lt; r2.second;</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code><span class="hl">{ }</span>
+<span class="hl">{<span class="mark x2i">3</span>}</span>
+<span class="hl">{3,<span class="mark x2i">7</span>}</span>
+<i>true</i> <small class="hwide">(inserted)</small>
+7    
+<span class="spacer"></span>
+<i>false</i> <small class="hwide">(NOT inserted)</small></code></pre>
+</div></div>
+<div class="panel-fold vexpand vcompact" open><h4><span class="nav-none"><span class="hwide">Emplace: </span>Insert &amp; Construct Keys In-Place</span>
+<span class="nav-only">Emplace</span>
+<div class="labels "><a class="lbl " href="tags/c++11.html">C++11</a></div></h4>
+<ul class="defn "><li><code><strong>.emplace</strong>(<span class="c1"><em>keyArg1,keyArg2,&hellip;</em></span>)
+</code>&rarr; <code>pair&lt;<em>@pos</em>,insert_success&gt;</code>
+</li></ul>
+<p>Construct key(s) directly inside the set using key constructor 
+arguments (can prevent copying of large key objects).</p></div>
+<div class="panel-row first-wide"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code>using <span class="c2">VS</span> = <span class="c6 hwide">std::</span>vector&lt;<span class="c6 hwide">std::</span>string&gt;;
+<span class="c6 hwide">std::</span>set&lt;<span class="c2">VS</span>&gt; s;
+<hr>s.insert( <span class="e2">VS{</span><span class="c1">"a","c"</span><span class="e2">}</span> );
+<hr>s.<strong>emplace</strong>(<span class="c1">"v","w","x"</span>);</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code>
+<span class="hl">{ }</span>
+<hr><span class="hl">{<span class="mark x2i">{"a","c"}</span>}</span>
+<hr><span class="hl">{<span class="mark x7">{"a","c"}</span>,<span class="mark x2i">{"v","w","x"}</span>}</span></code></pre>
+</div></div>
+<div class="panel-fold vexpand vcompact" ><h4><span class="nav-none">Insert Ranges of Keys</span>
+<span class="nav-only">Ranges</span></h4>
+<ul class="defn "><li><code><strong>.insert</strong>(<span class="e1">{</span><em>key1</em>,<em>key2</em>,&hellip;<span class="e1">}</span>)
+</code></li>
+<li><code><strong>.insert</strong>(<span class="c2"><em>@keys_begin</em></span>,<span class="c2"><em>@keys_end</em></span>)
+</code></li></ul></div>
+<div class="panel-row first-wide"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 hwide">std::</span>set&lt;int&gt; s;
+s.insert(<span class="e1">{</span>3,5<span class="e1">}</span>);
+<hr>vector&lt;int&gt; v {2,4,1};
+s.insert(<span class="e2">begin(v)</span>,<span class="e2">end(v)</span>);</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code><span class="hl">{ }</span>
+<span class="hl">{<span class="mark x2i">3</span>,<span class="mark x2i">5</span>}</span>
+<hr>
+<span class="hl">{<span class="mark x2i">1</span>,<span class="mark x2i">2</span>,3,<span class="mark x2i">4</span>,5}</span></code></pre>
+</div></div>
+<div class="panel-fold vexpand vcompact" ><h4><span class="nav-none">Insert/Emplace With Position Hint</span>
+<span class="nav-only">With Hint</span></h4>
+<ul class="defn "><li><code><strong>.insert</strong>(<span class="c2"><em>@hint</em></span>,<span class="c1"><em>key</em></span>})
+</code>&rarr; <code><em>@insert_pos</em></code>
+</li>
+<li><code><strong>.emplace_hint</strong>(<span class="c2"><em>@hint</em></span>,<span class="c1"><em>keyArg1,keyArg2,&hellip;</em></span>)
+</code>&rarr; <code><em>@insert_pos</em></code>
+</li></ul>
+<p>Potentially faster than regular insert: 
+amortized constant cost, if <code><em>@hint</em></code> is before/after the
+key's final position in the set.</p></div>
+<div class="panel-row "{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 hwide">std::</span>set&lt;int&gt; s {1,4};
+<span class="comment "></span>
+auto h = s.find(4);
+s.<strong>insert</strong>(<span class="e2">h</span>, 3);
+<hr><span class="comment "></span>
+h = s.find(1);
+s.<strong>insert</strong>(<span class="e2">h</span>, 2);</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code>
+<span class="hl">{1, <span class="mark x2">4</span>}</span>
+    <span class="sym-iter-up e2"></span>h
+<span class="hl">{1, <span class="mark x2i">3</span>, 4}</span>
+<hr><span class="hl">{<span class="mark x2">1</span>, 3, 4}</span>
+ <span class="sym-iter-up e2"></span>h
+<span class="hl">{1, <span class="mark x2i">2</span>, 3, 4}</span></code></pre>
+</div></div></div>
+<div class="panel-fold " ><h3><span class="hwide">Insert Keys+Values Into Maps</span>
+<span class="hslim">Maps: Insert Keys+Values</span>
+<span class="hnavi">Map Insert</span></h3>
+<a class="nav " id="map-insert" keywords="map-insert "></a></div>
+<div class="panel hvtight bg-filled "><div class="panel-fold vexpand vcompact" open><h4><span class="nav-none">Insert Single Key-Value Pairs</span>
+<span class="nav-only">Single</span></h4>
+<ul class="defn "><li><code><strong>.insert</strong>(<span class="e1">{</span><em>key</em>,<em>value</em><span class="e1">}</span>)
+</code>&rarr; <code>pair&lt;<em>@pos</em>,insert_success&gt;</code>
+</li></ul>
+<p>Copies/moves key-value <em>pairs</em> into the map. 
+Use <code>emplace</code> (see next section) if your
+key and/or value types are expensive to copy.</p></div>
+<div class="panel-row first-wide"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 hwide">std::</span>map&lt;int,<span class="c6 hwide">std::</span>string&gt; m;
+auto r1 = m.<strong>insert</strong>(<span class="e1">{</span>1,"a"<span class="e1">}</span>);
+cout &lt;&lt; r1.second;
+cout &lt;&lt; <span class="e2">*</span>r1.first;
+<hr>auto r2 = m.<strong>insert</strong>(<span class="e1">{</span>1,"b"<span class="e1">}</span>);
+cout &lt;&lt; r2.second;
+cout &lt;&lt; <span class="e2">*</span>r2.first;</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code><span class="hl">{ }</span>
+<span class="hl">{<span class="mark x2i">1:"a"</span>}</span>
+<i>true</i>  <small class="hwide">(inserted)</small>
+"a"   <small class="hwide">(key at position)</small>
+<hr><span class="hl">{<span class="mark x2">1:"a"</span>}</span>
+<i>false</i> <small class="hwide">(NOT inserted)</small>
+"a"   <small class="hwide">(key at position)</small></code></pre>
+</div></div>
+<div class="panel-fold vexpand vcompact" open><h4><span class="nav-none"><span class="hwide">Emplace: </span>Insert &amp; Construct Key-Value Pairs In-Place</span>
+<span class="nav-only">Emplace</span></h4>
+<ul class="defn "><li><code><strong>.emplace</strong>(<em>key</em>,<span class="c2"><em>value</em></span>)
+</code>&rarr; <code>pair&lt;<em>@pos</em>,insert_success&gt;&emsp;<a class="lbl " href="tags/c++11.html">C++11</a></code>
+</li>
+<li><code><strong>.try_emplace</strong>(<em>key</em>,<span class="c1"><em>valArg1,<em>valArg2</em></em></span>,&hellip;)
+</code>&rarr; <code>pair&lt;<em>@pos</em>,insert_success&gt;&emsp;<a class="lbl " href="tags/c++17.html">C++17</a></code>
+</li></ul>
+<p>Constructs key-value pairs directly inside the map using constructor arguments.
+(prevents copying of large value or key objects).</p></div>
+<div class="panel-col "{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code>struct <span class="e2">P2</span> {  <span class="comment ">// custom value type</span>
+  <span class="e2">P2</span>(<span class="c1">int x_</span>, <span class="c1">int y_</span>): x{x_}, y{y_} {}
+  int x, y;
+};</code></pre>
+</div>
+<div class="panel-row "{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 hwide">std::</span>map&lt;char,<span class="c2">P2</span>&gt; m;
+m.<strong>insert</strong>( <strong>{</strong>'a',&nbsp;<span class="c2">P2{<span class="c1">1,2</span>}</span><strong>}</strong> );
+<hr>m.<strong>emplace</strong>('c', <span class="c2">P2</span><span class="e2">{</span><span class="c1">3,4</span><span class="e2">}</span>);
+<hr>m.<strong>try_emplace</strong>('b', <span class="c1">5,6</span>);
+<hr>m.<strong>try_emplace</strong>('a', <span class="c1">8,9</span>);</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code><span class="hl">{ }</span>
+<span class="hl">{<span class="mark x2i">'a':{1,2}</span>}</span>
+<hr><span class="hl">{<span class="mark x7">'a':{1,2}</span>,<span class="mark x2i">'c':{3,4}</span>}</span>
+<hr><span class="hl">{<span class="mark x7">'a':{1,2}</span>,<span class="mark x2i">'b':{5,6}</span>,<span class="mark x7">'c':{3,4}</span>}</span>
+<hr><span class="hl">{<span class="mark x7">'a':{1,2}</span>,<span class="mark x7">'b':{5,6}</span>,<span class="mark x7">'c':{3,4}</span>}</span></code></pre>
+</div></div></div>
+<div class="panel-fold vexpand vcompact" ><h4><span class="nav-none">Insert / Access / Assign</span>
+<span class="nav-only"><code><strong>[</strong>key<strong>]</strong>=v</code></span></h4>
+<ul class="defn ">
+<li><code><span class="e1">[</span><em>key</em><span class="e1">]</span> <strong>=</strong> <em>value</em></code>
+&ensp;<small>(inserts key if not found)</small></li>
+
+<li><code><strong>.at</strong>(<em>key</em>) <strong>=</strong> <em>value</em></code>
+&ensp;<small>(throws <code><span class="c6 ">std::</span>out_of_range</code> if key not found)</small></li>
+<li><code><strong>.insert_or_assign</strong>(<em>key</em>,<em>value</em>)
+</code>&rarr; <code>pair&lt;<em>@pos</em>,insert_success&gt;&emsp;<a class="lbl " href="tags/c++17.html">C++17</a></code>
+</li></ul></div>
+<div class="panel-row first-wide"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 hwide">std::</span>map&lt;int,<span class="c6 hwide">std::</span>string&gt; m;
+m<span class="e1">[</span>1<span class="e1">]</span> = "a";
+m<span class="e1">[</span>1<span class="e1">]</span> = "x";
+<hr>m.<strong>insert_or_assign</strong>(3,"c")
+m.<strong>insert_or_assign</strong>(3,"u")
+<hr>try {
+  m.<strong>at</strong>(1) = "y";
+  m.<strong>at</strong>(2) = "z";
+} catch(<span class="c6 ">std::</span>out_of_range&amp;) {<span class="annotation">&hellip;</span>}</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code><span class="hl">{ }</span>
+<span class="hl">{<span class="mark x2i">1:"a"</span>}</span>
+<span class="hl">{<span class="mark x2">1:</span><span class="mark x2i">"x"</span>}</span>
+<hr><span class="hl">{<span class="mark x7">1:"y"</span>,<span class="mark x2i">3:"c"</span>}</span>
+<span class="hl">{<span class="mark x7">1:"y"</span>,<span class="mark x7">3:</span><span class="mark x2i">"u"</span>}</span>
+<hr>
+<span class="hl">{<span class="mark x2">1:</span><span class="mark x2i">"y"</span>,<span class="mark x7">3:"u"</span>}</span>
+&larr; throws exception</code></pre>
+</div></div>
+<div class="panel-fold vexpand vcompact" ><h4><span class="nav-none">Insert Ranges of Key-Value Pairs</span>
+<span class="nav-only">Ranges</span></h4>
+<ul class="defn "><li><code><strong>.insert</strong>(<span class="c2">@<em>kv_pairs_begin</em></span>,<span class="c2"><em>@kv_pairs_end</em></span>)
+</code></li></ul></div>
+<div class="panel-row first-wide responsive"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 hwide">std::</span>vector&lt;pair&lt;int,string&gt;&gt; v;
+v.emplace_back(3,"c");
+v.emplace_back(1,"a");
+v.emplace_back(2,"b");
+<span class="spacer"></span>map&lt;int,string&gt; m;
+m.<strong>insert</strong>(<span class="c2">begin(v)</span>, <span class="c2">end(v)</span>);</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code>// final result
+m: <span class="hl">{<span class="mark x2">1:"a"</span>,<span class="mark x2">2:"b"</span>,<span class="mark x2">3:"c"</span>}</span></code></pre>
+</div></div>
+<div class="panel-fold vexpand vcompact" ><h4><span class="nav-none">Insert/Emplace With Position Hint</span>
+<span class="nav-only">With Hint</span></h4>
+<ul class="defn "><li><code><strong>.insert</strong>(<span class="c2"><em>@hint</em></span>,<span class="e1">{</span><em>key</em>,<em>value</em><span class="e1">}</span>)
+</code>&rarr; <code><em>@pos</em></code>
+</li>
+<li><code><strong>.emplace_hint</strong>(<span class="c2"><em>@hint</em></span>,<span class="c1"><em>key</em></span>,<span class="c1"><em>value</em></span>)
+</code>&rarr; <code>pair&lt;<em>@pos</em>,insert_success&gt;&emsp;<a class="lbl " href="tags/c++11.html">C++11</a></code>
+</li></ul>
+<p>Potentially faster than regular insert: 
+amortized constant cost, if <code><em>@hint</em></code> is before/after the
+key's final position in the map.</p></div>
+<div class="panel-row "{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 hwide">std::</span>map&lt;int,<span class="c6 hwide">std::</span>string&gt; m;
+m.insert(<span class="mark x7">{4,"d"}</span>);
+<hr><span class="comment "></span>
+auto h1 = m.find(4);
+m.<strong>insert</strong>(<span class="e2">h1</span>, <span class="c1">{</span>1,"a"<span class="c1">}</span>);
+<hr><span class="comment "></span>
+auto h2 = m.find(1);
+m.<strong>emplace</strong>(<span class="e2">h2</span>, <span class="c1">3,"c"</span>);</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code><span class="hl">{ }</span>
+<span class="hl">{<span class="mark x2i">4:"d"</span>}</span>
+<hr><span class="hl">{<span class="mark x2">4:"d"</span>}</span>
+ <span class="sym-iter-up e2"></span>h1
+<span class="hl">{<span class="mark x2i">1:"a"</span>,<span class="mark x7">4:"d"</span>}</span>
+<hr><span class="hl">{<span class="mark x2">1:"a"</span>,<span class="mark x7">4:"d"</span>}</span>
+ <span class="sym-iter-up e2"></span>h2
+<span class="hl">{<span class="mark x7">1:"a"</span>,<span class="mark x2i">3:"c"</span>,<span class="mark x7">4:"d"</span>}</span></code></pre>
+</div></div></div>
+<div class="panel-fold " ><h3><span class="hwide">Find/Access/Count Keys</span>
+<span class="hslim">Find/Access/Query/Count Keys</span>
+<span class="hnavi">Query</span></h3>
+<a class="nav " id="find" keywords="find query count bounds"></a></div>
+<div class="panel hvtight bg-filled "><div class="panel-fold vexpand vcompact" open><h4><span class="nav-none">Check If Set/Map Contains Key</span>
+<span class="nav-only">Containment</span></h4>
+<ul class="defn "><li><code>.<strong>find</strong>(<em>key</em>) <strong>!= <em>@end</em></strong>
+</code>&rarr; <i>true</i>, if container has 'key'
+</li></ul>
+<ul class="defn "><li><code>.<strong>contains</strong>(<em>key</em>)
+</code>&rarr; <i>true</i>, if container has 'key'&emsp;<code><a class="lbl " href="tags/c++20.html">C++20</a></code>
+</li></ul></div>
+<div class="panel-row first-wide"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 hwide">std::</span>set&lt;int&gt; s {1,3,5,6};
+<hr>if(s.<strong>find</strong>(6) != <strong>end</strong>(s)) {<span class="annotation">&hellip;</span>}
+if(s.find(7) != end(s)) {<span class="annotation">&hellip;</span>}
+<hr>if(s.<strong>contains</strong>(6)) {<span class="annotation">&hellip;</span>}
+if(s.contains(7)) {<span class="annotation">&hellip;</span>}</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code>
+<hr><i>true</i>
+<i>false</i>
+<hr><i>true</i>
+<i>false</i></code></pre>
+</div></div>
+<div class="panel-fold vexpand vcompact" open><h4><span class="nav-none">Find/Get Key Position</span>
+<span class="nav-only">Position</span></h4>
+<ul class="defn "><li><code>.<strong>find</strong>(<em>key</em>)
+</code>&rarr; <code><em>@position</em></code>, if '<code><em>key</em></code>' found or <code><em>@end</em></code> otherwise
+</li></ul></div>
+<div class="panel-row "{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 hwide">std::</span>set&lt;int&gt; s {1,3,5,6};
+auto <span class="c2">i</span> = s.<strong>find</strong>(<mark>3</mark>);
+if(<span class="c2">i</span> != end(s)) {
+  cout &lt;&lt; <strong>*</strong><span class="c2">i</span>;
+  <span class="c1">i</span> = s.erase(<span class="c2">i</span>);
+}
+<hr><span class="comment "></span>
+auto <span class="c2">j</span> = s.<strong>find</strong>(<mark>4</mark>);
+if(<span class="c2">j</span> != end(s)) {<span class="annotation">&hellip;</span>}</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code><span class="hl">{1, <span class="mark x2">3</span>, 5, 6 }</span>
+    <span class="sym-iter-up e2"></span>i
+<i>true</i>
+3
+<span class="hl">{1, <span class="mark x1">5</span>, 6 }</span>
+    <span class="sym-iter-up e1"></span>i <small>(after)</small>
+<hr><span class="hl">{1, 5, 6<span class="mark x2"> </span>}</span>
+        <span class="sym-iter-up e2"></span>j
+<i>false</i></code></pre>
+</div></div>
+<div class="panel-fold vexpand vcompact" open><h4><span class="nav-none">Access / Assign (maps only)</span>
+<span class="nav-only"><code><strong>[</strong>key<strong>]</strong>&rarr;value</code></span></h4>
+<ul class="defn ">
+<li><code><span class="e1">[</span><em>key</em><span class="e1">]</span> <strong>=</strong> <em>value</em></code>
+&ensp;<small>(inserts key if not found)</small></li>
+
+<li><code><strong>.at</strong>(<em>key</em>) <strong>=</strong> <em>value</em></code>
+&ensp;<small>(throws <code><span class="c6 ">std::</span>out_of_range</code> if key not found)</small></li></ul></div>
+<div class="panel-row first-wide"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 hwide">std::</span>map&lt;int,<span class="c6 hwide">std::</span>string&gt; m;
+m<span class="e1">[</span>1<span class="e1">]</span> = "a";
+m<span class="e1">[</span>2<span class="e1">]</span> = "b";
+m<span class="e1">[</span>1<span class="e1">]</span> = "x";
+<hr>try {
+  m.<strong>at</strong>(2) = "y";
+  m.<strong>at</strong>(3) = "z";
+} catch(<span class="c6 ">std::</span>out_of_range&amp;) {<span class="annotation">&hellip;</span>}</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code><span class="hl">{ }</span>
+<span class="hl">{<span class="mark x2i">1:"a"</span>}</span>
+<span class="hl">{<span class="mark x7">1:"a"</span>,<span class="mark x2i">2:"b"</span>}</span>
+<span class="hl">{<span class="mark x2">1:</span><span class="mark x2i">"x"</span>,<span class="mark x7">2:"b"</span>}</span>
+<hr>
+<span class="hl">{<span class="mark x7">1:"x"</span>,<span class="mark x2">2:</span><span class="mark x2i">"y"</span>}</span>
+&larr; throws exception</code></pre>
+</div></div>
+<div class="panel-fold vexpand vcompact" ><h4><span class="nav-none">Count Key Occurrences</span>
+<span class="nav-only">Count Key</span></h4>
+<ul class="defn "><li><code><strong>.count</strong>(<em>key</em>)
+</code>&rarr; number of occurrences of '<code><em>key</em></code>'
+</li></ul>
+<p class="if-opened">This makes most sense for containers that allow multiple equivalent
+keys, like e.g., <code>multiset</code> since for the non-<q>multi</q>
+associative containers the result will be either 0 or 1.</p></div>
+<div class="panel-row first-xwide"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 hwide">std::</span>multiset&lt;int&gt; s {1,3,3,6,9};
+cout &lt;&lt; s.count(1);
+cout &lt;&lt; s.count(2);
+cout &lt;&lt; s.count(3);
+<hr><span class="c6 hwide">std::</span>map&lt;int,<span class="c6 hwide">std::</span>string&gt; m {<span class="mark x7">{1,"a"}</span>,<span class="mark x7">{3,"b"}</span>};
+cout &lt;&lt; m.count(1);
+cout &lt;&lt; m.count(2);</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code>
+1
+0
+2
+<hr>
+1
+0</code></pre>
+</div></div></div>
+<div class="panel-fold " ><h3><span class="nav-none">Iterate Over Elements</span>
+<span class="nav-only">Iterate</span></h3></div>
+<div class="panel hvtight bg-filled "><div class="panel cat-info"><p>It is not possible to modify <em>keys</em> through iterators or in range
+based for loops, because this could break the container invariant
+(key ordering or position in the hash table).</p></div>
+<div class="panel-fold vexpand" open><h4><span class="nav-none">Range-Based <code>for</code> Loops</span>
+<span class="nav-only">Range-for</span></h4>
+<table class="hborders"><tbody><tr><td><h6 class="nav-none">Sets:</h6></td>
+<td><div class="block ">
+<pre class="notranslate"><code><strong>for(</strong>auto lightKey <span class="e1">:</span> <em>mySet</em><strong>)</strong> {<span class="annotation">&hellip;</span>}</code></pre>
+</div>
+<div class="block ">
+<pre class="notranslate"><code><strong>for(</strong>auto const&amp; heavyKey <span class="e1">:</span> <em>mySet</em><strong>)</strong> {<span class="annotation">&hellip;</span>}</code></pre>
+</div></td></tr>
+<tr><td><h6 class="nav-none">Maps:</h6></td>
+<td><div class="block ">
+<pre class="notranslate"><code><strong>for(</strong>auto const&amp; keyValuePair <span class="e1">:</span> <em>myMap</em><strong>)</strong> {<span class="annotation">&hellip;</span>}</code></pre>
+</div>
+<div class="block ">
+<pre class="notranslate"><code><strong>for(</strong>auto const&amp; <span class="e1">[</span>key,value<span class="e1">]</span> <span class="e1">:</span> <em>myMap</em><strong>)</strong> {<span class="annotation">&hellip;</span>} &emsp;<code><a class="lbl " href="tags/c++17.html">C++17</a></code></code></pre>
+</div></td></tr></tbody></table></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="comment ">// keys that are cheap to copy:</span>
+<span class="c6 hwide">std::</span>set&lt;int&gt; s1 { <span class="annotation">&hellip;</span> };
+for(auto key <span class="e1">:</span> s1) { <span class="annotation">&hellip;</span> }
+<hr><span class="comment ">// keys that are expensive to copy:</span>
+<span class="c6 hwide">std::</span>set&lt;<span class="c6 hwide">std::</span>string&gt; s2 { <span class="annotation">&hellip;</span> };
+for(auto const&amp; key <span class="e1">:</span> s2) { <span class="annotation">&hellip;</span> }
+<hr><span class="comment ">// <a class="lbl " href="tags/c++17.html">C++17</a>: lightweight key-value pairs</span>
+<span class="c6 hwide">std::</span>map&lt;int,<span class="c6 hwide">std::</span>string&gt; m2 { <span class="annotation">&hellip;</span> };
+for(auto <span class="e1">[</span><span class="c2">key</span>,<span class="c2">value</span><span class="e1">]</span> <span class="e1">:</span> m2) {
+  cout &lt;&lt; <span class="c2">key</span> &lt;&lt;":"&lt;&lt; <span class="c2">value</span> &lt;&lt;" "; }
+<hr><span class="comment ">// <a class="lbl " href="tags/c++17.html">C++17</a>: expensive-to-copy key-value pairs</span>
+<span class="c6 hwide">std::</span>map&lt;int,<span class="c6 hwide">std::</span>string&gt; m2 { <span class="annotation">&hellip;</span> };
+for(auto <span class="e1">const&amp;</span> <span class="e1">[</span><span class="c2">key</span>,<span class="c2">value</span><span class="e1">]</span> <span class="e1">:</span> m2) {
+  cout &lt;&lt; <span class="c2">key</span> &lt;&lt;":"&lt;&lt; <span class="c2">value</span> &lt;&lt;" "; }
+<hr><span class="comment ">// <a class="lbl " href="tags/c++11.html">C++11</a>: leightweight key-value pairs</span>
+<span class="c6 hwide">std::</span>map&lt;int,<span class="c6 hwide">std::</span>string&gt; m1 { <span class="annotation">&hellip;</span> };
+for(auto kv <span class="e1">:</span> m1) {
+  cout &lt;&lt; kv<span class="c2">.first</span> &lt;&lt;":"&lt;&lt; kv<span class="c2">.second</span> &lt;&lt;" "; }
+<hr><span class="comment ">// <a class="lbl " href="tags/c++11.html">C++11</a>: expensive-to-copy key-value pairs</span>
+<span class="c6 hwide">std::</span>map&lt;int,<span class="c6 hwide">std::</span>string&gt; m1 { <span class="annotation">&hellip;</span> };
+for(auto <span class="e1">const&amp;</span> kv <span class="e1">:</span> m1) {
+  cout &lt;&lt; kv<span class="c2">.first</span> &lt;&lt;":"&lt;&lt; kv<span class="c2">.second</span> &lt;&lt;" "; }</code></pre>
+</div>
+<div class="panel-fold vexpand vcompact" ><h4><span class="nav-none">Obtain Iterators (Forward&nbsp;Direction)</span>
+<span class="nav-only">Iterator</span></h4>
+<h6 class="nav-none">Either with member functions:</h6>
+<ul class="defn "><li><code><em>container</em><strong>.begin</strong>()
+</code>&rarr; <code><em>@first_element</em></code>
+</li>
+<li><code><em>container</em><strong>.end</strong>()
+</code>&rarr; <code><em>@one_behind_last_element</em></code>
+</li></ul>
+<h6 class="nav-none">or free-standing functions:</h6>
+<ul class="defn "><li><code><span class="c6 ">std::</span><strong>begin</strong>(<em>container</em>)
+</code>&rarr; <code><em>@first_element</em></code>&emsp;<code><a class="lbl " href="tags/c++11.html">C++11</a></code>
+</li>
+<li><code><span class="c6 ">std::</span><strong>end</strong>(<em>container</em>)
+</code>&rarr; <code><em>@one_behind_last_element</em></code>&emsp;<code><a class="lbl " href="tags/c++11.html">C++11</a></code>
+</li></ul>
+<p class="if-opened cat-info">If you are not familiar with what iterators are, 
+please refer to <a class="" href="cpp/std/iterators_intro.html" title="click to go to page &quot;Iterators (Introduction)&quot;">
+
+this article
+</a>.</p></div>
+<div class="panel-col "{style=""><div class="panel-row "{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 hwide">std::</span>set&lt;int&gt; s {1,3,9};
+auto <span class="e2">i</span> = <strong>begin</strong>(s);
+const auto <span class="e1">e</span> = <strong>end</strong>(s);
+cout &lt;&lt; <strong>*</strong>i;
+<hr><span class="comment ">// go to next</span>
+++i;
+cout &lt;&lt; <strong>*</strong>i;</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code><span class="hl">{<span class="mark x2">1</span>,3,9<span class="mark x1"> </span>}</span>
+ <span class="sym-iter-up e2"></span>    <span class="sym-iter-up e1"></span>
+ <span class="c2">i</span>     <span class="c1">e</span>
+1
+<hr><span class="hl">{1,<span class="mark x2">3</span>,9 }</span>
+   <span class="sym-iter-up e2"></span>
+3</code></pre>
+</div></div>
+<div class="panel-row "{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 hwide">std::</span>map&lt;int,<span class="c6 hwide">std::</span>string&gt; m {
+  <span class="mark x7">{1,"a"}</span>, <span class="mark x7">{2,"b"}</span>};
+auto <span class="e2">i</span> = <strong>begin</strong>(m);
+const auto <span class="e1">e</span> = <strong>end</strong>(m);
+<hr>cout &lt;&lt; i<strong>-&gt;</strong>first 
+     &lt;&lt; i<strong>-&gt;</strong>second;
+<hr>++i;
+auto kvpair = *i;
+cout &lt;&lt; kvpair<strong>.</strong>first 
+     &lt;&lt; kvpair<strong>.</strong>second;
+<hr>auto <mark><strong>[</strong>k,v<strong>]</strong></mark> = *i;
+cout &lt;&lt; k &lt;&lt;" "&lt;&lt; v;</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code>
+<span class="hl">{<span class="mark x2">1:"a"</span>, <span class="mark x7">2:"b"</span><span class="mark x1"> </span>}</span>
+ <span class="sym-iter-up e2"></span>           <span class="sym-iter-up e1"></span>
+ <span class="c2">i</span>            <span class="c1">e</span>
+<hr>1
+"a"
+<hr><span class="hl">{<span class="mark x7">1:"a"</span>, <span class="mark x2">2:"b"</span> }</span>
+        <span class="sym-iter-up e2"></span>
+2
+"b"
+<hr><a class="lbl " href="tags/c++17.html">C++17</a>
+2 "b"</code></pre>
+</div></div></div>
+<div class="panel-fold vexpand vcompact" ><h4><span class="nav-none">Obtain Iterators (Reverse&nbsp;Direction)</span>
+<span class="nav-only">Reverse Dir.</span></h4>
+<p>Only available for <em>ordered</em> containers.</p>
+<h6 class="nav-none">Either with member functions:</h6>
+<ul class="defn "><li><code><em>container</em><strong>.rbegin</strong>()
+</code>&rarr; <code><em>@last_element</em></code>
+</li>
+<li><code><em>container</em><strong>.rend</strong>()
+</code>&rarr; <code><em>@one_before_first_element</em></code>
+</li></ul>
+<h6 class="nav-none">or free-standing functions:</h6>
+<ul class="defn "><li><code><span class="c6 ">std::</span><strong>rbegin</strong>(<em>container</em>)
+</code>&rarr; <code><em>@last_element</em></code>&emsp;<code><a class="lbl " href="tags/c++11.html">C++11</a></code>
+</li>
+<li><code><span class="c6 ">std::</span><strong>rend</strong>(<em>container</em>)
+</code>&rarr; <code><em>@one_before_first_element</em></code>&emsp;<code><a class="lbl " href="tags/c++11.html">C++11</a></code>
+</li></ul>
+<p class="if-opened cat-info">If you are not familiar with what reverse iterators are, please refer to 
+<a class="" href="cpp/std/iterators_intro.html#reverse-traversal" title="click to go to page &quot;Iterators (Introduction)&quot;">
+
+this article
+</a>.</p></div>
+<div class="panel-col "{style=""><div class="panel-row "{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 hwide">std::</span>set&lt;int&gt; s {1,3,9};
+auto <span class="e2">i</span> = <strong>rbegin</strong>(s);
+<span class="hwide">const </span>auto <span class="e1">e</span> = <strong>rend</strong>(s);
+cout &lt;&lt; <strong>*</strong>i;
+<hr><span class="comment ">// go to next</span>
+++i;
+cout &lt;&lt; <strong>*</strong>i;</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code><span class="hl">{<span class="mark x1"> </span>1,3,<span class="mark x2">9</span>}</span>
+ <span class="sym-iter-up e1"></span>    <span class="sym-iter-up e2"></span>
+ <span class="c1">e</span>     <span class="c2">i</span>
+9
+<hr><span class="hl">{1,<span class="mark x2">3</span>,9 }</span>
+   <span class="sym-iter-up e2"></span>
+3</code></pre>
+</div></div>
+<div class="panel-row "{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 hwide">std::</span>map&lt;int,<span class="c6 hwide">std::</span>string&gt; m {
+  <span class="mark x7">{1,"a"}</span>, <span class="mark x7">{2,"b"}</span>};
+auto <span class="e2">i</span> = <strong>rbegin</strong>(m);
+<span class="hwide">const </span>auto <span class="e1">e</span> = <strong>rend</strong>(m);
+<hr>cout &lt;&lt; i<strong>-&gt;</strong>first 
+     &lt;&lt; i<strong>-&gt;</strong>second;
+<hr>++i;
+auto kvpair = *i;
+cout &lt;&lt; kvpair<strong>.</strong>first 
+     &lt;&lt; kvpair<strong>.</strong>second;
+<hr>auto <mark><strong>[</strong>k,v<strong>]</strong></mark> = *i;
+cout &lt;&lt; k &lt;&lt;" "&lt;&lt; v;</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code>
+<span class="hl">{<span class="mark x1"> </span><span class="mark x7">1:"a"</span>, <span class="mark x2">2:"b"</span>}</span>
+ <span class="sym-iter-up e1"></span>       <span class="sym-iter-up e2"></span>
+ <span class="c1">e</span>        <span class="c2">i</span>
+<hr>2
+"b"
+<hr><span class="hl">{ <span class="mark x2">1:"a"</span>, <span class="mark x7">2:"b"</span>}</span>
+  <span class="sym-iter-up e2"></span>
+1
+"a"
+<hr><a class="lbl " href="tags/c++17.html">C++17</a>
+1 "a"</code></pre>
+</div></div></div></div>
+<div class="panel-fold " ><h3><span class="nav-none">Get Range of Equivalent Keys</span>
+<span class="nav-only">Get Ranges</span></h3>
+<a class="nav " id="equal-range" keywords="equal-range "></a></div>
+<div class="panel-col "{style=""><div class="panel "><h4 class="nav-none">(available for all&nbsp;sets/maps)</h4>
+<ul class="defn "><li><code>.<strong>equal_range</strong>(<em>key</em>)
+</code>&rarr; <code>pair&lt;<span class="c2"><em>@range_begin</em></span>,<span class="c1"><em>@range_end</em></span>&gt;</code>
+</li></ul>
+<p>This follows the usual
+<a class="" href="cpp/std/iterators_intro.html#iterator-ranges" title="click to go to page &quot;Iterators (Introduction)&quot;">
+
+iterator range
+</a>
+convention, so <code><em>@range_end</em></code> points to <em>one behind</em> the last
+element in the range.</p></div>
+<div class="panel-row first-wide"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 hwide">std::</span>multiset&lt;int&gt; s {2,4,4,4,6};
+<hr><span class="comment ">// 4 is a non-unique key:</span>
+auto e4 = s.<strong>equal_range</strong>(<mark>4</mark>);
+cout &lt;&lt; <strong>*</strong>(<span class="e2">e4.first</span>)
+     &lt;&lt; <strong>*</strong>(<span class="e1">e4.second</span>);
+auto n = distance(<span class="c2">e4.first</span>,
+                  <span class="c1">e4.second</span>);
+<hr><span class="comment ">// 1 is smaller than all:</span>
+auto e1 = s.<strong>equal_range</strong>(<mark>1</mark>);
+<span class="comment ">// &rarr; empty range</span>
+<hr><span class="comment ">// 2 is the smallest key:</span>
+auto e2 = s.<strong>equal_range</strong>(<mark>2</mark>);
+<span class="comment ">// &rarr; range with 1 element</span>
+<hr><span class="comment ">// 3 is in between keys:</span>
+auto e3 = s.<strong>equal_range</strong>(<mark>3</mark>);
+<span class="comment ">// &rarr; empty range</span>
+<hr><span class="comment ">// 6 is the largest key:</span>
+auto e6 = s.<strong>equal_range</strong>(<mark>6</mark>);
+<span class="comment ">// &rarr; range with 1 element</span>
+<hr><span class="comment ">// 7 is larger than all:</span>
+auto e7 = s.<strong>equal_range</strong>(<mark>7</mark>);
+<span class="comment ">// &rarr; empty range</span></code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code>
+<hr><span class="hl">{2,<span class="mark x2">4</span>,<span class="mark x2">4</span>,<span class="mark x2">4</span>,<span class="mark x1">6</span> }</span>
+   <span class="sym-iter-up e2"></span>     <span class="sym-iter-up e1"></span>
+4  <small class="hwide">(first in range)</small>
+6  <small class="hwide">(1 behind last)</small>
+n: 3  <small class="hwide">(range size)</small>
+
+<hr> <span class="sym-iter-dn e2"></span>
+<span class="hl">{<span class="mark x4">2</span>,4,4,4,6 }</span>
+ <span class="sym-iter-up e1"></span>
+<hr> <span class="sym-iter-dn e2"></span>
+<span class="hl">{<span class="mark x2">2</span>,<span class="mark x1">4</span>,4,4,6 }</span>
+   <span class="sym-iter-up e1"></span>
+<hr>   <span class="sym-iter-dn e2"></span>
+<span class="hl">{2,<span class="mark x4">4</span>,4,4,6 }</span>
+   <span class="sym-iter-up e1"></span>
+<hr>         <span class="sym-iter-dn e2"></span>
+<span class="hl">{2,4,4,4,<span class="mark x2">6</span><span class="mark x1"> </span>}</span>
+          <span class="sym-iter-up e1"></span>
+<hr>          <span class="sym-iter-dn e2"></span>
+<span class="hl">{2,4,4,4,6<span class="mark x4"> </span>}</span>
+          <span class="sym-iter-up e1"></span></code></pre>
+</div></div></div>
+<div class="panel-fold " ><h3><span class="hwide">Get Upper/Lower Key Bound Positions</span>
+<span class="hslim">Get Upper/Lower Key Bounds</span>
+<span class="hnavi">Get Bounds</span></h3>
+<a class="nav " id="" keywords=" "></a></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><h4 class="nav-none">(ordered&nbsp;sets/maps&nbsp;only)</h4>
+<ul class="defn "><li><code>.<strong>lower_bound</strong>(<em>key</em>)
+</code>&rarr; <code><em>@first_not_less_than_key</em></code>
+</li>
+<li><code>.<strong>upper_bound</strong>(<em>key</em>)
+</code>&rarr; <code><em>@first_greater_than_key</em></code>
+</li></ul></div>
+<div class="panel-row first-wide"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 hwide">std::</span>multiset&lt;int&gt; s {2,4,4,4,6};
+<hr><span class="comment ">// 1 is smaller than all:</span>
+auto <span class="c2">l1</span> = s.<strong>lower_bound</strong>(<mark>1</mark>);
+auto <span class="c1">u1</span> = s.<strong>upper_bound</strong>(<mark>1</mark>);
+if(l1 != end(s)) cout &lt;&lt; <strong>*</strong>l1;
+if(u1 != end(s)) cout &lt;&lt; <strong>*</strong>u1;
+<hr><span class="comment ">// 2 is the smallest key:</span>
+auto <span class="c2">l2</span> = s.<strong>lower_bound</strong>(<mark>2</mark>);
+auto <span class="c1">u2</span> = s.<strong>upper_bound</strong>(<mark>2</mark>);
+if(l2 != end(s)) cout &lt;&lt; <strong>*</strong>l2;
+if(u2 != end(s)) cout &lt;&lt; <strong>*</strong>u2;
+<hr><span class="comment ">// 3 is in between keys:</span>
+auto <span class="c2">l3</span> = s.<strong>lower_bound</strong>(<mark>3</mark>);
+auto <span class="c1">u3</span> = s.<strong>upper_bound</strong>(<mark>3</mark>);
+if(l3 != end(s)) cout &lt;&lt; <strong>*</strong>l3;
+if(u3 != end(s)) cout &lt;&lt; <strong>*</strong>u3;
+<hr><span class="comment ">// 4 is a non-unique key:</span>
+auto <span class="c2">l4</span> = s.<strong>lower_bound</strong>(<mark>4</mark>);
+auto <span class="c1">u4</span> = s.<strong>upper_bound</strong>(<mark>4</mark>);
+if(l4 != end(s)) cout &lt;&lt; <strong>*</strong>l4;
+if(u4 != end(s)) cout &lt;&lt; <strong>*</strong>u4;
+<hr><span class="comment ">// 6 is the largest key:</span>
+auto <span class="c2">l6</span> = s.<strong>lower_bound</strong>(<mark>6</mark>);
+auto <span class="c1">u6</span> = s.<strong>upper_bound</strong>(<mark>6</mark>);
+if(l6 != end(s)) cout &lt;&lt; <strong>*</strong>l6;
+if(u6 != end(s)) cout &lt;&lt; <strong>*</strong>u6;
+<hr><span class="comment ">// 7 is larger than all:</span>
+auto <span class="c2">l7</span> = s.<strong>lower_bound</strong>(<mark>7</mark>);
+auto <span class="c1">u7</span> = s.<strong>upper_bound</strong>(<mark>7</mark>);
+if(l7 != end(s)) cout &lt;&lt; <strong>*</strong>l7;
+if(u7 != end(s)) cout &lt;&lt; <strong>*</strong>u7;</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code>
+<hr><span class="hl">{<span class="mark x4">2</span>,4,4,4,6 }</span>
+ <span class="sym-iter-up e2"></span>
+ <span class="sym-iter-up e1"></span>
+<i>true</i>  &rarr; 2
+<i>true</i>  &rarr; 2
+<hr><span class="hl">{<span class="mark x2">2</span>,<span class="mark x1">4</span>,4,4,6 }</span>
+ <span class="sym-iter-up e2"></span>
+   <span class="sym-iter-up e1"></span>
+<i>true</i>  &rarr; 2
+<i>true</i>  &rarr; 4
+<hr><span class="hl">{2,<span class="mark x4">4</span>,4,4,6 }</span>
+   <span class="sym-iter-up e2"></span>
+   <span class="sym-iter-up e1"></span>
+<i>true</i>  &rarr; 4
+<i>true</i>  &rarr; 4
+<hr><span class="hl">{2,<span class="mark x2">4</span>,<span class="mark x2">4</span>,<span class="mark x2">4</span>,<span class="mark x1">6</span> }</span>
+   <span class="sym-iter-up e2"></span>
+          <span class="sym-iter-up e1"></span>
+<i>true</i>  &rarr; 4
+<i>true</i>  &rarr; 6
+<hr><span class="hl">{2,4,4,4,<span class="mark x2">6</span><span class="mark x1"> </span>}</span>
+         <span class="sym-iter-up e2"></span>
+          <span class="sym-iter-up e1"></span>
+<i>true</i>  &rarr; 6
+<i>false</i> <small>@end</small>
+<hr><span class="hl">{2,4,4,4,6<span class="mark x4"> </span>}</span>
+          <span class="sym-iter-up e2"></span>
+          <span class="sym-iter-up e1"></span>
+<i>false</i> <small>@end</small>
+<i>false</i> <small>@end</small></code></pre>
+</div></div></div>
+<div class="panel-fold " ><h3><span class="nav-none">Get Size&thinsp;/&thinsp;Query Emptiness</span>
+<span class="nav-only">Size/Empty</span></h3></div>
+<div class="panel-col "{style=""><div class="panel "><h6 class="nav-none">Either with member functions:</h6>
+<ul class="defn "><li><code>container.<strong>empty</strong>()
+</code>&rarr; <i>true</i>, if container has no keys
+</li>
+<li><code>container.<strong>size</strong>()
+</code>&rarr; <em>total number of keys or key-value pairs</em>
+</li></ul>
+<h6 class="nav-none">Or with free-standing functions:</h6>
+<ul class="defn "><li><code><span class="c6 ">std::</span><strong>empty</strong>(<em>container</em>) 
+</code>&rarr; <i>true</i>&thinsp;|&thinsp;<i>false</i>&emsp;<code><a class="lbl " href="tags/c++17.html">C++17</a></code>
+</li>
+<li><code><span class="c6 ">std::</span><strong>size</strong>(<em>container</em>)
+</code>&rarr; #(keys/key-value pairs)&emsp;<code><a class="lbl " href="tags/c++17.html">C++17</a></code>
+</li></ul></div>
+<div class="panel-row first-wide"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 hwide">std::</span>map&lt;int;<span class="c6 hwide">std::</span>string&gt; m;
+cout &lt;&lt; m.empty();
+cout &lt;&lt; m.size();
+<hr>m.insert(3,"x");
+cout &lt;&lt; m.empty();
+cout &lt;&lt; m.size();
+<hr>m.insert(1,"y");
+cout &lt;&lt; m.size();</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code><span class="hl">{ }</span>
+<i>true</i>
+0
+<hr><span class="hl">{<span class="mark x2i">3:"x"</span>}</span>
+<i>false</i>
+1
+<hr><span class="hl">{<span class="mark x2i">1:"y"</span>,<span class="mark x7">3:"x"</span>}</span>
+2</code></pre>
+</div></div></div>
+<div class="panel-fold " ><h3><span class="nav-none">Erase Elements&thinsp;/&thinsp;Ranges</span>
+<span class="nav-only">Erase</span></h3></div>
+<div class="panel hvtight bg-filled "><div class="panel-fold vexpand vcompact" open><h4><span class="nav-none">Erase A Single Key / Key-Value Pair</span>
+<span class="nav-only">Single</span></h4>
+<ul class="defn "><li><code>.<strong>erase</strong>(<span class="c1"><em>key</em></span>)
+</code>&rarr; <em>number of deleted keys/key-value pairs</em>
+</li></ul></div>
+<div class="panel-row first-wide"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 hwide">std::</span>multiset&lt;int&gt; s {1,3,3,7,9};
+auto n = s.<strong>erase</strong>(<span class="c1">3</span>)
+cout &lt;&lt; n;
+<hr>s.<strong>erase</strong>(<span class="c1">7</span>)</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code><span class="hl">{1,3,3,7,9}</span>
+<span class="hl">{1<span class="mark x1">,</span>7,9}</span>
+2
+<hr><span class="hl">{1<span class="mark x1">,</span>9}</span></code></pre>
+</div></div>
+<div class="panel-fold vexpand vcompact" open><h4><span class="nav-none">Erase With Iterator (Ranges)</span>
+<span class="nav-only">Iterator(Range)</span></h4>
+<ul class="defn "><li><code>.<strong>erase</strong>(<span class="c2"><em>@position</em></span>)
+</code>&rarr; <code><em>@behind_deleted</em></code>
+</li>
+<li><code>.<strong>erase</strong>(<span class="c2"><em>@range_begin</em></span>,<span class="c2"><em>@range_end</em></span>)
+</code>&rarr; <code><em>@behind_last_deleted</em></code>
+</li></ul></div>
+<div class="panel-row first-wide"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 hwide">std::</span>set&lt;int&gt; s {1,3,6,8,9};
+auto i = s.find(3);
+<span class="c1">i</span> = s.<strong>erase</strong>(<span class="c2">i</span>);
+
+<hr><span class="comment "></span>
+auto <span class="c1">j</span> = s.erase(<span class="c2">begin(s)</span>, <span class="c2">s.find(8)</span>);</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code><span class="hl">{1,<span class="mark x2">3</span>,6,8,9}</span>
+   <span class="sym-iter-up e2"></span>i
+<span class="hl">{1,<span class="mark x1">6</span>,8,9}</span>
+   <span class="sym-iter-up e1"></span>i <small>(after)</small>
+<hr><span class="hl">{<span class="mark x2i">1</span>,<span class="mark x2i">6</span>,<span class="mark x2">8</span>,9}</span>
+ <span class="sym-iter-up e2"></span>   <span class="sym-iter-up e2"></span>
+<span class="hl">{<span class="mark x1">8</span>,9}</span>
+ <span class="sym-iter-up e1"></span>j</code></pre>
+</div></div>
+<div class="panel-fold vexpand vcompact" open><h4><span class="nav-none">Erase Everything</span>
+<span class="nav-only">Everything</span></h4>
+<ul class="defn if-closed"><li><code>.<strong>clear</strong>()
+</code></li></ul></div>
+<div class="panel-row first-wide"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 hwide">std::</span>set&lt;int&gt; s {1,2,5,8};
+s.<strong>clear</strong>();
+s.empty();</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code><span class="hl">{1,2,5,8}</span>
+<span class="hl">{ }</span>
+<i>true</i></code></pre>
+</div></div></div>
+<div class="panel-fold " ><h3><span class="hwide">Extract &amp; (Re-)Insert Nodes</span>
+<span class="hslim">Extract/(Re-)Insert</span>
+<span class="hnavi">Nodes</span>
+<div class="labels "><a class="lbl " href="tags/c++17.html">C++17</a></div></h3></div>
+<div class="panel hvtight bg-filled "><div class="panel-row responsive"{style=""><div class="panel vcompact"><ul class="defn "><li><code>.<strong>extract</strong>(<span class="c2"><em>key</em></span>)
+</code>&rarr; <code><span class="c1"><em>node</em></span></code>
+</li>
+<li><code>.<strong>extract</strong>(<em>@position</em>)
+</code>&rarr; <code><span class="c1"><em>node</em></span></code>
+</li></ul>
+<ul class="defn "><li><code>.<strong>insert</strong>(<span class="c1"><em>node</em></span>)
+</code>&rarr; <code><em>@insert_position</em></code>
+</li></ul></div>
+<div class="panel vcompact"><h6 class="nav-none"><code>container::<strong>node_type</strong></code></h6>
+<p>Important Member Functions:</p>
+<ul class="plain ">
+<li><code><strong>.key</strong>()   </code> &rarr; <code>key_type&amp;</code></li>
+
+<li><code><strong>.mapped</strong>()</code> &rarr; <code>mapped_type&amp;</code></li></ul></div></div>
+<div class="panel-fold vexpand vcompact" open><h4><span class="nav-none">Transfer Key(-Value Pair) Between Sets/Maps</span>
+<span class="nav-only">Transfer</span></h4>
+<p>&hellip; without copying or moving key/value objects</p></div>
+<div class="panel-row first-wide"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code>set&lt;string&gt; s {"a","b","e"};
+set&lt;string&gt; t {"x","z"};
+<hr>t.<strong>insert</strong>(s.<strong>extract</strong>("a"));</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code>s: <span class="hl">{<span class="mark x7">"a"</span>,<span class="mark x7">"b"</span>,<span class="mark x7">"e"</span>}</span>
+t: <span class="hl">{<span class="mark x7">"x"</span>,<span class="mark x7">"z"</span>}</span>
+<hr>s: <span class="hl">{<span class="mark x1"> </span><span class="mark x7">"b"</span>,<span class="mark x7">"e"</span>}</span>
+t: <span class="hl">{<span class="mark x2i">"a"</span>,<span class="mark x7">"x"</span>,<span class="mark x7">"z"</span>}</span></code></pre>
+</div></div>
+<div class="panel-fold vexpand vcompact" open><h4><span class="nav-none">Change Keys Without Copying It</span>
+<span class="nav-only">Change Key</span></h4></div>
+<div class="panel-row first-wide"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code>set&lt;string&gt; s {"a","c","e"};
+auto na = s.<strong>extract</strong>("a");
+na.key() = "z";
+<span class="comment ">// move node back in</span>
+s.<strong>insert</strong>(<span class="c6 ">std::</span>move(na));
+<hr>map&lt;int,string&gt; m {<span class="hslim-br"></span><span class="hslim">  </span><span class="mark x7">{2,"a"}</span>,<span class="mark x7">{3,"x"}</span>};
+auto n2 = m.<strong>extract</strong>(2);
+m.<strong>key</strong>() = 5;
+<span class="comment ">// move node back in</span>
+m.<strong>insert</strong>(<span class="c6 ">std::</span>move(n2));</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code><span class="hl">{<span class="mark x7">"a"</span>,<span class="mark x7">"c"</span>,<span class="mark x7">"e"</span>}</span>
+get node
+change key
+
+<span class="hl">{<span class="mark x7">"c"</span>,<span class="mark x7">"e"</span>,<span class="mark x2i">"z"</span>}</span>
+<hr><span class="hl">{<span class="mark x7">2:"a"</span>,<span class="mark x7">3:"x"</span>}<span class="hslim-br"></span><span class="hslim"></span></span>
+get node
+change key
+
+<span class="hl">{<span class="mark x7">3:"x"</span>,<span class="mark x2i">5:"a"</span>}</span></code></pre>
+</div></div></div>
+<hr>
+<div class="panel-fold " ><h3><span class="hwide">Copy &amp; Assign Entire Sets/Maps</span>
+<span class="hslim">Copy &amp; Assign</span>
+<span class="hnavi">Copy/Assign</span></h3>
+<a class="nav " id="copy-assign" keywords="copy-assign copy copying assign assignment"></a></div>
+<div class="panel hvtight bg-filled "><div class="panel-fold vexpand" open><table><tbody><tr><td><h5 class="nav-none">Copying:</h5></td>   <td>creates a new container object and copies all contained keys &amp; values</td></tr>
+<tr><td><h5 class="nav-none">Assigning:</h5></td> <td>all contained objects are copied from source to assignment target</td></tr></tbody></table>
+<p class="cat-speed">Copying / copy-assigning sets or maps might be expensive, if they 
+contain a large number of elements!</p></div>
+<div class="panel-row first-wide"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 hwide">std::</span>set&lt;int&gt; a {4,7,1,9};
+<span class="c6 hwide">std::</span>set&lt;int&gt; b {1,2,3};    
+bool equal1 = (a <span class="e1">==</span> b);
+<hr><span class="comment ">// copy assignment:</span>
+a <span class="e1">=</span> b;
+bool equal2 = (a <span class="e1">==</span> b);
+<hr>b.clear();<span class="hslim-br"></span><span class="hslim"></span>
+bool equal3 = (a <span class="e1">==</span> b);
+<hr><span class="comment ">// ways of making copies:</span>
+<span class="c6 hwide">std::</span>set&lt;int&gt; a2 <span class="e1">{</span>a<span class="e1">}</span>;
+<span class="c6 hwide">std::</span>set&lt;int&gt; a3 <span class="e1">(</span>a<span class="e1">)</span>;
+<span class="c6 hwide">std::</span>set&lt;int&gt; a4 <span class="e1">=</span> a;
+<strong>auto</strong> a5 <span class="e1">{</span>a<span class="e1">}</span>;
+<strong>auto</strong> a6 <span class="e1">(</span>a<span class="e1">)</span>;
+<strong>auto</strong> a7 <span class="e1">=</span> a;</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code>a: <span class="hl">{<span class="mark x7">4</span>,<span class="mark x7">7</span>,<span class="mark x7">1</span>,<span class="mark x7">9</span>}</span>
+b: <span class="hl">{<span class="mark x7">1</span>,<span class="mark x7">2</span>,<span class="mark x7">3</span>}</span>
+<i>false</i>
+<hr>
+a: <span class="hl">{<span class="mark x7">1</span>,<span class="mark x7">2</span>,<span class="mark x7">3</span>}</span>
+<i>true</i>
+<hr>b: <span class="hl">{}</span>  <span class="hslim-br"></span><span class="hslim"></span>a: <span class="hl">{<span class="mark x7">1</span>,<span class="mark x7">2</span>,<span class="mark x7">3</span>}</span>
+<i>false</i>
+<hr>
+a2: <span class="hl">{<span class="mark x7">1</span>,<span class="mark x7">2</span>,<span class="mark x7">3</span>}</span>
+a3: <span class="hl">{<span class="mark x7">1</span>,<span class="mark x7">2</span>,<span class="mark x7">3</span>}</span>
+a4: <span class="hl">{<span class="mark x7">1</span>,<span class="mark x7">2</span>,<span class="mark x7">3</span>}</span>
+a5: <span class="hl">{<span class="mark x7">1</span>,<span class="mark x7">2</span>,<span class="mark x7">3</span>}</span>
+a6: <span class="hl">{<span class="mark x7">1</span>,<span class="mark x7">2</span>,<span class="mark x7">3</span>}</span>
+a7: <span class="hl">{<span class="mark x7">1</span>,<span class="mark x7">2</span>,<span class="mark x7">3</span>}</span></code></pre>
+</div></div>
+<div class="panel-fold vexpand vcompact" open><h4 class="nav-none">Assigning Key Ranges To A Set</h4>
+<ul class="defn "><li><code><strong>assign</strong>(<span class="c2"><em>@keys_begin</em></span>, <span class="c2"><em>@keys_end</em></span>)
+</code></li></ul></div>
+<div class="panel-row first-wide"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 hwide">std::</span>set&lt;int&gt; s {1,6};
+<hr>vector&lt;int&gt; keys {2,7,3,0};
+s.<strong>assign</strong>(<span class="c2">begin(keys)+1</span>, 
+         <span class="c2">end(keys)</span>);</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code>s: <span class="hl">{<span class="mark x2">1</span>,<span class="mark x2">6</span>}</span>
+<hr><ul class="array "><li class="x2">2</li><li class="x2i">7</li><li class="x2i">3</li><li class="x2i">0</li><li class="x0 dotted"> </li></ul>
+<ul class="array plain"><li class=""></li><li class=""><span class="sym-iter-up e2"></span></li><li class=""></li><li class=""></li><li class=""><span class="sym-iter-up e2"></span></li></ul>
+s: <span class="hl">{<span class="mark x2i">0</span>,<span class="mark x2i">3</span>,<span class="mark x2i">7</span>}</span></code></pre>
+</div></div></div>
+<div class="panel-fold " ><h3><span class="nav-none">Compare Entire Sets/Maps</span>
+<span class="nav-only">Compare</span></h3>
+<a class="nav " id="regularity" keywords="regularity compare comparing"></a></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><h6 class="nav-none">Comparisons are <strong>value-based</strong></h6>
+<p>comparing two associative containers compares the contained 
+keys / key-value pairs</p>
+<h6 class="nav-none"><strong>Equality</strong> comparison of all set/map types with 
+<code><span class="e1">==</span></code> and <code><span class="e1">!=</span></code></h6>
+<p>two associative containers are equal, if their key(-value) 
+content is equal</p>
+<h6 class="nav-none"><strong>Lexicographical</strong> comparisons of ordered sets/maps with 
+<code><span class="e1">&lt;</span></code>, <code><span class="e1">&lt;=</span></code>, <code><span class="e1">&gt;</span></code>, <code><span class="e1">&lt;=</span></code></h6></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 hwide">std::</span>set&lt;int&gt; s1 {1,2,7,8,9};
+<span class="c6 hwide">std::</span>set&lt;int&gt; s2 {1,4,5};    
+bool s1_equals_s2  = (s1 <span class="e1">==</span> s2);  <span class="comment ">// <i>false</i></span>
+bool s1_unqual_s2  = (s1 <span class="e1">!=</span> s2);  <span class="comment ">// <i>true</i></span>
+bool s1_smaller_s2 = (s1 <span class="e1">&lt;</span>  s2);  <span class="comment ">// <i>true</i></span>
+bool s1_greater_s2 = (s1 <span class="e1">&gt;</span>  s2);  <span class="comment ">// <i>false</i></span>
+<hr><span class="c6 hwide">std::</span>map&lt;int,<span class="c6 hwide">std::</span>string&gt; m1 {<span class="mark x7">{1,"z"}</span>,<span class="mark x7">{2,"f"}</span>,<span class="mark x7">{7,"b"}</span>};
+<span class="c6 hwide">std::</span>map&lt;int,<span class="c6 hwide">std::</span>string&gt; m2 {<span class="mark x7">{1,"a"}</span>,<span class="mark x7">{3,"x"}</span>};    
+bool m1_equals_m2  = (m1 <span class="e1">==</span> m2);  <span class="comment ">// <i>false</i></span>
+bool m1_unequal_m2 = (m1 <span class="e1">!=</span> m2);  <span class="comment ">// <i>true</i></span>
+bool m1_smaller_m2 = (m1 <span class="e1">&lt;</span>  m2);  <span class="comment ">// <i>true</i></span>
+bool m1_greater_m2 = (m1 <span class="e1">&gt;</span>  m2);  <span class="comment ">// <i>false</i></span></code></pre>
+</div></div>
+<div class="panel-fold " ><h3><span class="hwide">Merge Entire Sets/Maps</span>
+<span class="hslim">Merge Sets/Maps</span>
+<span class="hnavi">Merge</span>
+<div class="labels "><a class="lbl " href="tags/c++17.html">C++17</a></div></h3></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><p>Integrate <em>nodes</em> from source into target without copying keys or values:</p>
+<ul class="defn "><li><code><span class="c2">target</span>.<strong>merge</strong>(<span class="c1"><em>source</em></span>)
+</code></li></ul>
+<p>Runtime complexity:&ensp;
+<span class="c1">source.size()</span><strong>&nbsp;&sdot;&nbsp;log(</strong><span class="c2">target.size()</span>&nbsp;+&nbsp;<span class="c1">source.size()</span>)<strong>)</strong></p></div>
+<div class="panel-row "{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code>set&lt;string&gt; s {2,7};
+set&lt;string&gt; t {1,5,8<span class="hwide">,9</span>};
+<hr>t.<strong>merge</strong>(s);</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code>s: <span class="hl">{<span class="mark x7">2</span>,<span class="mark x7">7</span>}</span>
+t: <span class="hl">{<span class="mark x7">1</span>,<span class="mark x7">5</span>,<span class="mark x7">8</span><span class="hwide">,<span class="mark x7">9</span></span>}</span>
+<hr>s: <span class="hl">{<span class="mark x1"> </span>}</span>
+t: <span class="hl">{<span class="mark x7">1</span>,<span class="mark x2i">2</span>,<span class="mark x7">5</span>,<span class="mark x2i">7</span>,<span class="mark x7">8</span><span class="hwide">,<span class="mark x7">9</span></span>}</span></code></pre>
+</div></div></div>
+<hr>
+<div class="panel-fold " ><h3><span class="nav-none">Inspect/Control Hash Table</span>
+<span class="nav-only">Hash</span></h3></div>
+<div class="panel hvtight bg-filled "><div class="panel vcompact"><h4>(unordered sets &amp; maps only)</h4></div>
+<div class="panel-fold vexpand vcompact" open><h4><span class="nav-none">Check &amp; Control Hash Table Size</span>
+<span class="nav-only">Table</span></h4>
+<ul class="defn indented"><li><code><strong>.size</strong>()
+</code>&rarr; #elements &ensp;<small>(#keys/key-value&nbsp;pairs)</small>
+</li>
+
+<li><code><strong>.reserve</strong>(<em>#elements</em>)</code>
+&emsp; make space for at least '<em>#elements</em>' <small>(might&nbsp;trigger&nbsp;rehash)</small></li></ul>
+<ul class="defn indented"><li><code><strong>.bucket_count</strong>()
+</code>&rarr; #hash_table_buckets
+</li>
+<li><code><strong>.bucket_size</strong>(<span class="c2"><em>bucket_index</em></span>)
+</code>&rarr; #elements_in_bucket
+</li>
+<li><code><strong>.load_factor</strong>()
+</code>&rarr; #non_empty_buckets&thinsp;<strong>/</strong>&thinsp;#bucket_count
+</li>
+
+<li><code><strong>.rehash</strong>(<em>new_min_bucket_count</em>)</code>
+&ensp;<small>(also takes <em>max_load_factor</em> into account)</small></li></ul></div>
+<div class="panel-col "{style=""><div class="panel-row responsive last-wide"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code>unordered_map&lt;int,string&gt; m { <span class="mark x7">{6,"x"}</span>,<span class="mark x7">{4,"a"}</span>,<span class="mark x7">{7,"n"}</span>,<span class="mark x7">{2,"z"}</span> };
+cout 
+  &lt;&lt; m.size()         <span class="comment ">//&nbsp;4</span>
+  &lt;&lt; m.<strong>bucket_count</strong>() <span class="comment ">//&nbsp;5</span>
+  &lt;&lt; m.<strong>bucket_size</strong>(<span class="c2">1</span>) <span class="comment ">//&nbsp;1</span>
+  &lt;&lt; m.bucket_size(<span class="c2">2</span>) <span class="comment ">//&nbsp;0</span>
+  &lt;&lt; m.bucket_size(<span class="c2">3</span>) <span class="comment ">//&nbsp;2</span>
+  &lt;&lt; m.<strong>load_factor</strong>(); <span class="comment ">//&nbsp;0.6&nbsp;=&nbsp;3/5</span></code></pre>
+</div>
+<div class="panel "><img src="cpp/std/unordered_map_htable1.svg" style="max-width:100%;width:300px;"></img></div></div>
+<div class="panel-row responsive last-wide"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code>unordered_map&lt;int,string&gt; m { <span class="mark x7">{6,"x"}</span>,<span class="mark x7">{4,"a"}</span>,<span class="mark x7">{7,"n"}</span>,<span class="mark x7">{2,"z"}</span> };
+<span class="comment ">// set to at least 7 buckets:</span>
+m.<strong>rehash</strong>(7);
+cout 
+  &lt;&lt; m.size()         <span class="comment ">//&nbsp;4</span>
+  &lt;&lt; m.<strong>bucket_count</strong>() <span class="comment ">//&nbsp;7</span>
+  &lt;&lt; m.bucket_size(<span class="c2">1</span>) <span class="comment ">//&nbsp;1</span>
+  &lt;&lt; m.bucket_size(<span class="c2">2</span>) <span class="comment ">//&nbsp;0</span>
+  &lt;&lt; m.<strong>load_factor</strong>(); <span class="comment ">//&nbsp;0.57&nbsp;=&nbsp;4/7</span></code></pre>
+</div>
+<div class="panel "><img src="cpp/std/unordered_map_htable2.svg" style="max-width:100%;width:300px;"></img></div></div></div>
+<div class="panel-fold vexpand vcompact" ><h4><span class="nav-none">Check &amp; Control Load Factor</span>
+<span class="nav-only">Load Factor</span></h4>
+<ul class="defn "><li><code><strong>.load_factor</strong>()
+</code>&rarr; #occupied_slots&thinsp;<strong>/</strong>&thinsp;#all_slots
+</li>
+<li><code><code><strong>.max_load_factor</strong>()</code>
+</code>&rarr; max_allowed_load_factor
+</li>
+
+<li><code><strong>.max_load_factor</strong>(<span class="c2"><em>new_maximum</em></span>)</code>
+<small>(might trigger rehash)</small></li></ul></div>
+<div class="panel-row first-wide"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code>unordered_set&lt;int&gt; s {1,3,5,8,9};
+cout &lt;&lt; s.load_factor();
+cout &lt;&lt; s.max_load_factor();
+<span class="comment ">// set new maximum:</span>
+cout &lt;&lt; s.<strong>max_load_factor</strong>(<span class="c2">0.8</span>);
+s.<strong>rehash</strong>(10);
+cout &lt;&lt; s.load_factor();</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code>
+1.0
+1.0
+
+<em>might</em> trigger rehash
+force rehash
+0.3846</code></pre>
+</div></div>
+<div class="panel-fold vexpand vcompact" ><h4><span class="nav-none">Access or Iterate Over Hash Buckets</span>
+<span class="nav-only">Iterate</span></h4>
+<ul class="defn "><li><code><strong>.bucket</strong>(<span class="c1"><em>key</em></span>)
+</code>&rarr; <span class="c2">index_of_bucket_with_key</span>
+</li>
+<li><code><strong>.bucket_size</strong>(<span class="c2"><em>bucket_index</em></span>)
+</code>&rarr; number_of_nodes_in_bucket
+</li></ul>
+<h6 class="nav-none">Get <code>(const_)local_iterator</code></h6>
+<ul class="defn "><li><code><strong>.begin</strong>(<span class="c2"><em>bucket_index</em></span>)
+</code>&rarr; <code><em>@bucket_begin</em></code>
+</li>
+<li><code><strong>.end</strong>(<span class="c2"><em>bucket_index</em></span>)
+</code>&rarr; <code><em>@bucket_end</em></code>
+</li></ul>
+<ul class="defn if-opened"><li><code><strong>.cbegin</strong>(<span class="c2"><em>bucket_index</em></span>)
+</code>&rarr; <code><em>const@bucket_begin</em></code>
+</li>
+<li><code><strong>.cend</strong>(<span class="c2"><em>bucket_index</em></span>)
+</code>&rarr; <code><em>const@bucket_end</em></code>
+</li></ul></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>unordered_set&lt;int&gt; s {1,3,5,8,9};
+<span class="comment ">// get bucket with key 3</span>
+const auto <span class="c2">b</span> = s.bucket(<span class="c1">3</span>);
+<span class="comment ">// iterate over keys in bucket</span>
+for(auto i = s.begin(<span class="c2">b</span>); i != s.end(<span class="c2">b</span>); ++i) {
+  cout &lt;&lt; *i;
+}</code></pre>
+</div></div>
+<div class="panel-fold " ><h3><span class="nav-none">Get Types: Key&thinsp;/&thinsp;Value&thinsp;/&hellip;</span>
+<span class="nav-only">Types</span></h3></div>
+<div class="panel-col "{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code>using set_t = <span class="c6 ">std::</span>map&lt;double&gt;;
+set_t::<span class="e2">size_type</span> i = 0;  <span class="comment ">//&nbsp;std::size_t</span>
+set_t::<span class="e2">key_type</span>{0} k = 0;   <span class="comment ">//&nbsp;double</span>
+set_t::<span class="e2">value_type</span>{0} v = 0; <span class="comment ">//&nbsp;double</span>
+<hr>using map_t = <span class="c6 ">std::</span>map&lt;int,<span class="c6 ">std::</span>string&gt;;
+map_t::<span class="e2">key_type</span>{0} k = 0;    <span class="comment ">//&nbsp;int</span>
+map_t::<span class="e2">mapped_type</span>{0} m = 0; <span class="comment ">//&nbsp;string</span>
+map_t::<span class="e2">value_type</span>{0,"a"} v {1,"a"}; <span class="comment ">//&nbsp;pair&lt;const&nbsp;int,string&gt;</span></code></pre>
+</div>
+<div class="panel-row responsive"{style=""><div class="panel "><h6 class="nav-none">Example: <code><span class="c6 ">std::</span>map</code></h6>
+<div class="block "><img src="cpp/std/map_layout.svg" style="max-width:100%;width:260px;"></img></div></div>
+<div class="panel vcompact"><h6 class="nav-none">For more see:</h6>
+<ul class="resources-small "><li class="cat-cppreference"><a href="https://en.cppreference.com/w/cpp/container/set">cppreference: <code><span class="c6 ">std::</span>set</code></a></li>
+<li class="cat-cppreference"><a href="https://en.cppreference.com/w/cpp/container/map">cppreference: <code><span class="c6 ">std::</span>map</code></a></li>
+<li class="cat-cppreference"><a href="https://en.cppreference.com/w/cpp/container/unordered_set">cppreference: <code><span class="c6 ">std::</span>unordered_set</code></a></li>
+<li class="cat-cppreference"><a href="https://en.cppreference.com/w/cpp/container/unordered_map">cppreference: <code><span class="c6 ">std::</span>unordered_map</code></a></li></ul></div></div></div>
+<hr>
+<div class="panel-fold vcompact" ><h3><span class="nav-none">Make Keys Orderable</span>
+<span class="nav-only">Order Keys</span></h3>
+<a class="nav " id="key-ordering" keywords="key-ordering "></a></div>
+<div class="panel hvtight bg-filled "><div class="panel-fold vcompact" open><h4 class="nav-none"><span class="hwide">Key Comparison is Based on <em>Equivalence</em></span>
+<span class="hslim">Ordering is <em>Equivalence</em>-Based</span></h4>
+<a class="nav " id="equivalence" keywords="equivalence compare comparison equivalent equivalence less order ordering"></a></div>
+<div class="panel vcompact"><h6 class="nav-none"><code>a</code> and <code>b</code> are <strong><em>equal</em></strong></h6>
+<p>if <code class="inset ">a&nbsp;<span class="e2">==</span>&nbsp;b</code>
+is&nbsp;<i>true</i>, &emsp;i.e.,&nbsp;their&nbsp;values&nbsp;are&nbsp;the&nbsp;same</p>
+<h6 class="nav-none"><code>a</code> and <code>b</code> are <strong><em>equivalent</em></strong></h6>
+<p>if <code class="inset "><strong>!</strong>(a&nbsp;<span class="e2">&lt;</span>&nbsp;b) &amp;&amp; <strong>!</strong>(b&nbsp;<span class="e2">&lt;</span>&nbsp;a)</code>
+is&nbsp;<i>true</i>, &emsp;i.e.,&nbsp;neither&nbsp;one&nbsp;is&nbsp;ordered&nbsp;before&nbsp;the&nbsp;other</p>
+<p>The C++ standard library uses equivalence based on <q>less than</q>
+for ordering objects (according to a <em>strict weak ordering</em>).</p></div>
+<div class="panel-fold vexpand vcompact" ><h4 class="nav-none"><strong>Alternative 1</strong>: Supply A Custom Comparator</h4>
+<a class="nav " id="comparators" keywords="comparators "></a>
+<div class="panel vcompact"><h6 class="nav-none">Ordered containers take an additional type parameter:</h6>
+<ul>
+<li><code>set&lt;<span class="c1"><em>Key</em></span>,<span class="c2"><em>KeyComp</em></span>&gt;,</code></li>
+
+<li><code>map&lt;<span class="c1"><em>Key</em></span>,Mapped,<span class="c2"><em>KeyComp</em></span>&gt;, &hellip;</code></li></ul>
+<p>The type <code><span class="c2"><em>KeyComp</em></span></code> needs to provide a public member function</p>
+<div class="block ">
+<pre class="notranslate"><code>bool <strong>operator()</strong> (Key <small>const&amp;</small>, Key <small>const&amp;</small>) const</code></pre>
+</div>
+<p>which returns <code><i>true</i></code>, if the first argument
+should be ordered before the second.
+The default is <code><span class="c6 ">std::</span>less&lt;Key&gt;</code>.</p></div></div>
+<div class="panel-col "{style=""><div class="panel-row "{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 hwide">std::</span>set&lt;<span class="c1">int</span>,<span class="c2">std::greater&lt;&gt;</span>&gt; s;
+s.insert({1,5,3,2});
+s.insert(4);        
+<hr><span class="comment ">// get comparator copy</span>
+auto kc = s.key_comp();
+cout &lt;&lt; kc(4,2);</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code><span class="comment "><a class="lbl ">C++98-11</a>: std::greater&lt;<strong>int</strong>&gt;</span>
+s: <span class="hl">{<span class="mark x7">5</span>,<span class="mark x7">3</span>,<span class="mark x7">2</span>,<span class="mark x7">1</span>}</span>
+s: <span class="hl">{<span class="mark x7">5</span>,<span class="mark x2i">4</span>,<span class="mark x7">3</span>,<span class="mark x7">2</span>,<span class="mark x7">1</span>}</span>
+<hr>
+
+<i>true</i></code></pre>
+</div></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="comment ">// custom key type</span>
+struct <strong>P2</strong> {
+  <strong>P2</strong>(int x_, int y_): x{x_}, y{y_} {}
+  int x, y;
+};
+<span class="comment ">// comparator function object</span>
+struct <span class="e2">P2_less</span> {
+  constexpr bool <strong>operator ()</strong>
+  (P2 const&amp; l, P2 const&amp; r) const&nbsp;noexcept {
+      if(l.x &lt; r.x) return true;
+      return (l.y &lt; r.y);
+  }
+};</code></pre>
+</div>
+<div class="panel-row "{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 hwide">std::</span>set&lt;P2,<span class="c2">P2_less</span>&gt; s;
+s.insert( P2{1,2} );
+s.<strong>emplace</strong>(3,4);</code></pre>
+</div>
+<div class="panel comments cs-light ">
+<pre class="notranslate"><code>s: <span class="hl">{ }</span>
+s: <span class="hl">{<span class="mark x2i">{1,2}</span>}</span>
+s: <span class="hl">{<span class="mark x7">{1,2}</span>,<span class="mark x2i">{3,4}</span>}</span></code></pre>
+</div></div></div>
+<div class="panel vcompact"><h4 class="nav-none"><strong>Alternative 2</strong>: Make Your Type Comparable</h4>
+<p class="cat-guideline">You should only do that</p>
+<ul class="vcompact">
+<li>if objects of your type can be ordered in a way that is 
+<q>natural</q> &amp; unambiguous</li>
+
+<li>if you can at least provide a <em>strict weak ordering</em></li></ul>
+<h6 class="nav-none">For more details, see:</h6>
+<ul class="resources "><li class="cat-article"><a href="cpp/lang/comparisons.html">Comparing Custom Types</a></li>
+</ul></div></div>
+<div class="panel-fold " ><h3><span class="nav-none">Make Keys Hashable</span>
+<span class="nav-only">Hash Keys</span></h3>
+<a class="nav " id="hashers" keywords="hashers hash hashing hasher"></a></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><h6 class="nav-none">Unordered containers take an additional type parameter:</h6>
+<ul>
+<li><code>set&lt;<span class="c1"><em>Key</em></span>,<span class="c2"><em>Hasher</em></span>&gt;,</code></li>
+
+<li><code>map&lt;<em>Key</em>,<em>Mapped</em>,<span class="c2"><em>Hasher</em></span>&gt;, &hellip;</code></li></ul>
+<p>The type <code><span class="c2"><em>Hasher</em></span></code> needs to provide a public member function</p>
+<div class="block ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>size_t <strong>operator()</strong> (Key <small>const&amp;</small>) const</code></pre>
+</div>
+<p>which returns the hash value (= an unsigned index) for a given key. 
+The default is <code><span class="c6 ">std::</span>hash&lt;Key&gt;</code>.</p></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>struct <span class="e2">TM_hash</span> {
+  <span class="comment ">// <a href="http://stackoverflow.com/users/382763/thomas-mueller" >32bit integer hash by T. Mueller</a></span>
+  constexpr <span class="c6 ">std::</span>size_t
+  <strong>operator ()</strong> (<span class="c6 ">std::</span>uint32_t k) const&nbsp;noexcept {
+    k = ((k &gt;&gt; 16) ^ k) * 0x45d9f3b;
+    k = ((k &gt;&gt; 16) ^ k) * 0x45d9f3b;
+    k = ((k &gt;&gt; 16) ^ k);
+    return k;
+  }
+};
+<hr><span class="comment ">// make set with custom hasher</span>
+<span class="c6 ">std::</span>unordered_set&lt;<span class="c6 ">std::</span>uint32_t,<span class="c2">TM_hash</span>&gt; s;
+<span class="annotation">&hellip;</span>
+<span class="comment ">// get copy of hasher from set</span>
+auto h = s.hasher();</code></pre>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="comment ">// custom key type</span>
+class <strong>A</strong> { <span class="annotation">&hellip;</span> };
+<span class="comment ">// hasher function class</span>
+struct <span class="e2">A_hash</span> {
+  <span class="c6 ">std::</span>size_t <strong>operator ()</strong> (A const&amp; k) const&nbsp;noexcept {
+    <span class="annotation">&hellip;</span> <span class="comment ">// suitable hash function </span>
+  }
+};
+<hr><span class="comment ">// make set with custom hasher</span>
+<span class="c6 ">std::</span>unordered_set&lt;A,<span class="c2">A_hash</span>&gt; s;
+&hellip;</code></pre>
+</div></div></div></section>
+<section class="epilog">
+<div class="panel-col "{style=""><div class="panel-col "{style=""><div class="guide-nav">
+<div class="go-prev"><a href="cpp/std/sequence_views.html"><span class="hwide">Views</span></a></div>
+<div class="go-up"><a href="cpp/beginners_guide.html#std-lib-containers">Beginner's Guide <span class="hxwide">/ Containers</span></a></div>
+<div class="go-next"><a href="cpp/std/algorithms/intro.html"><span class="hwide">Std.Algorithms</span></a></div>
+</div></div>
+<div class="panel title vcompact "><h6>Other Containers
+</h6></div>
+<div class="panel "><ul class="resources "><li class="cat-article"><a href="cpp/std/sequence_containers.html">Standard Library Sequence Containers</a></li>
+<li class="cat-article"><a href="cpp/std/sequence_views.html">Sequence Views</a></li>
+<li class="cat-slides"><a href="cpp/std/special_containers.html">Special Standard Library Containers</a></li>
+</ul></div></div>
+</section>
+<section class="epilog">
+<div class="panel-fold " open><h3 class="cat-link">Related <span class="if-closed">&hellip;</span></h3></div>
+<div class="panel "><ul class="resources "><li class="cat-cppreference"><a href="https://en.cppreference.com/w/cpp/container">cppreference: Containers Library</a></li>
+<li class="cat-cppreference"><a href="https://en.cppreference.com/w/cpp/container/set">cppreference: <code><span class="c6 ">std::</span>set</code></a></li>
+<li class="cat-cppreference"><a href="https://en.cppreference.com/w/cpp/container/map">cppreference: <code><span class="c6 ">std::</span>map</code></a></li>
+<li class="cat-cppreference"><a href="https://en.cppreference.com/w/cpp/container/unordered_set">cppreference: <code><span class="c6 ">std::</span>unordered_set</code></a></li>
+<li class="cat-cppreference"><a href="https://en.cppreference.com/w/cpp/container/unordered_map">cppreference: <code><span class="c6 ">std::</span>unordered_map</code></a></li>
+<hr>
+<li class="cat-book"><a href="https://isocpp.org/files/papers/4-Tour-Algo-draft.pdf">A Tour of C++: Containers and Algorithms</a></li>
+
+<li class="cat-youtube"><a href="https://www.youtube.com/watch?v=24VAm8gzWq4&list=PLVFrD1dmDdvdUZA2jB-wvXY81SXXRWXkU"><q>5 Data Structures in 5 Minutes</q> <small>by Conor Hoekstra</small></a></li>
+<hr>
+
+<li>
+
+<a href="cpp/std/associative_containers.png"class="img " ><img src="cpp/std/associative_containers_thumb.png"style="max-width:100%;height:100px;"></img>Overview Sheet "Associative Containers"</a></li></ul></div>
+</section>
+<section class="context">
+<ul class="linear-tags "><li><a href="tags/c++.html">C++</a></li><li><a href="tags/c++20.html">C++20</a></li><li><a href="tags/article.html">article</a></li><li><a href="tags/beginner-level.html">beginner-level</a></li><li><a href="tags/containers.html">containers</a></li><li><a href="tags/hash-map.html">hash-map</a></li><li><a href="tags/hash-set.html">hash-set</a></li><li><a href="tags/hashing.html">hashing</a></li><li><a href="tags/map.html">map</a></li><li><a href="tags/set.html">set</a></li><li><a href="tags/std-library.html">std-library</a></li></ul>
+</section>
+<section class="metadata">
+<p><span class="cat-date">Last updated: 2020-12-13</span></p>
+</section>
+</article></div>
+<footer>
+<div id="footer-top"><div id="footer-top-content"><div id="footer-top-left"><nav><ul class="plain ">
+<li>
+<a href="index.html" class="cat-home" >Home</a>
+</li>
+
+<li>
+<a href="tags/news.html" class="cat-news" >News</a>
+</li>
+
+<li>
+<a href="tags/article.html" class="cat-article" >Articles</a>
+</li>
+
+<li>
+<a href="tags/featured.html" class="cat-featured" >Featured</a>
+</li>
+
+<li>
+<a href="tags/guide.html" class="cat-guide" >Guides</a>
+</li>
+
+<li>
+<a href="tags/list.html" class="cat-list" >Lists</a>
+</li>
+
+<li>
+<a href="about.html" class="cat-about" >About</a>
+</li>
+
+<li>
+<a href="privacy.html" class="cat-contact" >Privacy</a>
+</li>
+
+<li>
+<a href="https://twitter.com/hackingcpp" class="cat-twitter" >Twitter</a>
+</li></ul></nav></div>
+<div id="footer-top-right"><h2 class="cat-tags nav-none">
+<a href="tags.html" >Tags</a>
+</h2>
+<ul class="topic-cloud "><li><a style="font-size:119.09832775265055%;" href="tags/algorithms.html">algorithms</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/allocators.html">allocators</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/arrays.html">arrays</a></li> <li><a style="font-size:155.67625418551208%;" href="tags/article.html">article</a></li> <li><a style="font-size:151.4520701280242%;" href="tags/beginner-level.html">beginner-level</a></li> <li><a style="font-size:60.0%;" href="tags/blogs.html">blogs</a></li> <li><a style="font-size:60.0%;" href="tags/books.html">books</a></li> <li><a style="font-size:60.0%;" href="tags/build-systems.html">build-systems</a></li> <li><a style="font-size:160.9530933887302%;" href="tags/c++.html">C++</a></li> <li><a style="font-size:60.0%;" href="tags/c++-standardization.html">C++-standardization</a></li> <li><a style="font-size:122.76135311474769%;" href="tags/c++11.html">C++11</a></li> <li><a style="font-size:112.96632221214513%;" href="tags/c++14.html">C++14</a></li> <li><a style="font-size:104.32374581448789%;" href="tags/c++17.html">C++17</a></li> <li><a style="font-size:109.08009883059783%;" href="tags/c++20.html">C++20</a></li> <li><a style="font-size:60.0%;" href="tags/c++98.html">C++98</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/c-style.html">C-style</a></li> <li><a style="font-size:60.0%;" href="tags/c-vs-c++.html">C-vs-C++</a></li> <li><a style="font-size:60.0%;" href="tags/cat-casts.html">cat-casts</a></li> <li><a style="font-size:106.83431667163975%;" href="tags/classes.html">classes</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/code-editors.html">code-editors</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/code-formatters.html">code-formatters</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/command-line.html">command-line</a></li> <li><a style="font-size:106.83431667163975%;" href="tags/community.html">community</a></li> <li><a style="font-size:60.0%;" href="tags/comparisons.html">comparisons</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/compilers.html">compilers</a></li> <li><a style="font-size:60.0%;" href="tags/concepts.html">concepts</a></li> <li><a style="font-size:60.0%;" href="tags/conferences.html">conferences</a></li> <li><a style="font-size:60.0%;" href="tags/const.html">const</a></li> <li><a style="font-size:60.0%;" href="tags/constexpr.html">constexpr</a></li> <li><a style="font-size:111.11165590902733%;" href="tags/containers.html">containers</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/control-flow.html">control-flow</a></li> <li><a style="font-size:114.67244982290701%;" href="tags/custom-types.html">custom-types</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/data-structures.html">data-structures</a></li> <li><a style="font-size:60.0%;" href="tags/debugging.html">debugging</a></li> <li><a style="font-size:104.32374581448789%;" href="tags/design.html">design</a></li> <li><a style="font-size:106.83431667163975%;" href="tags/diagnostics.html">diagnostics</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/exceptions.html">exceptions</a></li> <li><a style="font-size:89.54916387632527%;" href="tags/featured.html">featured</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/file-io.html">file-io</a></li> <li><a style="font-size:60.0%;" href="tags/find.html">find</a></li> <li><a style="font-size:60.0%;" href="tags/find_if.html">find_if</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/functional-prog.html">functional-prog</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/functions.html">functions</a></li> <li><a style="font-size:60.0%;" href="tags/gallery.html">gallery</a></li> <li><a style="font-size:94.30551689243521%;" href="tags/generic-prog.html">generic-prog</a></li> <li><a style="font-size:60.0%;" href="tags/groups.html">groups</a></li> <li><a style="font-size:60.0%;" href="tags/guide.html">guide</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/guidelines.html">guidelines</a></li> <li><a style="font-size:60.0%;" href="tags/hash-map.html">hash-map</a></li> <li><a style="font-size:60.0%;" href="tags/hash-set.html">hash-set</a></li> <li><a style="font-size:60.0%;" href="tags/hashing.html">hashing</a></li> <li><a style="font-size:60.0%;" href="tags/header-files.html">header-files</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/heap.html">heap</a></li> <li><a style="font-size:60.0%;" href="tags/ides.html">ides</a></li> <li><a style="font-size:98.1917402739825%;" href="tags/idiom.html">idiom</a></li> <li><a style="font-size:98.1917402739825%;" href="tags/io.html">io</a></li> <li><a style="font-size:94.30551689243521%;" href="tags/iostreams.html">iostreams</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/iterators.html">iterators</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/language-mechanism.html">language-mechanism</a></li> <li><a style="font-size:60.0%;" href="tags/language-references.html">language-references</a></li> <li><a style="font-size:60.0%;" href="tags/learning.html">learning</a></li> <li><a style="font-size:60.0%;" href="tags/libraries.html">libraries</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/linker.html">linker</a></li> <li><a style="font-size:130.25147500745962%;" href="tags/list.html">list</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/low-level.html">low-level</a></li> <li><a style="font-size:60.0%;" href="tags/map.html">map</a></li> <li><a style="font-size:109.08009883059783%;" href="tags/memory.html">memory</a></li> <li><a style="font-size:120.39055466724817%;" href="tags/modern-c++.html">modern-C++</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/move-semantics.html">move-semantics</a></li> <li><a style="font-size:126.83373677211958%;" href="tags/news.html">news</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/oop.html">oop</a></li> <li><a style="font-size:60.0%;" href="tags/organizations.html">organizations</a></li> <li><a style="font-size:60.0%;" href="tags/package-manager.html">package-manager</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/paradigm.html">paradigm</a></li> <li><a style="font-size:60.0%;" href="tags/pattern.html">pattern</a></li> <li><a style="font-size:60.0%;" href="tags/people.html">people</a></li> <li><a style="font-size:60.0%;" href="tags/podcasts.html">podcasts</a></li> <li><a style="font-size:60.0%;" href="tags/pointers.html">pointers</a></li> <li><a style="font-size:60.0%;" href="tags/preprocessor.html">preprocessor</a></li> <li><a style="font-size:60.0%;" href="tags/profiling.html">profiling</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/randomness.html">randomness</a></li> <li><a style="font-size:60.0%;" href="tags/ranges.html">ranges</a></li> <li><a style="font-size:60.0%;" href="tags/references.html">references</a></li> <li><a style="font-size:60.0%;" href="tags/set.html">set</a></li> <li><a style="font-size:60.0%;" href="tags/social-media.html">social-media</a></li> <li><a style="font-size:60.0%;" href="tags/sorted-sequences.html">sorted-sequences</a></li> <li><a style="font-size:89.54916387632527%;" href="tags/stack.html">stack</a></li> <li><a style="font-size:60.0%;" href="tags/standardization.html">standardization</a></li> <li><a style="font-size:116.25207726360686%;" href="tags/std-algorithms.html">std-algorithms</a></li> <li><a style="font-size:89.54916387632527%;" href="tags/std-containers.html">std-containers</a></li> <li><a style="font-size:128.6110337848704%;" href="tags/std-library.html">std-library</a></li> <li><a style="font-size:60.0%;" href="tags/std-macros.html">std-macros</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/std-vector.html">std-vector</a></li> <li><a style="font-size:60.0%;" href="tags/strings.html">strings</a></li> <li><a style="font-size:60.0%;" href="tags/style.html">style</a></li> <li><a style="font-size:60.0%;" href="tags/taste.html">taste</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/templates.html">templates</a></li> <li><a style="font-size:60.0%;" href="tags/testing.html">testing</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/toolchain.html">toolchain</a></li> <li><a style="font-size:116.25207726360686%;" href="tags/tools.html">tools</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/traversal.html">traversal</a></li> <li><a style="font-size:117.72267522825506%;" href="tags/types.html">types</a></li> <li><a style="font-size:60.0%;" href="tags/user.html">user</a></li> <li><a style="font-size:60.0%;" href="tags/version-control.html">version-control</a></li> <li><a style="font-size:60.0%;" href="tags/views.html">views</a></li> <li><a style="font-size:60.0%;" href="tags/vim.html">VIM</a></li> <li><a style="font-size:60.0%;" href="tags/vim-plugins.html">VIM-plugins</a></li> <li><a style="font-size:60.0%;" href="tags/warnings.html">warnings</a></li> <li><a style="font-size:114.67244982290701%;" href="tags/websites.html">websites</a></li> 
+</ul></div></div></div>
+<div id="footer-bottom"><div id="footer-bottom-content">&copy;&nbsp;2019-2021&ensp;André&nbsp;Müller&emsp;&emsp;</div></div>
+</footer>
+<script src="assets/content.js?v=26"></script>
+</body>
+</html>

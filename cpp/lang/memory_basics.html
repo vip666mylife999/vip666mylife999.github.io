@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang='en-US'>
+<head>
+<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+<base href="https://vip666mylife999.github.io/">
+<link rel="icon" href="assets/hcpp-icon.png">
+<link rel="stylesheet" type="text/css" href="assets/style.css?v=26">
+<link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<title>h/cpp - Memory (Basics)</title>
+<meta name="description" content="">
+<meta name="keyword" content="cpp scope lifetime memory heap stack animation">
+<meta name="author" content="André Müller">
+<meta name="date" content="2021-01-31">
+<meta name="copyright" content="2019-2021&ensp;André Müller">
+<meta name="hcpp-page-category" content="cat-article">
+<meta name="hcpp-tags" content="C++ article beginner-level memory stack ">
+</head>
+<body>
+<div id="top-nav"><div id="titlebar" class="boxed-wide"><div id="main-branding">
+<a href="index.html"  id="main-logo" title="home"><span class="hwide"><img src="assets/hcpp.svg" style="max-width:100%;height:40;"></img></span>
+<span class="hslim"><img src="assets/hcpp-square.svg" style="max-width:100%;height:40;"></img></span></a>
+
+<div id="main-title">
+<a href="index.html"  title="home">hacking&nbsp;C++</a>
+</div></div>
+<div id="main-menu"><div class="entry "><a href="tags/news.html">News</a></div>
+<div class="submenu "><a>Learning</a><div class="submenu-dropdown">
+<a href="cpp/beginners_guide.html" >Beginner's Guide to C++</a>
+
+<hr>
+
+<a href="cpp/std/containers.html" >Standard Library Containers</a>
+
+
+<a href="cpp/std/algorithms.html" >Standard Library Algorithms</a>
+
+<hr>
+
+<a href="cpp/cheat_sheets.html" >Infographics / Cheat Sheets</a>
+
+
+<a href="tags/article.html" >All Articles</a>
+
+<hr>
+
+<a href="dev/web_learning.html" >Online Learning</a>
+
+
+<a href="cpp/books.html" >Books</a>
+</div></div>
+<div class="submenu "><a>Links</a><div class="submenu-dropdown">
+<a href="cpp/community.html" >Community Resources</a>
+
+
+<a href="cpp/tools/ecosystem.html" >Tool Ecosystem</a>
+
+<hr>
+
+<a href="tags/list.html" >All Resource Lists</a>
+
+<hr>
+
+<a href="dev/vim_plugins.html" >VIM Plugins</a>
+</div></div>
+<div class="submenu "><a>About</a><div class="submenu-dropdown">
+<a href="about.html" >Why &amp; Who</a>
+
+
+<a href="privacy.html" >Privacy</a>
+</div></div></div>
+<div id="main-socialbar">
+<a href="https://twitter.com/hackingcpp" ><span class="cat-twitter"></span></a>
+</div>
+<div class="navlinks" id="nav-path"></div>
+<div id="searchbar"><div id="searchbox"><input id="search-input"></input>
+<button id="search-clear"></button>
+<button id="search-run"></button>
+<button id="search-close"></button></div></div>
+<div class="hamburger " id="main-hamburger"><button title=""></button><div class="hamburger-dropdown"><a class="nav-icon-collapse-all" onclick="collapse_all_major_folds()">Collapse <strong>All</strong> Levels</a>
+
+<a class="nav-icon-collapse" onclick="collapse_major_folds()">Collapse Top Level</a>
+
+<a class="nav-icon-expand" onclick="expand_major_folds()">Expand Top Level</a>
+
+<a class="nav-icon-expand-all" onclick="expand_all_major_folds()">Expand <strong>All</strong> Levels</a>
+
+<hr>
+
+<a href="tags/news.html" class="cat-news" >News</a>
+
+
+<a href="tags/featured.html" class="cat-featured" >Featured</a>
+
+
+<a href="tags/article.html" class="cat-article" >Articles</a>
+
+
+<a href="cpp/beginners_guide.html" class="cat-guide" >Beginner's Guide to C++</a>
+
+
+<a href="tags/list.html" class="cat-list" >Lists</a>
+
+<hr>
+
+<a href="https://twitter.com/hackingcpp" ><span class="cat-twitter"></span> @hackingcpp</a>
+
+
+<a href="about.html" class="cat-about" >About</a>
+
+
+<a href="privacy.html" class="cat-contact" >Privacy</a>
+
+
+<a href="index.html" class="cat-home" >Home</a>
+</div></div></div>
+<nav id="guide-bar" class="boxed-wide"><div class="guide-nav">
+<div class="go-prev"><a href="cpp/lang/function_basics.html"><span class="hwide">Functions</span></a></div>
+<div class="go-up"><a href="cpp/beginners_guide.html#first-steps">Beginner's Guide <span class="hxwide">/ First Steps</span></a></div>
+<div class="go-next"><a href="cpp/std/string_basics.html"><span class="hwide">Strings</span></a></div>
+</div></nav></div>
+<div id="drawer-top" class="boxed-wide"><div id="search-results"><div id="search-header"><h1 class="cat-search" id="search-title"></h1></div>
+<div id="search-locations"><ul class="resources" id="search-location-items"></ul></div>
+<div id="search-footer"></div></div></div>
+<div id="drawer-left"><div id="drawer-left-heading"><a class="cat-guide" href="cpp/beginners_guide.html#intro">Beginner's Guide</a></div>
+<div id="drawer-left-content"><div class="tree-fold plain" ><h5>First Steps</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/tools/beginner_dev_setup.html" >Development Setup</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/hello_world.html" >Hello World</a>
+</li>
+
+<li>
+<a href="cpp/std/io_basics.html" >Input &amp; Output <small>(Basics)</small></a>
+</li>
+
+<li>
+<a href="cpp/lang/fundamental_types.html" >Fundamental Types</a>
+</li>
+
+<li>
+<a href="cpp/std/vector_intro.html" >std::vector Introduction</a>
+</li>
+
+<li>
+<a href="cpp/lang/enumerations.html" >Enumerations</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/lang/control_flow_basics.html" >Control Flow <small>(Basics)</small></a>
+</li>
+
+<li>
+<a href="cpp/lang/type_system_basics.html" >Type System <small>(Basics)</small></a>
+</li>
+
+<li>
+<a href="cpp/lang/function_basics.html" >Functions <small>(Basics)</small></a>
+</li>
+
+<li>
+<a href="cpp/lang/memory_basics.html" >Memory <small>(Basics)</small></a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/std/string_basics.html" >String <small>(Basics)</small></a>
+</li>
+
+<li>
+<a href="cpp/lang/references.html" >References</a>
+</li>
+
+<li>
+<a href="cpp/lang/aggregates.html" >Simple Aggregates</a>
+</li>
+
+<li>
+<a href="cpp/lang/function_call_mechanics.html" >Function Call Mechanics</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Input &amp; Output</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/command_line_arguments.html" >Command Line Arguments</a>
+</li>
+
+<li>
+<a href="cpp/std/file_streams.html" >File Input &amp; Output</a>
+</li>
+
+<li>
+<a href="cpp/std/io_streams.html" >Stream Input &amp; Output</a>
+</li>
+
+<li>
+<a href="cpp/std/istream_recover_from_errors.html" >Recover From Input Errors</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Custom Types &ndash; Part 1</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/custom_type_basics.html" >Simple Classes / Custom Types</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/lang/pointers.html" >Pointers</a>
+</li>
+
+<li>
+<a href="cpp/lang/destructors.html" >Destructors</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/lang/exceptions.html" >Exceptions</a>
+</li>
+
+<li>
+<a href="cpp/lang/noexcept.html" >Noexcept</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Diagnostics</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/tools/compiler_warnings.html" >Compiler Warnings</a>
+</li>
+
+<li>
+<a href="cpp/tools/gdb_intro.html" >Debugging With gdb</a>
+</li>
+
+<li>
+<a href="cpp/tools/asan.html" >Address Sanitizer</a>
+</li>
+
+<li>
+<a href="cpp/tools/ubsan.html" >Undefined Behavior Sanitizer</a>
+</li>
+
+<li>
+<a href="cpp/tools/valgrind.html" >valgrind</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Standard Library</h5></div>
+<div class="content " ><div class="tree-fold plain" ><h6>Containers &amp; Views</h6></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/std/iterators_intro.html" >Iterators</a>
+</li>
+
+<li>
+<a href="cpp/std/sequence_containers.html" >Sequence Containers</a>
+</li>
+
+<li>
+<a href="cpp/std/sequence_views.html" >Sequence Views</a>
+</li>
+
+<li>
+<a href="cpp/std/associative_containers.html" >Associative Containers</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h6>Standard Algorithms</h6></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/std/algorithms/intro.html" >Basic Paradigms</a>
+</li>
+
+<li>
+<a href="cpp/std/container_traversal.html" >Container Traversal</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/std/algorithms/min_max.html" >Minimum / Maximum</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/existence_queries.html" >Existence Queries</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/finding.html" >Finding Elements</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/comparing_ranges.html" >Comparing Ranges</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/design/function_objects.html" >Function Objects</a>
+</li>
+
+<li>
+<a href="cpp/lang/lambda_basics.html" >Lambdas <small>(Basics)</small></a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/std/algorithms/reordering.html" >Sequence Reordering</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/element_modification.html" >Changing Elements</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/numeric.html" >Numeric Algorithms</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/sorted_sequence_operations.html" >Sorted Sequence Operations</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h6>Utilities</h6></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/std/special_containers.html" >Special Containers</a>
+</li>
+
+<li>
+<a href="cpp/std/special_iterators.html" >Special Iterators</a>
+</li>
+
+<li>
+<a href="cpp/std/random.html" >Random Numbers</a>
+</li></ul></div></div>
+<div class="tree-fold plain" ><h5>Code Organization</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/separate_compilation.html" >Separate Compilation</a>
+</li>
+
+<li>
+<a href="cpp/lang/namespaces.html" >Namespaces</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Custom Types &ndash; Part 2</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/friends.html" >Friends</a>
+</li>
+
+<li>
+<a href="cpp/lang/comparisons.html" >Comparisons</a>
+</li>
+
+<li>
+<a href="cpp/design/literal_types.html" >Literal Types</a>
+</li>
+
+<li>
+<a href="cpp/design/arithmetic_types.html" >Arithmetic Types</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/std/unique_ownership.html" >Unique Resource Ownership</a>
+</li>
+
+<li>
+<a href="cpp/design/node_based_data_structures.html" >Node-Based Data Structures</a>
+</li>
+
+<li>
+<a href="cpp/lang/special_class_members.html" >Special Class Members</a>
+</li>
+
+<li>
+<a href="cpp/std/shared_ownership.html" >Shared Resource Ownership</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/lang/object_oriented_programming.html" >Object Oriented Programming</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/lang/move_semantics.html" >Move Semantics</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Generic Programming</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/templates.html" >Templates</a>
+</li>
+
+<li>
+<a href="cpp/lang/type_casts.html" >Type Casts</a>
+</li>
+
+<li>
+<a href="cpp/lang/type_deduction.html" >Type Deduction</a>
+</li>
+
+<li>
+<a href="cpp/std/type_traits.html" >Type Traits</a>
+</li>
+
+<li>
+<a href="cpp/lang/perfect_forwarding.html" >Perfect Forwarding</a>
+</li>
+
+<li>
+<a href="cpp/lang/concepts.html" >Concepts &amp; Constrained Templates</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Memory Management</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/pointer_arithmetic.html" >Pointer Arithmetic</a>
+</li>
+
+<li>
+<a href="cpp/lang/c_arrays.html" >C-Style Arrays</a>
+</li>
+
+<li>
+<a href="cpp/lang/manual_memory_management.html" >Manual Memory Management</a>
+</li>
+
+<li>
+<a href="cpp/design/allocators.html" >Allocators</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Software Design Basics</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/design/principles.html" >Design Principles</a>
+</li>
+
+<li>
+<a href="cpp/design/function_interface_example1.html" >Design Study: Function Interfaces</a>
+</li>
+
+<li>
+<a href="cpp/design/angle_axis_rotation.html" >Design Study: Angle-Axis Rotation</a>
+</li>
+
+<li>
+<a href="cpp/design/traversal_approaches.html" >Traversal Approaches</a>
+</li>
+
+<li>
+<a href="cpp/design/pimpl.html" >The PIMPL Idiom</a>
+</li></ul></div></div>
+<button id="drawer-left-toggle" title=""></button></div>
+<div id="main-content" class="boxed-wide "><article class="boxed-normal ">
+<header class="plain">
+<h1>
+<span class="hwide">Memory (Basics)</span><span class="hslim">Memory (Basics)</span><span class="hnavi">Memory</span></h1>
+
+</header>
+<section class="main plain"><h2 class="hfold " open><span class="nav-none">Memory Model</span>
+<span class="nav-only">Model</span></h2>
+<div class="content " ><div class="panel-fold " open><h3><span class="hwide">On Paper: C++'s Abstract Memory Model</span>
+<span class="hslim">On Paper: Abstract Memory Model</span>
+<span class="hnavi">On Paper</span></h3></div>
+<div class="panel hvtight bg-filled "><div class="panel "><h6 class="nav-none">C++'s language specification is based on an abstract
+memory model</h6>
+<p>Concrete implementations (= compiler, C++ runtime, &hellip;) 
+can employ different strategies to satisfy these specifications
+on a concrete platform (= CPU architecture, operating system, &hellip;).</p></div>
+<div class="panel-fold " open><h4 class="nav-none">Memory Organisation</h4></div>
+<div class="panel "><div class="block "><img src="cpp/lang/bytes.svg" style="max-width:100%;width:380px;"></img></div>
+<hr>
+<div class="block "><img src="cpp/lang/objects.svg" style="max-width:100%;width:360px;"></img></div>
+<p>Example: <code class="inset "><span class="c6 ">std::</span>int16_t i = 1234;</code>
+is an object with name <code class="inset ">i</code>, a size of 2 bytes (= 16 bits)
+and value <code class="inset ">0000010011010010</code> which according to its 
+type <code class="inset ">int16_t</code> represents the number 1234.</p>
+<hr>
+<p>Note that the abstract model doesn't say anything about how
+memory is partitioned or about cache hierarchies.</p></div>
+<div class="panel-fold " open><h4 class="nav-none">Object Storage Duration Types</h4></div>
+<div class="panel-col "{style=""><table class="vstriped"><tbody><tr><th><em>Automatic</em></th>
+<td>object lifetime tied to start &amp; end of <code class="inset ">{ <span class="annotation">&hellip;</span> }</code> block scopes</td>
+<td>local variables, function parameters</td></tr>
+<tr><th><em>Dynamic</em></th>
+<td>object lifetime controlled with special instructions</td>
+<td>objects that can be created/destroyed on demand and independent of block scopes</td></tr>
+<tr><th><em>Thread</em></th>
+<td>object lifetime tied to start &amp; end of a thread</td>
+<td>per-thread storage</td></tr>
+<tr><th><em>Static</em></th>
+<td>object lifetime tied to start &amp; end of the program</td>
+<td>singletons, &hellip;</td></tr></tbody></table></div></div>
+<div class="panel-fold " open><h3><span class="hwide">In Practice: Actual Memory Handling</span>
+<span class="hslim">In Practice: Memory Handling</span>
+<span class="hnavi">In Practice</span></h3></div>
+<div class="panel-col "{style=""><div class="panel "><h5 class="nav-none">Practical realizations of C++'s memory model</h5>
+<ul>
+<li>are constrained by features &amp; limitations of the target platform 
+(CPU/memory architecture, operating system, compiler)</li>
+
+<li>need to fix choices left open by the C++ standard, e.g., number of
+bits in a byte (8 on most platforms)</li>
+
+<li>need to support object storage duration/lifetime schemes
+described by the C++ standard (automatic, dynamic, thread, static)</li></ul></div>
+<div class="panel "><h4 class="nav-none">Common Solution: 
+Dedicated Memory Partitions For Automatic/Dynamic Storage Durations</h4>
+<div class="flex-gallery no-wrap"><div class="content " ><table class="memory no-text"><tbody class="heap"><tr><td> </td></tr>
+<tr><td class="x2i"> </td></tr>
+<tr><td class="x2i"> </td></tr>
+<tr><td> </td></tr>
+<tr><td> </td></tr>
+<tr><td class="x2i"> </td></tr>
+<tr><td> </td></tr>
+<tr><td> </td></tr>
+<tr><td class="x2i"> </td></tr>
+<tr><td> </td></tr>
+<tr><td class="x2i"> </td></tr>
+<tr><td class="x2i"> </td></tr>
+<tr><td class="x2i"> </td></tr>
+<tr><td class="x2i"> </td></tr>
+<tr><td> </td></tr>
+<tr><td> </td></tr>
+<tr><td> </td></tr>
+<tr><td class="x2i"> </td></tr>
+<tr><td class="x2i"> </td></tr>
+<tr><td class="x2i"> </td></tr>
+<tr><td> </td></tr></tbody></table></div>
+<div class="content " ><h6><span class="e2">HEAP</span> (also called <q>Free Store</q>)</h6>
+<ul>
+<li>used for objects of <strong><em>dynamic</em></strong> <em>storage duration</em>, 
+e.g. the contents of a <code>std::vector</code></li>
+
+<li><strong>big</strong>, can be used for bulk storage (most of main memory)</li>
+
+<li>possible to allocate &amp; deallocate any object on demand</li>
+
+<li>(de-)allocations in no particular order &rArr; fragmentation</li>
+
+<li><strong>slow</strong> allocation: need to find <em>contiguous</em> unoccupied space for new objects</li></ul></div></div>
+<div class="flex-gallery no-wrap"><div class="content " ><table class="memory no-text"><tbody class="stack"><tr><td> </td></tr>
+<tr><td> </td></tr>
+<tr><td> </td></tr>
+<tr><td> </td></tr>
+<tr><td class="x1"> </td></tr>
+<tr><td class="x1"> </td></tr>
+<tr><td class="x1"> </td></tr>
+<tr><td class="x1"> </td></tr>
+<tr><td class="x1"> </td></tr></tbody></table></div>
+<div class="content " ><h6><span class="e1">STACK</span></h6>
+<ul>
+<li>used for objects of <strong><em>automatic</em></strong> <em>storage duration</em>:
+<strong>local variables, function parameters</strong>, etc.</li>
+
+<li><strong>small</strong> (usually only a few MB)</li>
+
+<li><strong>fast</strong> allocation: new objects are always put on top</li>
+
+<li>objects de-allocated in reverse order of their creation</li>
+
+<li>can't de-allocate objects below the topmost (= newest)</li></ul></div></div></div></div></div>
+<h2 class="hfold " open><span class="hwide">Automatic Storage</span>
+<span class="hslim">Automatic Storage</span>
+<span class="hnavi">Automatic</span></h2>
+<div class="content " ><div class="panel-fold " open><h3 class="cat-carousel"><span class="nav-none">Example: Local Variables</span>
+<span class="nav-only">Example</span></h3></div>
+<div class="panel "><h6>A stack is generally used for objects of automatic storage duration 
+such as local variables (including function parameters):</h6>
+<p><small>Use the navigation buttons on the right/left to go forward/backwards.</small></p>
+<div class="carousel clear-controls"><div class="content " ><div class="grid-gallery-L vcompact"><div class="content " ><div class="block vstretch">
+<pre class="notranslate"><code><span class="border o1">int <strong>main</strong>() <span class="mark b1"><strong>{</strong></span></span>
+  int i = 4;
+  for(int j = 0; j &lt; i; j++) <span class="mark b2"><strong>{</strong></span>
+    if(j &gt; 2) <span class="mark b3"><strong>{</strong></span>
+      int k = 2 * j;
+    <span class="mark b3"><strong>}</strong></span>
+    
+  <span class="mark b2"><strong>}</strong></span>
+  
+<span class="mark b1"><strong>}</strong></span></code></pre>
+</div></div>
+<div class="content " style="min-height: 18rem"><table class="memory"><tbody class="stack"><tr><td><span class="e1">STACK</span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td> </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td> </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td> </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td> </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td> </td> <td class="x6">&vellip;</td> <td><span class="e1"><span class="sym-iptr-le "></span></span></td></tr></tbody></table>
+<p>program starts</p></div></div></div>
+<div class="content " ><div class="grid-gallery-L vcompact"><div class="content " ><div class="block vstretch">
+<pre class="notranslate"><code>int <strong>main</strong>() <span class="mark b1"><strong>{</strong></span>
+  <span class="border o1">int i = 4;</span>
+  for(int j = 0; j &lt; i; j++) <span class="mark b2"><strong>{</strong></span>
+    if(j &gt; 2) <span class="mark b3"><strong>{</strong></span>
+      int k = 2 * j;
+    <span class="mark b3"><strong>}</strong></span>
+    
+  <span class="mark b2"><strong>}</strong></span>
+  
+<span class="mark b1"><strong>}</strong></span></code></pre>
+</div></div>
+<div class="content " style="min-height: 18rem"><table class="memory"><tbody class="stack"><tr><td><span class="e1">STACK</span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td> </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td> </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td> </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>int i</td> <td class="x1">4</td> <td><span class="e1"><span class="sym-iptr-le "></span></span></td></tr>
+<tr><td> </td> <td class="x6">&vellip;</td> <td> </td></tr></tbody></table>
+<p>Local variable <code class="inset ">i</code> is pushed on the stack.</p></div></div></div>
+<div class="content " ><div class="grid-gallery-L vcompact"><div class="content " ><div class="block vstretch">
+<pre class="notranslate"><code>int <strong>main</strong>() <span class="mark b1"><strong>{</strong></span>
+  int i = 4;
+  for(int j = 0; j &lt; i; j++) <span class="mark b2"><strong>{</strong></span>
+    <span class="border o1">if(j &gt; 2) <span class="mark b3"><strong>{</strong></span></span>
+      int k = 2 * j;
+    <span class="mark b3"><strong>}</strong></span>
+      
+  <span class="mark b2"><strong>}</strong></span>
+    
+<span class="mark b1"><strong>}</strong></span></code></pre>
+</div></div>
+<div class="content " style="min-height: 18rem"><table class="memory"><tbody class="stack"><tr><td><span class="e1">STACK</span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td> </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td> </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>int j</td> <td class="x2">0</td> <td><span class="e1"><span class="sym-iptr-le "></span></span></td></tr>
+<tr><td>int i</td> <td class="x1">4</td> <td> </td></tr>
+<tr><td> </td> <td class="x6">&vellip;</td> <td> </td></tr></tbody></table>
+<ul class="plain ">
+<li>Loop-local variable <kbd>j</kbd> is pushed on the stack.</li>
+
+<li>First loop iteration.</li></ul></div></div></div>
+<div class="content " ><div class="grid-gallery-L vcompact"><div class="content " ><div class="block vstretch">
+<pre class="notranslate"><code>int <strong>main</strong>() <span class="mark b1"><strong>{</strong></span>
+  int i = 4;
+  for(int j = 0; j &lt; i; j++) <span class="mark b2"><strong>{</strong></span>
+    <span class="border o1">if(j &gt; 2) <span class="mark b3"><strong>{</strong></span></span>
+      int k = 2 * j;
+    <span class="mark b3"><strong>}</strong></span>
+    
+  <span class="mark b2"><strong>}</strong></span>
+    
+<span class="mark b1"><strong>}</strong></span></code></pre>
+</div></div>
+<div class="content " style="min-height: 18rem"><table class="memory"><tbody class="stack"><tr><td><span class="e1">STACK</span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td> </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td> </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>int j</td> <td class="x2">1</td> <td><span class="e1"><span class="sym-iptr-le "></span></span></td></tr>
+<tr><td>int i</td> <td class="x1">4</td> <td> </td></tr>
+<tr><td> </td> <td class="x6">&vellip;</td> <td> </td></tr></tbody></table>
+<p>Second loop iteration: <code class="inset ">j</code> is incremented to 1.</p></div></div></div>
+<div class="content " ><div class="grid-gallery-L vcompact"><div class="content " ><div class="block vstretch">
+<pre class="notranslate"><code>int <strong>main</strong>() <span class="mark b1"><strong>{</strong></span>
+  int i = 4;
+  for(int j = 0; j &lt; i; j++) <span class="mark b2"><strong>{</strong></span>
+    <span class="border o1">if(j &gt; 2) <span class="mark b3"><strong>{</strong></span></span>
+      int k = 2 * j;
+    <span class="mark b3"><strong>}</strong></span>
+    
+  <span class="mark b2"><strong>}</strong></span>
+    
+<span class="mark b1"><strong>}</strong></span></code></pre>
+</div></div>
+<div class="content " style="min-height: 18rem"><table class="memory"><tbody class="stack"><tr><td><span class="e1">STACK</span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td> </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td> </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>int j</td> <td class="x2">2</td> <td><span class="e1"><span class="sym-iptr-le "></span></span></td></tr>
+<tr><td>int i</td> <td class="x1">4</td> <td> </td></tr>
+<tr><td> </td> <td class="x6">&vellip;</td> <td> </td></tr></tbody></table>
+<p>Third loop iteration: <code class="inset ">j</code> is incremented to 2.</p></div></div></div>
+<div class="content " ><div class="grid-gallery-L vcompact"><div class="content " ><div class="block vstretch">
+<pre class="notranslate"><code>int <strong>main</strong>() <span class="mark b1"><strong>{</strong></span>
+  int i = 4;
+  for(int j = 0; j &lt; i; j++) <span class="mark b2"><strong>{</strong></span>
+    <span class="border o1">if(j &gt; 2) <span class="mark b3"><strong>{</strong></span></span>
+      int k = 2 * j;
+    <span class="mark b3"><strong>}</strong></span>
+    
+  <span class="mark b2"><strong>}</strong></span>
+    
+<span class="mark b1"><strong>}</strong></span></code></pre>
+</div></div>
+<div class="content " style="min-height: 18rem"><table class="memory"><tbody class="stack"><tr><td><span class="e1">STACK</span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td> </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td> </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>int j</td> <td class="x2">3</td> <td><span class="e1"><span class="sym-iptr-le "></span></span></td></tr>
+<tr><td>int i</td> <td class="x1">4</td> <td> </td></tr>
+<tr><td> </td> <td class="x6">&vellip;</td> <td> </td></tr></tbody></table>
+<p>Fourth loop iteration: <code class="inset ">j</code> is incremented to 3.</p></div></div></div>
+<div class="content " ><div class="grid-gallery-L vcompact"><div class="content " ><div class="block vstretch">
+<pre class="notranslate"><code>int <strong>main</strong>() <span class="mark b1"><strong>{</strong></span>
+  int i = 4;
+  for(int j = 0; j &lt; i; j++) <span class="mark b2"><strong>{</strong></span>
+    if(j &gt; 2) <span class="mark b3"><strong>{</strong></span>
+      <span class="border o1">int k = 2 * j;</span>
+    <span class="mark b3"><strong>}</strong></span>
+    
+  <span class="mark b2"><strong>}</strong></span>
+    
+<span class="mark b1"><strong>}</strong></span></code></pre>
+</div></div>
+<div class="content " style="min-height: 18rem"><table class="memory"><tbody class="stack"><tr><td><span class="e1">STACK</span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td> </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>int k</td> <td class="x3">6</td> <td><span class="e1"><span class="sym-iptr-le "></span></span></td></tr>
+<tr><td>int j</td> <td class="x2">3</td> <td> </td></tr>
+<tr><td>int i</td> <td class="x1">4</td> <td> </td></tr>
+<tr><td> </td> <td class="x6">&vellip;</td> <td> </td></tr></tbody></table>
+<ul class="plain ">
+<li>Condition <code class="inset ">j &gt; 2</code> is true &rArr; entering <code>if</code>-branch.</li>
+
+<li>Branch-local variable <code class="inset ">k</code> is pushed on the stack.</li></ul></div></div></div>
+<div class="content " ><div class="grid-gallery-L vcompact"><div class="content " ><div class="block vstretch">
+<pre class="notranslate"><code>int <strong>main</strong>() <span class="mark b1"><strong>{</strong></span>
+  int i = 4;
+  for(int j = 0; j &lt; i; j++) <span class="mark b2"><strong>{</strong></span>
+    if(j &gt; 2) <span class="mark b3"><strong>{</strong></span>
+      int k = 2 * j;
+    <span class="mark b3"><strong>}</strong></span>
+    <span class="border o1">          </span>
+  <span class="mark b2"><strong>}</strong></span>
+    
+<span class="mark b1"><strong>}</strong></span></code></pre>
+</div></div>
+<div class="content " style="min-height: 18rem"><table class="memory"><tbody class="stack"><tr><td><span class="e1">STACK</span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td> </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td> </td> <td class="x0">6</td> <td> </td></tr>
+<tr><td>int j</td> <td class="x2">3</td> <td><span class="e1"><span class="sym-iptr-le "></span></span></td></tr>
+<tr><td>int i</td> <td class="x1">4</td> <td> </td></tr>
+<tr><td> </td> <td class="x6">&vellip;</td> <td> </td></tr></tbody></table>
+<ul class="plain ">
+<li>Leaving <code>if</code>-branch scope: <code class="inset ">k</code> is popped from the stack.</li>
+
+<li>Note that <code class="inset ">k</code>'s value still remains in memory. 
+Only the stack's top position marker is decreased by one.</li></ul></div></div></div>
+<div class="content " ><div class="grid-gallery-L vcompact"><div class="content " ><div class="block vstretch">
+<pre class="notranslate"><code>int <strong>main</strong>() <span class="mark b1"><strong>{</strong></span>
+  int i = 4;
+  for(int j = 0; j &lt; i; j++) <span class="mark b2"><strong>{</strong></span>
+    if(j &gt; 2) <span class="mark b3"><strong>{</strong></span>
+      int k = 2 * j;
+    <span class="mark b3"><strong>}</strong></span>
+    
+  <span class="mark b2"><strong>}</strong></span>
+  <span class="border o1">          </span>
+<span class="mark b1"><strong>}</strong></span></code></pre>
+</div></div>
+<div class="content " style="min-height: 18rem"><table class="memory"><tbody class="stack"><tr><td><span class="e1">STACK</span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td> </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td> </td> <td class="x0">6</td> <td> </td></tr>
+<tr><td> </td> <td class="x0">3</td> <td> </td></tr>
+<tr><td>int i</td> <td class="x1">4</td> <td><span class="e1"><span class="sym-iptr-le "></span></span></td></tr>
+<tr><td> </td> <td class="x6">&vellip;</td> <td> </td></tr></tbody></table>
+<ul class="plain ">
+<li>Leaving the <code>for</code> loop's scope: <code class="inset ">j</code> is popped from the stack.</li>
+
+<li>Note that <code class="inset ">j</code>'s current value still remains in memory. 
+Only the stack's top position marker is decreased by one.</li></ul></div></div></div>
+<div class="content " ><div class="grid-gallery-L vcompact"><div class="content " ><div class="block vstretch">
+<pre class="notranslate"><code>int <strong>main</strong>() <span class="mark b1"><strong>{</strong></span>
+  int i = 4;
+  for(int j = 0; j &lt; i; j++) <span class="mark b2"><strong>{</strong></span>
+    if(j &gt; 2) <span class="mark b3"><strong>{</strong></span>
+      int k = 2 * j;
+    <span class="mark b3"><strong>}</strong></span>
+    
+  <span class="mark b2"><strong>}</strong></span>
+    
+<span class="mark b1"><strong>}</strong></span> <span class="border o1"> </span></code></pre>
+</div></div>
+<div class="content " style="min-height: 18rem"><table class="memory"><tbody class="stack"><tr><td><span class="e1">STACK</span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td> </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td> </td> <td class="x0">6</td> <td> </td></tr>
+<tr><td> </td> <td class="x0">3</td> <td> </td></tr>
+<tr><td> </td> <td class="x0">4</td> <td> </td></tr>
+<tr><td> </td> <td class="x6">&vellip;</td> <td><span class="e1"><span class="sym-iptr-le "></span></span></td></tr></tbody></table>
+<ul class="plain ">
+<li>Leaving the scope of the <code class="inset ">main</code> function: <code class="inset ">i</code> is popped from the stack.</li>
+
+<li>Stack top position marker is decreased by one.</li></ul></div></div></div></div></div></div>
+<h2 class="hfold " open><span class="nav-none"><span class="hwide">Dynamic Storage: <code>std::vector</code></span>
+<span class="hslim">Dynamic Storage</span></span>
+<span class="nav-only">std::vector</span></h2>
+<div class="content " ><div class="panel "><h5 class="hfold nav-none" open><span class="cat-info"></span> Dynamic Memory Allocation</h5>
+<div class="content " ><p><strong>For now:</strong> only by using <code><span class="c6 ">std::</span>vector</code></p>
+<p><strong>Next:</strong> more standard library containers  (<code>set</code>, <code>map</code>, &hellip;)</p>
+<p><strong>Much later:</strong> manual dynamic memory allocation</p>
+<p>In modern C++, manual allocation is actually only really necessary
+if you want to implement your own dynamic data structures&thinsp;/&thinsp;containers.</p></div></div>
+<div class="panel-fold " open><h3><span class="nav-none"><code><span class="c6 hwide">std::</span>vector</code>&ensp;Memory Layout</span>
+<span class="nav-only">Layout</span></h3></div>
+<div class="panel-col "{style=""><div class="panel-row responsive"{style=""><div class="panel "><p>Each vector object holds a separate buffer that is dynamically
+allocated (on the heap) where the actual content is stored.</p>
+<p>Right now we only know how to allocate objects on the stack, 
+but the vector object <code class="inset "><span class="e1">v</span></code> itself could also 
+be allocated on the heap (more on that in later chapters).</p></div>
+<div class="panel "><div class="block large">
+<pre class="notranslate"><code>vector&lt;int&gt; <span class="e1">v</span> <strong>{</strong>0,1,2,3,4<strong>}</strong>;</code></pre>
+</div>
+<hr>
+<img src="cpp/std/vector_of_ints.svg" style="max-width:100%;width: 100%; max-width: 200px;"></img></div></div></div>
+<div class="panel-fold " open><h3><span class="nav-none"><code><span class="c6 hwide">std::</span>vector</code>&ensp;Growth Scheme</span>
+<span class="nav-only">Growth</span></h3></div>
+<div class="panel-row responsive"{style=""><div class="panel "><p>Memory blocks, once allocated, can't be resized!
+<small>(no guarantee that there is space left directly behind 
+previously allocated memory block)</small></p>
+<p>Dynamic array implementations separate the array object
+from the actual memory block for storing values.</p>
+<p>Growth is then done the following way:</p>
+<ul>
+<li>dynamically allocate new, (&asymp;1.1-2&times;) larger memory block</li>
+
+<li>copy/move old values to new block</li>
+
+<li>destroy old, smaller block</li></ul></div>
+<div class="panel "><img src="cpp/std/vector_growth.svg" style="max-width:100%;width:220px;"></img>
+<hr>
+<p><a class="cat-wikipedia" href="https://en.wikipedia.org/wiki/Dynamic_array">Dynamic Array&hellip;</a></p></div></div>
+<div class="panel-fold " open><h3><span class="nav-none"><code><span class="c6 hwide">std::</span>vector</code>&ensp;Size vs. Capacity</span>
+<span class="nav-only">Size/Capacity</span></h3></div>
+<div class="panel-col "{style=""><div class="panel "><ul class="defn "><li><code><strong>.size</strong>() 
+</code>&rarr; <span class="c2">number of elements in vector</span>
+</li>
+<li><code><strong>.resize</strong>(<span class="e2"><em>new_number_of_elements</em></span>)
+</code></li>
+<hr>
+<li><code><strong>.capacity</strong>()
+</code>&rarr; <span class="c3">number of <span class="hslim">avail.</span><span class="hwide">available</span> memory slots</span>
+</li>
+<li><code><strong>.reserve</strong>(<span class="e3"><em>new_capacity</em></span>)
+</code></li></ul></div>
+<div class="panel-row "{style=""><div class="panel cs-light vstretch">
+<pre class="notranslate"><code>
+vector&lt;int&gt; v;
+v.push_back(7);
+v.<span class="e1">reserve</span>(<span class="e3">4</span>);
+v.push_back(8);
+v.push_back(9);
+<hr>auto s<span class="hwide"> </span>=<span class="hwide"> </span>v.<span class="e1">size</span>();
+auto c<span class="hwide"> </span>=<span class="hwide"> </span>v.<span class="e1">capacity</span>();
+<hr>v.<span class="e1">resize</span>(<span class="e2">6</span>,0);</code></pre>
+</div>
+<div class="panel comments cs-light vstretch">
+<pre class="notranslate"><code><span class="comment ">        capacity size</span>
+               <span class="comment ">0    0</span>
+<ul class="array "><li class="x2i ">7</li>             <span class="comment ">1    1</span></ul>
+<ul class="array "><li class="x2 ">7</li><li class="x0 dotted"> </li><li class="x0 dotted"> </li><li class="x0 dotted"> </li>       <span class="comment ">4    1</span></ul>
+<ul class="array "><li class="x2 ">7</li><li class="x2i ">8</li><li class="x0 dotted"> </li><li class="x0 dotted"> </li>       <span class="comment ">4    2</span></ul>
+<ul class="array "><li class="x2 ">7</li><li class="x2 ">8</li><li class="x2i ">9</li><li class="x0 dotted"> </li>       <span class="comment ">4    3</span></ul>
+<hr>s: 3
+c: 4
+<hr><ul class="array "><li class="x2 ">7</li><li class="x2 ">8</li><li class="x2 ">9</li><li class="x2i ">0</li><li class="x2i ">0</li><li class="x2i ">0</li>   <span class="comment ">6    6</span></ul></code></pre>
+</div></div>
+<div class="panel "><p class="cat-guideline">If you know the (approximate) number of elements in advance
+&rArr; <code>reserve</code> before adding elements to the vector!</p>
+<p>This avoids unnecessary memory allocations and copying during
+the growth phase.  
+See <a class="" href="cpp/std/vector.html#how-growing" onclick="reveal_anchor()">
+
+here
+</a> for a short explanation.</p></div></div>
+<div class="panel-fold " open><h3 class="cat-carousel"><span class="hwide"><code><span class="c6 hwide">std::</span>vector</code> Memory Lifetime Example</span>
+<span class="hslim"><code>vector</code> Lifetime Example</span>
+<span class="hnavi">Example</span></h3></div>
+<div class="panel "><p><small>Use the navigation buttons on the right/left to go forward/backwards.</small></p>
+<div class="carousel clear-controls"><div class="content " ><div class="flex-gallery vcompact"><div class="content " ><div class="block ">
+<pre class="notranslate"><code>void <strong>foo</strong>(
+  vector&lt;int&gt; w, 
+  int x) 
+{
+  w[0] = x;
+}
+<hr><span class="border o1">int <strong>main</strong>() {     </span>
+  vector&lt;int&gt; v;
+  v.push_back(3);
+  v.push_back(6);
+  foo(v, 8);
+}</code></pre>
+</div></div>
+<div class="content hcompact" ><table class="memory"><tbody class="heap"><tr><td><span class="e2">HEAP</span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr></tbody></table></div>
+<div class="content hcompact" style="min-height: 22rem; max-width: 130px;"><table class="memory"><tbody class="stack"><tr><td><span class="e1">STACK</span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>         </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>         </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>         </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>         </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>         </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>         </td> <td class="x6">&vellip;</td> <td><span class="e1"><span class="sym-iptr-le "></span></span></td></tr></tbody></table>
+<h6>program starts</h6></div></div></div>
+<div class="content " ><div class="flex-gallery vcompact"><div class="content " ><div class="block ">
+<pre class="notranslate"><code>void <strong>foo</strong>(
+  vector&lt;int&gt; w, 
+  int x) 
+{
+  w[0] = x;
+}
+<hr>int <strong>main</strong>() {
+<span class="border o1">  vector&lt;int&gt; v; </span>
+  v.push_back(3);
+  v.push_back(6);
+  foo(v, 8);
+}</code></pre>
+</div></div>
+<div class="content hcompact" ><table class="memory"><tbody class="heap"><tr><td><span class="e2">HEAP</span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr></tbody></table></div>
+<div class="content hcompact" style="min-height: 22rem; max-width: 130px;"><table class="memory"><tbody class="stack"><tr><td><span class="e1">STACK</span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>         </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>         </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>         </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>         </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>v        </td> <td class="x1">&hellip;</td> <td><span class="e1"><span class="sym-iptr-le "></span></span></td></tr>
+<tr><td>         </td> <td class="x6">&vellip;</td> <td> </td></tr></tbody></table>
+<p><code class="inset ">v</code> is put on the stack</p></div></div></div>
+<div class="content " ><div class="flex-gallery vcompact"><div class="content " ><div class="block ">
+<pre class="notranslate"><code>void <strong>foo</strong>(
+  vector&lt;int&gt; w, 
+  int x) 
+{
+  w[0] = x;
+}
+<hr>int <strong>main</strong>() {
+  vector&lt;int&gt; v;
+<span class="border o1">  v.push_back(3);</span>
+  v.push_back(6);
+  foo(v, 8);
+}</code></pre>
+</div></div>
+<div class="content hcompact" ><table class="memory"><tbody class="heap"><tr><td><span class="e2">HEAP</span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x2i">3</td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr></tbody></table></div>
+<div class="content hcompact" style="min-height: 22rem; max-width: 130px;"><table class="memory"><tbody class="stack"><tr><td><span class="e1">STACK</span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>         </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>         </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>         </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>         </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>v        </td> <td class="x1">&hellip;</td> <td><span class="e1"><span class="sym-iptr-le "></span></span></td></tr>
+<tr><td>         </td> <td class="x6">&vellip;</td> <td> </td></tr></tbody></table>
+<p>vector <code class="inset ">v</code> allocates buffer on the heap and puts <code class="inset ">3</code> into it</p></div></div></div>
+<div class="content " ><div class="flex-gallery vcompact"><div class="content " ><div class="block ">
+<pre class="notranslate"><code>void <strong>foo</strong>(
+  vector&lt;int&gt; w, 
+  int x) 
+{
+  w[0] = x;
+}
+<hr>int <strong>main</strong>() {
+  vector&lt;int&gt; v;
+  v.push_back(3);
+<span class="border o1">  v.push_back(6);</span>
+  foo(v, 8);
+}</code></pre>
+</div></div>
+<div class="content hcompact" ><table class="memory"><tbody class="heap"><tr><td><span class="e2">HEAP</span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x2i">3</td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x2"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x2"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x2"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr></tbody></table></div>
+<div class="content hcompact" style="min-height: 22rem; max-width: 130px;"><table class="memory"><tbody class="stack"><tr><td><span class="e1">STACK</span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>         </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>         </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>         </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>         </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>v        </td> <td class="x1">&hellip;</td> <td><span class="e1"><span class="sym-iptr-le "></span></span></td></tr>
+<tr><td>         </td> <td class="x6">&vellip;</td> <td> </td></tr></tbody></table>
+<p>vector <code class="inset ">v</code> allocates new buffer in order to make room for
+the next element <code class="inset ">6</code></p></div></div></div>
+<div class="content " ><div class="flex-gallery vcompact"><div class="content " ><div class="block ">
+<pre class="notranslate"><code>void <strong>foo</strong>(
+  vector&lt;int&gt; w, 
+  int x) 
+{
+  w[0] = x;
+}
+<hr>int <strong>main</strong>() {
+  vector&lt;int&gt; v;
+  v.push_back(3);
+<span class="border o1">  v.push_back(6);</span>
+  foo(v, 8);
+}</code></pre>
+</div></div>
+<div class="content hcompact" ><table class="memory"><tbody class="heap"><tr><td><span class="e2">HEAP</span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x2i">3</td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x2"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x2i">6</td> <td> </td></tr>
+<tr><td>        </td> <td class="x2i">3</td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr></tbody></table></div>
+<div class="content hcompact" style="min-height: 22rem; max-width: 130px;"><table class="memory"><tbody class="stack"><tr><td><span class="e1">STACK</span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>         </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>         </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>         </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>         </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>v        </td> <td class="x1">&hellip;</td> <td><span class="e1"><span class="sym-iptr-le "></span></span></td></tr>
+<tr><td>         </td> <td class="x6">&vellip;</td> <td> </td></tr></tbody></table>
+<p>old elements of <code class="inset ">v</code> are copied to new buffer and
+new element <code class="inset ">6</code> is added</p></div></div></div>
+<div class="content " ><div class="flex-gallery vcompact"><div class="content " ><div class="block ">
+<pre class="notranslate"><code>void <strong>foo</strong>(
+  vector&lt;int&gt; w, 
+  int x) 
+{
+  w[0] = x;
+}
+<hr>int <strong>main</strong>() {
+  vector&lt;int&gt; v;
+  v.push_back(3);
+<span class="border o1">  v.push_back(6);</span>
+  foo(v, 8);
+}</code></pre>
+</div></div>
+<div class="content hcompact" ><table class="memory"><tbody class="heap"><tr><td><span class="e2">HEAP</span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x2"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x2i">6</td> <td> </td></tr>
+<tr><td>        </td> <td class="x2i">3</td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr></tbody></table></div>
+<div class="content hcompact" style="min-height: 22rem; max-width: 130px;"><table class="memory"><tbody class="stack"><tr><td><span class="e1">STACK</span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>         </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>         </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>         </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>         </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>v        </td> <td class="x1">&hellip;</td> <td><span class="e1"><span class="sym-iptr-le "></span></span></td></tr>
+<tr><td>         </td> <td class="x6">&vellip;</td> <td> </td></tr></tbody></table>
+<p><code class="inset ">v</code> deallocated its old buffer</p></div></div></div>
+<div class="content " ><div class="flex-gallery vcompact"><div class="content " ><div class="block ">
+<pre class="notranslate"><code><span class="border o1">void <strong>foo</strong>(        </span>
+  vector&lt;int&gt; w, 
+  int x) 
+{
+  w[0] = x;
+}
+<hr>int <strong>main</strong>() {
+  vector&lt;int&gt; v;
+  v.push_back(3);
+  v.push_back(6);
+<span class="border o6">  foo(v, 8);     </span>
+}</code></pre>
+</div></div>
+<div class="content hcompact" ><table class="memory"><tbody class="heap"><tr><td><span class="e2">HEAP</span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x2"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x2i">6</td> <td> </td></tr>
+<tr><td>        </td> <td class="x2i">3</td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr></tbody></table></div>
+<div class="content hcompact" style="min-height: 22rem; max-width: 130px;"><table class="memory"><tbody class="stack"><tr><td><span class="e1">STACK</span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>         </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>         </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>         </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>foo      </td> <td class="x1">&hellip;</td> <td><span class="e1"><span class="sym-iptr-le "></span></span></td></tr>
+<tr><td>v        </td> <td class="x1">&hellip;</td> <td> </td></tr>
+<tr><td>         </td> <td class="x6">&vellip;</td> <td> </td></tr></tbody></table>
+<p>program execution jumps to function <code class="inset ">foo</code></p></div></div></div>
+<div class="content " ><div class="flex-gallery vcompact"><div class="content " ><div class="block ">
+<pre class="notranslate"><code>void <strong>foo</strong>(
+<span class="border o1">  vector&lt;int&gt; w, </span>
+  int x)
+{
+  w[0] = x;
+}
+<hr>int <strong>main</strong>() {
+  vector&lt;int&gt; v;
+  v.push_back(3);
+  v.push_back(6);
+<span class="border o6">  foo(v, 8);     </span>
+}</code></pre>
+</div></div>
+<div class="content hcompact" ><table class="memory"><tbody class="heap"><tr><td><span class="e2">HEAP</span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x2"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x2"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x2"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x2i">6</td> <td> </td></tr>
+<tr><td>        </td> <td class="x2i">3</td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr></tbody></table></div>
+<div class="content hcompact" style="min-height: 22rem; max-width: 130px;"><table class="memory"><tbody class="stack"><tr><td><span class="e1">STACK</span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>         </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>         </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>w        </td> <td class="x1">&hellip;</td> <td><span class="e1"><span class="sym-iptr-le "></span></span></td></tr>
+<tr><td>foo      </td> <td class="x1">&hellip;</td> <td> </td></tr>
+<tr><td>v        </td> <td class="x1">&hellip;</td> <td> </td></tr>
+<tr><td>         </td> <td class="x6">&vellip;</td> <td> </td></tr></tbody></table>
+<p>entering <code class="inset ">foo</code>:</p>
+<p>local parameter <code class="inset ">w</code> is put on the stack</p>
+<p><code class="inset ">w</code> allocates its buffer</p></div></div></div>
+<div class="content " ><div class="flex-gallery vcompact"><div class="content " ><div class="block ">
+<pre class="notranslate"><code>void <strong>foo</strong>(
+<span class="border o1">  vector&lt;int&gt; w, </span>
+  int x)
+{
+  w[0] = x;
+}
+<hr>int <strong>main</strong>() {
+  vector&lt;int&gt; v;
+  v.push_back(3);
+  v.push_back(6);
+<span class="border o6">  foo(v, 8);     </span>
+}</code></pre>
+</div></div>
+<div class="content hcompact" ><table class="memory"><tbody class="heap"><tr><td><span class="e2">HEAP</span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x2i"><strong>6</strong></td> <td> </td></tr>
+<tr><td>        </td> <td class="x2i"><strong>3</strong></td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x2"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x2i">6</td> <td> </td></tr>
+<tr><td>        </td> <td class="x2i">3</td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr></tbody></table></div>
+<div class="content hcompact" style="min-height: 22rem; max-width: 130px;"><table class="memory"><tbody class="stack"><tr><td><span class="e1">STACK</span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>         </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>         </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>w        </td> <td class="x1">&hellip;</td> <td><span class="sym-iptr-le "></span></td></tr>
+<tr><td>foo      </td> <td class="x1">&hellip;</td> <td> </td></tr>
+<tr><td>v        </td> <td class="x1">&hellip;</td> <td> </td></tr>
+<tr><td>         </td> <td class="x6">&vellip;</td> <td> </td></tr></tbody></table>
+<p><code class="inset ">w</code> copies elements from <code class="inset ">v</code></p>
+<p>&rArr; <code class="inset ">w</code> is now a local copy of argument <code class="inset ">v</code></p></div></div></div>
+<div class="content " ><div class="flex-gallery vcompact"><div class="content " ><div class="block ">
+<pre class="notranslate"><code>void <strong>foo</strong>(
+  vector&lt;int&gt; w,
+<span class="border o1">  int x)         </span>
+{
+  w[0] = x;
+}
+<hr>int <strong>main</strong>() {
+  vector&lt;int&gt; v;
+  v.push_back(3);
+  v.push_back(6);
+<span class="border o6">  foo(v, 8);     </span>
+}</code></pre>
+</div></div>
+<div class="content hcompact" ><table class="memory"><tbody class="heap"><tr><td><span class="e2">HEAP</span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x2i">6</td> <td> </td></tr>
+<tr><td>        </td> <td class="x2i">3</td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x2"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x2i">6</td> <td> </td></tr>
+<tr><td>        </td> <td class="x2i">3</td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr></tbody></table></div>
+<div class="content hcompact" style="min-height: 22rem; max-width: 130px;"><table class="memory"><tbody class="stack"><tr><td><span class="e1">STACK</span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>         </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>x        </td> <td class="x1">8</td> <td><span class="e1"><span class="sym-iptr-le "></span></span></td></tr>
+<tr><td>w        </td> <td class="x1">&hellip;</td> <td> </td></tr>
+<tr><td>foo      </td> <td class="x1">&hellip;</td> <td> </td></tr>
+<tr><td>v        </td> <td class="x1">&hellip;</td> <td> </td></tr>
+<tr><td>         </td> <td class="x6">&vellip;</td> <td> </td></tr></tbody></table>
+<p>local parameter <code class="inset ">x</code> is put on the stack</p></div></div></div>
+<div class="content " ><div class="flex-gallery vcompact"><div class="content " ><div class="block ">
+<pre class="notranslate"><code>void <strong>foo</strong>(
+  vector&lt;int&gt; w, 
+  int x) 
+{
+<span class="border o1">  w[0] = x;      </span>
+}
+<hr>int <strong>main</strong>() {
+  vector&lt;int&gt; v;
+  v.push_back(3);
+  v.push_back(6);
+<span class="border o6">  foo(v, 8);     </span>
+}</code></pre>
+</div></div>
+<div class="content hcompact" ><table class="memory"><tbody class="heap"><tr><td><span class="e2">HEAP</span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x2i">6</td> <td> </td></tr>
+<tr><td>        </td> <td class="x2i"><strong>8</strong></td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x2"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x2i">6</td> <td> </td></tr>
+<tr><td>        </td> <td class="x2i">3</td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr></tbody></table></div>
+<div class="content hcompact" style="min-height: 22rem; max-width: 130px;"><table class="memory"><tbody class="stack"><tr><td><span class="e1">STACK</span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>         </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>x        </td> <td class="x1">8</td> <td><span class="e1"><span class="sym-iptr-le "></span></span></td></tr>
+<tr><td>w        </td> <td class="x1">&hellip;</td> <td> </td></tr>
+<tr><td>foo      </td> <td class="x1">&hellip;</td> <td> </td></tr>
+<tr><td>v        </td> <td class="x1">&hellip;</td> <td> </td></tr>
+<tr><td>         </td> <td class="x6">&vellip;</td> <td> </td></tr></tbody></table>
+<p>the first element of <code class="inset ">w</code> is changed</p></div></div></div>
+<div class="content " ><div class="flex-gallery vcompact"><div class="content " ><div class="block ">
+<pre class="notranslate"><code>void <strong>foo</strong>(
+  vector&lt;int&gt; w, 
+  int x) 
+{
+  w[0] = x;
+<span class="border o1">}                </span>
+<hr>int <strong>main</strong>() {
+  vector&lt;int&gt; v;
+  v.push_back(3);
+  v.push_back(6);
+<span class="border o6">  foo(v, 8);     </span>
+}</code></pre>
+</div></div>
+<div class="content hcompact" ><table class="memory"><tbody class="heap"><tr><td><span class="e2">HEAP</span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x2i">6</td> <td> </td></tr>
+<tr><td>        </td> <td class="x2i">8</td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x2"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x2i">6</td> <td> </td></tr>
+<tr><td>        </td> <td class="x2i">3</td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr></tbody></table></div>
+<div class="content hcompact" style="min-height: 22rem; max-width: 130px;"><table class="memory"><tbody class="stack"><tr><td><span class="e1">STACK</span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>         </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td><small>x </small></td> <td class="x0"><small>8</small></td> <td> </td></tr>
+<tr><td>w        </td> <td class="x1">&hellip;</td> <td><span class="e1"><span class="sym-iptr-le "></span></span></td></tr>
+<tr><td>foo      </td> <td class="x1">&hellip;</td> <td> </td></tr>
+<tr><td>v        </td> <td class="x1">&hellip;</td> <td> </td></tr>
+<tr><td>         </td> <td class="x6">&vellip;</td> <td> </td></tr></tbody></table>
+<p><code class="inset ">foo</code> ends:</p>
+<p>its local parameters are removed from the stack, beginning with <code class="inset ">x</code></p></div></div></div>
+<div class="content " ><div class="flex-gallery vcompact"><div class="content " ><div class="block ">
+<pre class="notranslate"><code>void <strong>foo</strong>(
+  vector&lt;int&gt; w, 
+  int x) 
+{
+  w[0] = x;
+<span class="border o1">}                </span>
+<hr>int <strong>main</strong>() {
+  vector&lt;int&gt; v;
+  v.push_back(3);
+  v.push_back(6);
+<span class="border o6">  foo(v, 8);     </span>
+}</code></pre>
+</div></div>
+<div class="content hcompact" ><table class="memory"><tbody class="heap"><tr><td><span class="e2">HEAP</span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x2"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x2i">6</td> <td> </td></tr>
+<tr><td>        </td> <td class="x2i">3</td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr></tbody></table></div>
+<div class="content hcompact" style="min-height: 22rem; max-width: 130px;"><table class="memory"><tbody class="stack"><tr><td><span class="e1">STACK </span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>          </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td><small>x  </small></td> <td class="x0"><small>8</small></td> <td> </td></tr>
+<tr><td><small>w  </small></td> <td class="x0"><small>&hellip;</small></td> <td> </td></tr>
+<tr><td>foo       </td> <td class="x1">&hellip;</td> <td><span class="e1"><span class="sym-iptr-le "></span></span></td></tr>
+<tr><td>v         </td> <td class="x1">&hellip;</td> <td> </td></tr>
+<tr><td>          </td> <td class="x6">&vellip;</td> <td> </td></tr></tbody></table>
+<p>when <code class="inset ">w</code> is destroyed, it deallocates its heap buffer</p></div></div></div>
+<div class="content " ><div class="flex-gallery vcompact"><div class="content " ><div class="block ">
+<pre class="notranslate"><code>void <strong>foo</strong>(
+  vector&lt;int&gt; w, 
+  int x) 
+{
+  w[0] = x;
+}
+<hr>int <strong>main</strong>() {
+  vector&lt;int&gt; v;
+  v.push_back(3);
+  v.push_back(6);
+<span class="border o1">  foo(v, 8);     </span>
+}</code></pre>
+</div></div>
+<div class="content hcompact" ><table class="memory"><tbody class="heap"><tr><td><span class="e2">HEAP</span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x2"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x2i">6</td> <td> </td></tr>
+<tr><td>        </td> <td class="x2i">3</td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr></tbody></table></div>
+<div class="content hcompact" style="min-height: 22rem; max-width: 130px;"><table class="memory"><tbody class="stack"><tr><td><span class="e1">STACK </span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>          </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td><small>x  </small></td> <td class="x0"><small>8</small></td> <td> </td></tr>
+<tr><td><small>w  </small></td> <td class="x0"><small>&hellip;</small></td> <td> </td></tr>
+<tr><td><small>foo</small></td> <td class="x0"><small>&hellip;</small></td> <td> </td></tr>
+<tr><td>v         </td> <td class="x1">&hellip;</td> <td><span class="e1"><span class="sym-iptr-le "></span></span></td></tr>
+<tr><td>          </td> <td class="x6">&vellip;</td> <td> </td></tr></tbody></table>
+<p>returned from <code class="inset ">foo</code>; 
+note that the change to local parameter <code class="inset ">w</code>
+had no effect outside of <code class="inset ">foo</code></p></div></div></div>
+<div class="content " ><div class="flex-gallery vcompact"><div class="content " ><div class="block ">
+<pre class="notranslate"><code>void <strong>foo</strong>(
+  vector&lt;int&gt; w, 
+  int x) 
+{
+  w[0] = x;
+}
+<hr>int <strong>main</strong>() {
+  vector&lt;int&gt; v;
+  v.push_back(3);
+  v.push_back(6);
+  foo(v, 8);
+<span class="border o1">}                </span></code></pre>
+</div></div>
+<div class="content hcompact" ><table class="memory"><tbody class="heap"><tr><td><span class="e2">HEAP</span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>        </td> <td class="x6"> </td> <td> </td></tr></tbody></table></div>
+<div class="content hcompact" style="min-height: 22rem; max-width: 130px;"><table class="memory"><tbody class="stack"><tr><td><span class="e1">STACK </span></td> <td class="x0"> </td> <td> </td></tr>
+<tr><td>          </td> <td class="x0"> </td> <td> </td></tr>
+<tr><td><small>x  </small></td> <td class="x0"><small>8</small></td> <td> </td></tr>
+<tr><td><small>w  </small></td> <td class="x0"><small>&hellip;</small></td> <td> </td></tr>
+<tr><td><small>foo</small></td> <td class="x0"><small>&hellip;</small></td> <td> </td></tr>
+<tr><td><small>v  </small></td> <td class="x0"><small>&hellip;</small></td> <td> </td></tr>
+<tr><td>          </td> <td class="x6">&vellip;</td> <td><span class="e1"><span class="sym-iptr-le "></span></span></td></tr></tbody></table>
+<h6>program ends:</h6>
+<p>when <code class="inset ">v</code> is destroyed, it deallocates its heap buffer</p></div></div></div></div></div></div></section>
+<section class="epilog">
+<div class="panel-col bg-filled"{style=""><div class="guide-nav">
+<div class="go-prev"><a href="cpp/lang/function_basics.html"><span class="hwide">Functions</span></a></div>
+<div class="go-up"><a href="cpp/beginners_guide.html#first-steps">Beginner's Guide <span class="hxwide">/ First Steps</span></a></div>
+<div class="go-next"><a href="cpp/std/string_basics.html"><span class="hwide">Strings</span></a></div>
+</div></div>
+</section>
+<section class="context">
+<ul class="linear-tags "><li><a href="tags/c++.html">C++</a></li><li><a href="tags/article.html">article</a></li><li><a href="tags/beginner-level.html">beginner-level</a></li><li><a href="tags/memory.html">memory</a></li><li><a href="tags/stack.html">stack</a></li></ul>
+</section>
+<section class="metadata">
+<p><span class="cat-date">Last updated: 2020-11-24</span></p>
+</section>
+</article></div>
+<footer>
+<div id="footer-top"><div id="footer-top-content"><div id="footer-top-left"><nav><ul class="plain ">
+<li>
+<a href="index.html" class="cat-home" >Home</a>
+</li>
+
+<li>
+<a href="tags/news.html" class="cat-news" >News</a>
+</li>
+
+<li>
+<a href="tags/article.html" class="cat-article" >Articles</a>
+</li>
+
+<li>
+<a href="tags/featured.html" class="cat-featured" >Featured</a>
+</li>
+
+<li>
+<a href="tags/guide.html" class="cat-guide" >Guides</a>
+</li>
+
+<li>
+<a href="tags/list.html" class="cat-list" >Lists</a>
+</li>
+
+<li>
+<a href="about.html" class="cat-about" >About</a>
+</li>
+
+<li>
+<a href="privacy.html" class="cat-contact" >Privacy</a>
+</li>
+
+<li>
+<a href="https://twitter.com/hackingcpp" class="cat-twitter" >Twitter</a>
+</li></ul></nav></div>
+<div id="footer-top-right"><h2 class="cat-tags nav-none">
+<a href="tags.html" >Tags</a>
+</h2>
+<ul class="topic-cloud "><li><a style="font-size:119.09832775265055%;" href="tags/algorithms.html">algorithms</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/allocators.html">allocators</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/arrays.html">arrays</a></li> <li><a style="font-size:155.67625418551208%;" href="tags/article.html">article</a></li> <li><a style="font-size:151.4520701280242%;" href="tags/beginner-level.html">beginner-level</a></li> <li><a style="font-size:60.0%;" href="tags/blogs.html">blogs</a></li> <li><a style="font-size:60.0%;" href="tags/books.html">books</a></li> <li><a style="font-size:60.0%;" href="tags/build-systems.html">build-systems</a></li> <li><a style="font-size:160.9530933887302%;" href="tags/c++.html">C++</a></li> <li><a style="font-size:60.0%;" href="tags/c++-standardization.html">C++-standardization</a></li> <li><a style="font-size:122.76135311474769%;" href="tags/c++11.html">C++11</a></li> <li><a style="font-size:112.96632221214513%;" href="tags/c++14.html">C++14</a></li> <li><a style="font-size:104.32374581448789%;" href="tags/c++17.html">C++17</a></li> <li><a style="font-size:109.08009883059783%;" href="tags/c++20.html">C++20</a></li> <li><a style="font-size:60.0%;" href="tags/c++98.html">C++98</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/c-style.html">C-style</a></li> <li><a style="font-size:60.0%;" href="tags/c-vs-c++.html">C-vs-C++</a></li> <li><a style="font-size:60.0%;" href="tags/cat-casts.html">cat-casts</a></li> <li><a style="font-size:106.83431667163975%;" href="tags/classes.html">classes</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/code-editors.html">code-editors</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/code-formatters.html">code-formatters</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/command-line.html">command-line</a></li> <li><a style="font-size:106.83431667163975%;" href="tags/community.html">community</a></li> <li><a style="font-size:60.0%;" href="tags/comparisons.html">comparisons</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/compilers.html">compilers</a></li> <li><a style="font-size:60.0%;" href="tags/concepts.html">concepts</a></li> <li><a style="font-size:60.0%;" href="tags/conferences.html">conferences</a></li> <li><a style="font-size:60.0%;" href="tags/const.html">const</a></li> <li><a style="font-size:60.0%;" href="tags/constexpr.html">constexpr</a></li> <li><a style="font-size:111.11165590902733%;" href="tags/containers.html">containers</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/control-flow.html">control-flow</a></li> <li><a style="font-size:114.67244982290701%;" href="tags/custom-types.html">custom-types</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/data-structures.html">data-structures</a></li> <li><a style="font-size:60.0%;" href="tags/debugging.html">debugging</a></li> <li><a style="font-size:104.32374581448789%;" href="tags/design.html">design</a></li> <li><a style="font-size:106.83431667163975%;" href="tags/diagnostics.html">diagnostics</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/exceptions.html">exceptions</a></li> <li><a style="font-size:89.54916387632527%;" href="tags/featured.html">featured</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/file-io.html">file-io</a></li> <li><a style="font-size:60.0%;" href="tags/find.html">find</a></li> <li><a style="font-size:60.0%;" href="tags/find_if.html">find_if</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/functional-prog.html">functional-prog</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/functions.html">functions</a></li> <li><a style="font-size:60.0%;" href="tags/gallery.html">gallery</a></li> <li><a style="font-size:94.30551689243521%;" href="tags/generic-prog.html">generic-prog</a></li> <li><a style="font-size:60.0%;" href="tags/groups.html">groups</a></li> <li><a style="font-size:60.0%;" href="tags/guide.html">guide</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/guidelines.html">guidelines</a></li> <li><a style="font-size:60.0%;" href="tags/hash-map.html">hash-map</a></li> <li><a style="font-size:60.0%;" href="tags/hash-set.html">hash-set</a></li> <li><a style="font-size:60.0%;" href="tags/hashing.html">hashing</a></li> <li><a style="font-size:60.0%;" href="tags/header-files.html">header-files</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/heap.html">heap</a></li> <li><a style="font-size:60.0%;" href="tags/ides.html">ides</a></li> <li><a style="font-size:98.1917402739825%;" href="tags/idiom.html">idiom</a></li> <li><a style="font-size:98.1917402739825%;" href="tags/io.html">io</a></li> <li><a style="font-size:94.30551689243521%;" href="tags/iostreams.html">iostreams</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/iterators.html">iterators</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/language-mechanism.html">language-mechanism</a></li> <li><a style="font-size:60.0%;" href="tags/language-references.html">language-references</a></li> <li><a style="font-size:60.0%;" href="tags/learning.html">learning</a></li> <li><a style="font-size:60.0%;" href="tags/libraries.html">libraries</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/linker.html">linker</a></li> <li><a style="font-size:130.25147500745962%;" href="tags/list.html">list</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/low-level.html">low-level</a></li> <li><a style="font-size:60.0%;" href="tags/map.html">map</a></li> <li><a style="font-size:109.08009883059783%;" href="tags/memory.html">memory</a></li> <li><a style="font-size:120.39055466724817%;" href="tags/modern-c++.html">modern-C++</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/move-semantics.html">move-semantics</a></li> <li><a style="font-size:126.83373677211958%;" href="tags/news.html">news</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/oop.html">oop</a></li> <li><a style="font-size:60.0%;" href="tags/organizations.html">organizations</a></li> <li><a style="font-size:60.0%;" href="tags/package-manager.html">package-manager</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/paradigm.html">paradigm</a></li> <li><a style="font-size:60.0%;" href="tags/pattern.html">pattern</a></li> <li><a style="font-size:60.0%;" href="tags/people.html">people</a></li> <li><a style="font-size:60.0%;" href="tags/podcasts.html">podcasts</a></li> <li><a style="font-size:60.0%;" href="tags/pointers.html">pointers</a></li> <li><a style="font-size:60.0%;" href="tags/preprocessor.html">preprocessor</a></li> <li><a style="font-size:60.0%;" href="tags/profiling.html">profiling</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/randomness.html">randomness</a></li> <li><a style="font-size:60.0%;" href="tags/ranges.html">ranges</a></li> <li><a style="font-size:60.0%;" href="tags/references.html">references</a></li> <li><a style="font-size:60.0%;" href="tags/set.html">set</a></li> <li><a style="font-size:60.0%;" href="tags/social-media.html">social-media</a></li> <li><a style="font-size:60.0%;" href="tags/sorted-sequences.html">sorted-sequences</a></li> <li><a style="font-size:89.54916387632527%;" href="tags/stack.html">stack</a></li> <li><a style="font-size:60.0%;" href="tags/standardization.html">standardization</a></li> <li><a style="font-size:116.25207726360686%;" href="tags/std-algorithms.html">std-algorithms</a></li> <li><a style="font-size:89.54916387632527%;" href="tags/std-containers.html">std-containers</a></li> <li><a style="font-size:128.6110337848704%;" href="tags/std-library.html">std-library</a></li> <li><a style="font-size:60.0%;" href="tags/std-macros.html">std-macros</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/std-vector.html">std-vector</a></li> <li><a style="font-size:60.0%;" href="tags/strings.html">strings</a></li> <li><a style="font-size:60.0%;" href="tags/style.html">style</a></li> <li><a style="font-size:60.0%;" href="tags/taste.html">taste</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/templates.html">templates</a></li> <li><a style="font-size:60.0%;" href="tags/testing.html">testing</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/toolchain.html">toolchain</a></li> <li><a style="font-size:116.25207726360686%;" href="tags/tools.html">tools</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/traversal.html">traversal</a></li> <li><a style="font-size:117.72267522825506%;" href="tags/types.html">types</a></li> <li><a style="font-size:60.0%;" href="tags/user.html">user</a></li> <li><a style="font-size:60.0%;" href="tags/version-control.html">version-control</a></li> <li><a style="font-size:60.0%;" href="tags/views.html">views</a></li> <li><a style="font-size:60.0%;" href="tags/vim.html">VIM</a></li> <li><a style="font-size:60.0%;" href="tags/vim-plugins.html">VIM-plugins</a></li> <li><a style="font-size:60.0%;" href="tags/warnings.html">warnings</a></li> <li><a style="font-size:114.67244982290701%;" href="tags/websites.html">websites</a></li> 
+</ul></div></div></div>
+<div id="footer-bottom"><div id="footer-bottom-content">&copy;&nbsp;2019-2021&ensp;André&nbsp;Müller&emsp;&emsp;</div></div>
+</footer>
+<script src="assets/content.js?v=26"></script>
+</body>
+</html>

@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang='en-US'>
+<head>
+<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+<base href="https://vip666mylife999.github.io/">
+<link rel="icon" href="assets/hcpp-icon.png">
+<link rel="stylesheet" type="text/css" href="assets/style.css?v=26">
+<link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<title>h/cpp - Simple Classes / Custom Types</title>
+<meta name="description" content="The basics of how to write a simple class in C++. Member functions, private data and custom constructors help to establish and keep invariants and const member functions enforce data mutability guarantees.">
+<meta name="keyword" content="cpp design engineering class struct interfaces constructor destructor construction destruction create destroy invariant member init initialization-order initialization-list const-correctness encapsulation coupling hiding">
+<meta name="author" content="André Müller">
+<meta name="date" content="2021-01-31">
+<meta name="copyright" content="2019-2021&ensp;André Müller">
+<meta name="hcpp-page-category" content="cat-article">
+<meta name="hcpp-tags" content="C++ article beginner-level classes custom-types types ">
+</head>
+<body>
+<div id="top-nav"><div id="titlebar" class="boxed-wide"><div id="main-branding">
+<a href="index.html"  id="main-logo" title="home"><span class="hwide"><img src="assets/hcpp.svg" style="max-width:100%;height:40;"></img></span>
+<span class="hslim"><img src="assets/hcpp-square.svg" style="max-width:100%;height:40;"></img></span></a>
+
+<div id="main-title">
+<a href="index.html"  title="home">hacking&nbsp;C++</a>
+</div></div>
+<div id="main-menu"><div class="entry "><a href="tags/news.html">News</a></div>
+<div class="submenu "><a>Learning</a><div class="submenu-dropdown">
+<a href="cpp/beginners_guide.html" >Beginner's Guide to C++</a>
+
+<hr>
+
+<a href="cpp/std/containers.html" >Standard Library Containers</a>
+
+
+<a href="cpp/std/algorithms.html" >Standard Library Algorithms</a>
+
+<hr>
+
+<a href="cpp/cheat_sheets.html" >Infographics / Cheat Sheets</a>
+
+
+<a href="tags/article.html" >All Articles</a>
+
+<hr>
+
+<a href="dev/web_learning.html" >Online Learning</a>
+
+
+<a href="cpp/books.html" >Books</a>
+</div></div>
+<div class="submenu "><a>Links</a><div class="submenu-dropdown">
+<a href="cpp/community.html" >Community Resources</a>
+
+
+<a href="cpp/tools/ecosystem.html" >Tool Ecosystem</a>
+
+<hr>
+
+<a href="tags/list.html" >All Resource Lists</a>
+
+<hr>
+
+<a href="dev/vim_plugins.html" >VIM Plugins</a>
+</div></div>
+<div class="submenu "><a>About</a><div class="submenu-dropdown">
+<a href="about.html" >Why &amp; Who</a>
+
+
+<a href="privacy.html" >Privacy</a>
+</div></div></div>
+<div id="main-socialbar">
+<a href="https://twitter.com/hackingcpp" ><span class="cat-twitter"></span></a>
+</div>
+<div class="navlinks" id="nav-path"></div>
+<div id="searchbar"><div id="searchbox"><input id="search-input"></input>
+<button id="search-clear"></button>
+<button id="search-run"></button>
+<button id="search-close"></button></div></div>
+<div class="hamburger " id="main-hamburger"><button title=""></button><div class="hamburger-dropdown"><a class="nav-icon-collapse-all" onclick="collapse_all_major_folds()">Collapse <strong>All</strong> Levels</a>
+
+<a class="nav-icon-collapse" onclick="collapse_major_folds()">Collapse Top Level</a>
+
+<a class="nav-icon-expand" onclick="expand_major_folds()">Expand Top Level</a>
+
+<a class="nav-icon-expand-all" onclick="expand_all_major_folds()">Expand <strong>All</strong> Levels</a>
+
+<hr>
+
+<a href="tags/news.html" class="cat-news" >News</a>
+
+
+<a href="tags/featured.html" class="cat-featured" >Featured</a>
+
+
+<a href="tags/article.html" class="cat-article" >Articles</a>
+
+
+<a href="cpp/beginners_guide.html" class="cat-guide" >Beginner's Guide to C++</a>
+
+
+<a href="tags/list.html" class="cat-list" >Lists</a>
+
+<hr>
+
+<a href="https://twitter.com/hackingcpp" ><span class="cat-twitter"></span> @hackingcpp</a>
+
+
+<a href="about.html" class="cat-about" >About</a>
+
+
+<a href="privacy.html" class="cat-contact" >Privacy</a>
+
+
+<a href="index.html" class="cat-home" >Home</a>
+</div></div></div>
+<nav id="guide-bar" class="boxed-wide"><div class="guide-nav">
+<div class="go-prev"><a href="cpp/std/istream_recover_from_errors.html"><span class="hwide">Input Errors</span></a></div>
+<div class="go-up"><a href="cpp/beginners_guide.html#custom-types-1">Beginner's Guide <span class="hxwide">/ Custom Types 1</span></a></div>
+<div class="go-next"><a href="cpp/lang/pointers.html"><span class="hwide">Pointers</span></a></div>
+</div></nav></div>
+<div id="drawer-top" class="boxed-wide"><div id="search-results"><div id="search-header"><h1 class="cat-search" id="search-title"></h1></div>
+<div id="search-locations"><ul class="resources" id="search-location-items"></ul></div>
+<div id="search-footer"></div></div></div>
+<div id="drawer-left"><div id="drawer-left-heading"><a class="cat-guide" href="cpp/beginners_guide.html#intro">Beginner's Guide</a></div>
+<div id="drawer-left-content"><div class="tree-fold plain" ><h5>First Steps</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/tools/beginner_dev_setup.html" >Development Setup</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/hello_world.html" >Hello World</a>
+</li>
+
+<li>
+<a href="cpp/std/io_basics.html" >Input &amp; Output <small>(Basics)</small></a>
+</li>
+
+<li>
+<a href="cpp/lang/fundamental_types.html" >Fundamental Types</a>
+</li>
+
+<li>
+<a href="cpp/std/vector_intro.html" >std::vector Introduction</a>
+</li>
+
+<li>
+<a href="cpp/lang/enumerations.html" >Enumerations</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/lang/control_flow_basics.html" >Control Flow <small>(Basics)</small></a>
+</li>
+
+<li>
+<a href="cpp/lang/type_system_basics.html" >Type System <small>(Basics)</small></a>
+</li>
+
+<li>
+<a href="cpp/lang/function_basics.html" >Functions <small>(Basics)</small></a>
+</li>
+
+<li>
+<a href="cpp/lang/memory_basics.html" >Memory <small>(Basics)</small></a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/std/string_basics.html" >String <small>(Basics)</small></a>
+</li>
+
+<li>
+<a href="cpp/lang/references.html" >References</a>
+</li>
+
+<li>
+<a href="cpp/lang/aggregates.html" >Simple Aggregates</a>
+</li>
+
+<li>
+<a href="cpp/lang/function_call_mechanics.html" >Function Call Mechanics</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Input &amp; Output</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/command_line_arguments.html" >Command Line Arguments</a>
+</li>
+
+<li>
+<a href="cpp/std/file_streams.html" >File Input &amp; Output</a>
+</li>
+
+<li>
+<a href="cpp/std/io_streams.html" >Stream Input &amp; Output</a>
+</li>
+
+<li>
+<a href="cpp/std/istream_recover_from_errors.html" >Recover From Input Errors</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Custom Types &ndash; Part 1</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/custom_type_basics.html" >Simple Classes / Custom Types</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/lang/pointers.html" >Pointers</a>
+</li>
+
+<li>
+<a href="cpp/lang/destructors.html" >Destructors</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/lang/exceptions.html" >Exceptions</a>
+</li>
+
+<li>
+<a href="cpp/lang/noexcept.html" >Noexcept</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Diagnostics</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/tools/compiler_warnings.html" >Compiler Warnings</a>
+</li>
+
+<li>
+<a href="cpp/tools/gdb_intro.html" >Debugging With gdb</a>
+</li>
+
+<li>
+<a href="cpp/tools/asan.html" >Address Sanitizer</a>
+</li>
+
+<li>
+<a href="cpp/tools/ubsan.html" >Undefined Behavior Sanitizer</a>
+</li>
+
+<li>
+<a href="cpp/tools/valgrind.html" >valgrind</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Standard Library</h5></div>
+<div class="content " ><div class="tree-fold plain" ><h6>Containers &amp; Views</h6></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/std/iterators_intro.html" >Iterators</a>
+</li>
+
+<li>
+<a href="cpp/std/sequence_containers.html" >Sequence Containers</a>
+</li>
+
+<li>
+<a href="cpp/std/sequence_views.html" >Sequence Views</a>
+</li>
+
+<li>
+<a href="cpp/std/associative_containers.html" >Associative Containers</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h6>Standard Algorithms</h6></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/std/algorithms/intro.html" >Basic Paradigms</a>
+</li>
+
+<li>
+<a href="cpp/std/container_traversal.html" >Container Traversal</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/std/algorithms/min_max.html" >Minimum / Maximum</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/existence_queries.html" >Existence Queries</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/finding.html" >Finding Elements</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/comparing_ranges.html" >Comparing Ranges</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/design/function_objects.html" >Function Objects</a>
+</li>
+
+<li>
+<a href="cpp/lang/lambda_basics.html" >Lambdas <small>(Basics)</small></a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/std/algorithms/reordering.html" >Sequence Reordering</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/element_modification.html" >Changing Elements</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/numeric.html" >Numeric Algorithms</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/sorted_sequence_operations.html" >Sorted Sequence Operations</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h6>Utilities</h6></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/std/special_containers.html" >Special Containers</a>
+</li>
+
+<li>
+<a href="cpp/std/special_iterators.html" >Special Iterators</a>
+</li>
+
+<li>
+<a href="cpp/std/random.html" >Random Numbers</a>
+</li></ul></div></div>
+<div class="tree-fold plain" ><h5>Code Organization</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/separate_compilation.html" >Separate Compilation</a>
+</li>
+
+<li>
+<a href="cpp/lang/namespaces.html" >Namespaces</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Custom Types &ndash; Part 2</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/friends.html" >Friends</a>
+</li>
+
+<li>
+<a href="cpp/lang/comparisons.html" >Comparisons</a>
+</li>
+
+<li>
+<a href="cpp/design/literal_types.html" >Literal Types</a>
+</li>
+
+<li>
+<a href="cpp/design/arithmetic_types.html" >Arithmetic Types</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/std/unique_ownership.html" >Unique Resource Ownership</a>
+</li>
+
+<li>
+<a href="cpp/design/node_based_data_structures.html" >Node-Based Data Structures</a>
+</li>
+
+<li>
+<a href="cpp/lang/special_class_members.html" >Special Class Members</a>
+</li>
+
+<li>
+<a href="cpp/std/shared_ownership.html" >Shared Resource Ownership</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/lang/object_oriented_programming.html" >Object Oriented Programming</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/lang/move_semantics.html" >Move Semantics</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Generic Programming</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/templates.html" >Templates</a>
+</li>
+
+<li>
+<a href="cpp/lang/type_casts.html" >Type Casts</a>
+</li>
+
+<li>
+<a href="cpp/lang/type_deduction.html" >Type Deduction</a>
+</li>
+
+<li>
+<a href="cpp/std/type_traits.html" >Type Traits</a>
+</li>
+
+<li>
+<a href="cpp/lang/perfect_forwarding.html" >Perfect Forwarding</a>
+</li>
+
+<li>
+<a href="cpp/lang/concepts.html" >Concepts &amp; Constrained Templates</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Memory Management</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/pointer_arithmetic.html" >Pointer Arithmetic</a>
+</li>
+
+<li>
+<a href="cpp/lang/c_arrays.html" >C-Style Arrays</a>
+</li>
+
+<li>
+<a href="cpp/lang/manual_memory_management.html" >Manual Memory Management</a>
+</li>
+
+<li>
+<a href="cpp/design/allocators.html" >Allocators</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Software Design Basics</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/design/principles.html" >Design Principles</a>
+</li>
+
+<li>
+<a href="cpp/design/function_interface_example1.html" >Design Study: Function Interfaces</a>
+</li>
+
+<li>
+<a href="cpp/design/angle_axis_rotation.html" >Design Study: Angle-Axis Rotation</a>
+</li>
+
+<li>
+<a href="cpp/design/traversal_approaches.html" >Traversal Approaches</a>
+</li>
+
+<li>
+<a href="cpp/design/pimpl.html" >The PIMPL Idiom</a>
+</li></ul></div></div>
+<button id="drawer-left-toggle" title=""></button></div>
+<div id="main-content" class="boxed-wide "><article class="boxed-normal ">
+<header class="plain">
+<h1>
+<span class="hwide">Simple Custom Types</span><span class="hslim">Simple Custom Types</span><span class="hnavi">Classes</span></h1>
+<nav id="page-navbar" class=""></nav>
+</header>
+<section class="prolog plain"><h3 class="hfold nav-none" open>Type Categories (simplified)</h3>
+<div class="content " ><div class="panel-col "{style=""><table class="hborders vstriped"><tbody><tr><td class="vtop"><h6>Fundamental Types</h6></td>
+<td><code>void</code>, <code>bool</code>, <code>char</code>, <code>int</code>, <code>double</code>, &hellip;</td></tr>
+<tr><td class="vtop"><h6>Simple Aggregates</h6></td>
+<td class="vcompact"><ul>
+<li>aggregate: may contain one/many fundamental or other aggregate-compatible types</li>
+
+<li>no control over interplay of constituent types</li>
+
+<li><q>trivial</q> if only (compiler generated) default construction / destruction / copy / assignment</li>
+
+<li><q>standard memory layout</q> (all members laid out contiguous in declaration order),
+if all members have same access control (e.g. all public)</li></ul></td></tr>
+<tr><td class="vtop"><h6><mark><strong>More Complex Custom Types</strong></mark></h6></td>
+<td class="vcompact"><ul>
+<li>custom invariants and control over interplay of members</li>
+
+<li>restricted member access</li>
+
+<li>member functions</li>
+
+<li>user-defined construction / member initialization</li>
+
+<li>user-defined destruction / copy / assignment</li>
+
+<li>may be polymorphic (contain virtual member functions)</li></ul></td></tr></tbody></table></div></div></section>
+<section class="main plain"><h2 class="hfold " open><span class="nav-none">Why Custom Types?</span>
+<span class="nav-only">Why?</span></h2>
+<div class="content " ><div class="panel "><h4 class="hfold nav-none" open>Correctness Guarantees</h4>
+<div class="content " ><ul>
+<li><strong>invariants</strong> = behavior and/or data properties that never change</li>
+
+<li>avoid data corruption by controlling/restricting access to data members</li></ul></div>
+<h4 class="hfold nav-none" open>Reusable Abstractions</h4>
+<div class="content " ><ul>
+<li>easy-to-use interfaces that hide low-level implementation details</li>
+
+<li>stable interfaces that are not affected by changing internal implementations</li>
+
+<li>reusable abstractions for commonly needed facilities (e.g., dynamic array)</li></ul></div>
+<h4 class="hfold nav-none" open>Resource Management</h4>
+<div class="content " ><p>also called <q>RAII</q> (<u>R</u>esource <u>A</u>cquisition <u>I</u>s <u>I</u>nitialization)</p>
+<ul>
+<li>acquire some resource (memory, file handle, connection,  &hellip;) when object is constructed</li>
+
+<li>release/clean up resource when object is destroyed (de-allocate memory,  close connection, &hellip;)</li></ul></div></div>
+<div class="panel-fold " open><h3><span class="nav-none">Example 1: Monotonous Counter</span>
+<span class="nav-only">Example 1</span></h3></div>
+<div class="panel-col "{style=""><div class="panel-row last-wide responsive"{style=""><div class="panel "><ul>
+<li>stores an integer</li>
+
+<li>is initialized with 0</li>
+
+<li><strong>Invariant:</strong> count can <em>only</em> increase
+(cannot be decreased or reset)</li></ul></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="e2">monotonous_counter</span> c;   
+cout &lt;&lt; c.reading();  <span class="comment ">// prints 0</span>
+c.increment();
+cout &lt;&lt; c.reading();  <span class="comment ">// prints 1</span>
+c.increment();
+c.increment();
+cout &lt;&lt; c.reading();  <span class="comment ">// prints 3</span></code></pre>
+</div></div>
+<div class="panel title vcompact "><h6 class="nav-none"><span class="e1"><span class="cat-no"></span></span> A simple aggregate cannot guarantee this:</h6></div>
+<div class="panel-row responsive"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code>struct <span class="e1">frail_counter</span> {
+  int count;
+};
+<hr>frail_counter c;    
+cout &lt;&lt; c.count; <span class="comment ">// any value</span>
+c.count++;
+c.count = 11;</code></pre>
+</div>
+<div class="panel "><ul class="symbols ">
+<li class="cat-negative">integer member not automatically initialized to 0</li>
+
+<li class="cat-negative">one can freely modify any integer member of an aggregate</li></ul>
+&rArr; no advantage over just using an integer</div></div></div>
+<div class="panel-fold " open><h3><span class="nav-none">Example 2: Ascending Sequence</span>
+<span class="nav-only">Example 2</span></h3></div>
+<div class="panel-col "{style=""><div class="panel-row last-wide responsive"{style=""><div class="panel "><ul>
+<li>should store integers</li>
+
+<li><strong>Invariant:</strong>
+number of elements can only <em>increase</em>, i.e., 
+one can <em>only insert</em> new elements, but not remove them</li>
+
+<li><strong>Invariant:</strong>
+elements must always be <em>sorted</em> in ascending order</li></ul></div>
+<div class="panel cs-light vstretch">
+<pre class="notranslate"><code><span class="e2">ascending_sequence</span> s;  <ul class="array wide x2"><li class="x0 dotted"> </li></ul>
+s.insert(5);           <ul class="array wide x2"><li class="">5</li></ul>
+s.insert(-8);          <ul class="array wide x2"><li class="">-8</li><li class="">5</li></ul>
+s.insert(42);          <ul class="array wide x2"><li class="">-8</li><li class="">5</li><li class="">42</li></ul>
+cout &lt;&lt; s.size();   <span class="comment ">// prints 3</span>
+cout &lt;&lt; s[0];       <span class="comment ">// prints -8</span>
+cout &lt;&lt; s[2];       <span class="comment ">// prints 42</span></code></pre>
+</div></div>
+<div class="panel title vcompact "><h6 class="nav-none"><span class="e1"><span class="cat-no"></span></span> A simple aggregate cannot guarantee this:</h6></div>
+<div class="panel-row responsive"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code>struct <span class="e1">chaotic_sequence</span> {
+  <span class="c6 ">std::</span>vector&lt;int&gt; nums;
+};
+<hr>chaotic_sequence s;    <ul class="array x0 dotted"><li class=""> </li></ul>
+s.nums.push_back(8);   <ul class="array x2"><li class="">8</li></ul>
+s.nums.push_back(1);   <ul class="array x2"><li class="">8</li><li class="">1</li></ul>
+s.nums.push_back(4);   <ul class="array x2"><li class="">8</li><li class="">1</li><li class="">4</li></ul>
+s.nums.pop_back(4);    <ul class="array x2"><li class="">8</li><li class="">1</li><li class="x0 dotted"> </li></ul></code></pre>
+</div>
+<div class="panel "><h6>can violate requirements</h6>
+<ul class="symbols ">
+<li class="cat-negative">numbers not neccessarily sorted in ascending order</li>
+
+<li class="cat-negative">we can manipulate <q><code>num</code></q> without restriction 
+(delete numbers, etc.)</li></ul>
+&rArr; no advantage over just using a plain <code>std::vector</code></div></div></div></div>
+<h2 class="hfold " open><span class="hwide">Restricted Member Access</span>
+<span class="hslim">Member Access</span>
+<span class="hnavi">Access</span></h2>
+<div class="content " ><a class="nav " id="member-access" keywords="member-access member-functions access"></a>
+<div class="panel-fold " open><h3>Member Functions</h3></div>
+<div class="panel-col "{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code>class <strong>monotonous_counter</strong> <strong>{</strong>
+  int count_;  <span class="comment ">// &larr; data member</span>
+<span class="annotation">&hellip;</span>
+<span class="c1">  void</span> <span class="e1">increment() {</span>  <span class="comment ">// &larr; member function</span>
+    ++count_; 
+<span class="e1">  }</span>
+<strong>};</strong></code></pre>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>class <strong>ascending_sequence</strong> <strong>{</strong>
+  <span class="c6 ">std::</span>vector&lt;int&gt; seq_;  <span class="comment ">// &larr; data member</span>
+<span class="annotation">&hellip;</span>
+<span class="c1">  void</span> <span class="e1">insert</span><span class="e1">(</span>int x<span class="e1">) {</span>   <span class="comment ">// &larr; member function</span>
+    <span class="comment ">// insert <q>x</q> into nums<span class="hslim-br"></span><span class="hslim"></span><span class="hslim">    //</span> at the right position</span>
+<span class="e1">  }</span>
+<strong>};</strong></code></pre>
+</div>
+<div class="panel vcompact"><ul>
+<li>manipulate or query data members</li>
+
+<li>control/restrict access to data members</li>
+
+<li>hide low-level implementation details</li>
+
+<li><strong>corectness</strong>: keep/guarantee invariants</li>
+
+<li><strong>clearity</strong>: well-structured interfaces for users of type</li>
+
+<li><strong>stability</strong>: internal data representation (mostly) independed from interface</li>
+
+<li><strong>avoids repetition/boilerplate</strong>:
+only one call necessary for potentially complex operations</li></ul></div></div>
+<div class="panel-fold " open><h3><span class="hwide"><code>public</code> vs. <code>private</code> Visibility</span>
+<span class="hslim"><code>public</code> vs. <code>private</code></span>
+<span class="hnavi"><code>public</code>/<code>private</code></span></h3>
+<a class="nav " id="public-private" keywords="public-private public private"></a></div>
+<div class="panel hvtight bg-filled "><div class="panel-col "{style=""><div class="panel title vcompact "><h5>Private members are only accessible through member functions:</h5></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>class <strong>ascending_sequence {</strong>
+<span class="e1">private:</span>
+  <span class="c6 ">std::</span>vector&lt;int&gt; <span class="c1">seq_</span>;
+  <span class="comment ">// &hellip; more private members</span>
+<span class="e2">public:</span>
+  void <span class="e2">insert</span>(int x) { <span class="annotation">&hellip;</span> }
+  auto <span class="e2">size</span>() const { return <span class="c1">seq_</span>.size(); }
+  <span class="comment ">// &hellip; more public members</span>
+<strong>};</strong>
+<hr>int <strong>main</strong>() {
+  ascending_sequence s;
+  s.insert(8);         <span class="comment ">// <span class="sym-ok"></span> 'insert' is public</span>
+  auto n = s.size();   <span class="comment ">// <span class="sym-ok"></span> 'size' is public</span>
+  auto i = <s>s.seq_[0]</s>;  <span class="comment ">// <span class="sym-err"></span><span class="hwide e-err"> COMPILER ERROR:</span> <span class="c-err"><span class="e-err">'seq_' is private</span></span></span>
+  auto m = <s>s.seq_.size()</s>; <span class="comment ">// <span class="sym-err"></span><span class="hwide e-err"> COMPILER ERROR</span></span>
+  <s>s.seq_.push_back(1)</s>;    <span class="comment ">// <span class="sym-err"></span><span class="hwide e-err"> COMPILER ERROR</span></span>
+}</code></pre>
+</div></div>
+<div class="panel-col "{style=""><div class="panel title vcompact "><h5><code>struct</code> vs. <code>class</code> &ndash; main difference is default visibility:</h5></div>
+<div class="panel-col "{style=""><div class="panel-row hcompact responsive"{style=""><div class="panel-col "{style=""><table><tbody><tr></tr>
+<td><div class="block ">
+<pre class="notranslate"><code><span class="e2">struct</span> point {
+
+<span class="e2">&hellip;</span>
+};</code></pre>
+</div></td>
+<td><p class="xxlarge">=</p></td>
+<td><div class="block ">
+<pre class="notranslate"><code><span class="e1">class</span> point {
+<span class="e2">public:</span>
+<span class="e2">&hellip;</span>
+};</code></pre>
+</div></td></tbody></table></div>
+<div class="panel-col "{style=""><table><tbody><tr></tr>
+<td><div class="block ">
+<pre class="notranslate"><code><span class="e1">class</span> point {
+
+<span class="e1">&hellip;</span>
+};</code></pre>
+</div></td>
+<td><p class="xxlarge">=</p></td>
+<td><div class="block ">
+<pre class="notranslate"><code><span class="e2">struct</span> point {
+<span class="e1">private:</span>
+<span class="e1">&hellip;</span>
+};</code></pre>
+</div></td></tbody></table></div></div></div></div>
+<div class="panel-col vcompact"{style=""><table><thead><tr><th>keyword</th> <th>usually used for</th></tr></thead>
+<tbody><tr><td><code>struct</code></td> <td>simple aggregates of public data</td></tr>
+<tr><td><code>class </code></td> <td>private data, member functions, invariants, &hellip;</td></tr></tbody></table></div></div>
+<div class="panel-fold " open><h3><span class="nav-none"><code>const</code> Member Functions</span>
+<span class="nav-only"><code>const</code> Members</span></h3>
+<a class="nav " id="const-members" keywords="const-members "></a></div>
+<div class="panel hvtight bg-filled "><div class="panel-fold vexpand vcompact" open><h5 class="nav-none">Only <code>const</code>-qualified member functions can be 
+called on <code>const</code> objects<span class="if-opened">:</span></h5></div>
+<div class="panel-col "{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code>class <strong>ascending_sequence {</strong>
+  <span class="c6 ">std::</span>vector&lt;int&gt; seq_;
+public:  <span class="annotation">&hellip;</span>
+  void <strong>insert</strong> { <span class="annotation">&hellip;</span> }
+  auto <strong>size</strong>() <span class="e2">const</span> { return seq_.size(); }
+<strong>};</strong>
+<hr>int <strong>main</strong>() {
+  ascending_sequence s;
+  s.insert(88);  <span class="comment ">// <span class="sym-ok"></span> s is <strong>not</strong> const</span>
+  auto <span class="e2">const&amp;</span> cs = s; 
+  cs.<s>insert</s>(5);  <span class="comment ">// <span class="sym-err"></span><span class="hwide e-err"> COMPILER ERROR:</span> <span class="c-err">'insert' is <strong>not</strong> const</span></span>
+}</code></pre>
+</div>
+<div class="panel title vcompact "><p>A function taking a <code>const</code>(reference) parameter not only 
+promises not to modify it, this promise is checked &amp; enforced by the compiler:</p></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>void <strong>foo</strong>(ascending_sequence <span class="e2">const&amp;</span> s) {
+  <span class="comment ">// 's' is <strong>const</strong> reference ^^^^^</span>
+  auto n = s.size();  <span class="comment ">// <span class="sym-ok"></span> 'size' is const</span>
+  s.<s>insert</s>(5);  <span class="comment ">// <span class="sym-err"></span><span class="hwide e-err"> COMPILER ERROR:</span> <span class="c-err">'insert' is <strong>not</strong> const</span></span>
+}</code></pre>
+</div></div>
+<div class="panel-fold vexpand vcompact" open><h5 class="nav-none">Members are <code>const</code> inside of 
+<code>const</code>-qualified member functions<span class="if-opened">:</span></h5></div>
+<div class="panel-col "{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code>class <strong>monotonous_counter</strong> {
+  int count_;
+public:  <span class="annotation">&hellip;</span>
+  int <strong>reading</strong> () <span class="e2">const</span> { 
+    <span class="comment ">// <span class="sym-err"></span><span class="hwide e-err"> COMPILER ERROR:</span> <span class="c-err"><q>count_</q> is <strong>const:</strong></span></span>
+    <s>count_ +=</s> 2;
+    return count_;
+  }
+<strong>};</strong></code></pre>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>class <strong>ascending_sequence {</strong>
+  <span class="c6 ">std::</span>vector&lt;int&gt; seq_;
+public:  <span class="annotation">&hellip;</span>
+  auto <strong>size</strong>() <span class="e2">const</span> {  <span class="comment ">// 'seq_' is const</span>
+    <span class="comment ">// <span class="sym-err"></span><span class="hwide e-err"> COMPILER ERROR:</span> <span class="c-err">calling <strong>non</strong>-const 'push_back'</span></span>
+    seq_.<s>push_back</s>(0);  
+
+    <span class="comment ">// <span class="sym-ok"></span> vector's member 'size()' is const</span>
+    return seq_.size();  
+  }
+<strong>};</strong></code></pre>
+</div></div>
+<div class="panel-fold vexpand vcompact no-spacing" open><h5 class="nav-none">Member functions can be overloaded by <code>const</code><span class="if-opened">:</span></h5></div>
+<div class="panel-col "{style=""><div class="panel "><p>Two member functions can have the same name (and parameter lists)
+if one is <code>const</code>-qualified and the other one isn't.
+This makes it possible to clearly distinguish read-only access 
+from read/write actions.</p></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>class <strong>interpolation</strong> { <span class="annotation">&hellip;</span>
+  int t_;
+  <span class="annotation">&hellip;</span>
+public:
+  <span class="annotation">&hellip;</span>
+  <span class="comment ">// setter/getter pair:</span>
+  void <strong>threshold</strong>(int t)  { if(t &gt; 0) t_ = t; }
+  int  <strong>threshold</strong>() <span class="e2">const</span> { return t_; }
+  <span class="comment ">// write access to a 'node'</span>
+  node&amp;       <strong>at</strong>(int x) { <span class="annotation">&hellip;</span> }
+  <span class="comment ">// read-only access to a 'node'</span>
+  node const&amp; <strong>at</strong>(int x) <span class="e2">const</span> { <span class="annotation">&hellip;</span> }
+};</code></pre>
+</div></div></div>
+<div class="panel-fold " open><h3><span class="hwide">Member Declaration vs. Definition</span>
+<span class="hslim">Declaration vs. Definition</span>
+<span class="hnavi">Declarations</span></h3></div>
+<div class="panel-row responsive first-wide"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code>class <strong>MyType {</strong>
+  int n_;
+  <span class="comment ">// more data members &hellip;</span>
+public:
+  <span class="comment ">// declaration + inline definition</span>
+  int <strong>count</strong>() const { return n_; } 
+  <span class="comment ">// declaration only</span>
+  double <strong>foo</strong>(int, int);
+<strong>};</strong>
+<hr><span class="comment ">// separate definition</span>
+double <span class="e1">MyType::</span><strong>foo</strong>(int x, int y) {
+  <span class="comment ">// lots of stuff</span> &hellip;
+}</code></pre>
+</div>
+<div class="panel "><p>Definitions of complex member functions are usually put
+outside of the class (and into a separate source file).</p>
+<p>However, small member functions like interface adapter functions,
+getters (like <code>count</code>) should be implemented <q><em>inline</em></q>, 
+i.e., directly in the class body for maximum performance.</p>
+<p>For now we will keep <em>all</em> member functions inline until we learn 
+about <a class="" href="cpp/lang/separate_compilation.html" title="click to go to page &quot;Separate Compilation&quot;">
+
+Separate Compilation
+</a></p></div></div>
+<div class="panel-fold " open><h3><span class="hwide">Operator Member Functions</span>
+<span class="hslim">Operator Functions</span>
+<span class="hnavi">Operators</span></h3></div>
+<div class="panel-col "{style=""><div class="panel "><h6>special member function</h6>
+<div class="block large">
+<pre class="notranslate"><code>class <strong>X</strong> { &hellip;
+  Y <span class="e1">operator []</span> (<span class="e2">int</span> <span class="c2">i</span>) { &hellip; } 
+};</code></pre>
+</div>
+<h6>enables the <q>subscript operator</q>:</h6>
+<div class="block large">
+<pre class="notranslate"><code>X x;
+Y y = x<span class="e1">[</span><span class="e2">0</span><span class="e1">]</span>;</code></pre>
+</div></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>class <strong>ascending_sequence {</strong>
+private:
+  <span class="c6 ">std::</span>vector&lt;int&gt; seq_;
+public: <span class="annotation">&hellip;</span>
+  void <strong>insert</strong>(int x) { <span class="annotation">&hellip;</span> }
+  int <span class="e1">operator []</span> (<span class="e2">size_t</span> <span class="c2">index</span>) const {<span class="hslim-br"></span><span class="hslim">   </span> return seq_[index];<span class="hslim-br"></span><span class="hslim"> </span> }
+<strong>};</strong>
+<hr>int <strong>main</strong>() {
+  ascending_sequence s;  <span class="comment ">// s.seq_: <ul class="array x2"><li class="x0 dotted">&nbsp;</li></ul></span>
+  s.insert(9);           <span class="comment ">// s.seq_: <ul class="array x2"><li class="">9</li></ul></span>
+  s.insert(2);           <span class="comment ">// s.seq_: <ul class="array x2"><li class="">2</li><li class="">9</li></ul></span>
+  s.insert(4);           <span class="comment ">// s.seq_: <ul class="array x2"><li class="">2</li><li class="">4</li><li class="">9</li></ul></span>
+  cout &lt;&lt; s<span class="e1">[</span><span class="e2">0</span><span class="e1">]</span> &lt;&lt; '\n';  <span class="comment ">// prints '2'</span>
+  cout &lt;&lt; s<span class="e1">[</span><span class="e2">1</span><span class="e1">]</span> &lt;&lt; '\n';  <span class="comment ">// prints '4'</span>
+}</code></pre>
+</div></div></div>
+<h2 class="hfold " open><span class="hwide">Initialization</span>
+<span class="hslim">Initialization</span>
+<span class="hnavi">Init</span></h2>
+<div class="content " ><div class="panel-fold " open><h3><span class="nav-none">Member Initialization</span>
+<span class="nav-only">Data Members</span></h3>
+<a class="nav " id="member-initialization" keywords="member-initialization initialization"></a></div>
+<div class="panel hvtight bg-filled enumerate"><div class="panel-fold vexpand vcompact" ><h6 class="nav-none">Remember: Objects of fundamental type are not initialized by default!</h6></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>class <strong>counter</strong> {
+  int count_;
+public:
+  int <strong>reading</strong>() { return count_; }
+};
+<hr>counter c;   <span class="comment ">// <span class="e1">'count_' not initialized!</span></span>
+cout &lt;&lt; c.reading();  <span class="comment ">// can be anything!</span></code></pre>
+</div>
+<div class="panel-col "{style=""><div class="panel title vcompact enum-item"><h5>Member Initializers <div class="labels "><a class="lbl " href="tags/c++11.html">C++11</a></div></h5></div>
+<div class="panel-col "{style=""><div class="panel-row responsive"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code>class counter {
+  <span class="comment ">// counter should start at 0</span>
+  int count_ <span class="e2">= 0</span>;
+public:
+  <span class="annotation">&hellip;</span>
+};</code></pre>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>class Foo {
+  int i_ <span class="e2">= 10</span>;
+  double x_ <span class="e2">= 3.14</span>;
+public:
+  <span class="annotation">&hellip;</span>
+};</code></pre>
+</div></div></div></div>
+<div class="panel-col "{style=""><div class="panel title vcompact enum-item"><h5>Constructor Initilization Lists</h5>
+<ul class="defn "><li><span class="term">constructor (<q>ctor</q>)
+</span> = <span class="defn">special member function that is executed when an object is created
+</span></li></ul></div>
+<div class="panel-row responsive"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code>class counter {
+  int count_;
+public:
+  <strong>counter()<mark>:</mark></strong> <span class="e2">count_{0}</span> <strong>{ }</strong>
+  <span class="annotation">&hellip;</span>
+};</code></pre>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>class Foo {
+  int i_;     <span class="comment ">// 1<sup>st</sup></span>
+  double x_;  <span class="comment ">// 2<sup>nd</sup></span>
+public:    
+  <strong>Foo()<mark>:</mark></strong> <span class="e2">i_{10}, x_{3.14}</span> <strong>{ }</strong>
+  <span class="comment ">// same order: i_ , x_ </span>
+  <span class="annotation">&hellip;</span>
+};</code></pre>
+</div></div>
+<div class="panel cat-warning"><p class="sfold ">Make sure that the member order in initialzation lists is always
+the same as the member declaration order!</p>
+<div class="content " ><p>A different order in the initialization list might lead to
+undefined behavior such as accesses to uninitialized memory.</p>
+<p>Some compilers warn about this: g++/clang++ with <kbd>-Wall</kbd> or <kbd>-Wreorder</kbd>, 
+&mdash; yet another reason to always activate and never ignore compiler warnings!</p></div></div></div></div>
+<div class="panel-fold " open><h3>Constructors</h3>
+<a class="nav " id="constructors" keywords="constructors constructor"></a></div>
+<div class="panel hvtight bg-filled "><div class="panel vcompact"><ul class="defn "><li><span class="term">constructor (<q>ctor</q>)
+</span> = <span class="defn">special member function that is executed when an object is created
+</span></li></ul>
+<ul>
+<li>constructor's <q>function name</q> = type name</li>
+
+<li>has no return type</li>
+
+<li>can initialize data members via <em>initialization list</em></li>
+
+<li>can execute code before first usage of an object</li>
+
+<li>can be used to establish invariants</li></ul>
+<ul class="defn "><li><span class="term">default constructor 
+</span> = <span class="defn">constructor that takes <strong>no parameters</strong>
+</span></li></ul></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>class <strong>Samples</strong> {
+  int min_;
+  int max_;
+  <span class="c6 ">std::</span>vector<int> v_;
+public:
+  <span class="comment ">// <strong>default constructor:</strong></span>
+  <span class="e2">Samples():</span> min_{0}, max_{1}, v_{min_,max_} <span class="e2">{</span><span class="hslim-br"></span><span class="hslim">   </span> v_.reserve(8);<span class="hslim-br"></span><span class="hslim"> </span> <span class="e2">}</span>
+<span class="spacer"></span><span class="c2">  explicit</span>  <span class="comment ">// <strong>special constructor:</strong></span>
+  <span class="e2">Samples(</span><span class="c1">int x</span><span class="e2">):</span> min_{<span class="c1">x</span>}, max_{<span class="c1">x</span>}, v_{<span class="c1">x</span>} <span class="e2">{</span><span class="hslim-br"></span><span class="hslim">   </span> v_.reserve(8);<span class="hslim-br"></span><span class="hslim"> </span> <span class="e2">}</span>
+<span class="spacer"></span><span class="sfold " >  int <strong>add</strong>(int i)  {&ensp;</span><span>    if (i &lt; min_) min_ = i;
+    else if (i &gt; max_) max_ = i;
+    v_.push_back(i);</span>  }
+<span class="spacer"></span>  int <strong>min</strong>() const { return min_; }
+  int <strong>max</strong>() const { return max_; }
+  <span class="annotation">&hellip;</span>
+};
+<hr>Samples s1;      <span class="comment ">// default ctor <span class="hwide">&rArr;</span></span><span class="hslim-br"></span><span class="hslim"></span><span class="comment "><span class="hslim">//</span> s1.v_: <ul class="array x2"><li class="">0</li><li class="">1</li><li class="x0 dotted"> </li><li class="x0 dotted"> </li><li class="x0 dotted"> </li><li class="x0 dotted"> </li><li class="x0 dotted"> </li><li class="x0 dotted"> </li></ul></span>
+<span class="spacer"></span>Samples s2 <span class="e2">{</span><span class="e1">3</span><span class="e2">}</span>;  <span class="comment ">// special ctor <span class="hwide">&rArr;</span></span><span class="hslim-br"></span><span class="hslim"></span><span class="comment "><span class="hslim">//</span> s2.v_: <ul class="array x2"><li class="">3</li><li class="x0 dotted"> </li><li class="x0 dotted"> </li><li class="x0 dotted"> </li><li class="x0 dotted"> </li><li class="x0 dotted"> </li><li class="x0 dotted"> </li><li class="x0 dotted"> </li></ul></span></code></pre>
+</div>
+<div class="panel-col "{style=""><div class="panel title vcompact "><h5>Separate Definition of Constructors</h5>
+<p>works the same as for other member functions</p></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>class <strong>MyType</strong> { <span class="annotation">&hellip;</span>
+public:
+  <strong>MyType</strong>();  <span class="comment ">// declaration</span>
+  <span class="annotation">&hellip;</span>
+};
+<span class="comment ">// separate definition</span>
+<span class="e2">MyType::MyType</span>(): <span class="annotation">&hellip;</span> { <span class="annotation">&hellip;</span> }</code></pre>
+</div></div>
+<div class="panel cat-warning"><p class="sfold ">Make sure that the member order in initialzation lists is always
+the same as the member declaration order!</p>
+<div class="content " ><p>A different order in the initialization list might lead to
+undefined behavior such as accesses to uninitialized memory.</p>
+<p>Here, in the default constructor we need to make sure to 
+access <code class="inset ">min_</code> and <code class="inset ">max_</code> in <code class="inset ">v_{min_,max_}</code>
+only after they have been initialized.</p>
+<p>Some compilers warn about this: g++/clang++ with <kbd>-Wall</kbd> or <kbd>-Wreorder</kbd>, 
+&mdash; yet another reason to always activate and never ignore compiler warnings!</p></div></div></div>
+<div class="panel-fold " open><h3><span class="hwide">Default vs. Custom Constructors</span>
+<span class="hslim">Custom Constructors</span>
+<span class="hnavi">Custom</span></h3>
+<a class="nav " id="custom-constructors" keywords="custom-constructors "></a></div>
+<div class="panel hvtight bg-filled "><div class="panel-fold vexpand" open><h6 class="nav-none">No user-defined constructor &rArr; compiler generates one</h6></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>class <strong>BoringType</strong> { public: int i = 0; };
+<span class="spacer"></span>BoringType obj1;     <span class="comment ">// <span class="sym-ok"></span></span>
+BoringType obj2 {};  <span class="comment ">// <span class="sym-ok"></span></span></code></pre>
+</div>
+<div class="panel-fold vexpand" open><h6 class="nav-none">At least one special constructor<br>
+&rArr; compiler does NOT generate default constructor</h6></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>class <strong>SomeType</strong> { <span class="annotation">&hellip;</span>
+public:
+  <span class="comment ">// special constructor:</span>
+  <span class="c2">explicit</span> <span class="e2">SomeType(</span>int x<span class="e2">) <span class="annotation">&hellip;</span> { <span class="annotation">&hellip;</span> }</span>
+};
+<span class="spacer"></span>SomeType s1 <span class="e2">{</span>1<span class="e2">}</span>;  <span class="comment ">// <span class="sym-ok"></span> special (int) constructor</span>
+SomeType s2;      <span class="comment ">// <span class="sym-err"></span><span class="hwide e-err"> COMPILER ERROR:</span> <span class="c-err">no default constructor!</span></span>
+SomeType s3 {};   <span class="comment ">// <span class="sym-err"></span><span class="hwide e-err"> COMPILER ERROR:</span> <span class="c-err">no default constructor!</span></span></code></pre>
+</div>
+<div class="panel-fold vexpand" open><h6 class="nav-none"><code><strong><span class="e2">TypeName() = default;</span></strong><br></code>
+&rArr; compiler generates implementation of default constructor</h6></div>
+<div class="panel-col "{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code>class <strong>MyType</strong> { <span class="annotation">&hellip;</span>
+public:
+  <strong>MyType()</strong> <span class="e2">= default;</span>
+  <span class="comment ">// special constructor:</span>
+  explicit <strong>MyType(</strong>int x<strong>) <span class="annotation">&hellip;</span> { <span class="annotation">&hellip;</span> }</strong>
+};
+<span class="spacer"></span>MyType m1 <span class="e2">{</span>1<span class="e2">}</span>;  <span class="comment ">// <span class="sym-ok"></span> special (int) constructor</span>
+MyType m2;      <span class="comment ">// <span class="sym-ok"></span></span>
+MyType m3 {};   <span class="comment ">// <span class="sym-ok"></span></span></code></pre>
+</div>
+<div class="panel cat-warning">If you use <code class="inset ">= default</code>, make sure to initialize data members 
+with <a class="" href="cpp/lang/custom_type_basics.html#member-initialization" onclick="reveal_anchor()">
+
+member initializers
+</a>.</div></div></div>
+<div class="panel-fold " open><h3><span class="hwide">Explicit Constructors &harr; Implicit Conversions</span>
+<span class="hslim">Explicit Constructors</span>
+<span class="hnavi"><code>explicit</code></span></h3>
+<a class="nav " id="explicit" keywords="explicit explicit implicit conversion"></a></div>
+<div class="panel hvtight bg-filled "><div class="panel cs-light vstretch">
+<pre class="notranslate"><code><span class="comment ">// functions with a 'Counter' parameter</span>
+void <strong>foo</strong>(<span class="c2">Counter</span> c) { <span class="annotation">&hellip;</span> }
+void <strong>bar</strong>(<span class="c2">Counter</span> const&amp; c) { <span class="annotation">&hellip;</span> }</code></pre>
+</div>
+<div class="grid-gallery-L "><div class="panel-col "{style=""><div class="panel title vcompact "><h5 class="cat-bad">Implicit Conversion<code> </code></h5></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>class <strong>Counter</strong> {
+  int count_ = 0;
+public:<span class="hwide-br"></span><span class="hwide"></span>
+  <strong>Counter(</strong><span class="c2">int initial</span><strong>):</strong>
+    count_{initial} <strong>{}</strong>
+  <span class="annotation">&hellip;</span>
+};
+<hr><span class="comment ">// makes 'Counter' from '2':</span>
+foo(<span class="e2">2</span>);           <span class="comment ">// <span class="sym-ok"></span></span>
+bar(<span class="e2">2</span>);           <span class="comment ">// <span class="sym-ok"></span></span>
+<hr>foo(<span class="c2">Counter{2}</span>);  <span class="comment ">// <span class="sym-ok"></span></span>
+bar(<span class="c2">Counter{2}</span>);  <span class="comment ">// <span class="sym-ok"></span></span></code></pre>
+</div></div>
+<div class="panel-col "{style=""><div class="panel title vcompact "><h5 class="cat-good"><code>explicit</code> Constructors</h5></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>class <strong>Counter</strong> {
+  int count_ = 0;
+public:
+  <span class="e1">explicit</span>
+  <strong>Counter(</strong><span class="c2">int initial</span><strong>):</strong>
+    count_{initial} <strong>{}</strong>
+  <span class="annotation">&hellip;</span>
+};
+<hr><span class="comment ">// no implicit conversion: </span>
+foo(<span class="e1">2</span>);  <span class="comment ">// <span class="sym-err"></span><span class="hwide e-err"> COMPILER ERROR</span></span>
+bar(<span class="e1">2</span>);  <span class="comment ">// <span class="sym-err"></span><span class="hwide e-err"> COMPILER ERROR</span></span>
+<hr>foo(<span class="c2">Counter</span><span class="e2">{2}</span>);  <span class="comment ">// <span class="sym-ok"></span></span>
+bar(<span class="c2">Counter</span><span class="e2">{2}</span>);  <span class="comment ">// <span class="sym-ok"></span></span></code></pre>
+</div></div></div>
+<div class="panel cat-guideline"><h6>Make user-defined constructors <code>explicit</code> by default!</h6>
+<p>Implicit conversions are a major source of hard-to-find bugs!</p>
+<p>Only use non-explicit constructors, if direct conversions from the 
+parameter type(s) is <em>absolutely</em> needed and has an unambiguous meaning.</p>
+<p>Some older teaching materials and people coming from C++98
+might tell you that one only needs to worry about implicit conversions
+for single-parameter constructors. This is no longer the case
+as of C++11!</p></div></div>
+<div class="panel-fold " open><h3><span class="nav-none">Constructor Delegation</span>
+<span class="nav-only">Delegation</span></h3>
+<div class="labels "><a class="lbl " href="tags/c++11.html">C++11</a></div>
+<a class="nav " id="constructor-delegation" keywords="constructor-delegation delegation"></a></div>
+<div class="panel-col "{style=""><div class="panel "><h6>= <q>call</q> other constructor in an initialization list</h6></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>class <strong>Range</strong> {
+  int a_;
+  int b_;
+public:
+  <span class="comment ">// 1) special constructor</span>
+  explicit <span class="hslim-br"></span><span class="hslim">  </span><strong>Range</strong>(int a, int b): a_{a}, b_{b} {
+    if(b_ &gt; a_) <span class="c6 ">std::</span>swap(a_,b_);
+  }
+  <span class="comment ">// 2) <span class="hwide">special [a,a] constructor -</span> delegates to [a,b] ctor</span>
+  explicit <strong>Range</strong>(int a): <span class="e2">Range{a,a}</span> {}
+  <span class="comment ">// 3) <span class="hwide">default constructor -</span> delegates to [a,a] ctor</span>
+  <strong>Range</strong>(): <span class="e2">Range{0}</span> {}
+  <span class="annotation">&hellip;</span>
+};
+<hr>Range r1;        <span class="comment ">// 3) &rArr; r1.a_: 0  r1.b_: 0</span>
+Range r2 {3};    <span class="comment ">// 2) &rArr; r2.a_: 3  r2.b_: 3</span>
+Range r3 {4,9};  <span class="comment ">// 1) &rArr; r3.a_: 4  r3.b_: 9</span>
+Range r4 {8,2};  <span class="comment ">// 1) &rArr; r4.a_: 2  r4.b_: 8</span></code></pre>
+</div></div>
+<div class="panel-fold " open><h3 class="cat-warning"><span class="nav-none">The <q>Most Vexing Parse</q></span>
+<span class="nav-only"><q>Vexing Parse</q></span></h3>
+<a class="nav " id="most-vexing-parse" keywords="most-vexing-parse vexing parse"></a></div>
+<div class="panel-col "{style=""><div class="panel title vcompact minor"><p>Can't use empty parentheses for object construction
+due to an ambiguity in C++'s grammar:</p></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>class <strong>A</strong> { &hellip; };
+<hr>A a <span class="e1">()</span>;  <span class="comment ">// declares function 'a' </span>
+<span class="comment ">         // without parameters</span>
+<span class="comment ">         // and return type 'A'</span>
+<hr>A a;     <span class="comment ">// constructs an object of type A</span>
+<hr>A a <span class="e2">{}</span>;  <span class="comment ">// constructs an object of type A</span></code></pre>
+</div></div></div>
+<h2 class="hfold " open><span class="hwide">Design, Conventions &amp; Style</span>
+<span class="hslim">Design &amp; Style</span>
+<span class="hnavi">Design</span></h2>
+<div class="content " ><div class="panel-fold " open><h3><span class="nav-none">General Guidelines</span>
+<span class="nav-only">Guidelines</span></h3></div>
+<div class="panel "><ul class="symbols-large ">
+<li class="cat-guideline"><h6>Each type should have exactly one purpose</h6>
+<p>because it reduces the likelihood of future modifications to it.</p>
+<ul class="cbullets vcompact"><li class="follows ">reduced risk of new bugs</li>
+<li class="follows ">keeps code depending on your type more stable</li></ul></li>
+
+<li class="cat-guideline"><h6>Keep data members private &amp; use member functions to access/modify data</h6>
+<p>so that one can only interact with your type through a stable interface.</p>
+<ul class="cbullets vcompact"><li class="follows ">avoids data corruption / allows guarantees of invariants</li>
+<li class="follows ">users of your type don't need to change their code
+if you change the type's internal implementation</li></ul></li>
+
+<li class="cat-guideline"><h6><code>const</code>-qualify all non-modifying member functions</h6>
+<p>in order to clearly advertise how and when the internal state of an object changes.</p>
+<ul class="cbullets vcompact"><li class="follows ">makes it harder to use your type incorrectly</li>
+<li class="follows ">enables compiler mutability checks</li>
+<li class="follows ">better reasoning about correctness, especially in scenarios 
+with concurrent access to objects, e.g., from multiple threads.</li></ul></li></ul>
+<hr>
+<blockquote>Interfaces should be easy to use correctly and hard to use incorrectly.
+&ensp;&mdash;&nbsp;&nbsp;Scott&nbsp;Meyers</blockquote></div>
+<div class="panel-fold " open><h3>Type Interfaces</h3>
+<a class="nav " id="type-interfaces" keywords="type-interfaces using"></a></div>
+<div class="panel-col "{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6">#include &lt;cstdint&gt;</span>
+<span class="c6">#include &lt;numeric_limits&gt;</span>
+<span class="spacer"></span>class <strong>monotonous_counter</strong> {
+public:
+  <span class="comment ">// public type alias</span>
+  <span class="e2">using value_type = <span class="c6 ">std::</span>uint64_t;</span>
+private:
+  value_type count_ = 0;
+public:
+  value_type <strong>reading</strong>() const { return count_; }
+  <span class="annotation">&hellip;</span>
+};
+<hr>const auto max = <span class="c6 ">std::</span>numeric_limits&lt;<span class="c2">monotonous_counter::value_type</span>&gt;::max();</code></pre>
+</div>
+<div class="panel "><h6 class="cat-warning">Don't leak implementation details:</h6>
+<ul class="symbols-large ">
+<li class="cat-guideline">Only make type aliases public, if the aliased types are used in the
+public interface of your class, i.e., used as return
+types or parameters of public member functions.</li>
+
+<li class="cat-guideline">Do not make type aliases public if the aliased types are only used
+in private member functions or for private data members.</li></ul></div></div>
+<div class="panel-fold " open><h3 class="cat-guideline"><span class="hwide">Member vs. Non-Member</span>
+<span class="hslim">Member/Non-Member</span>
+<span class="hnavi">(Non-)Member?</span></h3></div>
+<div class="panel hvtight bg-filled "><div class="panel "><h5>How to implement a feature / add new functionality?</h5>
+<ul class="large">
+<li>only need to access public data (e.g. via member functions)
+&rArr;&nbsp;implement as free standing function</li>
+
+<li>need to access private data &rArr;&nbsp;implement as member function</li></ul></div>
+<div class="panel-col "{style=""><div class="panel title vcompact "><h5>Example: interval-like type <code>gap</code></h5>
+<p>How to implement a function that makes a new <q><code>gap</code></q>
+object with both bounds shifted by the same amount?</p></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>class <strong>gap</strong> {
+  int a_; 
+  int b_;
+public:
+  explicit <span class="hslim-br"></span><span class="hslim">  </span><strong>gap</strong>(int a, int b): a_{a}, b_{b} {}
+  int <strong>a</strong>() const { return a_; }
+  int <strong>b</strong>() const { return b_; }
+};</code></pre>
+</div></div>
+<div class="grid-gallery-L "><div class="panel-col "{style=""><div class="panel title vcompact "><h6 class="cat-good">Free-Standing Function</h6></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>gap <span class="e2">shifted</span>(gap const&amp; g, int x) <strong>{</strong>
+  return gap{g.a()+x, g.b()+x};
+<strong>}</strong></code></pre>
+</div>
+<div class="panel "><ul class="symbols ">
+<li class="cat-positive">implementation only depends on the public interface of <code class="inset ">gap</code></li>
+
+<li class="cat-positive">we didn't change type <code class="inset ">gap</code> itself 
+&rArr; other code depending on it doesn't need to be recompiled</li></ul></div></div>
+<div class="panel-col "{style=""><div class="panel title vcompact "><h6 class="cat-bad">Member Function</h6></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>class <strong>gap</strong> { 
+  <span class="annotation">&hellip;</span>
+  gap <span class="e2">shifted</span>(int x) const <strong>{</strong>
+    return gap{a_+x, b_+x};
+  <strong>}</strong>
+};</code></pre>
+</div>
+<div class="panel "><ul class="symbols ">
+<li class="cat-negative">other users of <code class="inset ">gap</code> might want a <q>shifted</q> function 
+with different semantics, but they are now stuck with ours</li>
+
+<li class="cat-negative">all other code depending on <code class="inset ">gap</code> needs to recompile</li></ul></div></div></div></div>
+<div class="panel-fold " open><h3 class="cat-guideline"><span class="nav-none">Avoid Setter/Getter Pairs!</span>
+<span class="nav-only">Avoid Setters!</span></h3></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><ul>
+<li>use <q>action</q> functions instead of just <q>setters</q></li>
+
+<li>usually models problems better</li>
+
+<li>more fine-grained control</li>
+
+<li>better code readability / expression of intent</li></ul></div>
+<div class="panel-row responsive"{style=""><div class="panel-col "{style=""><div class="panel title vcompact "><h6 class="cat-good">descriptive actions</h6></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>class <strong>Account</strong> { <span class="annotation">&hellip;</span>
+  void <strong>deposit</strong>(Money const&amp;);
+  Money <strong>withdraw</strong>(Money const&amp;);
+  Money const&amp; <strong>balance</strong>() const;
+};</code></pre>
+</div></div>
+<div class="panel-col "{style=""><div class="panel title vcompact "><h6 class="cat-bad">setter/getter pair</h6></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>class <strong>Account</strong> { <span class="annotation">&hellip;</span>
+  void <strong>set_balance</strong>(Money const&amp;);<span class="hwide-br"></span><span class="hwide"> </span>
+  Money const&amp; <strong>balance</strong>() const;
+};</code></pre>
+</div></div></div></div>
+<div class="panel-fold " open><h3 class="cat-guideline">Naming</h3>
+<a class="nav " id="naming" keywords="naming name naming"></a></div>
+<div class="panel hvtight bg-filled "><div class="panel-fold vexpand" open><h5 class="nav-none">Names should reflect the purpose of a type/function</h5></div>
+<div class="panel-row "{style=""><div class="panel vcompact"><h6 class="cat-good">Understandable</h6>
+<div class="block ">
+<pre class="notranslate"><code>class <strong>IPv6_Address</strong> {<span class="annotation">&hellip;</span>};
+class <strong>ThreadPool</strong> {<span class="annotation">&hellip;</span>};
+class <strong>cuboid</strong> {<span class="annotation">&hellip;</span>};
+<hr>double <strong>volume</strong>(cuboid const&amp;) {<span class="annotation">&hellip;</span>}</code></pre>
+</div></div>
+<div class="panel vcompact"><h6 class="cat-bad">Too generic</h6>
+<div class="block ">
+<pre class="notranslate"><code>class <strong>Manager</strong> {<span class="annotation">&hellip;</span>};
+class <strong>Starter</strong> {<span class="annotation">&hellip;</span>};
+class <strong>Pool</strong> {<span class="annotation">&hellip;</span>};
+<hr>int <strong>get_number</strong>(Pool const&amp;) {<span class="annotation">&hellip;</span>}</code></pre>
+</div></div></div>
+<div class="panel-fold vexpand" open><h5 class="nav-none">Be consistent in naming types &amp; (member) functions</h5></div>
+<div class="panel-row "{style=""><div class="panel vcompact"><h6>Example Style 1</h6>
+<div class="block ">
+<pre class="notranslate"><code>class <strong>type_name</strong> {<span class="annotation">&hellip;</span>};
+int <strong>free_function</strong>() {<span class="annotation">&hellip;</span>}
+int <strong>member_function</strong>() {<span class="annotation">&hellip;</span>}
+int <strong>localVariable</strong>;
+int <strong>memberVariable_</strong>;</code></pre>
+</div></div>
+<div class="panel vcompact"><h6>Example Style 2</h6>
+<div class="block ">
+<pre class="notranslate"><code>class <strong>TypeName</strong> {<span class="annotation">&hellip;</span>};
+int <strong>free_function</strong>() {<span class="annotation">&hellip;</span>}
+int <strong>memberFunction</strong>() {<span class="annotation">&hellip;</span>}
+int <strong>localVariable</strong>;
+int <strong>memberVariable_</strong>;</code></pre>
+</div></div></div>
+<div class="panel cat-warning"><h6 class="sfold">Do not use <em>leading</em> underscores or <em>double</em> underscores in names 
+of types, variables, functions, private data members, etc.!</h6>
+<div class="content " ><p>Names beginning with underscores and/or containing double
+underscores are reserved for the standard library and/or
+compiler-generated entities.</p>
+<p>Using names with leading underscores or double underscores can
+invoke undefined behavior!</p>
+<p>A common and unproblematic convention is to use <em>trailing</em>
+underscores for private data members.</p>
+<div class="block large vstretch">
+<pre class="notranslate"><code><span class="sym-err"></span>  <span class="e-err">_</span>member        <span class="sym-ok"></span>  m<span class="e-ok">_</span>ember          
+<span class="sym-err"></span>  member<span class="e-err">__</span>       <span class="sym-ok"></span>  member<span class="e-ok">_</span>
+<span class="sym-err"></span>  m<span class="e-err">__</span>ember</code></pre>
+</div></div></div></div></div>
+<h2 class="hfold " open><span class="hwide">Example Implementations</span>
+<span class="hslim">Complete Examples</span>
+<span class="hnavi">Examples</span></h2>
+<div class="content " ><div class="panel-fold " open><h3><span class="nav-none">Example 1: Monotonous Counter</span>
+<span class="nav-only">monotonous_counter</span></h3>
+<a class="nav " id="example-monotonous-counter" keywords="example-monotonous-counter monotonous_counter"></a></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><ul>
+<li>new counters start at 0</li>
+
+<li>can only count up, not down</li>
+
+<li>read-only access to current count value</li></ul></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6">#include &lt;iostream&gt;</span>   <span class="comment ">// std::cout</span>
+<span class="c6">#include &lt;cstdint&gt;</span>    <span class="comment ">// std::uint64_t</span>
+<span class="spacer"></span><strong>class monotonous_counter {</strong>
+public:
+  using <span class="c2">value_type</span> = std::uint64_t;
+private:
+  value_type <span class="c1">count_</span> = 0;  <span class="comment ">// initial</span>
+public:
+  <span class="e2">monotonous_counter</span>() = default;
+<span class="spacer"></span>  explicit <span class="hslim-br"></span><span class="hslim">  </span><span class="e2">monotonous_counter</span>(value_type init): <span class="hslim-br"></span><span class="hslim">    </span><span class="c1">count_</span>{init} {}
+<span class="spacer"></span>  void <span class="e2">increment</span>() { ++<span class="c1">count_</span>; }
+<span class="spacer"></span>  value_type <span class="e2">reading</span>() const { return <span class="c1">count_</span>; }
+<strong>};</strong>
+<hr>int <strong>main</strong>() {
+  monotonous_counter c;
+  c.increment();
+  <span class="c6 ">std::</span>cout &lt;&lt; c.reading();  <span class="comment ">// prints 1</span>
+  c.increment();
+  c.increment();
+  <span class="c6 ">std::</span>cout &lt;&lt; c.reading();  <span class="comment ">// prints 3</span>
+}</code></pre>
+</div></div>
+<div class="panel-fold " open><h3><span class="nav-none">Example 2: Ascending Sequence</span>
+<span class="nav-only">ascending_sequence</span></h3>
+<a class="nav " id="example-ascending-sequence" keywords="example-ascending-sequence ascending_sequence"></a></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><ul>
+<li>stores integers</li>
+
+<li>read-only access to stored elements by index</li>
+
+<li>can <em>only insert</em> new elements, but not remove them</li>
+
+<li>elements are <em>always sorted</em> in ascending order</li>
+
+<li>content only modifyable through public interface</li></ul>
+<p class="cat-info">The implementation of 'insert' and the role of the 'begin' and 'end'
+member functions will become much clearer after we have learned about
+iterators and the algorithms in the standard library.</p></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6">#include &lt;iostream&gt;</span>   <span class="comment ">// std::cout</span>
+<span class="c6">#include &lt;vector&gt;</span>     <span class="comment ">// std::vector</span>
+<span class="c6">#include &lt;algorithm&gt;</span>  <span class="comment ">// std::lower_bound</span>
+<span class="spacer"></span><strong>class ascending_sequence {</strong>
+public:
+  using <span class="c2">value_type</span> = int;
+private:
+  using storage_t = <span class="c6 ">std::</span>vector&lt;value_type&gt;;
+  storage_t <span class="c1">seq_</span>;
+public:
+  using <span class="c2">size_type</span> = storage_t::size_type;
+<span class="spacer"></span>  void <span class="e2">insert</span>(value_type x) {
+    <span class="comment ">// use <a href="https://en.wikipedia.org/wiki/Binary_search_algorithm" >binary search</a> to find insert pos<span class="hwide">ition</span></span>
+    <span class="c1">seq_</span>.insert(<span class="hslim-br"></span><span class="hslim">      </span><a href="https://en.cppreference.com/w/cpp/algorithm/lower_bound" ><span class="c6 ">std::</span>lower_bound</a>(<span class="hslim-br"></span><span class="hslim">        </span><span class="c1">seq_</span>.begin(), <span class="c1">seq_</span>.end(), x), x);
+  }
+<span class="spacer"></span>  value_type <span class="e2">operator []</span> (size_type index) <strong>const</strong> <span class="hslim-br"></span><span class="hslim">  </span>{<span class="hwide-br"></span><span class="hwide">   </span> return <span class="c1">seq_</span>[index]; }
+<span class="spacer"></span>  size_type <span class="e2">size</span>() <strong>const</strong> { return <span class="c1">seq_</span>.size(); }
+<span class="spacer"></span>  <span class="comment ">// enable range based iteration</span>
+  auto <span class="e2">begin</span>() <strong>const</strong> { return <span class="c1">seq_</span>.begin(); }
+  auto <span class="e2">end</span>()   <strong>const</strong> { return <span class="c1">seq_</span>.end();   }
+<strong>};</strong>
+<hr>int <strong>main</strong>() {
+  ascending_sequence s;   <span class="comment ">// s.seq_: <ul class="array x0"><li class="dotted"> </li></ul></span>
+  s.insert(7);            <span class="comment ">// s.seq_: <ul class="array x2"><li class="x2i ">7</li></ul></span>
+  s.insert(2);            <span class="comment ">// s.seq_: <ul class="array x2"><li class="x2i ">2</li><li class="">7</li></ul></span>
+  s.insert(4);            <span class="comment ">// s.seq_: <ul class="array x2"><li class="">2</li><li class="x2i ">4</li><li class="">7</li></ul></span>
+  s.insert(9);            <span class="comment ">// s.seq_: <ul class="array x2"><li class="">2</li><li class="">4</li><li class="">7</li><li class="x2i ">9</li></ul></span>
+  s.insert(5);            <span class="comment ">// s.seq_: <ul class="array x2"><li class="">2</li><li class="">4</li><li class="x2i ">5</li><li class="">7</li><li class="">9</li></ul></span>
+  <span class="c6 ">std::</span>cout &lt;&lt; s[3];      <span class="comment ">// prints 7</span>
+  for(auto x : s) {
+    <span class="c6 ">std::</span>cout &lt;&lt; x &lt;&lt;' ';  <span class="comment ">// 2 4 5 7 9</span>
+  }
+<span class="comment ">  // use type aliases</span>
+  ascending_sequence::value_type x = 1;
+  ascending_sequence::size_type  n = 2;
+}</code></pre>
+</div></div></div></section>
+<section class="epilog">
+<div class="panel-col bg-filled"{style=""><div class="guide-nav">
+<div class="go-prev"><a href="cpp/std/istream_recover_from_errors.html"><span class="hwide">Input Errors</span></a></div>
+<div class="go-up"><a href="cpp/beginners_guide.html#custom-types-1">Beginner's Guide <span class="hxwide">/ Custom Types 1</span></a></div>
+<div class="go-next"><a href="cpp/lang/pointers.html"><span class="hwide">Pointers</span></a></div>
+</div></div>
+</section>
+<section class="context">
+<ul class="linear-tags "><li><a href="tags/c++.html">C++</a></li><li><a href="tags/article.html">article</a></li><li><a href="tags/beginner-level.html">beginner-level</a></li><li><a href="tags/classes.html">classes</a></li><li><a href="tags/custom-types.html">custom-types</a></li><li><a href="tags/types.html">types</a></li></ul>
+</section>
+<section class="metadata">
+<p><span class="cat-date">Last updated: 2020-09-20</span></p>
+</section>
+</article></div>
+<footer>
+<div id="footer-top"><div id="footer-top-content"><div id="footer-top-left"><nav><ul class="plain ">
+<li>
+<a href="index.html" class="cat-home" >Home</a>
+</li>
+
+<li>
+<a href="tags/news.html" class="cat-news" >News</a>
+</li>
+
+<li>
+<a href="tags/article.html" class="cat-article" >Articles</a>
+</li>
+
+<li>
+<a href="tags/featured.html" class="cat-featured" >Featured</a>
+</li>
+
+<li>
+<a href="tags/guide.html" class="cat-guide" >Guides</a>
+</li>
+
+<li>
+<a href="tags/list.html" class="cat-list" >Lists</a>
+</li>
+
+<li>
+<a href="about.html" class="cat-about" >About</a>
+</li>
+
+<li>
+<a href="privacy.html" class="cat-contact" >Privacy</a>
+</li>
+
+<li>
+<a href="https://twitter.com/hackingcpp" class="cat-twitter" >Twitter</a>
+</li></ul></nav></div>
+<div id="footer-top-right"><h2 class="cat-tags nav-none">
+<a href="tags.html" >Tags</a>
+</h2>
+<ul class="topic-cloud "><li><a style="font-size:119.09832775265055%;" href="tags/algorithms.html">algorithms</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/allocators.html">allocators</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/arrays.html">arrays</a></li> <li><a style="font-size:155.67625418551208%;" href="tags/article.html">article</a></li> <li><a style="font-size:151.4520701280242%;" href="tags/beginner-level.html">beginner-level</a></li> <li><a style="font-size:60.0%;" href="tags/blogs.html">blogs</a></li> <li><a style="font-size:60.0%;" href="tags/books.html">books</a></li> <li><a style="font-size:60.0%;" href="tags/build-systems.html">build-systems</a></li> <li><a style="font-size:160.9530933887302%;" href="tags/c++.html">C++</a></li> <li><a style="font-size:60.0%;" href="tags/c++-standardization.html">C++-standardization</a></li> <li><a style="font-size:122.76135311474769%;" href="tags/c++11.html">C++11</a></li> <li><a style="font-size:112.96632221214513%;" href="tags/c++14.html">C++14</a></li> <li><a style="font-size:104.32374581448789%;" href="tags/c++17.html">C++17</a></li> <li><a style="font-size:109.08009883059783%;" href="tags/c++20.html">C++20</a></li> <li><a style="font-size:60.0%;" href="tags/c++98.html">C++98</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/c-style.html">C-style</a></li> <li><a style="font-size:60.0%;" href="tags/c-vs-c++.html">C-vs-C++</a></li> <li><a style="font-size:60.0%;" href="tags/cat-casts.html">cat-casts</a></li> <li><a style="font-size:106.83431667163975%;" href="tags/classes.html">classes</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/code-editors.html">code-editors</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/code-formatters.html">code-formatters</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/command-line.html">command-line</a></li> <li><a style="font-size:106.83431667163975%;" href="tags/community.html">community</a></li> <li><a style="font-size:60.0%;" href="tags/comparisons.html">comparisons</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/compilers.html">compilers</a></li> <li><a style="font-size:60.0%;" href="tags/concepts.html">concepts</a></li> <li><a style="font-size:60.0%;" href="tags/conferences.html">conferences</a></li> <li><a style="font-size:60.0%;" href="tags/const.html">const</a></li> <li><a style="font-size:60.0%;" href="tags/constexpr.html">constexpr</a></li> <li><a style="font-size:111.11165590902733%;" href="tags/containers.html">containers</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/control-flow.html">control-flow</a></li> <li><a style="font-size:114.67244982290701%;" href="tags/custom-types.html">custom-types</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/data-structures.html">data-structures</a></li> <li><a style="font-size:60.0%;" href="tags/debugging.html">debugging</a></li> <li><a style="font-size:104.32374581448789%;" href="tags/design.html">design</a></li> <li><a style="font-size:106.83431667163975%;" href="tags/diagnostics.html">diagnostics</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/exceptions.html">exceptions</a></li> <li><a style="font-size:89.54916387632527%;" href="tags/featured.html">featured</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/file-io.html">file-io</a></li> <li><a style="font-size:60.0%;" href="tags/find.html">find</a></li> <li><a style="font-size:60.0%;" href="tags/find_if.html">find_if</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/functional-prog.html">functional-prog</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/functions.html">functions</a></li> <li><a style="font-size:60.0%;" href="tags/gallery.html">gallery</a></li> <li><a style="font-size:94.30551689243521%;" href="tags/generic-prog.html">generic-prog</a></li> <li><a style="font-size:60.0%;" href="tags/groups.html">groups</a></li> <li><a style="font-size:60.0%;" href="tags/guide.html">guide</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/guidelines.html">guidelines</a></li> <li><a style="font-size:60.0%;" href="tags/hash-map.html">hash-map</a></li> <li><a style="font-size:60.0%;" href="tags/hash-set.html">hash-set</a></li> <li><a style="font-size:60.0%;" href="tags/hashing.html">hashing</a></li> <li><a style="font-size:60.0%;" href="tags/header-files.html">header-files</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/heap.html">heap</a></li> <li><a style="font-size:60.0%;" href="tags/ides.html">ides</a></li> <li><a style="font-size:98.1917402739825%;" href="tags/idiom.html">idiom</a></li> <li><a style="font-size:98.1917402739825%;" href="tags/io.html">io</a></li> <li><a style="font-size:94.30551689243521%;" href="tags/iostreams.html">iostreams</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/iterators.html">iterators</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/language-mechanism.html">language-mechanism</a></li> <li><a style="font-size:60.0%;" href="tags/language-references.html">language-references</a></li> <li><a style="font-size:60.0%;" href="tags/learning.html">learning</a></li> <li><a style="font-size:60.0%;" href="tags/libraries.html">libraries</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/linker.html">linker</a></li> <li><a style="font-size:130.25147500745962%;" href="tags/list.html">list</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/low-level.html">low-level</a></li> <li><a style="font-size:60.0%;" href="tags/map.html">map</a></li> <li><a style="font-size:109.08009883059783%;" href="tags/memory.html">memory</a></li> <li><a style="font-size:120.39055466724817%;" href="tags/modern-c++.html">modern-C++</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/move-semantics.html">move-semantics</a></li> <li><a style="font-size:126.83373677211958%;" href="tags/news.html">news</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/oop.html">oop</a></li> <li><a style="font-size:60.0%;" href="tags/organizations.html">organizations</a></li> <li><a style="font-size:60.0%;" href="tags/package-manager.html">package-manager</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/paradigm.html">paradigm</a></li> <li><a style="font-size:60.0%;" href="tags/pattern.html">pattern</a></li> <li><a style="font-size:60.0%;" href="tags/people.html">people</a></li> <li><a style="font-size:60.0%;" href="tags/podcasts.html">podcasts</a></li> <li><a style="font-size:60.0%;" href="tags/pointers.html">pointers</a></li> <li><a style="font-size:60.0%;" href="tags/preprocessor.html">preprocessor</a></li> <li><a style="font-size:60.0%;" href="tags/profiling.html">profiling</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/randomness.html">randomness</a></li> <li><a style="font-size:60.0%;" href="tags/ranges.html">ranges</a></li> <li><a style="font-size:60.0%;" href="tags/references.html">references</a></li> <li><a style="font-size:60.0%;" href="tags/set.html">set</a></li> <li><a style="font-size:60.0%;" href="tags/social-media.html">social-media</a></li> <li><a style="font-size:60.0%;" href="tags/sorted-sequences.html">sorted-sequences</a></li> <li><a style="font-size:89.54916387632527%;" href="tags/stack.html">stack</a></li> <li><a style="font-size:60.0%;" href="tags/standardization.html">standardization</a></li> <li><a style="font-size:116.25207726360686%;" href="tags/std-algorithms.html">std-algorithms</a></li> <li><a style="font-size:89.54916387632527%;" href="tags/std-containers.html">std-containers</a></li> <li><a style="font-size:128.6110337848704%;" href="tags/std-library.html">std-library</a></li> <li><a style="font-size:60.0%;" href="tags/std-macros.html">std-macros</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/std-vector.html">std-vector</a></li> <li><a style="font-size:60.0%;" href="tags/strings.html">strings</a></li> <li><a style="font-size:60.0%;" href="tags/style.html">style</a></li> <li><a style="font-size:60.0%;" href="tags/taste.html">taste</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/templates.html">templates</a></li> <li><a style="font-size:60.0%;" href="tags/testing.html">testing</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/toolchain.html">toolchain</a></li> <li><a style="font-size:116.25207726360686%;" href="tags/tools.html">tools</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/traversal.html">traversal</a></li> <li><a style="font-size:117.72267522825506%;" href="tags/types.html">types</a></li> <li><a style="font-size:60.0%;" href="tags/user.html">user</a></li> <li><a style="font-size:60.0%;" href="tags/version-control.html">version-control</a></li> <li><a style="font-size:60.0%;" href="tags/views.html">views</a></li> <li><a style="font-size:60.0%;" href="tags/vim.html">VIM</a></li> <li><a style="font-size:60.0%;" href="tags/vim-plugins.html">VIM-plugins</a></li> <li><a style="font-size:60.0%;" href="tags/warnings.html">warnings</a></li> <li><a style="font-size:114.67244982290701%;" href="tags/websites.html">websites</a></li> 
+</ul></div></div></div>
+<div id="footer-bottom"><div id="footer-bottom-content">&copy;&nbsp;2019-2021&ensp;André&nbsp;Müller&emsp;&emsp;</div></div>
+</footer>
+<script src="assets/content.js?v=26"></script>
+</body>
+</html>

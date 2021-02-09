@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang='en-US'>
+<head>
+<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+<base href="https://vip666mylife999.github.io/">
+<link rel="icon" href="assets/hcpp-icon.png">
+<link rel="stylesheet" type="text/css" href="assets/style.css?v=26">
+<link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<title>h/cpp - Argument Dependent Lookup</title>
+<meta name="description" content="Learn about Argument Dependent Lookup (ADL): what it does, how it works and common C++ idioms involving ADL (2-step/fallback, hidden friends, niebloids, CPOs).">
+<meta name="keyword" content="cpp ADL argument depended name lookup koenig namespace qualified call hidden friend niebloid CPO customization point object">
+<meta name="author" content="André Müller">
+<meta name="date" content="2021-01-31">
+<meta name="copyright" content="2019-2021&ensp;André Müller">
+<meta name="hcpp-page-category" content="cat-article">
+<meta name="hcpp-tags" content="C++ article featured idiom language-mechanism ">
+</head>
+<body>
+<div id="top-nav"><div id="titlebar" class="boxed-wide"><div id="main-branding">
+<a href="index.html"  id="main-logo" title="home"><span class="hwide"><img src="assets/hcpp.svg" style="max-width:100%;height:40;"></img></span>
+<span class="hslim"><img src="assets/hcpp-square.svg" style="max-width:100%;height:40;"></img></span></a>
+
+<div id="main-title">
+<a href="index.html"  title="home">hacking&nbsp;C++</a>
+</div></div>
+<div id="main-menu"><div class="entry "><a href="tags/news.html">News</a></div>
+<div class="submenu "><a>Learning</a><div class="submenu-dropdown">
+<a href="cpp/beginners_guide.html" >Beginner's Guide to C++</a>
+
+<hr>
+
+<a href="cpp/std/containers.html" >Standard Library Containers</a>
+
+
+<a href="cpp/std/algorithms.html" >Standard Library Algorithms</a>
+
+<hr>
+
+<a href="cpp/cheat_sheets.html" >Infographics / Cheat Sheets</a>
+
+
+<a href="tags/article.html" >All Articles</a>
+
+<hr>
+
+<a href="dev/web_learning.html" >Online Learning</a>
+
+
+<a href="cpp/books.html" >Books</a>
+</div></div>
+<div class="submenu "><a>Links</a><div class="submenu-dropdown">
+<a href="cpp/community.html" >Community Resources</a>
+
+
+<a href="cpp/tools/ecosystem.html" >Tool Ecosystem</a>
+
+<hr>
+
+<a href="tags/list.html" >All Resource Lists</a>
+
+<hr>
+
+<a href="dev/vim_plugins.html" >VIM Plugins</a>
+</div></div>
+<div class="submenu "><a>About</a><div class="submenu-dropdown">
+<a href="about.html" >Why &amp; Who</a>
+
+
+<a href="privacy.html" >Privacy</a>
+</div></div></div>
+<div id="main-socialbar">
+<a href="https://twitter.com/hackingcpp" ><span class="cat-twitter"></span></a>
+</div>
+<div class="navlinks" id="nav-path"></div>
+<div id="searchbar"><div id="searchbox"><input id="search-input"></input>
+<button id="search-clear"></button>
+<button id="search-run"></button>
+<button id="search-close"></button></div></div>
+<div class="hamburger " id="main-hamburger"><button title=""></button><div class="hamburger-dropdown"><a class="nav-icon-collapse-all" onclick="collapse_all_major_folds()">Collapse <strong>All</strong> Levels</a>
+
+<a class="nav-icon-collapse" onclick="collapse_major_folds()">Collapse Top Level</a>
+
+<a class="nav-icon-expand" onclick="expand_major_folds()">Expand Top Level</a>
+
+<a class="nav-icon-expand-all" onclick="expand_all_major_folds()">Expand <strong>All</strong> Levels</a>
+
+<hr>
+
+<a href="tags/news.html" class="cat-news" >News</a>
+
+
+<a href="tags/featured.html" class="cat-featured" >Featured</a>
+
+
+<a href="tags/article.html" class="cat-article" >Articles</a>
+
+
+<a href="cpp/beginners_guide.html" class="cat-guide" >Beginner's Guide to C++</a>
+
+
+<a href="tags/list.html" class="cat-list" >Lists</a>
+
+<hr>
+
+<a href="https://twitter.com/hackingcpp" ><span class="cat-twitter"></span> @hackingcpp</a>
+
+
+<a href="about.html" class="cat-about" >About</a>
+
+
+<a href="privacy.html" class="cat-contact" >Privacy</a>
+
+
+<a href="index.html" class="cat-home" >Home</a>
+</div></div></div>
+<nav id="guide-bar" class="boxed-wide"></nav></div>
+<div id="drawer-top" class="boxed-wide"><div id="search-results"><div id="search-header"><h1 class="cat-search" id="search-title"></h1></div>
+<div id="search-locations"><ul class="resources" id="search-location-items"></ul></div>
+<div id="search-footer"></div></div></div>
+
+<div id="main-content" class="boxed-wide "><article class="boxed-normal ">
+<header>
+<h1><span class="nav-none">Argument Dependent Lookup</span>
+<span class="nav-only">ADL</span></h1>
+<nav id="page-navbar" class=""></nav>
+</header>
+<section class="main plain"><h2 class="hfold " open><span class="nav-none">What It Does</span>
+<span class="nav-only">What?</span></h2>
+<div class="content " ><div class="panel-col "{style=""><div class="panel "><h4 class="nav-none">Situation: Multiple Namespaces</h4></div>
+<div class="panel-row responsive"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="e1">namespace pixl {</span>
+  <strong>class point {</strong> <span class="annotation">&hellip;</span>
+      point(<span class="c1">int x, int y</span>); <span class="annotation">&hellip;</span>
+  <strong>};</strong>
+  void <span class="e1">draw</span> (point const&amp;);
+  void <span class="c1">print</span> (int);
+<span class="e1">}</span></code></pre>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="e2">namespace geom {</span>
+  <strong>class point {</strong> <span class="annotation">&hellip;</span>
+      point(<span class="c2">double x, double y</span>); <span class="annotation">&hellip;</span>
+  <strong>};</strong>
+  void <span class="e2">draw</span> (point const&amp;);
+
+<span class="e2">}</span></code></pre>
+</div></div></div>
+<div class="panel-col "{style=""><div class="panel "><h4>With ADL</h4>
+<p>Functions are looked up in the namespace(s) of the argument type(s) 
+involved in a call expression:</p></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="e1">pixl::point px</span> {640, 480};
+<span class="e2">geom::point gm</span> {1.1, 2.3};
+
+<span class="e1">draw(px);</span>  <span class="comment ">// ADL &rArr; call pixl::draw</span>
+<span class="e2">draw(gm);</span>  <span class="comment ">// ADL &rArr; call geom::draw</span></code></pre>
+</div>
+<div class="panel "><p>Argument <code>px</code> has type <code>pixl::point</code> &rArr;
+ADL looks for function <q><code>draw</code></q> in namespace <code>pixl</code>
+&rArr; matching function found and called.</p></div></div>
+<div class="panel-col "{style=""><div class="panel "><h4><span class="hwide">Explicit Qualification &rArr; No ADL</span>
+<span class="hslim">Without ADL</span>
+<span class="hnavi">Without ADL</span></h4>
+<p>No ADL is performed if a function call is explicitly qualified 
+with a namespace name.</p>
+<p>Note that explicit qualification is <em>necessary</em>, 
+if none of the function arguments has an associated namespace 
+(like, e.g., fundamental types: <code>int</code>, <code>double</code>, &hellip;).</p></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="e1">pixl::draw(px);</span>
+<span class="e2">geom::draw(gm);</span>
+
+<s><span class="e1">pixl::draw</span>(<span class="e2">gm</span>);</s>  <span class="comment ">// <span class="sym-err"></span><span class="hwide e-err"> COMPILER ERROR:</span> <span class="c-err">expects pixl::point</span></span>
+<s><span class="e2">geom::draw</span>(<span class="e1">px</span>);</s>  <span class="comment ">// <span class="sym-err"></span><span class="hwide e-err"> COMPILER ERROR:</span> <span class="c-err">expects geom::point</span></span>
+
+<span class="comment ">// <strong>needs</strong> qualification</span>
+<span class="e1">pixl::print(5);</span>
+<span class="comment ">// because 'int' is not in namespace 'pixl'</span>
+<s>print(5);</s>        <span class="comment ">// <span class="sym-err"></span><span class="hwide e-err"> COMPILER ERROR:</span> <span class="c-err">'print' not found</span></span></code></pre>
+</div></div>
+<div class="panel-col "{style=""><div class="panel "><h4><span class="hwide">Standard Library Example</span>
+<span class="hslim">Standard Lib Example</span>
+<span class="hnavi">Example</span></h4></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><small><span class="c6">#include &lt;vector&gt;</span></small>
+<small><span class="c6">#include &lt;algorithm&gt;</span></small>
+<span class="c6 ">std::</span>vector&lt;int&gt; v {1,2,3,4};
+sort(begin(v), end(v));  <span class="comment ">// <span class="sym-ok"></span> <strong>compiles!</strong></span></code></pre>
+</div>
+<div class="panel "><ul>
+<li>argument <code class="inset ">v</code>'s type is <code class="inset ">std::vector</code></li>
+
+<li>ADL looks for <code class="inset ">begin</code>/<code class="inset ">end</code> in namespace <code class="inset ">std</code></li>
+
+<li><code class="inset ">std::begin</code>/<code class="inset ">std::end</code> found and called</li>
+
+<li>return type of <code>begin</code>/<code>end</code> is <code class="inset ">std::vector::iterator</code></li>
+
+<li>ADL looks for <code class="inset ">sort</code> in namespace <code class="inset ">std</code></li>
+
+<li><code class="inset ">std::sort</code> found and called</li></ul></div></div></div>
+<h2 class="hfold " open>Why?</h2>
+<div class="content " ><div class="panel-fold " open><h3><span class="hwide">Consistent Member/Non-Member Calls</span>
+<span class="hslim">Consistent Function Calls</span>
+<span class="hnavi">Consistency</span></h3>
+<a class="nav " id="non-member-operators" keywords="non-member-operators "></a></div>
+<div class="panel-col "{style=""><div class="panel "><table><tbody><tr><td><code class="large">object.fn();</code></td>
+<td>looks up member function in object's class</td></tr>
+<tr><td><code class="large">fn(object);</code></td>
+<td>looks up function in namespace of object's class</td></tr></tbody></table></div>
+<div class="panel cat-remember"><p><em>Non-member</em> functions <q>mentioning</q> class <code><strong>X</strong></code>
+(e.g., taking an argument of type <code>X</code>)
+that are in the same namespace as <code><strong>X</strong></code>
+are also part of <code><strong>X</strong></code>'s interface.</p></div></div>
+<div class="panel-fold " ><h3><span class="hwide">Non-Member Operators!</span>
+<span class="hslim">Non-Member Operators!</span>
+<span class="hnavi">Operators!</span></h3></div>
+<div class="panel hvtight bg-filled "><div class="panel-col "{style=""><div class="panel "><h5 class="nav-none">Example: Class <code>point</code> in 2 Namespaces</h5>
+<ul>
+<li>want support for expressions like
+<code class="inset "><em>5</em>&nbsp;<span class="e1">*</span>&nbsp;point{4,1}</code></li>
+
+<li>need functions
+<code class="inset ">operator <strong>*</strong>&nbsp;(<em>NUMBER</em>,&nbsp;point)</code></li>
+
+<li>left hand operand <em>not</em> a <code>point</code>
+&rArr; <code>operator*</code> cannot be member function of <code>point</code></li></ul></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="e1">namespace pixl {</span>
+  class <strong>point</strong> { <span class="annotation">&hellip;</span>
+      point(<span class="c1">int x, int y</span>); <span class="annotation">&hellip;</span>
+  };
+  <span class="comment ">// cannot be member function:</span>
+  point <strong>operator *</strong> (<span class="e1">int</span><span class="hwide"> factor</span>, point const&amp;);
+<span class="e1">}</span>
+<span class="e2">namespace geom {</span>
+  class <strong>point</strong> { <span class="annotation">&hellip;</span>
+      point(<span class="c2">double x, double y</span>); <span class="annotation">&hellip;</span>
+  };
+  point <strong>operator *</strong> (<span class="e2">double</span><span class="hwide"> factor</span>, point const&amp;);
+<span class="e2">}</span></code></pre>
+</div></div>
+<div class="panel "><h5 class="nav-none">If there was no ADL</h5>
+<ul class="cbullets "><li class="follows ">would need explicit qualification with <code><span class="e1">::</span></code> <br>
+<code>auto p = <strong>pixl<span class="e1">::</span>operator*(</strong>2, px<strong>)</strong>;</code></li>
+<li class="follows ">clumsy call syntax defeats purpose of operators 
+(readability, infix notation, terseness)</li></ul></div>
+<div class="panel-col "{style=""><div class="panel "><h5 class="nav-none">With ADL</h5>
+<p>Operator functions are selected based on the 
+<em>namespace</em> of their operand type(s):</p></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="e1">pixl::point px</span> {640, 480};
+<span class="e2">geom::point gm</span> {1.1, 2.3};
+
+<span class="comment ">// px has type <span class="c1">pixl::</span>point</span><span class="comment hslim-br"></span><span class="hslim">//</span><span class="comment "> &rArr; ADL selects <span class="c1">pixl::</span>operator*</span>
+auto p = 2 <span class="e1">* px</span>;  
+
+<span class="comment ">// gm has type <span class="c2">geom::</span>point</span><span class="comment hslim-br"></span><span class="hslim">//</span><span class="comment "> &rArr; ADL selects <span class="c2">geom::</span>operator*</span>
+auto x = 2 <span class="e2">* gm</span>;</code></pre>
+</div></div></div></div>
+<h2 class="hfold " open><span class="nav-none">When and Where?</span>
+<span class="nav-only">Where?</span></h2>
+<div class="content " ><div class="panel-fold " ><h3>General Rules</h3>
+<a class="nav " id="general-rules" keywords="general-rules "></a></div>
+<div class="panel-col "{style=""><div class="panel-fold minor" open><h5 class="nav-none">ADL <strong>is</strong> used
+<span class="if-opened">to look up name <code><strong>f</strong></code>, if</span>
+<span class="if-closed">&hellip;</span></h5></div>
+<div class="panel "><ul class="symbols ">
+<li class="cat-positive"><code><strong>f</strong></code> is part of a function call expression, like e.g., 
+<code><span class="e2">f(</span>arg<span class="e2">)</span></code></li>
+
+<li class="cat-positive"><code><strong>f</strong></code> is the name of a function</li>
+
+<li class="cat-positive"><code><strong>f</strong></code> is called with at least one argument</li></ul></div>
+<div class="panel-fold minor" open><h5 class="nav-none">ADL is <strong>not</strong> used 
+<span class="if-opened">to look up name <code><code>f</code></code>, if</span>
+<span class="if-closed">&hellip;</span></h5></div>
+<div class="panel "><ul class="symbols ">
+<li class="cat-negative">the call to <code><strong>f</strong></code> is qualified,
+e.g., <code><strong>ns</strong><span class="e1">::</span><strong>f</strong>(arg)</code></li>
+
+<li class="cat-negative">the name <code><strong>f</strong></code> itself is contained 
+in an expression like, e.g., <code><span class="e1">(</span><strong>f</strong><span class="e1">)</span>(arg)</code></li>
+
+<li class="cat-negative">there is already a <code>class</code> member named <code><strong>f</strong></code>
+in the lookup candidate set</li>
+
+<li class="cat-negative">there is already a block-scope declaration of function <code><strong>f</strong></code>
+in the lookup candidate set (types declared with <q><code>using</code></q> are ignored)</li>
+
+<li class="cat-negative">there is already a declaration of any other 
+(variable/object, &hellip;) <code><strong>f</strong></code>
+that is not a function or function template
+in the lookup candidate set</li></ul></div>
+<div class="panel-fold minor" open><h5 class="nav-none">ADL is <strong>exclusively</strong> used 
+<span class="if-opened">for looking up</span>
+<span class="if-closed">&hellip;</span></h5></div>
+<div class="panel "><ul class="symbols ">
+<li class="cat-positive"><p>non-member functions <code>begin</code> and <code>end</code> taking <q><code>range</code></q> in</p>
+<p><code><strong>for</strong>(auto const&amp; x <span class="e1">:</span> range) { <span class="annotation">&hellip;</span> }</code></p>
+<p>if member-<code>begin</code> or member-<code>end</code> could not be found
+in <code>range</code>'s class</p></li>
+
+<li class="cat-positive">non-member function <q><code>get</code></q>
+needed by 
+
+<a href="https://en.cppreference.com/w/cpp/language/structured_binding" >structured bindings</a>
+</li>
+
+<li class="cat-positive">names that 
+
+<a href="https://en.cppreference.com/w/cpp/language/dependent_name#Lookup_rules" >depend on a template parameter</a>
+
+(when a template is instantiated)</li></ul></div></div>
+<div class="panel-fold " ><h3><span class="nav-none">When Calling Functions</span>
+<span class="nav-only">Function Calls</span></h3></div>
+<div class="panel-col "{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code>namespace <strong>ns</strong> {
+  class <strong>C</strong> { <span class="annotation">&hellip;</span> };
+  void <span class="e2">f</span> (C);
+}
+<span class="annotation">&hellip;</span>
+ns::C x;</code></pre>
+</div>
+<table class="vstriped"><thead><tr><th><small>expression</small></th> <th><small>compiles?</small></th> <th><small>explanation</small></th></tr></thead>
+<tbody><tr><td><code>f(x);</code></td>
+<td class="hcentered"><span class="sym-ok"></span></td>
+<td><code>f</code> is a function name and <code>x</code> has class type
+&rArr; <strong>ADL finds <code>f</code></strong></td></tr>
+<tr><td><code><mark>ns::</mark>f(x);</code></td>
+<td class="hcentered"><span class="sym-ok"></span></td>
+<td>call explicitly qualified with <code>ns::</code> &rArr; <strong>no ADL</strong></td></tr>
+<tr><td><code><span class="e1">(</span>f<span class="e1">)</span>(x);</code></td>
+<td class="hcentered"><span class="sym-err"></span></td>
+<td><code>(f)</code> is not a simple function name, but an expression
+&rArr; <strong>no ADL <span class="e-err">&rArr; function not found</span></strong></td></tr>
+<tr><td><code>using&nbsp;ns::f;<br>(f)(x);</code></td>
+<td class="hcentered"><span class="sym-ok"></span></td>
+<td><strong>no ADL</strong>, but <code>f</code> was explicitly made visible for regular name lookup</td></tr></tbody></table></div>
+<div class="panel-fold " ><h3><span class="hwide">When Calling Function Templates</span>
+<span class="hslim">Calling Function Templates</span>
+<span class="hnavi">Template Calls</span></h3></div>
+<div class="panel-col "{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code>namespace <strong>ns</strong> {
+  class <strong>C</strong> { <span class="annotation">&hellip;</span> };
+  template&lt;class <em>T</em>&gt; <span class="e2">g</span>(T);
+  template&lt;int i&gt; <span class="e2">h</span>(C);
+}
+<span class="annotation">&hellip;</span>
+ns::C x;</code></pre>
+</div>
+<table class="vstriped"><thead><tr><th><small>expression</small></th> <th><small>compiles?</small></th> <th><small>explanation</small></th></tr></thead>
+<tbody><tr><td><code>g(x);</code></td>
+<td class="hcentered"><span class="sym-ok"></span></td>
+<td>ADL finds <code>ns::g</code></td></tr>
+<tr><td><code>ns::g(x);</code></td>
+<td class="hcentered"><span class="sym-ok"></span></td>
+<td>qualification with <code>ns::</code> &rArr; <strong>no ADL</strong></td></tr>
+<tr><td><code>g&lt;ns::C&gt;(x);</code></td>
+<td class="hcentered"><span class="sym-err"></span></td>
+<td><code>g&lt;ns::C&gt;</code> is not a simple function name
+&rArr; <strong>no ADL</strong>
+<span class="e-err">&rArr; function template not found</span></td></tr>
+<tr><td><code>ns::h&lt;0&gt;(x);</code></td>
+<td class="hcentered"><span class="sym-ok"></span></td>
+<td>qualification with <code>ns::</code> &rArr; <strong>no ADL</strong></td></tr>
+<tr><td><code>h&lt;0&gt;(x);</code></td>
+<td class="hcentered"><span class="sym-err"></span></td>
+<td><code>h&lt;0&gt;</code> is not a simple function name
+&rArr; <strong>no ADL</strong> <span class="e-err">&rArr; function template not found</span></td></tr>
+<tr><td><code>using&nbsp;ns::h;<br>h&lt;0&gt;(x);</code></td>
+<td class="hcentered"><span class="sym-ok"></span></td>
+<td>function template <code>ns::h</code> was explicitly made visible for regular name lookup</td></tr></tbody></table></div>
+<div class="panel-fold " ><h3><span class="hwide">When Calling Lambdas &rArr; No ADL</span>
+<span class="hslim">Calling Lambdas &rArr; No ADL</span>
+<span class="hnavi">Not For Lambdas</span></h3></div>
+<div class="panel-col "{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code>namespace <strong>ns</strong> {
+  class <strong>C</strong> { <span class="annotation">&hellip;</span> };
+  auto <span class="e2">lm</span> = <strong>[]</strong>(C a) { <span class="annotation">&hellip;</span> };  <span class="comment ">// lambda</span>
+}
+<span class="annotation">&hellip;</span>
+C x;</code></pre>
+</div>
+<table class="vstriped"><thead><tr><th><small>expression</small></th> <th><small>compiles?</small></th> <th><small>explanation</small></th></tr></thead>
+<tbody><tr><td><code>lm(x);</code></td>
+<td class="hcentered"><span class="sym-err"></span></td>
+<td><code>lm</code> is not a function,
+but a compiler-generated function <em>object</em>
+&rArr; <strong>no ADL</strong> &rArr; <code>lm</code> not found</td></tr>
+<tr><td><code>using&nbsp;ns::lm;<br>lm(x);</code></td>
+<td class="hcentered"><span class="sym-ok"></span></td>
+<td><strong>no ADL</strong> but object <code>lm</code>
+was explicitly made visible for regular name lookup</td></tr></tbody></table></div></div>
+<h2 class="hfold " open><span class="nav-none">How Does It Work?</span>
+<span class="nav-only">How?</span></h2>
+<div class="content " ><div class="panel cat-rules"><p>ADL examines the type of each argument in a function call expression
+<code><strong>f</strong>(arg1,&nbsp;arg2,&nbsp;<span class="annotation">&hellip;</span>)<br></code>
+(in no particular order) and determines the 
+set of <strong>associated namespaces and classes</strong>
+which will <em>also</em> be searched for a function (or function template)
+named <code><strong>f</strong></code>.</p></div>
+<div class="panel-fold " ><h3><span class="hwide">No Associated Namespace For<span class="if-closed">&hellip;</span></span>
+<span class="hslim">No Assoc. Namespace For<span class="if-closed">&hellip;</span></span>
+<span class="hnavi">ADL ignores</span></h3></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><ul class="symbols ">
+<li class="cat-negative">fundamental types (<code>int, double, &hellip;</code>)</li>
+
+<li class="cat-negative">aliases introduced by <code>using</code> directives (<span class="c2">B</span>)</li></ul></div>
+<div class="panel-row responsive"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code>namespace na {
+  class A { <span class="annotation">&hellip;</span> };
+  void <strong>f</strong>(<span class="e1">int</span>);
+  void <strong>g</strong>(A);
+}</code></pre>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>namespace nb {
+  <span class="e2">using B = na::A;
+  void <strong>h</strong>(B);</span>
+
+}</code></pre>
+</div></div>
+<table class="min-hborders vstriped vborders"><thead><tr><th>Call</th>  <th><span class="hwide">ADL</span> Examins  <th>Found</th></th></tr></thead>
+<tbody><tr><td><code>f(0);</code></td>
+<td>NO ADL (int doesn't have namespace)</td>
+<td><span class="sym-err"></span> NOTHING</td></tr>
+<tr><td><code><mark>na::</mark>f(0);</code></td>
+<td>explicit qualification &rArr; NO ADL</td>
+<td><code>na::f</code></td></tr>
+<tr><td><code>nb::B b; <br>h(b);</code></td>
+<td><code>(nb::B &equiv; na::A) &rArr; A, na</code></td>
+<td><span class="sym-err"></span> NOTHING</td></tr>
+<tr><td><code>nb::B b;<br>g(b);</code></td>
+<td><code>(nb::B &equiv; na::A) &rArr; A, <mark>na</mark></code></td>
+<td><code><span class="e1">na::g</span></code></td></tr></tbody></table></div>
+<div class="panel-fold " ><h3>Inline Namespaces</h3></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><h6>ADL looks in:</h6>
+<ul class="symbols ">
+<li class="cat-positive">enclosing namespace of inline namespace</li>
+
+<li class="cat-positive">inline namespaces of all previously found namespaces</li></ul></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>namespace <span class="e1">lib {</span>
+  class <span class="e1">A</span> { <span class="annotation">&hellip;</span> };
+
+  <strong>inline</strong> namespace <span class="e2">v2 {</span>
+    class <span class="e2">B</span> { <span class="annotation">&hellip;</span> };
+    void <strong>f</strong>(A const&amp;);
+  <span class="e2">}</span>
+  namespace <span class="e3">v1 {</span>
+    class <span class="e3">B</span> { <span class="annotation">&hellip;</span> };
+    void <strong>f</strong>(A const&amp;);
+  <span class="e3">}</span>
+
+  void <strong>g</strong>(<span class="c2">B</span> const&amp;);  <span class="comment ">// B refers to v2::B</span>
+<span class="e1">}</span></code></pre>
+</div>
+<table class="min-hborders vstriped vborders"><thead><tr><th>Call</th>  <th><span class="hwide">ADL</span> Examins  <th>Found</th></th></tr></thead>
+<tbody><tr><td><code><span class="c1">lib::A a</span>; <br><strong>f</strong>(<span class="e1">a</span>);</code></td>
+<td><code><span class="c1">lib</span> &rarr; <mark><span class="c2">lib::v2</span></mark></code></td>
+<td><code><span class="c2">lib::v2::<strong>f</strong></span>(<wbr><span class="c1">lib::A</span>);</code></td></tr>
+<tr><td><code><span class="c1">lib::A a</span>; <br><mark>lib::v2::</mark><strong>f</strong>(<span class="e1">a</span>);</code></td>
+<td>explicit qualification &rArr; NO ADL</td>
+<td><code><span class="c2">lib::v2::<strong>f</strong></span>(<wbr><span class="c1">lib::A</span>);</code></td></tr>
+<tr><td><code><span class="c1">lib::A a</span>; <br><mark>lib::v1::</mark><strong>f</strong>(<span class="e1">a</span>);</code></td>
+<td>explicit qualification &rArr; NO ADL</td>
+<td><code><span class="c3">lib::v1::<strong>f</strong></span>(<wbr><span class="c1">lib::A</span>);</code></td></tr>
+<tr><td><code><span class="c2">lib::B b</span>; <br><strong>g</strong>(<span class="e2">b</span>);</code></td>
+<td><code><span class="c2">lib::v2</span> &rarr; <mark><span class="c1">lib</span></mark></code></td>
+<td><code><span class="c1">lib::<strong>g</strong></span>(<wbr><span class="c2">lib::v2::B</span>);</code></td></tr>
+<tr><td><code><span class="c3">lib::v1::B b1</span>; <br><strong>g</strong>(<span class="e3">b1</span>);</code></td>
+<td><code><span class="c3">lib::v1</span> &rarr; <mark><span class="c1">lib</span></mark></code></td>
+<td><span class="sym-err"></span> NOTHING
+<br>no such function
+<br><code>g(<wbr>lib::<strong>v1</strong>::B)</code></td></tr></tbody></table></div>
+<div class="panel-fold " ><h3><span class="nav-none"><span class="if-closed">Classes</span>
+<span class="if-opened"><code>class <span class="e1">C</span></code></span></span>
+<span class="nav-only"><code>class Args</code></span></h3></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><h6>ADL looks in:</h6>
+<ul class="symbols ">
+<li class="cat-positive"><code><span class="e1">C</span></code> itself</li>
+
+<li class="cat-positive">base classes: direct (<code><span class="e3">B</span></code>) + indirect (<code><span class="e4">A</span></code>)</li>
+
+<li class="cat-positive">any class of which <code><span class="e1">C</span></code> is a member (<code><span class="e2">X</span></code>)</li>
+
+<li class="cat-positive">innermost enclosing namespaces of <em>all</em> classes in the set (<code>na, nb, nx</code>)</li></ul>
+<h6><em>Only</em> ADL can find:</h6>
+<ul class="symbols ">
+<li class="cat-positive"><a class="" href="cpp/lang/adl.html#hidden-friends" onclick="reveal_anchor()">
+
+hidden friends
+</a>
+like 
+<code><span class="c5">nx::</span><span class="e5">f</span><span class="c5">(nx::</span><span class="e5">X::</span><span class="c5">C)</span></code></li></ul></div>
+<div class="panel-row responsive"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code>namespace <span class="e4">na {</span>
+  class <span class="e4">A</span> { <span class="annotation">&hellip;</span> };
+  void <strong>f</strong>(A);
+<span class="e4">}</span>
+namespace <span class="e3">nb {</span>
+  class <span class="e3">B</span> : public <span class="c4">na::A</span> { <span class="annotation">&hellip;</span> };
+<span class="e3">}</span></code></pre>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>namespace <span class="e2">nx {</span>
+  class <span class="e2">X</span> { public: <span class="annotation">&hellip;</span>
+      <span class="e1">class C</span> : public <span class="c3">nb::B</span> { <span class="annotation">&hellip;</span> };
+      <span class="c5"><strong><em>friend</em></strong> void <strong>f</strong>(C);</span>
+  };
+  void <strong>f</strong>(X);
+<span class="e2">}</span></code></pre>
+</div></div>
+<table class="min-hborders vstriped vborders"><thead><tr><th>Call</th>  <th><span class="hwide">ADL</span> Examins  <th>Found</th></th></tr></thead>
+<tbody><tr><td><code><span class="c4">na::A a</span>; <br><strong>f</strong>(<span class="e4">a</span>);</code></td>
+<td><code>A, <mark>na</mark></code></td>
+<td><code><span class="c4">na::<strong>f</strong>(na::A)</span></code></td></tr>
+<tr><td><code><span class="c3">nb::B b</span>; <br><strong>f</strong>(<span class="e3">b</span>);</code></td>
+<td><code>B, A, nb, <mark>na</mark></code></td>
+<td><code><span class="comment ">// B &rarr; A<br> <span class="c4">na::<strong>f</strong>(na::A)</span></span></code></td></tr>
+<tr><td><code><span class="c2">nx::X x</span>; <br><strong>f</strong>(<span class="e2">x</span>);</code></td>
+<td><code>X, <mark>nx</mark></code></td>
+<td><code><span class="c2">nx::<strong>f</strong>(nx::X)</span></code></td></tr>
+<tr><td><code><span class="c1">nx::X::C c</span>;<br><strong>f</strong>(<span class="e1">c</span>);</code></td>
+<td><code>C, <mark>X</mark>, B, A, <br>nx, nb, na</code></td>
+<td><code><span class="comment ">// friend of X <br> <span class="c5">nx::<strong>f</strong>(nx::X::C)</span></span></code></td></tr>
+<tr><td><code><span class="c1">nx::X::C c</span>; <br><mark>nx::</mark><strong>f</strong>(<span class="e1">c</span>);</code></td>
+<td>explicit qualification &rArr; NO ADL</td>
+<td><span class="sym-err"></span> NOTHING 
+<br> <code>nx::f(nx::X<strong>::C</strong>)</code>
+<br> <em>only</em> visible to ADL!</td></tr></tbody></table></div>
+<div class="panel-fold " ><h3><span class="nav-none"><span class="if-closed">Enumerations</span>
+<span class="if-opened"><code>enum (class) E</code></span></span>
+<span class="nav-only">Enumeration Args</span></h3></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><h6>ADL looks in:</h6>
+<ul class="symbols ">
+<li class="cat-positive">enclosing namespace of <code>E</code></li>
+
+<li class="cat-positive">enclosing class of <code>E</code></li></ul>
+<h6><em>Only</em> ADL can find:</h6>
+<ul class="symbols ">
+<li class="cat-positive"><a class="" href="cpp/lang/adl.html#hidden-friends" onclick="reveal_anchor()">
+
+hidden friends
+</a>
+like 
+<code><span class="c3">ns::</span><span class="e3">f</span><span class="c3">(ns::</span><span class="e3">C::</span><span class="c3">E)</span></code></li></ul></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>namespace <span class="e1">ns</span> {
+  class <span class="e2">C</span> { public: <span class="annotation">&hellip;</span>
+    enum class <span class="e1">E</span> { x, y, z };
+    <span class="c3"><strong><em>friend</em></strong> void <strong>f</strong>(E);</span>
+  };
+  void <strong>f</strong>(int, C::E);
+}</code></pre>
+</div>
+<table class="min-hborders vstriped vborders"><thead><tr><th>Call</th>  <th><span class="hwide">ADL</span> Examins  <th>Found</th></th></tr></thead>
+<tbody><tr><td><code><strong>f</strong>(0,<span class="e1">C::E::x</span>);</code></td>
+<td><code>C, <mark>ns</mark></code></td>
+<td><code><span class="c1">ns::<strong>f</strong>(int, ns::C::E);</span></code></td></tr>
+<tr><td><code><strong>f</strong>(<span class="e1">C::E::x</span>);</code></td>
+<td><code><mark>C</mark>, ns</code></td>
+<td><code><span class="comment ">// friend of C</span><br><span class="c3">ns::<strong>f</strong>(ns::C::E);</span></code></td></tr></tbody></table></div>
+<div class="panel-fold " ><h3><span class="nav-none">Pointers/Addresses</span>
+<span class="nav-only">Pointer Args</span></h3></div>
+<div class="panel hvtight bg-filled "><div class="panel-fold " ><h4><span class="nav-none">Raw Pointer (<code>T*</code>)</span>
+<span class="nav-only"><code>T*</code></span></h4></div>
+<div class="panel-col "{style=""><div class="panel "><p>ADL examins associated namespaces and classes of <code>T</code></p></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>namespace <span class="e1">ns {</span>
+  class <span class="e1">T</span> { <span class="annotation">&hellip;</span> };
+  void <strong>g</strong>(T*);
+<span class="e1">}</span></code></pre>
+</div>
+<table class="min-hborders vstriped vborders"><thead><tr><th>Call</th>  <th><span class="hwide">ADL</span> Examins  <th>Found</th></th></tr></thead>
+<tbody><tr><td><code>ns::T x; <br> <strong>g</strong>(<strong>&amp;</strong>x);</code></td>
+<td><code>T, <mark>ns</mark></code></td>
+<td><code>ns::g(ns::T*)</code></td></tr></tbody></table></div>
+<div class="panel-fold " ><h4><span class="nav-none">Pointer To Class Data Member</span>
+<span class="nav-only"><code>C::*</code></span></h4></div>
+<div class="panel-col "{style=""><div class="panel "><p>ADL examins all associated namespaces and classes of the 
+member type (<code><span class="c1">A</span></code>) and the containing class (<code><span class="c2">C</span></code>)</p></div>
+<div class="panel-row responsive"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="comment ">// forward declaration of C</span>
+namespace nc { class C; } 
+namespace <span class="e1">na {</span>
+  class <span class="e1">A</span> { <span class="annotation">&hellip;</span> };
+  <span class="comment ">// pointer &amp;darr; to C member</span>
+  void <strong>f</strong>( A nc::C::* );
+<span class="e1">}</span></code></pre>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>namespace <span class="e2">nc {</span>
+  class <span class="e2">C</span> { public: <span class="annotation">&hellip;</span>
+    <span class="e1">na::A</span> x, y, z;
+  };
+  <span class="comment ">// pointer &amp;darr; to C member</span>
+  void <strong>g</strong>( na::A C::* );
+<span class="e2">}</span></code></pre>
+</div></div>
+<table class="min-hborders vstriped vborders"><thead><tr><th>Call</th>  <th><span class="hwide">ADL</span> Examins  <th>Found</th></th></tr></thead>
+<tbody><tr><td><code>na::A nc::C::* p = &amp;nc::C::x; <br> <strong>f</strong>(p);</code></td>
+<td><code>A, <mark>na</mark>, C, nc</code></td>
+<td><code><span class="c1">na::<strong>f</strong></span></code></td></tr>
+<tr><td><code>na::A nc::C::* p = &amp;nc::C::x; <br> <strong>g</strong>(p);</code></td>
+<td><code>A, na, C, <mark>nc</mark></code></td>
+<td><code><span class="c2">nc::<strong>g</strong></span></code></td></tr></tbody></table></div>
+<div class="panel-fold " ><h4><span class="nav-none">Function Pointer</span>
+<span class="nav-only"><code>Y(*)(X)</code></span></h4></div>
+<div class="panel-col "{style=""><div class="panel ">ADL examins associated namespaces and classes of 
+all parameter types and the return type</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>namespace na {  
+  class A { }; 
+  void <strong>f</strong>( <span class="e1">void(*)(A)</span> ) {}
+}
+
+void g(na::A);</code></pre>
+</div>
+<table class="min-hborders vstriped vborders"><thead><tr><th>Call</th>  <th><span class="hwide">ADL</span> Examins  <th>Found</th></th></tr></thead>
+<tbody><tr><td><code>void(*p)(na::A) = g; <br> <strong>f</strong>(p);</code></td>
+<td><code>A, <mark>na</mark></code></td>
+<td><code><span class="c1">na::<strong>f</strong></span></code></td></tr></tbody></table></div>
+<div class="panel-fold " ><h4><span class="nav-none">Pointer To Class Member Function</span>
+<span class="nav-only"><code>Y(C::*)(X)</code></span></h4></div>
+<div class="panel-col "{style=""><div class="panel ">ADL examins associated namespaces and classes of 
+all parameter types, the return type and the containing
+class type</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>namespace <span class="e1">na {</span>
+  class <span class="e1">A</span> { <span class="annotation">&hellip;</span> };
+<span class="e1">}</span>
+namespace <span class="e2">nc {</span>
+  class <span class="e2">C</span> { public: <span class="annotation">&hellip;</span>
+    void set(na::A);
+  };
+  void <strong>f</strong>( void(nc::C::*)(na::A) );
+<span class="e2">}</span></code></pre>
+</div>
+<table class="min-hborders vstriped vborders"><thead><tr><th>Call</th>  <th><span class="hwide">ADL</span> Examins  <th>Found</th></th></tr></thead>
+<tbody><tr><td><code><strong>f</strong>( <span class="c2">&amp;nc::C::set</span> );</code></td>
+<td><code>C, <mark>nc</mark>, A, na</code></td>
+<td><code><span class="c2">nc::<strong>f</strong></span></code></td></tr></tbody></table></div>
+<div class="panel-fold " ><h4><span class="nav-none">Address Of Overloaded Function</span>
+<span class="nav-only"><code><strong>&amp;(Y(*)(X)<strong></strong>{)</strong></code>}</span></h4></div>
+<div class="panel-col "{style=""><div class="panel ">ADL examins every function or function template in the set of overloads 
+(here both <code><strong>f</strong></code> functions)</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>namespace na {
+  class <strong>A</strong> { <span class="annotation">&hellip;</span> };
+  <span class="comment ">// set of overloads</span>
+  void <strong>f</strong>(A);
+  void <strong>f</strong>(A, int);
+
+  void <strong>g</strong>( <span class="e1">void(*)(A)</span> );
+}</code></pre>
+</div>
+<table class="min-hborders vstriped vborders"><thead><tr><th>Call</th>  <th><span class="hwide">ADL</span> Examins  <th>Found</th></th></tr></thead>
+<tbody><tr><td><code><strong>g</strong>( &amp;na::f );</code></td>
+<td><code>A, <mark>na</mark></code></td>
+<td><code>na::<strong>g</strong></code></td></tr></tbody></table></div></div>
+<div class="panel-fold " ><h3><span class="nav-none">Class Template Specializations</span>
+<span class="nav-only">Template Spec. Args</span></h3></div>
+<div class="panel-col "{style=""><div class="panel "><h6>ADL looks in:</h6>
+<ul class="symbols ">
+<li class="cat-positive">template type itself (<code><span class="c1">X</span></code>) and its associated namespaces (<code><span class="c1">nx</span></code>)</li>
+
+<li class="cat-positive">types of all <em>type</em> template arguments (<code>A1</code>)</li>
+
+<li class="cat-positive">template template arguments (e.g., <code>P2</code>=<code>A2</code>): classes in which they are members</li>
+
+<li class="cat-positive">template template arguments (e.g., <code>P2</code>=<code>A2</code>): enclosing namespaces (<code>n2</code>)</li></ul>
+<h6>ADL skips arguments for:</h6>
+<ul class="symbols ">
+<li class="cat-negative"><em>non-type</em> template parameters (<code>int P3</code>)</li>
+
+<li class="cat-negative">template template parameters (e.g., <code>P2</code>=<code>A2</code>: ADL skips <code>A2</code> <em>itself</em>)</li></ul></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>namespace <span class="e1">nx {</span>
+  template&lt;<span class="mark b2">class&nbsp;<em>P1</em></span>, <span class="hslim-br"></span><span class="hslim">           </span><span class="mark b3">template&lt;class&gt;&nbsp;class&nbsp;<em>P2</em></span>, <span class="hslim-br"></span><span class="hslim">           </span><span class="mark b4">int <em>P3</em></span>&gt; 
+  class&nbsp;<span class="e1">X</span> {<span class="annotation">&hellip;</span>};
+<span class="e1">}</span>
+namespace <strong>n1 {</strong> class <strong>A1</strong>; <strong>}</strong>
+<hr><span class="comment ">// specializations of X used as parameter:</span>
+namespace <strong>n2 {</strong>
+  template&lt;class&gt; 
+  class <strong>A2</strong> { public: <span class="annotation">&hellip;</span>
+    friend void <strong>h</strong>( <span class="c1">X&lt;</span>n1::A1,A2,5<span class="c1">&gt;</span> const&amp; );
+  };
+  void <strong>g</strong>( <span class="c1">X&lt;</span>n1::A1,A2,5<span class="c1">&gt;</span> const&amp; );
+<strong>}</strong>
+namespace <span class="e1">nx {</span>
+  void <strong>f</strong>( <span class="c1">X&lt;</span>n1::A1,n2::A2,5<span class="c1">&gt;</span> const&amp; );
+<span class="e1">}</span>
+<hr><span class="comment ">// instantiation:</span>
+nx::X&lt; <span class="mark b2">n1::A1</span>, <span class="mark b3">n2::A2</span>, <span class="mark b4">5</span>&gt; spx {};</code></pre>
+</div>
+<table class="min-hborders vstriped vborders"><thead><tr><th>Call</th>  <th><span class="hwide">ADL</span> Examins  <th>Found</th></th></tr></thead>
+<tbody><tr><td><code><strong>f</strong>(spx);</code></td>
+<td><code>X, <mark>nx</mark>, A1, n1, n2</code></td>
+<td><code><span class="c1">nx::<strong>f</strong></span></code></td></tr>
+<tr><td><code><strong>g</strong>(spx);</code></td>
+<td><code>X, nx, A1, n1, <mark>n2</mark></code></td>
+<td><code><span class="c2">n2::<strong>g</strong></span></code></td></tr>
+<tr><td><code><strong>h</strong>(spx);</code></td>
+<td><code>X, nx, A1, n1, n2</code></td>
+<td><code><span class="sym-err"></span> NOTHING</code></td></tr></tbody></table></div></div>
+<h2 class="hfold " open><span class="hwide">ADL-Related Idioms</span>
+<span class="hslim">Idioms</span>
+<span class="hnavi">Idioms</span></h2>
+<div class="content " ><div class="panel-fold " open><h3><span class="nav-none">2-Step: ADL&thinsp;+&thinsp;Fallback</span>
+<span class="nav-only">ADL+Fallback</span></h3>
+<a class="nav " id="fallback-idiom" keywords="fallback-idiom fallback idiom"></a></div>
+<div class="panel-col "{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="e2">template&lt;</span>class <em>T</em><span class="e2">&gt;</span>
+void <strong>generic_function</strong> (<span class="annotation">&hellip;</span>) {
+    <em>T</em> x;
+    <em>T</em> y;
+    <span class="annotation">&hellip;</span>
+    <span class="e1">using std::swap;</span>
+    <span class="e1">swap(x, y);</span>
+    <span class="annotation">&hellip;</span>
+}</code></pre>
+</div>
+<div class="panel "><h6 class="cat-explanation">This makes <code>swap</code> a <strong>customization point</strong>:</h6>
+<ul>
+<li>if custom <code>swap(<em>T</em>&amp;,<em>T</em>&amp;)</code> declared
+in <code><em>T</em></code>'s namespace
+<br>&rArr; <q>visible</q> to ADL &rArr; custom swap will be used</li>
+
+<li>if no special overload for <code><em>T</em></code> exists
+<br>&rArr; <code>std::swap</code> will be used as fallback
+(made visible with <code>using</code> directive)</li></ul>
+<p>If you want to suppress ADL and make sure that <code>std::swap</code> is
+always used, namespace-qualify the function call:
+<code>std::swap(x,y)</code>.</p>
+<hr>
+<p class="cat-guideline">Use the fallback idiom only in generic (template) code and only 
+if a common fallback implementation, like e.g.  <code>std::swap</code> exists.</p>
+<p><a class="lbl " href="tags/c++20.html">C++20</a>&ensp;
+If you want to enforce constraints on the arguments through
+
+<a href="cpp/lang/concepts.html" >concepts</a>
+
+you should use a <a class="" href="cpp/lang/adl.html#cpos" onclick="reveal_anchor()">
+
+customization point object
+</a>
+to make sure that the constraints can't be bypassed by custom
+functions.</p>
+<hr>
+<ul class="resources "><li class="cat-blogpost"><a href="https://quuxplusone.github.io/blog/2020/07/11/the-std-swap-two-step/">Arthur O'Dwyer's blog post about this idiom</a></li>
+</ul></div></div>
+<div class="panel-fold " ><h3>Hidden Friends</h3>
+<a class="nav " id="hidden-friends" keywords="hidden-friends hidden-friends"></a></div>
+<div class="panel hvtight bg-filled "><div class="panel cs-light ">
+<pre class="notranslate"><code>namespace math {
+  class <strong>ratio</strong> { <span class="annotation">&hellip;</span>
+  public:
+    explicit
+    <strong>ratio</strong>(int64_t numerator, <span class="hslim-br"></span><span class="hslim">          </span>int64_t denominator=1);
+    <span class="annotation">&hellip;</span>
+    <span class="e1">friend</span> ratio <strong>operator + </strong>(ratio a, ratio b) <span class="hslim-br"></span><span class="hslim">    </span>{ <span class="annotation">&hellip;</span> }
+  };
+}</code></pre>
+</div>
+<div class="panel-col "{style=""><div class="panel title vcompact "><h6 class="nav-none"><em>Only</em> ADL can find <code>math::operator+(ratio,ratio)</code></h6></div>
+<div class="panel "><ul>
+<li>declaring it friend of <code>ratio</code> makes it a member of namespace <code>math</code></li>
+
+<li>it was not directly <em>declared</em> in namespace scope</li>
+
+<li>it was not directly <em>defined</em> (=implemented) in namespace scope</li></ul></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="comment ">// ADL finds <code>math::operator+(ratio,ratio)</code></span>
+math::ratio x {2,3}, y {1,6};
+math::ratio z = x <span class="e2">+</span> y;  <span class="sym-ok"></span>
+<hr><span class="comment ">// qualified call &rArr; <strong>No ADL</strong> &rArr; <code>operator+</code> not found!</span>
+math::ratio x {2,3}, y {1,6};
+math::ratio w =<s> <span class="e1">math::operator+</span>(x,y)</s>;  <span class="comment ">// <span class="sym-err"></span><span class="hwide e-err"> COMPILER ERROR</span></span></code></pre>
+</div></div>
+<div class="panel-fold vexpand" open><h4 class="nav-none">Hidden friends are not callable through implicit conversions!</h4></div>
+<div class="panel-row responsive last-wide"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code>class <span class="e2">B</span> { };
+
+class <span class="e1">A</span> { public:
+  <strong>A</strong>() {}
+  <strong>A</strong>(<span class="c2">B</span>) {}    <span class="comment ">// implicit</span>
+  <strong>A</strong>(<span class="c3">int</span>) {}  <span class="comment ">// implicit</span>
+
+  <strong><em>friend</em></strong> void <strong>foo</strong>(<span class="c1">A</span>)   { } 
+  <strong><em>friend</em></strong> void <strong>foo</strong>(<span class="c2">B</span>)   { } 
+  <strong><em>friend</em></strong> void <strong>foo</strong>(<span class="c3">int</span>) { } 
+};
+
+void <strong>bar</strong>(<span class="c1">A</span>) { }</code></pre>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>A a1{ };      <span class="comment ">// <span class="sym-ok"></span></span>
+A a2{ <span class="c2">B{}</span> };  <span class="comment ">// <span class="sym-ok"></span></span>
+A a3{ <span class="c3">47</span> };   <span class="comment ">// <span class="sym-ok"></span></span>
+<hr>bar( <span class="c1">A{}</span> );  <span class="comment ">// <span class="sym-ok"></span></span>
+<span class="comment ">// implicit conversions:</span>
+bar( <span class="c2">B{}</span> );  <span class="comment ">// <span class="sym-ok"></span> bar( A{B{}} )</span>
+bar( <span class="c3">123</span> );  <span class="comment ">// <span class="sym-ok"></span> bar( A{123} )</span>
+<hr><span class="comment ">// hidden friend 'foo':</span>
+foo( <span class="c1">A{}</span> );  <span class="comment ">// <span class="sym-ok"></span></span>
+<span class="comment ">// can't find foo(B) &amp; foo(int),</span>
+<span class="comment ">// no implicit conversions to 'A'</span>
+foo( <span class="c2">B{}</span> );  <span class="comment ">// <span class="sym-err"></span> </span>
+foo( <span class="c3">123</span> );  <span class="comment ">// <span class="sym-err"></span> </span></code></pre>
+</div></div>
+<div class="panel-fold vexpand" ><h4><span class="nav-none">Example: No Constructor Conversions!</span>
+<span class="nav-only">Example 1</span></h4></div>
+<div class="panel-col "{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code>namespace math {
+  class <strong>tiny_ratio</strong> {
+    <span class="comment ">// <strong>no operator+</strong>! (on purpose)</span>
+    <span class="annotation">&hellip;</span>
+  };
+  class <strong>ratio</strong> { 
+    <span class="annotation">&hellip;</span>
+  public:
+    explicit
+    <strong>ratio</strong>(int64_t numerator, <span class="hslim-br"></span><span class="hslim">          </span>int64_t denominator=1);
+    <span class="comment ">// implicit conversion from tiny_ratio:</span>
+    <strong>ratio</strong>(tiny_ratio r);
+    <span class="annotation">&hellip;</span>
+    <span class="e1">friend</span> ratio <strong>operator + </strong>(ratio a, ratio b) <span class="hslim-br"></span><span class="hslim">    </span>{ <span class="annotation">&hellip;</span> }
+  };
+}
+<hr><span class="comment ">// No implicit conversions possible:</span>
+math::tiny_ratio r{1,2}, s{1,4};
+auto t =<s> r <span class="e1">+</span> s; </s>  <span class="comment ">// <span class="sym-err"></span><span class="hwide e-err"> COMPILER ERROR</span> &rArr; <strong>good!</strong></span></code></pre>
+</div>
+<div class="panel vcompact"><p>The hidden friend version of <code class="inset ">operator+(ratio,ratio)</code> can only be 
+found by ADL, so only if a <code>ratio</code> argument is involved in the call.</p>
+<p>Since we can implicitly construct a <code>ratio</code> from a <code>tiny_ratio</code>
+any <em>non-hidden</em> function taking <code>ratio</code> as input 
+(by value or non-const reference) could also be called with 
+<code>tiny_ratio</code> objects.</p>
+<p>So, if <code class="inset ">operator+(ratio,ratio)</code> had been declared in namespace
+scope instead of as hidden friend, we could use it to add
+<code>tiny_ratio</code> objects despite the fact that we explicitly
+did not want that!</p></div></div>
+<div class="panel-fold vexpand" ><h4><span class="nav-none">Example: No Operator Conversions!</span>
+<span class="nav-only">Example 2</span></h4></div>
+<div class="panel-col "{style=""><div class="panel "><p>Hidden friends also protect against conversion operators that 
+implicitly convert other types to <code>ratio</code>!</p></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>namespace math {
+  class <strong>ratio</strong> { 
+    <span class="annotation">&hellip;</span>
+  public: 
+    <span class="e1">friend</span> ratio <strong>operator + </strong>(ratio a, ratio b) <span class="hslim-br"></span><span class="hslim">    </span>{ <span class="annotation">&hellip;</span> }
+    <span class="annotation">&hellip;</span>
+  };
+  class <strong>my_num {</strong>
+    <span class="annotation">&hellip;</span>
+  public: 
+    <span class="annotation">&hellip;</span>
+    <span class="comment ">// conversion operator that can</span>
+    <span class="comment ">// create a 'ratio' from a 'my_num'</span>
+    <strong>operator ratio</strong>() const <span class="hslim-br"></span><span class="hslim">    </span>{ return ratio{<span class="annotation">&hellip;</span>}; }
+    <span class="comment ">// <strong>forgot operator + for my_num!</strong></span>
+  <strong>};</strong>
+}
+<hr>math::my_num u = 23;
+math::my_num v = 47;
+auto w =<s> u + v </s>;  <span class="comment ">// <span class="sym-err"></span><span class="hwide e-err"> COMPILER ERROR:</span> <span class="c-err">operator+ <strong>not found</strong></span></span></code></pre>
+</div>
+<div class="panel "><p>The hidden friend version of <code class="inset ">operator+(ratio,ratio)</code> can only be 
+found by ADL, so only if a <code>ratio</code> argument is involved in the call.</p>
+<p>Since <code class="inset ">my_num::operator ratio()</code> can convert any <code>my_num</code>
+into a <code>ratio</code>, any <em>non-hidden</em> function taking <code>ratio</code>
+as input (by value or non-const reference) can also be called with 
+<code>my_num</code> objects.</p>
+<p>So, if <code class="inset ">operator+(ratio,ratio)</code> had been declared in namespace
+scope instead of as hidden friend, the last line would have compiled
+and yielded a <code class="inset ">math::ratio w</code>!</p></div></div></div>
+<div class="panel-fold " ><h3><span class="hwide">Disabling ADL with <em>Niebloids</em></span>
+<span class="hslim">Disabling ADL: <em>Niebloids</em></span>
+<span class="hnavi">Niebloids</span></h3>
+<a class="nav " id="niebloids" keywords="niebloids niebloid prevent disable"></a></div>
+<div class="panel hvtight bg-filled "><div class="panel "><h5 class="nav-none">Goal: prevent ADL from picking up custom overloads of a 
+generic library function</h5></div>
+<div class="panel-fold " open><h4 class="nav-none">Idea: Use Function <em>Object</em></h4></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>namespace <strong>lib</strong> {
+  namespace detail {
+    <strong>struct</strong> <span class="e1">foo_fn</span> <strong>{</strong>
+      template&lt;class <em>T</em>&gt;
+      void <strong>operator() </strong>(<em>T</em> const&amp; x) const { <span class="annotation">&hellip;</span> }
+    <strong>};</strong>
+  }
+  <span class="comment ">// global function object lib::foo</span>
+  <strong>inline constexpr</strong> const detail::foo_fn <span class="e1">foo</span> {};
+  <span class="comment ">// note: inline variable requires <a class="lbl " href="tags/c++17.html">C++17</a></span>
+}</code></pre>
+</div>
+<div class="panel-fold " open><h4 class="nav-none">&rArr; Consistent Behavior!</h4></div>
+<div class="panel-col "{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code>namespace <strong>na</strong> {
+  class <strong>A</strong> { <span class="annotation">&hellip;</span> };
+}
+namespace <strong>nb</strong> {
+  class <strong>B</strong> { <span class="annotation">&hellip;</span> };
+  <span class="comment ">// custom foo</span>
+  void <span class="e2">foo</span>(B const&amp; b) {<span class="annotation">&hellip;</span>}
+}
+<hr>na::A a;
+nb::B b;
+<span class="comment ">// with explicit qualification:</span>
+<span class="c1">lib::foo</span>(a);  <span class="comment ">// lib::foo &rarr; <strong>lib::detail::foo</strong></span>
+<span class="c1">lib::foo</span>(b);  <span class="comment ">// lib::foo &rarr; <strong>lib::detail::foo</strong></span>
+<hr><span class="comment ">// same with using statement:</span>
+using <span class="c1">lib::foo</span>;
+<span class="c1">foo</span>(a);      <span class="comment ">// lib::foo &rarr; <strong>lib::detail::foo</strong></span>
+<span class="c1">foo</span>(b);      <span class="comment ">// lib::foo &rarr; <strong>lib::detail::foo</strong></span></code></pre>
+</div>
+<div class="panel "><ul class="symbols ">
+<li class="cat-positive">qualified and unqualified calls have the same effect</li>
+
+<li class="cat-positive">users cannot override library function's behavior</li></ul>
+<p>C++20's standard library makes use of such function objects,
+that are also known as <q>Niebloids</q> (named after Eric Niebler).</p></div></div></div>
+<div class="panel-fold " ><h3><span class="hwide">Customization Point Objects</span>
+<span class="hslim">Customization Objects</span>
+<span class="hnavi">CPOs</span>
+<div class="labels "><a class="lbl " href="tags/c++20.html">C++20</a></div></h3>
+<a class="nav " id="cpos" keywords="cpos customization-point CPO"></a></div>
+<div class="panel hvtight bg-filled "><div class="panel "><h4 class="nav-none">Goal: consistent 
+<a href="cpp/lang/concepts.html" >concept checking</a>
+
+on (potential) customization points of a generic library!</h4>
+<p>The traditional <a class="" href="cpp/lang/adl.html#fallback-idiom" onclick="reveal_anchor()">
+
+2-Step ADL & Fallback Idiom:
+</a></p>
+<p><code>using std::swap; <span class="comment ">// fallback</span><br>
+swap(x,y); <span class="comment ">// ADL may find custom swap</span></code></p>
+<p>cannot guarantee that a custom implementation of <code>swap</code>
+constrains its parameters the same way as the fallback implementation
+<code>std::swap</code>.</p></div>
+<div class="panel-fold " open><h4 class="nav-none"><span class="hwide">Idea: Function Object as Single Entry Point</span>
+<span class="hslim">Idea: Single-Entry Function Object</span></h4></div>
+<div class="panel-col "{style=""><div class="panel "><p>All objects passed to any '<code>foo</code>' implementation 
+should satisfy concept '<code>Fooable</code>':</p></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>namespace <strong>lib</strong> {
+  template&lt;class T&gt; <span class="hslim-br"></span><span class="hslim">  </span><strong>concept Fooable</strong> = requires (T x) { 
+    {x.size()} -&gt; std::integral; };
+
+  namespace detail {
+    <strong>inline</strong> namespace <span class="c2">defaults</span> {
+      template&lt;<strong>Fooable</strong> <em>T</em>&gt;  <span class="comment ">// constrained!</span>
+      void <span class="e2">foo</span>(<em>T</em> const&amp; x) { <span class="annotation">&hellip;</span> }
+    }
+    <strong>struct</strong> <span class="e1">foo_fn</span> <strong>{</strong>
+      template&lt;<strong>Fooable</strong> <em>T</em>&gt;  <span class="comment ">// constrained!</span>
+      void <strong>operator() </strong>(<em>T</em> const&amp; x) const {
+        <span class="comment ">// calls custom foo found by ADL</span>
+        <span class="comment ">// or fallback defaults::foo</span>
+        <strong>foo</strong>(x);
+      }
+    <strong>};</strong>
+  }
+  namespace <span class="c2">defaults</span> = detail::defaults;
+  <span class="comment ">// global function object lib::foo</span>
+  <strong>inline constexpr</strong> const detail::foo_fn <span class="e1">foo</span> {};
+}</code></pre>
+</div>
+<div class="panel "><p class="cat-warning">Make sure that your default implementation (here <code>lib::defaults::foo</code>) 
+is not unconstrained or underconstrained!
+Otherwise it might act as catch-all and custom functions (found by ADL) 
+won't be selected! 
+Functions with forwarding reference parameters and/or 
+variadic parameter packs are especially prone to being catch-alls.</p></div></div>
+<div class="panel-fold " open><h4 class="nav-none">&rArr; Consistent Behavior</h4></div>
+<div class="panel-col "{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code>namespace <strong>na</strong> {
+  class <strong>A</strong> { public: size_t size() const; };
+}
+namespace <strong>nb</strong> {
+  class <strong>B</strong> { public: int size() const; };
+  void <span class="e3">foo</span>(B const&amp; b);
+}
+<hr>na::A a;
+nb::B b;
+using <span class="c1">lib::foo</span>;
+<span class="c1">foo</span>(a);      <span class="comment ">// lib::foo &rarr; <span class="hwide">fallback </span><span class="c2">lib::defaults::foo</span></span>
+<span class="c1">foo</span>(b);      <span class="comment ">// lib::foo &rarr; <span class="hwide">custom   </span><span class="c3"><strong>nb</strong>::foo</span></span>
+<hr><span class="comment ">// explicit qualification has no effect:</span>
+<span class="c1">lib::foo</span>(a);  <span class="comment ">// lib::foo &rarr; <span class="hwide">fallback </span><span class="c2">lib::defaults::foo</span></span>
+<span class="c1">lib::foo</span>(b);  <span class="comment ">// lib::foo &rarr; <span class="hwide">custom   </span><span class="c3"><strong>nb</strong>::foo</span></span>
+<hr><span class="comment ">// force default implementation:</span>
+<span class="c2">lib::defaults::foo</span>(a);
+<span class="c2">lib::defaults::foo</span>(b);</code></pre>
+</div>
+<div class="panel "><ul class="symbols ">
+<li class="cat-positive">all calls are constrained with <code>Fooable</code> because
+they all invoke <code>lib::detail::foo_fn::operator()</code></li>
+
+<li class="cat-positive">always does the same thing; no need for ADL+Fallback (<q>ADL 2-step</q>)</li>
+
+<li class="cat-neutral">might be surprising that <em>forcing</em> default implementation 
+is not possible with explicit qualification 
+(because <code>lib::foo</code> is an object)</li></ul></div></div>
+<div class="panel-fold " open><h4 class="nav-none">&rArr; Cannot Bypass Constraints!</h4></div>
+<div class="panel-col "{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code>namespace lib {
+  template&lt;class T&gt; <span class="hslim-br"></span><span class="hslim">  </span><strong>concept Fooable</strong> = requires (T x) { 
+    {x.size()} -&gt; std::integral; };
+  <span class="annotation">&hellip;</span>
+}</code></pre>
+</div>
+<div class="panel "><p>Calls to <code>lib::foo</code> will never pick up unconstrained 
+custom <code>foo</code> overloads:</p></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>namespace nc {
+  class <strong>C</strong> {<s>   </s>};  <span class="comment ">// no member 'size()'</span>
+  void <strong>foo</strong>(C const&amp;);
+}
+<hr>nc::C c;
+<s>lib::foo</s>(c); <span class="comment "><span class="sym-err"></span><span class="hwide e-err"> COMPILER ERROR:</span> <span class="c-err">C doesn't satisfy '<span class="hwide">lib::</span>Fooable'</span></span>
+using lib::foo;
+<s>foo</s>(c);      <span class="comment "><span class="sym-err"></span><span class="hwide e-err"> COMPILER ERROR:</span> <span class="c-err">C doesn't satisfy '<span class="hwide">lib::</span>Fooable'</span></span></code></pre>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>class <strong>D</strong> { public: 
+  <span class="comment ">// non-integral return type:</span>
+  <s>double</s> size() const { <span class="annotation">&hellip;</span> } 
+  friend void <strong>foo</strong>(D const&amp;) { <span class="annotation">&hellip;</span> }
+};
+<hr>D d;
+<s>lib::foo</s>(d); <span class="comment "><span class="sym-err"></span><span class="hwide e-err"> COMPILER ERROR:</span> <span class="c-err">D doesn't satisfy '<span class="hwide">lib::</span>Fooable'</span></span>
+using lib::foo;
+<s>foo</s>(d);      <span class="comment "><span class="sym-err"></span><span class="hwide e-err"> COMPILER ERROR:</span> <span class="c-err">D doesn't satisfy '<span class="hwide">lib::</span>Fooable'</span></span></code></pre>
+</div></div></div></div></section>
+<section class="epilog">
+<div class="panel-fold " open><h3 class="cat-link">Related <span class="if-closed">&hellip;</span></h3></div>
+<div class="panel "><ul class="resources "><li class="cat-cppreference"><a href="https://en.cppreference.com/w/cpp/w/cpp/language/adl">cppreference: ADL</a></li>
+<li class="cat-wikipedia"><a href="https://en.wikipedia.org/wiki/Argument-dependent_name_lookup">Argument Dependent Name Lookup</a></li>
+<hr>
+<li class="cat-youtube"><a href="https://youtu.be/agS-h_eaLj8">C++ Weekly: Argument Dependent Lookup</a></li>
+<li class="cat-stack-overflow"><a href="https://stackoverflow.com/questions/8111677/what-is-argument-dependent-lookup-aka-adl-or-koenig-lookup">What is ADL?</a></li>
+<li class="cat-stack-overflow"><a href="https://stackoverflow.com/questions/53495848/what-are-customization-point-objects-and-how-to-use-them">What Are Customization Point Objects?</a></li></ul></div>
+</section>
+<section class="context">
+<ul class="linear-tags "><li><a href="tags/c++.html">C++</a></li><li><a href="tags/article.html">article</a></li><li><a href="tags/featured.html">featured</a></li><li><a href="tags/idiom.html">idiom</a></li><li><a href="tags/language-mechanism.html">language-mechanism</a></li></ul>
+</section>
+<section class="metadata">
+<p><span class="cat-date">Last updated: 2020-11-24</span></p>
+</section>
+</article></div>
+<footer>
+<div id="footer-top"><div id="footer-top-content"><div id="footer-top-left"><nav><ul class="plain ">
+<li>
+<a href="index.html" class="cat-home" >Home</a>
+</li>
+
+<li>
+<a href="tags/news.html" class="cat-news" >News</a>
+</li>
+
+<li>
+<a href="tags/article.html" class="cat-article" >Articles</a>
+</li>
+
+<li>
+<a href="tags/featured.html" class="cat-featured" >Featured</a>
+</li>
+
+<li>
+<a href="tags/guide.html" class="cat-guide" >Guides</a>
+</li>
+
+<li>
+<a href="tags/list.html" class="cat-list" >Lists</a>
+</li>
+
+<li>
+<a href="about.html" class="cat-about" >About</a>
+</li>
+
+<li>
+<a href="privacy.html" class="cat-contact" >Privacy</a>
+</li>
+
+<li>
+<a href="https://twitter.com/hackingcpp" class="cat-twitter" >Twitter</a>
+</li></ul></nav></div>
+<div id="footer-top-right"><h2 class="cat-tags nav-none">
+<a href="tags.html" >Tags</a>
+</h2>
+<ul class="topic-cloud "><li><a style="font-size:119.09832775265055%;" href="tags/algorithms.html">algorithms</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/allocators.html">allocators</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/arrays.html">arrays</a></li> <li><a style="font-size:155.67625418551208%;" href="tags/article.html">article</a></li> <li><a style="font-size:151.4520701280242%;" href="tags/beginner-level.html">beginner-level</a></li> <li><a style="font-size:60.0%;" href="tags/blogs.html">blogs</a></li> <li><a style="font-size:60.0%;" href="tags/books.html">books</a></li> <li><a style="font-size:60.0%;" href="tags/build-systems.html">build-systems</a></li> <li><a style="font-size:160.9530933887302%;" href="tags/c++.html">C++</a></li> <li><a style="font-size:60.0%;" href="tags/c++-standardization.html">C++-standardization</a></li> <li><a style="font-size:122.76135311474769%;" href="tags/c++11.html">C++11</a></li> <li><a style="font-size:112.96632221214513%;" href="tags/c++14.html">C++14</a></li> <li><a style="font-size:104.32374581448789%;" href="tags/c++17.html">C++17</a></li> <li><a style="font-size:109.08009883059783%;" href="tags/c++20.html">C++20</a></li> <li><a style="font-size:60.0%;" href="tags/c++98.html">C++98</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/c-style.html">C-style</a></li> <li><a style="font-size:60.0%;" href="tags/c-vs-c++.html">C-vs-C++</a></li> <li><a style="font-size:60.0%;" href="tags/cat-casts.html">cat-casts</a></li> <li><a style="font-size:106.83431667163975%;" href="tags/classes.html">classes</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/code-editors.html">code-editors</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/code-formatters.html">code-formatters</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/command-line.html">command-line</a></li> <li><a style="font-size:106.83431667163975%;" href="tags/community.html">community</a></li> <li><a style="font-size:60.0%;" href="tags/comparisons.html">comparisons</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/compilers.html">compilers</a></li> <li><a style="font-size:60.0%;" href="tags/concepts.html">concepts</a></li> <li><a style="font-size:60.0%;" href="tags/conferences.html">conferences</a></li> <li><a style="font-size:60.0%;" href="tags/const.html">const</a></li> <li><a style="font-size:60.0%;" href="tags/constexpr.html">constexpr</a></li> <li><a style="font-size:111.11165590902733%;" href="tags/containers.html">containers</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/control-flow.html">control-flow</a></li> <li><a style="font-size:114.67244982290701%;" href="tags/custom-types.html">custom-types</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/data-structures.html">data-structures</a></li> <li><a style="font-size:60.0%;" href="tags/debugging.html">debugging</a></li> <li><a style="font-size:104.32374581448789%;" href="tags/design.html">design</a></li> <li><a style="font-size:106.83431667163975%;" href="tags/diagnostics.html">diagnostics</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/exceptions.html">exceptions</a></li> <li><a style="font-size:89.54916387632527%;" href="tags/featured.html">featured</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/file-io.html">file-io</a></li> <li><a style="font-size:60.0%;" href="tags/find.html">find</a></li> <li><a style="font-size:60.0%;" href="tags/find_if.html">find_if</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/functional-prog.html">functional-prog</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/functions.html">functions</a></li> <li><a style="font-size:60.0%;" href="tags/gallery.html">gallery</a></li> <li><a style="font-size:94.30551689243521%;" href="tags/generic-prog.html">generic-prog</a></li> <li><a style="font-size:60.0%;" href="tags/groups.html">groups</a></li> <li><a style="font-size:60.0%;" href="tags/guide.html">guide</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/guidelines.html">guidelines</a></li> <li><a style="font-size:60.0%;" href="tags/hash-map.html">hash-map</a></li> <li><a style="font-size:60.0%;" href="tags/hash-set.html">hash-set</a></li> <li><a style="font-size:60.0%;" href="tags/hashing.html">hashing</a></li> <li><a style="font-size:60.0%;" href="tags/header-files.html">header-files</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/heap.html">heap</a></li> <li><a style="font-size:60.0%;" href="tags/ides.html">ides</a></li> <li><a style="font-size:98.1917402739825%;" href="tags/idiom.html">idiom</a></li> <li><a style="font-size:98.1917402739825%;" href="tags/io.html">io</a></li> <li><a style="font-size:94.30551689243521%;" href="tags/iostreams.html">iostreams</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/iterators.html">iterators</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/language-mechanism.html">language-mechanism</a></li> <li><a style="font-size:60.0%;" href="tags/language-references.html">language-references</a></li> <li><a style="font-size:60.0%;" href="tags/learning.html">learning</a></li> <li><a style="font-size:60.0%;" href="tags/libraries.html">libraries</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/linker.html">linker</a></li> <li><a style="font-size:130.25147500745962%;" href="tags/list.html">list</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/low-level.html">low-level</a></li> <li><a style="font-size:60.0%;" href="tags/map.html">map</a></li> <li><a style="font-size:109.08009883059783%;" href="tags/memory.html">memory</a></li> <li><a style="font-size:120.39055466724817%;" href="tags/modern-c++.html">modern-C++</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/move-semantics.html">move-semantics</a></li> <li><a style="font-size:126.83373677211958%;" href="tags/news.html">news</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/oop.html">oop</a></li> <li><a style="font-size:60.0%;" href="tags/organizations.html">organizations</a></li> <li><a style="font-size:60.0%;" href="tags/package-manager.html">package-manager</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/paradigm.html">paradigm</a></li> <li><a style="font-size:60.0%;" href="tags/pattern.html">pattern</a></li> <li><a style="font-size:60.0%;" href="tags/people.html">people</a></li> <li><a style="font-size:60.0%;" href="tags/podcasts.html">podcasts</a></li> <li><a style="font-size:60.0%;" href="tags/pointers.html">pointers</a></li> <li><a style="font-size:60.0%;" href="tags/preprocessor.html">preprocessor</a></li> <li><a style="font-size:60.0%;" href="tags/profiling.html">profiling</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/randomness.html">randomness</a></li> <li><a style="font-size:60.0%;" href="tags/ranges.html">ranges</a></li> <li><a style="font-size:60.0%;" href="tags/references.html">references</a></li> <li><a style="font-size:60.0%;" href="tags/set.html">set</a></li> <li><a style="font-size:60.0%;" href="tags/social-media.html">social-media</a></li> <li><a style="font-size:60.0%;" href="tags/sorted-sequences.html">sorted-sequences</a></li> <li><a style="font-size:89.54916387632527%;" href="tags/stack.html">stack</a></li> <li><a style="font-size:60.0%;" href="tags/standardization.html">standardization</a></li> <li><a style="font-size:116.25207726360686%;" href="tags/std-algorithms.html">std-algorithms</a></li> <li><a style="font-size:89.54916387632527%;" href="tags/std-containers.html">std-containers</a></li> <li><a style="font-size:128.6110337848704%;" href="tags/std-library.html">std-library</a></li> <li><a style="font-size:60.0%;" href="tags/std-macros.html">std-macros</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/std-vector.html">std-vector</a></li> <li><a style="font-size:60.0%;" href="tags/strings.html">strings</a></li> <li><a style="font-size:60.0%;" href="tags/style.html">style</a></li> <li><a style="font-size:60.0%;" href="tags/taste.html">taste</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/templates.html">templates</a></li> <li><a style="font-size:60.0%;" href="tags/testing.html">testing</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/toolchain.html">toolchain</a></li> <li><a style="font-size:116.25207726360686%;" href="tags/tools.html">tools</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/traversal.html">traversal</a></li> <li><a style="font-size:117.72267522825506%;" href="tags/types.html">types</a></li> <li><a style="font-size:60.0%;" href="tags/user.html">user</a></li> <li><a style="font-size:60.0%;" href="tags/version-control.html">version-control</a></li> <li><a style="font-size:60.0%;" href="tags/views.html">views</a></li> <li><a style="font-size:60.0%;" href="tags/vim.html">VIM</a></li> <li><a style="font-size:60.0%;" href="tags/vim-plugins.html">VIM-plugins</a></li> <li><a style="font-size:60.0%;" href="tags/warnings.html">warnings</a></li> <li><a style="font-size:114.67244982290701%;" href="tags/websites.html">websites</a></li> 
+</ul></div></div></div>
+<div id="footer-bottom"><div id="footer-bottom-content">&copy;&nbsp;2019-2021&ensp;André&nbsp;Müller&emsp;&emsp;</div></div>
+</footer>
+<script src="assets/content.js?v=26"></script>
+</body>
+</html>

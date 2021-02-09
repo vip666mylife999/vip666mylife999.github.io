@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang='en-US'>
+<head>
+<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+<base href="https://vip666mylife999.github.io/">
+<link rel="icon" href="assets/hcpp-icon.png">
+<link rel="stylesheet" type="text/css" href="assets/style.css?v=26-1">
+<link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<title>h/cpp - Standard Library Sequence Reordering Algorithms</title>
+<meta name="description" content="">
+<meta name="keyword" content="cpp std standard library algorithm">
+<meta name="author" content="André Müller">
+<meta name="date" content="2021-02-02">
+<meta name="copyright" content="2019-2021&ensp;André Müller">
+<meta name="hcpp-page-category" content="cat-article">
+<meta name="hcpp-tags" content="C++ C++11 C++20 algorithms article beginner-level std-algorithms std-library ">
+</head>
+<body>
+<div id="top-nav"><div id="titlebar" class="boxed-wide"><div id="main-branding">
+<a href="index.html"  id="main-logo" title="home"><span class="hwide"><img src="assets/hcpp.svg" style="max-width:100%;height:40;"></img></span>
+<span class="hslim"><img src="assets/hcpp-square.svg" style="max-width:100%;height:40;"></img></span></a>
+
+<div id="main-title">
+<a href="index.html"  title="home">hacking&nbsp;C++</a>
+</div></div>
+<div id="main-menu"><div class="entry "><a href="tags/news.html">News</a></div>
+<div class="submenu "><a>Learning</a><div class="submenu-dropdown">
+<a href="cpp/beginners_guide.html" >Beginner's Guide to C++</a>
+
+<hr>
+
+<a href="cpp/std/containers.html" >Standard Library Containers</a>
+
+
+<a href="cpp/std/algorithms.html" >Standard Library Algorithms</a>
+
+<hr>
+
+<a href="cpp/cheat_sheets.html" >Infographics / Cheat Sheets</a>
+
+
+<a href="tags/article.html" >All Articles</a>
+
+<hr>
+
+<a href="dev/web_learning.html" >Online Learning</a>
+
+
+<a href="cpp/books.html" >Books</a>
+</div></div>
+<div class="submenu "><a>Links</a><div class="submenu-dropdown">
+<a href="cpp/community.html" >Community Resources</a>
+
+
+<a href="cpp/tools/ecosystem.html" >Tool Ecosystem</a>
+
+<hr>
+
+<a href="tags/list.html" >All Resource Lists</a>
+
+<hr>
+
+<a href="dev/vim_plugins.html" >VIM Plugins</a>
+</div></div>
+<div class="submenu "><a>About</a><div class="submenu-dropdown">
+<a href="about.html" >Why &amp; Who</a>
+
+
+<a href="privacy.html" >Privacy</a>
+</div></div></div>
+<div id="main-socialbar">
+<a href="https://twitter.com/hackingcpp" ><span class="cat-twitter"></span></a>
+</div>
+<div class="navlinks" id="nav-path"></div>
+<div id="searchbar"><div id="searchbox"><input id="search-input"></input>
+<button id="search-clear"></button>
+<button id="search-run"></button>
+<button id="search-close"></button></div></div>
+<div class="hamburger " id="main-hamburger"><button title=""></button><div class="hamburger-dropdown"><a class="nav-icon-collapse-all" onclick="collapse_all_major_folds()">Collapse <strong>All</strong> Levels</a>
+
+<a class="nav-icon-collapse" onclick="collapse_major_folds()">Collapse Top Level</a>
+
+<a class="nav-icon-expand" onclick="expand_major_folds()">Expand Top Level</a>
+
+<a class="nav-icon-expand-all" onclick="expand_all_major_folds()">Expand <strong>All</strong> Levels</a>
+
+<hr>
+
+<a href="tags/news.html" class="cat-news" >News</a>
+
+
+<a href="tags/featured.html" class="cat-featured" >Featured</a>
+
+
+<a href="tags/article.html" class="cat-article" >Articles</a>
+
+
+<a href="cpp/beginners_guide.html" class="cat-guide" >Beginner's Guide to C++</a>
+
+
+<a href="tags/list.html" class="cat-list" >Lists</a>
+
+<hr>
+
+<a href="https://twitter.com/hackingcpp" ><span class="cat-twitter"></span> @hackingcpp</a>
+
+
+<a href="about.html" class="cat-about" >About</a>
+
+
+<a href="privacy.html" class="cat-contact" >Privacy</a>
+
+
+<a href="index.html" class="cat-home" >Home</a>
+</div></div></div>
+<nav id="guide-bar" class="boxed-wide"><div class="guide-nav">
+<div class="go-prev"><a href="cpp/lang/lambda_basics.html"><span class="hwide">Lambdas</span></a></div>
+<div class="go-up"><a href="cpp/beginners_guide.html#std-lib-algorithms">Beginner's Guide <span class="hxwide">/ Algorithms</span></a></div>
+<div class="go-next"><a href="cpp/std/algorithms/element_modification.html"><span class="hwide">Change</span></a></div>
+</div></nav></div>
+<div id="drawer-top" class="boxed-wide"><div id="search-results"><div id="search-header"><h1 class="cat-search" id="search-title"></h1></div>
+<div id="search-locations"><ul class="resources" id="search-location-items"></ul></div>
+<div id="search-footer"></div></div></div>
+<div id="drawer-left"><div id="drawer-left-heading"><a class="cat-guide" href="cpp/beginners_guide.html#intro">Beginner's Guide</a></div>
+<div id="drawer-left-content"><div class="tree-fold plain" ><h5>First Steps</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/tools/beginner_dev_setup.html" >Development Setup</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/hello_world.html" >Hello World</a>
+</li>
+
+<li>
+<a href="cpp/std/io_basics.html" >Input &amp; Output <small>(Basics)</small></a>
+</li>
+
+<li>
+<a href="cpp/lang/fundamental_types.html" >Fundamental Types</a>
+</li>
+
+<li>
+<a href="cpp/std/vector_intro.html" >std::vector Introduction</a>
+</li>
+
+<li>
+<a href="cpp/lang/enumerations.html" >Enumerations</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/lang/control_flow_basics.html" >Control Flow <small>(Basics)</small></a>
+</li>
+
+<li>
+<a href="cpp/lang/type_system_basics.html" >Type System <small>(Basics)</small></a>
+</li>
+
+<li>
+<a href="cpp/lang/function_basics.html" >Functions <small>(Basics)</small></a>
+</li>
+
+<li>
+<a href="cpp/lang/memory_basics.html" >Memory <small>(Basics)</small></a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/std/string_basics.html" >String <small>(Basics)</small></a>
+</li>
+
+<li>
+<a href="cpp/lang/references.html" >References</a>
+</li>
+
+<li>
+<a href="cpp/lang/aggregates.html" >Simple Aggregates</a>
+</li>
+
+<li>
+<a href="cpp/lang/function_call_mechanics.html" >Function Call Mechanics</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Input &amp; Output</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/command_line_arguments.html" >Command Line Arguments</a>
+</li>
+
+<li>
+<a href="cpp/std/file_streams.html" >File Input &amp; Output</a>
+</li>
+
+<li>
+<a href="cpp/std/io_streams.html" >Stream Input &amp; Output</a>
+</li>
+
+<li>
+<a href="cpp/std/istream_recover_from_errors.html" >Recover From Input Errors</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Custom Types &ndash; Part 1</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/custom_type_basics.html" >Simple Classes / Custom Types</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/lang/pointers.html" >Pointers</a>
+</li>
+
+<li>
+<a href="cpp/lang/destructors.html" >Destructors</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/lang/exceptions.html" >Exceptions</a>
+</li>
+
+<li>
+<a href="cpp/lang/noexcept.html" >Noexcept</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Diagnostics</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/tools/compiler_warnings.html" >Compiler Warnings</a>
+</li>
+
+<li>
+<a href="cpp/tools/gdb_intro.html" >Debugging With gdb</a>
+</li>
+
+<li>
+<a href="cpp/tools/asan.html" >Address Sanitizer</a>
+</li>
+
+<li>
+<a href="cpp/tools/ubsan.html" >Undefined Behavior Sanitizer</a>
+</li>
+
+<li>
+<a href="cpp/tools/valgrind.html" >valgrind</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Standard Library</h5></div>
+<div class="content " ><div class="tree-fold plain" ><h6>Containers &amp; Views</h6></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/std/iterators_intro.html" >Iterators</a>
+</li>
+
+<li>
+<a href="cpp/std/sequence_containers.html" >Sequence Containers</a>
+</li>
+
+<li>
+<a href="cpp/std/sequence_views.html" >Sequence Views</a>
+</li>
+
+<li>
+<a href="cpp/std/associative_containers.html" >Associative Containers</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h6>Standard Algorithms</h6></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/std/algorithms/intro.html" >Basic Paradigms</a>
+</li>
+
+<li>
+<a href="cpp/std/container_traversal.html" >Container Traversal</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/std/algorithms/min_max.html" >Minimum / Maximum</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/existence_queries.html" >Existence Queries</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/finding.html" >Finding Elements</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/comparing_ranges.html" >Comparing Ranges</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/design/function_objects.html" >Function Objects</a>
+</li>
+
+<li>
+<a href="cpp/lang/lambda_basics.html" >Lambdas <small>(Basics)</small></a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/std/algorithms/reordering.html" >Sequence Reordering</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/element_modification.html" >Changing Elements</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/numeric.html" >Numeric Algorithms</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/sorted_sequence_operations.html" >Sorted Sequence Operations</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h6>Utilities</h6></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/std/special_containers.html" >Special Containers</a>
+</li>
+
+<li>
+<a href="cpp/std/special_iterators.html" >Special Iterators</a>
+</li>
+
+<li>
+<a href="cpp/std/random.html" >Random Numbers</a>
+</li></ul></div></div>
+<div class="tree-fold plain" ><h5>Code Organization</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/separate_compilation.html" >Separate Compilation</a>
+</li>
+
+<li>
+<a href="cpp/lang/namespaces.html" >Namespaces</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Custom Types &ndash; Part 2</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/friends.html" >Friends</a>
+</li>
+
+<li>
+<a href="cpp/lang/comparisons.html" >Comparisons</a>
+</li>
+
+<li>
+<a href="cpp/design/literal_types.html" >Literal Types</a>
+</li>
+
+<li>
+<a href="cpp/design/arithmetic_types.html" >Arithmetic Types</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/std/unique_ownership.html" >Unique Resource Ownership</a>
+</li>
+
+<li>
+<a href="cpp/design/node_based_data_structures.html" >Node-Based Data Structures</a>
+</li>
+
+<li>
+<a href="cpp/lang/special_class_members.html" >Special Class Members</a>
+</li>
+
+<li>
+<a href="cpp/std/shared_ownership.html" >Shared Resource Ownership</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/lang/object_oriented_programming.html" >Object Oriented Programming</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/lang/move_semantics.html" >Move Semantics</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Generic Programming</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/templates.html" >Templates</a>
+</li>
+
+<li>
+<a href="cpp/lang/type_casts.html" >Type Casts</a>
+</li>
+
+<li>
+<a href="cpp/lang/type_deduction.html" >Type Deduction</a>
+</li>
+
+<li>
+<a href="cpp/std/type_traits.html" >Type Traits</a>
+</li>
+
+<li>
+<a href="cpp/lang/perfect_forwarding.html" >Perfect Forwarding</a>
+</li>
+
+<li>
+<a href="cpp/lang/concepts.html" >Concepts &amp; Constrained Templates</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Memory Management</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/pointer_arithmetic.html" >Pointer Arithmetic</a>
+</li>
+
+<li>
+<a href="cpp/lang/c_arrays.html" >C-Style Arrays</a>
+</li>
+
+<li>
+<a href="cpp/lang/manual_memory_management.html" >Manual Memory Management</a>
+</li>
+
+<li>
+<a href="cpp/design/allocators.html" >Allocators</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Software Design Basics</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/design/principles.html" >Design Principles</a>
+</li>
+
+<li>
+<a href="cpp/design/function_interface_example1.html" >Design Study: Function Interfaces</a>
+</li>
+
+<li>
+<a href="cpp/design/angle_axis_rotation.html" >Design Study: Angle-Axis Rotation</a>
+</li>
+
+<li>
+<a href="cpp/design/traversal_approaches.html" >Traversal Approaches</a>
+</li>
+
+<li>
+<a href="cpp/design/pimpl.html" >The PIMPL Idiom</a>
+</li></ul></div></div>
+<button id="drawer-left-toggle" title=""></button></div>
+<div id="main-content" class="boxed-wide "><article class="boxed-normal ">
+<header class="plain">
+<h1>
+<span class="hwide">Standard&nbsp;Library Sequence&nbsp;Reordering&nbsp;Algorithms</span><span class="hslim">Sequence Reordering Algorithms</span><span class="hnavi">Reorder</span></h1>
+<nav id="page-navbar" class=""></nav>
+</header>
+<section>
+<h5 class="nav-none">New to C++'s standard library algorithms?&ensp;
+&rArr;&ensp;
+<a href="cpp/std/algorithms/intro.html" >Short&nbsp;Introduction</a>
+</h5>
+</section>
+<section class="main plain"><h2 class="hfold " open><span class="nav-none">Shift Elements</span>
+<span class="nav-only">Shift</span></h2>
+<div class="content " ><div class="panel-fold " open><h3>
+<span class="hwide"><code>reverse</code><span class="c6 ">&thinsp;/&thinsp;<code>reverse_copy</code></span></span>
+<span class="hslim"><code>reverse<span class="c6 ">_copy</span></code></span>
+<span class="hnavi">reverse</span>
+</h3></div>
+<div class="panel hvtight bg-filled "><div class="panel-fold vexpand" open>
+<a class="nav" id="reverse"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/reverse_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; v {0,1,2,4,6,8,9,3,5};
+<span class="spacer"></span><span class="comment ">// reverse subrange (as shown in image):</span>
+<strong>reverse(</strong><span class="c2">begin(v)<strong>+2</strong></span>, <span class="c2">begin(v)<strong>+7</strong></span><strong>)</strong>;  
+for(int x : v) { cout &lt;&lt; x &lt;&lt; ' '; }  <span class="comment ">//&nbsp;0&nbsp;1&nbsp;<span class="mark b7">9&nbsp;8&nbsp;6&nbsp;4&nbsp;2</span>&nbsp;3&nbsp;5</span>
+<span class="spacer"></span><span class="comment ">// reverse entire vector:</span>
+<strong>reverse(</strong><span class="c2">begin(v)</span>, <span class="c2">end(v)</span><strong>)</strong>;  
+for(int x : v) { cout &lt;&lt; x &lt;&lt; ' '; }  <span class="comment ">//&nbsp;5&nbsp;3&nbsp;2&nbsp;4&nbsp;6&nbsp;8&nbsp;9&nbsp;1&nbsp;0</span></code></pre>
+</div>
+<div class="panel-fold vexpand" open>
+<a class="nav" id="ranges-reverse"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/ranges-reverse_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+
+</div>
+<div class="panel cs-light vstretch">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; v {2,4,6,8,9};
+<span class="c6 ">std::</span><span class="c6 ">ranges::</span><strong>reverse(</strong><span class="c2">v</span><strong>)</strong>;
+for(int x : v) { cout &lt;&lt; x &lt;&lt; ' '; }  <span class="comment ">//&nbsp;9&nbsp;8&nbsp;6&nbsp;4&nbsp;2</span></code></pre>
+</div>
+<div class="panel-fold vexpand" open>
+<a class="nav" id="reverse_copy"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/reverse_copy_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+<p class="cat-warning if-opened">the output must be able to recieve as many elements as there are in the input range</p>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; in {0,1,2,4,6,8,9,3,5};
+<span class="c6 ">std::</span>vector&lt;int&gt; out; 
+out.resize(5);
+<span class="spacer"></span><strong>reverse_copy(</strong><span class="c2">begin(in)<strong>+2</strong></span>, <span class="c2">begin(in)<strong>+7</strong></span>, <span class="c3">begin(out)</span><strong>)</strong>;
+<span class="spacer"></span>for(int x : out) { cout &lt;&lt; x &lt;&lt; ' '; }  <span class="comment ">//&nbsp;9&nbsp;8&nbsp;6&nbsp;4&nbsp;2</span></code></pre>
+</div>
+<div class="panel-fold vexpand">
+<a class="nav" id="ranges-reverse_copy"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/ranges-reverse_copy_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+<p class="cat-warning if-opened">the output must be able to recieve as many elements as there are in the input range</p>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; in {2,4,6,8,9};
+<span class="c6 ">std::</span>vector&lt;int&gt; out; 
+out.resize(in.size());
+<span class="spacer"></span><span class="c6 ">std::</span><span class="c6 ">ranges::</span><strong>reverse_copy(</strong><span class="c2">in</span>, <span class="c3">begin(out)</span><strong>)</strong>;
+<span class="spacer"></span>for(int x : out) { cout &lt;&lt; x &lt;&lt;' '; }  <span class="comment ">//&nbsp;9&nbsp;8&nbsp;6&nbsp;4&nbsp;2</span></code></pre>
+</div></div>
+<div class="panel-fold " open><h3>
+<span class="hwide"><code>rotate</code><span class="c6 ">&thinsp;/&thinsp;<code>rotate_copy</code></span></span>
+<span class="hslim"><code>rotate<span class="c6 "></span></code></span>
+<span class="hnavi">rotate</span>
+</h3></div>
+<div class="panel hvtight bg-filled "><div class="panel-fold vexpand" open>
+<a class="nav" id="rotate"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/rotate_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+<p class="if-opened">performs a cyclic left rotation: 
+all elements from <code><span class="c2">begin</span></code> to one before <code><span class="c2">new_fist</span></code>
+are put behind <code><span class="c2">end</span></code></p>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; v {1,2,3,4,5,6,7};
+<span class="spacer"></span>auto i = <strong>rotate(</strong><span class="c2">begin(v)</span>, begin(v)<strong>+2</strong>, <span class="c2">end(v)</span><strong>)</strong>;  
+<span class="spacer"></span>for(int x : v) { cout &lt;&lt; x &lt;&lt;' '; }  <span class="comment ">//&nbsp;3&nbsp;4&nbsp;5&nbsp;6&nbsp;7&nbsp;1&nbsp;2</span>
+<span class="comment ">// returned iterator refers to old first:</span>
+auto const value = *i;  <span class="comment ">//&nbsp;1</span>
+auto const index = distance(begin(v), i);  <span class="comment ">//&nbsp;5</span></code></pre>
+</div>
+<div class="panel-fold vexpand">
+<a class="nav" id="ranges-rotate"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/ranges-rotate_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; v {1,2,3,4,5,6,7};
+<span class="spacer"></span>auto sub = <span class="c6 ">std::</span><span class="c6 ">ranges::</span><strong>rotate(</strong><span class="c2">v</span>, <span class="c2">begin(v)<strong>+4</strong></span><strong>)</strong>;  
+<span class="spacer"></span>for(int x : v)   { cout &lt;&lt; x &lt;&lt;' '; }  <span class="comment ">//&nbsp;5&nbsp;6&nbsp;7&nbsp;1&nbsp;2&nbsp;3&nbsp;4</span>
+for(int x : sub) { cout &lt;&lt; x &lt;&lt;' '; }  <span class="comment ">//&nbsp;1&nbsp;2&nbsp;3&nbsp;4</span></code></pre>
+</div>
+<div class="panel-fold vexpand" open>
+<a class="nav" id="rotate_copy"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/rotate_copy_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+<p class="cat-warning if-opened">the output must be able to recieve as many elements as there are in the input range</p>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; in {1,2,3,4,5,6,7};
+<span class="c6 ">std::</span>vector&lt;int&gt; out; 
+out.resize(in.size());
+<span class="spacer"></span><strong>rotate_copy(</strong><span class="c2">begin(in)</span>, begin(in)<strong>+2</strong>, <span class="hslim-br"></span><span class="hslim">            </span><span class="c2">end(in)</span>, <span class="e3">begin(out)</span><strong>)</strong>;  
+<span class="spacer"></span>for(int x : out) { cout &lt;&lt; x &lt;&lt;' '; }  <span class="comment ">//&nbsp;3&nbsp;4&nbsp;5&nbsp;6&nbsp;7&nbsp;1&nbsp;2</span></code></pre>
+</div>
+<div class="panel-fold vexpand">
+<a class="nav" id="ranges-rotate_copy"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/ranges-rotate_copy_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+<p class="cat-warning if-opened">the output must be able to recieve as many elements as there are in the input range</p>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; in {1,2,3,4,5,6,7};
+<span class="c6 ">std::</span>vector&lt;int&gt; out; 
+out.resize(in.size());
+<span class="spacer"></span><span class="c6 ">std::</span><span class="c6 ">ranges::</span><strong>rotate_copy(</strong><span class="c2">in</span>, begin(in)<strong>+4</strong>, <span class="c3">out</span><strong>)</strong>;  
+<span class="spacer"></span>for(int x : out) { cout &lt;&lt; x &lt;&lt;' '; }  <span class="comment ">//&nbsp;5&nbsp;6&nbsp;7&nbsp;1&nbsp;2&nbsp;3&nbsp;4</span></code></pre>
+</div></div>
+<div class="panel-fold " open><h3>
+<span class="hwide"><code>shift_left</code><span class="c6 ">&thinsp;/&thinsp;<code>shift_right</code></span></span>
+<span class="hslim"><code>shift_left</code>&thinsp;<span class="c6 ">/&thinsp;<code>right</code></span></span>
+<span class="hnavi">shift_left/right</span>
+<div class="labels "><a class="lbl " href="tags/c++20.html">C++20</a></div>
+</h3></div>
+<div class="panel hvtight bg-filled "><div class="panel-fold vexpand">
+<a class="nav" id="shift_left"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/shift_left_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; v {1,2,3,4,5,6,7,8};
+int const <span class="c1">by</span> = 3;
+<span class="spacer"></span><strong>shift_left(</strong><span class="c2">begin(v)</span>, <span class="c2">end(v)</span>, <span class="c1">by</span><strong>)</strong>;  
+<span class="spacer"></span>for(int x : v) { cout &lt;&lt; x &lt;&lt;' '; }  <span class="comment ">//&nbsp;4&nbsp;5&nbsp;6&nbsp;7&nbsp;8&nbsp;6&nbsp;7&nbsp;8</span></code></pre>
+</div>
+<div class="panel-fold vexpand">
+<a class="nav" id="shift_right"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/shift_right_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; v {1,2,3,4,5,6,7,8,9};
+int const <span class="c1">by</span> = 3;
+<span class="spacer"></span><strong>shift_right(</strong><span class="c2">begin(v)</span>, <span class="c2">end(v)</span>, <span class="c1">by</span><strong>)</strong>;  
+<span class="spacer"></span>for(int x : v) { cout &lt;&lt; x &lt;&lt;' '; }  <span class="comment ">//&nbsp;1&nbsp;2&nbsp;3&nbsp;1&nbsp;2&nbsp;3&nbsp;4&nbsp;5</span></code></pre>
+</div></div>
+<div class="panel-fold " open><h3>
+<span class="nav-none"><code>shuffle</code></span>
+<span class="nav-only">shuffle</span>
+<div class="labels "><a class="lbl " href="tags/c++11.html">C++11</a></div>
+</h3></div>
+<div class="panel hvtight bg-filled "><div class="panel-fold vexpand" open>
+<a class="nav" id="shuffle"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/shuffle_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6">#include &lt;random&gt;</span>
+<span class="comment ">// 32 bit mersenne twister engine</span>
+auto <span class="c1">rgen</span> = <span class="c6 ">std::</span>mt19937{};
+<span class="c6 ">std::</span>vector&lt;int&gt; v {0,1,2,3,4,5,6,7,8};
+<span class="spacer"></span><strong>shuffle(</strong><span class="c2">begin(v)<strong>+2</strong></span>, <span class="c2">begin(v)<strong>+7</strong></span>, <span class="c1">rgen</span><strong>)</strong>;  
+<span class="spacer"></span>for(int x : v) { cout &lt;&lt; x &lt;&lt;' '; }  <span class="comment ">//&nbsp;0&nbsp;1&nbsp;&hellip;&nbsp;7&nbsp;8</span></code></pre>
+</div>
+<div class="panel-fold vexpand">
+<a class="nav" id="ranges-shuffle"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/ranges-shuffle_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6">#include &lt;random&gt;</span>
+<span class="comment ">// 32 bit mersenne twister engine</span>
+auto <span class="c1">rgen</span> = <span class="c6 ">std::</span>mt19937{};
+<span class="c6 ">std::</span>vector&lt;int&gt; v {2,3,4,5,6};
+<span class="spacer"></span><span class="c6 ">std::</span><span class="c6 ">ranges::</span><strong>shuffle(</strong><span class="c2">v</span>, <span class="c1">rgen</span><strong>)</strong>;  
+<span class="spacer"></span>for(int x : v) { cout &lt;&lt; x &lt;&lt;' '; }</code></pre>
+</div></div></div>
+<h2 class="hfold " open><span class="nav-none">Sorting</span>
+<span class="nav-only">Sort</span></h2>
+<div class="content " ><div class="panel-fold " open><h3>
+<span class="nav-none"><code>sort</code></span>
+<span class="nav-only">sort</span>
+</h3></div>
+<div class="panel hvtight bg-filled "><div class="panel-fold vexpand" open>
+<a class="nav" id="sort"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/sort_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+<p class="if-opened">a custom function(object) for comparing elements can be passed as <span class="c1">3<sup>rd</sup> argument</span></p>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; v {8,9,3,1,2,3,5,4,7,6};
+<span class="spacer"></span><span class="comment ">// sort subrange (as shown in image):</span>
+<strong>sort(</strong><span class="c2">begin(v)<strong>+2</strong></span>, <span class="c2">begin(v)<strong>+5</strong></span><strong>)</strong>;
+for(int x : v) { cout &lt;&lt; x &lt;&lt;' '; }  <span class="comment ">//&nbsp;8&nbsp;9&nbsp;<span class="mark b7">1&nbsp;2&nbsp;3&nbsp;3&nbsp;4&nbsp;5</span>&nbsp;7&nbsp;6</span>
+<span class="spacer"></span><span class="comment ">// sort entire vector:</span>
+<strong>sort(</strong><span class="c2">begin(v)</span>, <span class="c2">end(v)</span><strong>)</strong>;
+for(int x : v) { cout &lt;&lt; x &lt;&lt;' '; }  <span class="comment ">//&nbsp;1&nbsp;2&nbsp;3&nbsp;3&nbsp;4&nbsp;5&nbsp;6&nbsp;7&nbsp;8&nbsp;9</span>
+<span class="spacer"></span><span class="comment ">// sort vector in descending order:</span>
+<strong>sort(</strong><span class="c2">begin(v)</span>, <span class="c2">end(v)</span>, <span class="c6 ">std::</span><span class="c1">greater&lt;&gt;{}</span><strong>)</strong>;
+for(int x : v) { cout &lt;&lt; x &lt;&lt;' '; }  <span class="comment ">//&nbsp;9&nbsp;8&nbsp;7&nbsp;6&nbsp;5&nbsp;4&nbsp;3&nbsp;3&nbsp;2&nbsp;1</span></code></pre>
+</div>
+<div class="panel-fold vexpand" open>
+<a class="nav" id="ranges-sort"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/ranges-sort_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+<p class="if-opened">a custom function(object) for comparing elements can be passed as <span class="c1">2<sup>nd</sup> argument</span></p>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; range {3,1,2,3,5,4};
+<span class="c6 ">std::</span><span class="c6 ">ranges::</span><strong>sort(</strong><span class="c2">range</span><strong>)</strong>;
+for(int x : range) { cout &lt;&lt; x &lt;&lt;' '; }  <span class="comment ">//&nbsp;1&nbsp;2&nbsp;3&nbsp;3&nbsp;4&nbsp;5</span>
+<span class="spacer"></span><span class="comment ">// sort in descending order:</span>
+<span class="c6 ">std::</span><span class="c6 ">ranges::</span><strong>sort(</strong><span class="c2">range</span>, <span class="c6 ">std::</span><span class="c1">greater&lt;&gt;{}</span><strong>)</strong>;
+for(int x : range) { cout &lt;&lt; x &lt;&lt;' '; }  <span class="comment ">//&nbsp;9&nbsp;8&nbsp;7&nbsp;6&nbsp;5&nbsp;4&nbsp;3&nbsp;3&nbsp;2&nbsp;1</span></code></pre>
+</div></div>
+<div class="panel-fold " ><h3>
+<span class="nav-none"><code>stable_sort</code></span>
+<span class="nav-only">stable_sort</span>
+</h3></div>
+<div class="panel hvtight bg-filled "><div class="panel-fold vexpand">
+<a class="nav" id="stable_sort"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/stable_sort_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+<div class="block if-opened"><p>stable &rArr; <code class="inset ">a</code> stays before <code class="inset ">A</code> (and <code class="inset ">E</code> stays before <code class="inset ">e</code>) even
+though they are equivalent with respect to case insensitive comparison</p>
+<p>compares elements using <code class="inset ">operator <strong>&lt;</strong></code> by default;
+a custom function(object) for comparing elements can be passed as <span class="c1">3<sup>rd</sup> argument</span></p></div>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6">#include &lt;cctype&gt;</span>  <span class="comment ">// std::tolower</span>
+auto <span class="c1">compare_</span><span class="hslim"><span class="c1">ci</span></span><span class="hwide"><span class="c1">case_insensitive</span></span> = <strong>[](</strong>char&nbsp;x,&nbsp;char&nbsp;y<strong>) {</strong>
+  return std::tolower(x) &lt; std::tolower(y); <strong>}</strong>;
+<span class="spacer"></span><span class="c6 ">std::</span>string s = "gbaEAfec";
+<strong>stable_sort(</strong><span class="c2">begin(s)<strong>+1</strong></span>, <span class="c2">begin(s)<strong>+7</strong></span>, <span class="c1">compare_</span><span class="hslim"><span class="c1">ci</span></span><span class="hwide"><span class="c1">case_insensitive</span></span><strong>)</strong>;
+cout &lt;&lt; s;  <span class="comment ">//&nbsp;g<span class="mark b7">aAbEef</span>c</span></code></pre>
+</div>
+<div class="panel-fold vexpand">
+<a class="nav" id="ranges-stable_sort"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/ranges-stable_sort_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+<div class="block if-opened"><p>stable &rArr; <code class="inset ">a</code> stays before <code class="inset ">A</code> (and <code class="inset ">E</code> stays before <code class="inset ">e</code>) even
+though they are equivalent with respect to case insensitive comparison</p>
+<p>compares elements using <code class="inset ">operator <strong>&lt;</strong></code> by default;
+a custom function(object) for comparing elements can be passed as <span class="c1">2<sup>nd</sup> argument</span></p></div>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6">#include &lt;cctype&gt;</span>  <span class="comment ">// std::tolower</span>
+auto <span class="c1">compare_</span><span class="hslim"><span class="c1">ci</span></span><span class="hwide"><span class="c1">case_insensitive</span></span> = <strong>[](</strong>char&nbsp;x,&nbsp;char&nbsp;y<strong>) {</strong>
+  return std::tolower(x) &lt; std::tolower(y); <strong>}</strong>;
+<span class="spacer"></span><span class="c6 ">std::</span>string str = "baEAde";
+<span class="c6 ">std::</span><span class="c6 ">ranges::</span><strong>stable_sort(</strong><span class="c2">str</span>, <span class="c1">compare_</span><span class="hslim"><span class="c1">ci</span></span><span class="hwide"><span class="c1">case_insensitive</span></span><strong>)</strong>;
+cout &lt;&lt; str;  <span class="comment ">//&nbsp;aAbEed</span></code></pre>
+</div></div>
+<hr>
+<div class="panel-fold " ><h3>
+<span class="hwide"><code>partial_sort</code><span class="c6 ">&thinsp;/&thinsp;<code>partial_sort_copy</code></span></span>
+<span class="hslim"><code>partial_sort<span class="c6 ">_copy</span></code></span>
+<span class="hnavi">partial_sort</span>
+</h3></div>
+<div class="panel hvtight bg-filled "><div class="panel-fold vexpand">
+<a class="nav" id="partial_sort"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/partial_sort_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+<p class="if-opened">compares elements using <code class="inset ">operator <strong>&lt;</strong></code> by default;
+a custom function(object) for comparing elements can be passed as <span class="c4">4<sup>th</sup> argument</span></p>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; v {7,4,6,2,3,5,1,9};
+<span class="comment ">// sort 4 smallest elements:</span>
+auto const <span class="c1">nth</span> = begin(v) + 4;
+<strong>partial_sort(</strong><span class="c2">begin(v)</span>, <span class="e1">nth</span>, <span class="c2">end(v)</span><strong>)</strong>;
+for(int x : v) { cout &lt;&lt; x &lt;&lt;' '; }  <span class="comment ">//&nbsp;<span class="mark b7">1&nbsp;2&nbsp;3&nbsp;4</span>&nbsp;7&nbsp;6&nbsp;5&nbsp;9</span></code></pre>
+</div>
+<div class="panel-fold vexpand">
+<a class="nav" id="ranges-partial_sort"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/ranges-partial_sort_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+<p class="if-opened">compares elements using <code class="inset ">operator <strong>&lt;</strong></code> by default;
+a custom function(object) for comparing elements can be passed as <span class="c4">3<sup>rd</sup> argument</span></p>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; v {7,4,6,2,3,5,1,9};
+<span class="comment ">// sort 4 smallest elements:</span>
+auto const <span class="c1">nth</span> = begin(v) + 4;
+<span class="c6 ">std::</span><span class="c6 ">ranges::</span><strong>partial_sort(</strong><span class="c2">v</span>, <span class="e1">nth</span><strong>)</strong>;
+for(int x : v) { cout &lt;&lt; x &lt;&lt;' '; }  <span class="comment ">//&nbsp;<span class="mark b7">1&nbsp;2&nbsp;3&nbsp;4</span>&nbsp;7&nbsp;6&nbsp;5&nbsp;9</span></code></pre>
+</div>
+<div class="panel-fold vexpand">
+<a class="nav" id="partial_sort_copy"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/partial_sort_copy_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+<p class="if-opened">compares elements using <code class="inset ">operator <strong>&lt;</strong></code> by default;
+a custom function(object) for comparing elements can be passed as <span class="c1">5<sup>th</sup> argument</span></p>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; in {6,2,3,5,1};
+<span class="spacer"></span><span class="comment ">// get sorted copy of 3 smallest elements:</span>
+int const n = 3;
+<span class="c6 ">std::</span>vector&lt;int&gt; out; 
+out.resize(n);
+<strong>partial_sort_copy(</strong><span class="c2">begin(v)</span>, <span class="c2">end(v)</span>, <span class="hslim-br"></span><span class="hslim">                  </span><span class="c3">begin(v)</span>, <span class="c3">end(v)</span><strong>)</strong>;
+for(int x : out) { cout &lt;&lt; x &lt;&lt;' '; }  <span class="comment ">//&nbsp;1&nbsp;2&nbsp;3</span>
+<span class="spacer"></span><span class="comment ">// if output is larger than input:</span>
+out.resize(100);
+auto const e = <strong>partial_sort_copy(</strong><span class="c2">begin(v)</span>, <span class="c2">end(v)</span>, <span class="hslim-br"></span><span class="hslim">                  </span><span class="c3">begin(v)</span>, <span class="c3">end(v)</span><strong>)</strong>;
+out.erase(e, end(out));  <span class="comment ">//&nbsp;shrink&nbsp;to&nbsp;fit</span>
+for(int x : out) { cout &lt;&lt; x &lt;&lt;' '; }  <span class="comment ">//&nbsp;1&nbsp;2&nbsp;3&nbsp;5&nbsp;6</span></code></pre>
+</div>
+<div class="panel-fold vexpand">
+<a class="nav" id="ranges-partial_sort_copy"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/ranges-partial_sort_copy_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+<p class="if-opened">compares elements using <code class="inset ">operator <strong>&lt;</strong></code> by default;
+a custom function(object) for comparing elements can be passed as <span class="c1">3<sup>rd</sup> argument</span></p>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; in {6,2,3,5,1};
+<span class="comment ">// get sorted copy of 3 smallest elements:</span>
+int const n = 3;
+<span class="c6 ">std::</span>vector&lt;int&gt; out; 
+out.resize(n); 
+<span class="c6 ">std::</span><span class="c6 ">ranges::</span><strong>partial_sort_copy(</strong><span class="hslim-br"></span><span class="hslim"></span><span class="c2">in</span>, <span class="c3">out</span><strong>)</strong>;
+for(int x : out) { cout &lt;&lt; x &lt;&lt;' '; }  <span class="comment ">//&nbsp;1&nbsp;2&nbsp;3</span></code></pre>
+</div></div>
+<div class="panel-fold " open><h3>
+<span class="nav-none"><code>nth_element</code></span>
+<span class="nav-only">nth_element</span>
+</h3></div>
+<div class="panel hvtight bg-filled "><div class="panel-fold vexpand" open>
+<a class="nav" id="nth_element"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/nth_element_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+<p class="if-opened">compares elements using <code class="inset ">operator <strong>&lt;</strong></code> by default;
+a custom function(object) for comparing elements can be passed as 4<sup>th</sup> argument</p>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; v {4,2,5,6,3,7,1};
+<span class="comment ">// get 5th element in sorted order</span>
+int const n = 4;
+auto <span class="c1">nth</span> = begin(v) + n;
+<strong>nth_element(</strong><span class="c2">begin(v)</span>, <span class="e1">nth</span>, <span class="c2">end(v)</span><strong>)</strong>;
+cout &lt;&lt; *nth;  <span class="comment ">//&nbsp;5</span></code></pre>
+</div>
+<div class="panel-fold vexpand">
+<a class="nav" id="ranges-nth_element"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/ranges-nth_element_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+<p class="if-opened">compares elements using <code class="inset ">operator <strong>&lt;</strong></code> by default;
+a custom function(object) for comparing elements can be passed as 3<sup>rd</sup> argument</p>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; v {4,2,5,6,3,7,1};
+<span class="comment ">// get 5th element in sorted order</span>
+int const n = 4;
+auto <span class="c1">nth</span> = begin(v) + n;
+<span class="c6 ">std::</span><span class="c6 ">ranges::</span><strong>nth_element(</strong><span class="c2">v</span>, <span class="e1">nth</span><strong>)</strong>;
+cout &lt;&lt; *nth;  <span class="comment ">//&nbsp;5</span></code></pre>
+</div></div>
+<hr>
+<div class="panel-fold " ><h3>
+<span class="nav-none"><code>is_sorted</code></span>
+<span class="nav-only">is_sorted</span>
+</h3></div>
+<div class="panel hvtight bg-filled "><div class="panel-fold vexpand" open>
+<a class="nav" id="is_sorted"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/is_sorted_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+<p class="if-opened">compares elements using <code class="inset ">operator <strong>&lt;</strong></code> by default;
+a custom function(object) for comparing elements can be passed as <span class="c1">3<sup>rd</sup> argument</span></p>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; v {2,3,4,5,6,1,0};
+<span class="spacer"></span><span class="comment ">// test subrange (as shown in image):</span>
+cout &lt;&lt; <strong>is_sorted(</strong><span class="c2">begin(v)</span>, <span class="c2">begin(v)<strong>+5</strong></span><strong>)</strong>;  <span class="comment ">//&nbsp;true</span>
+<span class="spacer"></span><span class="comment ">// test entire vector (as shown in image):</span>
+cout &lt;&lt; <strong>is_sorted(</strong><span class="c2">begin(v)</span>, <span class="c2">end(v)</span><strong>)</strong>;  <span class="comment ">//&nbsp;false</span></code></pre>
+</div>
+<div class="panel-fold vexpand">
+<a class="nav" id="ranges-is_sorted"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/ranges-is_sorted_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+<p class="if-opened">compares elements using <code class="inset ">operator <strong>&lt;</strong></code> by default;
+a custom function(object) for comparing elements can be passed as <span class="c1">2<sup>nd</sup> argument</span></p>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; v {2,3,4,5,6};
+<span class="spacer"></span>cout &lt;&lt; <span class="c6 ">std::</span><span class="c6 ">ranges::</span><strong>is_sorted(</strong><span class="c2">v</span><strong>)</strong>;  <span class="comment ">//&nbsp;true</span></code></pre>
+</div></div>
+<div class="panel-fold " ><h3>
+<span class="nav-none"><code>is_sorted_until</code></span>
+<span class="nav-only">is_sorted_until</span>
+</h3></div>
+<div class="panel hvtight bg-filled "><div class="panel-fold vexpand" open>
+<a class="nav" id="is_sorted_until"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/is_sorted_until_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+<p class="if-opened">compares elements using <code class="inset ">operator <strong>&lt;</strong></code> by default;
+a custom function(object) for comparing elements can be passed as <span class="c1">3<sup>rd</sup> argument</span></p>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; v {2,3,4,5,4,2,0,7,8};
+<span class="spacer"></span><span class="comment ">// test from 1st to 7th (as shown in image):</span>
+auto <span class="e2">i</span> = <strong>is_sorted_until(</strong><span class="c2">begin(v)</span>, <span class="c2">begin(v)<strong>+7</strong></span><strong>)</strong>;
+<span class="spacer"></span><span class="comment ">// print sorted subrange</span>
+auto const print = <strong>[](</strong>int x<strong>)</strong>{ cout &lt;&lt; x &lt;&lt; ' '; };
+<span class="c6 ">std::</span>for_each(begin(v), <span class="e2">i</span>, print);  <span class="comment ">//&nbsp;2&nbsp;3&nbsp;4&nbsp;5</span></code></pre>
+</div>
+<div class="panel-fold vexpand">
+<a class="nav" id="ranges-is_sorted_until"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/ranges-is_sorted_until_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+<p class="if-opened">compares elements using <code class="inset ">operator <strong>&lt;</strong></code> by default;
+a custom function(object) for comparing elements can be passed as <span class="c1">2<sup>nd</sup> argument</span></p>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; v {2,3,4,5,4,2,0};
+<span class="spacer"></span>auto const <span class="e2">i</span> = <span class="c6 ">std::</span><span class="c6 ">ranges::</span><strong>is_sorted_until(</strong><span class="c2">v</span><strong>)</strong>;
+<span class="spacer"></span><span class="comment ">// print sorted subrange</span>
+auto const print = <strong>[](</strong>int x<strong>)</strong>{ cout &lt;&lt; x &lt;&lt; ' '; };
+<span class="c6 ">std::</span>for_each(begin(v), <span class="e2">i</span>, print);  <span class="comment ">//&nbsp;2&nbsp;3&nbsp;4&nbsp;5</span></code></pre>
+</div></div></div>
+<h2 class="hfold " open><span class="nav-none">Partitioning</span>
+<span class="nav-only">Partition</span></h2>
+<div class="content " ><div class="panel-fold " open><h3>
+<span class="hwide"><code>partition</code><span class="c6 ">&thinsp;/&thinsp;<code>partition_copy</code></span></span>
+<span class="hslim"><code>partition<span class="c6 ">_copy</span></code></span>
+<span class="hnavi">partition</span>
+</h3></div>
+<div class="panel hvtight bg-filled "><div class="panel-fold vexpand" open>
+<a class="nav" id="partition"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/partition_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>auto const <span class="c1">is_odd</span> = <strong>[](</strong>int x<strong>)</strong> { <span class="hslim-br"></span><span class="hslim">  </span>return (x &amp; 1); };
+<span class="spacer"></span><span class="c6 ">std::</span>vector&lt;int&gt; v {3,4,6,5,7,8,0};
+auto <span class="e2">i</span> = <strong>partition(</strong><span class="c2">begin(v)</span>, <span class="c2">end(v)</span>, <span class="c1">is_odd</span><strong>)</strong>;
+<span class="spacer"></span>auto const print = <strong>[](</strong>int x<strong>)</strong>{ cout &lt;&lt; x &lt;&lt; ' '; };
+<span class="comment ">// print 1st subrange</span>
+<span class="c6 ">std::</span>for_each(begin(v), <span class="e2">i</span>, print);  <span class="comment ">//&nbsp;3&nbsp;7&nbsp;5</span>
+<span class="comment ">// print 2nd subrange</span>
+<span class="c6 ">std::</span>for_each(<span class="e2">i</span>, end(v), print);  <span class="comment ">//&nbsp;6&nbsp;4&nbsp;8&nbsp;0</span></code></pre>
+</div>
+<div class="panel-fold vexpand">
+<a class="nav" id="ranges-partition"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/ranges-partition_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>auto const <span class="c1">is_odd</span> = <strong>[](</strong>int x<strong>)</strong> { <span class="hslim-br"></span><span class="hslim">  </span>return (x &amp; 1); };
+<span class="spacer"></span><span class="c6 ">std::</span>vector&lt;int&gt; v {3,4,6,5,7,8,0};
+auto r2 = <span class="c6 ">std::</span><span class="c6 ">ranges::</span><strong>partition(</strong><span class="c2">v</span>, <span class="c1">is_odd</span><strong>)</strong>;
+<span class="spacer"></span><span class="comment ">// print 2nd subrange</span>
+for(int x : r2) { cout &lt;&lt; x &lt;&lt; ' '; }  <span class="comment ">//&nbsp;6&nbsp;4&nbsp;8&nbsp;0</span></code></pre>
+</div>
+<div class="panel-fold vexpand" open>
+<a class="nav" id="partition_copy"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/partition_copy_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>auto const <span class="c1">is_odd</span> = <strong>[](</strong>int x<strong>)</strong> { <span class="hslim-br"></span><span class="hslim">  </span>return (x &amp; 1); };
+<span class="spacer"></span><span class="c6 ">std::</span>vector&lt;int&gt; in {3,4,6,5,0};
+<span class="comment ">// ensure each output could hold all elements:</span>
+<span class="c6 ">std::</span>vector&lt;int&gt; out1; out1.resize(in.size());
+<span class="c6 ">std::</span>vector&lt;int&gt; out2; out2.resize(in.size());
+<span class="spacer"></span>auto ends = <strong>partition_copy(</strong><span class="c2">begin(in)</span>, <span class="c2">end(in)</span>, <span class="c3">begin(out1)</span>, <span class="c4">begin(out2)</span>, <span class="c1">is_odd</span><strong>)</strong>;
+<span class="spacer"></span><span class="comment ">// resize partitions to fit content</span>
+out1.erase(ends.first,  end(out1));
+out2.erase(ends.second, end(out2));
+<span class="spacer"></span><span class="comment ">// print partitions</span>
+for(int x : out1) { cout &lt;&lt; x &lt;&lt; ' '; }  <span class="comment ">//&nbsp;3&nbsp;5</span>
+for(int x : out2) { cout &lt;&lt; x &lt;&lt; ' '; }  <span class="comment ">//&nbsp;4&nbsp;6&nbsp;0</span></code></pre>
+</div>
+<div class="panel-fold vexpand">
+<a class="nav" id="ranges-partition_copy"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/ranges-partition_copy_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>auto const <span class="c1">is_odd</span> = <strong>[](</strong>int x<strong>)</strong> { <span class="hslim-br"></span><span class="hslim">  </span>return (x &amp; 1); };
+<span class="spacer"></span><span class="c6 ">std::</span>vector&lt;int&gt; in {3,4,6,5,0};
+<span class="comment ">// ensure each output could hold all elements:</span>
+<span class="c6 ">std::</span>vector&lt;int&gt; out1; out1.resize(in.size());
+<span class="c6 ">std::</span>vector&lt;int&gt; out2; out2.resize(in.size());
+<span class="spacer"></span>auto ends = <span class="c6 ">std::</span><span class="c6 ">ranges::</span><strong>partition_copy(</strong><span class="c2">in</span>, <span class="c3">begin(out1)</span>, <span class="c4">begin(out2)</span>, <span class="c1">is_odd</span><strong>)</strong>;
+<span class="spacer"></span><span class="comment ">// resize partitions to fit content</span>
+out1.erase(ends.out1, end(out1));
+out2.erase(ends.out2, end(out2));
+<span class="spacer"></span><span class="comment ">// print partitions</span>
+for(int x : out1) { cout &lt;&lt; x &lt;&lt; ' '; }  <span class="comment ">//&nbsp;3&nbsp;5</span>
+for(int x : out2) { cout &lt;&lt; x &lt;&lt; ' '; }  <span class="comment ">//&nbsp;4&nbsp;6&nbsp;0</span></code></pre>
+</div></div>
+<div class="panel-fold " ><h3>
+<span class="nav-none"><code>stable_partition</code></span>
+<span class="nav-only">stable_partition</span>
+</h3></div>
+<div class="panel hvtight bg-filled "><div class="panel-fold vexpand" open>
+<a class="nav" id="stable_partition"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/stable_partition_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>auto const <span class="c1">is_odd</span> = <strong>[](</strong>int x<strong>)</strong> { <span class="hslim-br"></span><span class="hslim">  </span>return (x &amp; 1); };
+<span class="spacer"></span><span class="c6 ">std::</span>vector&lt;int&gt; v {3,4,6,5,7,8,0};
+auto <span class="e2">i</span> = <strong>stable_partition(</strong><span class="c2">begin(v)</span>, <span class="c2">end(v)</span>, <span class="c1">is_odd</span><strong>)</strong>;
+<span class="spacer"></span>auto const print = <strong>[](</strong>int x<strong>)</strong>{ cout &lt;&lt; x &lt;&lt; ' '; };
+<span class="comment ">// print 1st subrange</span>
+<span class="c6 ">std::</span>for_each(begin(v), <span class="e2">i</span>, print);  <span class="comment ">//&nbsp;3&nbsp;5&nbsp;7</span>
+<span class="comment ">// print 2nd subrange</span>
+<span class="c6 ">std::</span>for_each(<span class="e2">i</span>, end(v), print);  <span class="comment ">//&nbsp;4&nbsp;6&nbsp;8&nbsp;0</span></code></pre>
+</div>
+<div class="panel-fold vexpand">
+<a class="nav" id="ranges-stable_partition"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/ranges-stable_partition_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>auto const <span class="c1">is_odd</span> = <strong>[](</strong>int x<strong>)</strong> { <span class="hslim-br"></span><span class="hslim">  </span>return (x &amp; 1); };
+<span class="spacer"></span><span class="c6 ">std::</span>vector&lt;int&gt; v {3,4,6,5,7,8,0};
+auto r2 = <span class="c6 ">std::</span><span class="c6 ">ranges::</span><strong>stable_partition(</strong><span class="c2">v</span>, <span class="c1">is_odd</span><strong>)</strong>;
+<span class="spacer"></span><span class="comment ">// print 2nd subrange</span>
+for(int x : r2) { cout &lt;&lt; x &lt;&lt; ' '; }  <span class="comment ">//&nbsp;4&nbsp;6&nbsp;8&nbsp;0</span></code></pre>
+</div></div>
+<div class="panel-fold " ><h3>
+<span class="nav-none"><code>is_partitioned</code></span>
+<span class="nav-only">is_partitioned</span>
+</h3></div>
+<div class="panel hvtight bg-filled "><div class="panel-fold vexpand" open>
+<a class="nav" id="is_partitioned"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/is_partitioned_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+
+</div>
+<div class="panel cs-light vstretch">
+<pre class="notranslate"><code>auto const <span class="c1">is_odd</span> = <strong>[](</strong>int x<strong>)</strong> { <span class="hslim-br"></span><span class="hslim">  </span>return (x &amp; 1); };
+<span class="c6 ">std::</span>vector&lt;int&gt; v {3,5,7,6,4,8,0};
+cout &lt;&lt; <strong>is_partitioned(</strong><span class="c2">begin(v)</span>, <span class="c2">end(v)</span>, <span class="c1">is_odd</span><strong>)</strong>;  <span class="comment ">//&nbsp;true</span></code></pre>
+</div>
+<div class="panel-fold vexpand">
+<a class="nav" id="ranges-is_partitioned"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/ranges-is_partitioned_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+
+</div>
+<div class="panel cs-light vstretch">
+<pre class="notranslate"><code>auto const <span class="c1">is_odd</span> = <strong>[](</strong>int x<strong>)</strong> { <span class="hslim-br"></span><span class="hslim">  </span>return (x &amp; 1); };
+<span class="c6 ">std::</span>vector&lt;int&gt; v {3,5,7,6,4,8,0};
+cout &lt;&lt; <span class="c6 ">std::</span><span class="c6 ">ranges::</span><strong>is_partitioned(</strong><span class="c2">v</span>, <span class="c1">is_odd</span><strong>)</strong>;  <span class="comment ">//&nbsp;true</span></code></pre>
+</div></div>
+<div class="panel-fold " ><h3>
+<span class="nav-none"><code>partition_point</code></span>
+<span class="nav-only">partition_point</span>
+</h3></div>
+<div class="panel hvtight bg-filled "><div class="panel-fold vexpand" open>
+<a class="nav" id="partition_point"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/partition_point_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+<p class="if-opened">performs a binary search for the first element in a partitioned 
+<span class="c2">input range</span> for which <code><span class="c1"><em>f</em></span></code> is false</p>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>auto const <span class="c1">is_odd</span> = <strong>[](</strong>int x<strong>)</strong> { <span class="hslim-br"></span><span class="hslim">  </span>return (x &amp; 1); };
+<span class="spacer"></span><span class="c6 ">std::</span>vector&lt;int&gt; v {3,5,7,6,4,8,0};
+auto <span class="e2">i</span> = <strong>partition_point(</strong><span class="c2">begin(v)</span>, <span class="c2">end(v)</span>, <span class="c1">is_odd</span><strong>)</strong>;
+<span class="spacer"></span>auto const print = <strong>[](</strong>int x<strong>)</strong>{ cout &lt;&lt; x &lt;&lt; ' '; };
+<span class="comment ">// print 1st subrange</span>
+<span class="c6 ">std::</span>for_each(begin(v), <span class="e2">i</span>, print);  <span class="comment ">//&nbsp;3&nbsp;7&nbsp;5</span>
+<span class="comment ">// print 2nd subrange</span>
+<span class="c6 ">std::</span>for_each(<span class="e2">i</span>, end(v), print);  <span class="comment ">//&nbsp;6&nbsp;4&nbsp;8&nbsp;0</span></code></pre>
+</div>
+<div class="panel-fold vexpand">
+<a class="nav" id="ranges-partition_point"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/ranges-partition_point_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+<p class="if-opened">performs a binary search for the first element in a partitioned 
+<span class="c2">input range</span> for which <code><span class="c1"><em>f</em></span></code> is false</p>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>auto const <span class="c1">is_odd</span> = <strong>[](</strong>int x<strong>)</strong> { <span class="hslim-br"></span><span class="hslim">  </span>return (x &amp; 1); };
+<span class="spacer"></span><span class="c6 ">std::</span>vector&lt;int&gt; v {3,5,7,6,4,8,0};
+auto <span class="e2">i</span> = <span class="c6 ">std::</span><span class="c6 ">ranges::</span><strong>partition_point(</strong><span class="c2">v</span>, <span class="c1">is_odd</span><strong>)</strong>;
+<span class="spacer"></span>auto const print = <strong>[](</strong>int x<strong>)</strong>{ cout &lt;&lt; x &lt;&lt; ' '; };
+<span class="comment ">// print 1st subrange</span>
+<span class="c6 ">std::</span>for_each(begin(v), <span class="e2">i</span>, print);  <span class="comment ">//&nbsp;3&nbsp;7&nbsp;5</span>
+<span class="comment ">// print 2nd subrange</span>
+<span class="c6 ">std::</span>for_each(<span class="e2">i</span>, end(v), print);  <span class="comment ">//&nbsp;6&nbsp;4&nbsp;8&nbsp;0</span></code></pre>
+</div></div></div>
+<h2 class="hfold " open><span class="nav-none">Permutations</span>
+<span class="nav-only">Permute</span></h2>
+<div class="content " ><div class="panel-fold " open><h3>
+<span class="hwide"><code>prev_permutation</code>&thinsp;/&thinsp;<code>next_permutation</code></span>
+<span class="hslim"><code>prev_</code>&thinsp;/&thinsp;<code>next_permutation</code></span>
+<span class="hnavi">prev_/next_permutation</span>
+</h3></div>
+<div class="panel hvtight bg-filled "><div class="panel-fold vexpand" open><div class="block last-if-closed"><img class="" src="cpp/std/algorithms/next_permutation_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+<span class="if-opened"><hr></span>
+<div class="block if-opened"><img class="" src="cpp/std/algorithms/prev_permutation_thumb.svg" style="width:100%; max-width:580px;"}></img></div></div>
+<div class="panel-row first-xxwide"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>array&lt;int,3&gt; v {1,2,3};
+do {
+  for(int x : v) { cout &lt;&lt; x &lt;&lt; ' '; } 
+  cout &lt;&lt; '\n';
+} while( <span class="c6 ">std::</span><strong>next_permutation(</strong><span class="c2">begin(v)</span>,<span class="c2">end(v)</span><strong>)</strong> );</code></pre>
+</div>
+<div class="panel terminal cs-dark ">
+<pre class="notranslate"><code><span class="cat-terminal"></span>
+1 2 3 
+1 3 2 
+2 1 3 
+2 3 1 
+3 1 2 
+3 2 1</code></pre>
+</div></div>
+<div class="panel-fold vexpand" ><div class="block last-if-closed"><img class="" src="cpp/std/algorithms/ranges-next_permutation_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+<span class="if-opened"><hr></span>
+<div class="block if-opened"><img class="" src="cpp/std/algorithms/ranges-prev_permutation_thumb.svg" style="width:100%; max-width:580px;"}></img></div></div>
+<div class="panel-row first-xxwide"{style=""><div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>array&lt;int,3&gt; v {1,2,3};
+do {
+  for(int x : v) { cout &lt;&lt; x &lt;&lt; ' '; } 
+  cout &lt;&lt; '\n';
+} while( <span class="c6 ">std::</span><span class="c6 ">ranges::</span><strong>next_permutation(</strong><span class="c2">v</span><strong>)</strong><span class="e1">.</span><span class="c1">found</span> );</code></pre>
+</div>
+<div class="panel terminal cs-dark ">
+<pre class="notranslate"><code><span class="cat-terminal"></span>
+1 2 3 
+1 3 2 
+2 1 3 
+2 3 1 
+3 1 2 
+3 2 1</code></pre>
+</div></div></div>
+<div class="panel-fold " ><h3>
+<span class="nav-none"><code>is_permutation</code></span>
+<span class="nav-only">is_permutation</span>
+<div class="labels "><a class="lbl " href="tags/c++11.html">C++11</a></div>
+</h3></div>
+<div class="panel hvtight bg-filled "><div class="panel-fold vexpand" open>
+<a class="nav" id="is_permutation"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/is_permutation_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; v1 {1,2,3,4};
+<span class="c6 ">std::</span>vector&lt;int&gt; v2 {4,2,1,3};
+<span class="c6 ">std::</span>vector&lt;int&gt; v3 {5,0,1,2};
+<span class="spacer"></span>cout &lt;&lt; <strong>is_permutation(</strong><span class="c2">begin(v1)</span>, <span class="c2">end(v1)</span>, <span class="c1">begin(</span><span class="e1">v2</span><span class="c1">)</span><strong>)</strong>;  <span class="comment ">//&nbsp;true</span>
+<span class="spacer"></span>cout &lt;&lt; <strong>is_permutation(</strong><span class="c2">begin(v1)</span>, <span class="c2">end(v1)</span>, <span class="c1">begin(</span><span class="e1">v3</span><span class="c1">)</span><strong>)</strong>;  <span class="comment ">//&nbsp;false</span></code></pre>
+</div>
+<div class="panel-fold vexpand">
+<a class="nav" id="ranges-is_permutation"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/ranges-is_permutation_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; v1 {1,2,3,4};
+<span class="c6 ">std::</span>vector&lt;int&gt; v2 {4,2,1,3};
+<span class="c6 ">std::</span>vector&lt;int&gt; v3 {5,0,1,2};
+<span class="spacer"></span>cout &lt;&lt; <span class="c6 ">std::</span><span class="c6 ">ranges::</span><strong>is_permutation(</strong><span class="c2">v1</span>, <span class="e1">v2</span><strong>)</strong>;  <span class="comment ">//&nbsp;true</span>
+<span class="spacer"></span>cout &lt;&lt; <span class="c6 ">std::</span><span class="c6 ">ranges::</span><strong>is_permutation(</strong><span class="c2">v1</span>, <span class="e1">v3</span><strong>)</strong>;  <span class="comment ">//&nbsp;false</span></code></pre>
+</div></div></div></section>
+<section class="epilog">
+<div class="panel-col bg-filled"{style=""><div class="guide-nav">
+<div class="go-prev"><a href="cpp/std/lang/lambda_basics.html"><span class="hwide">Lambdas</span></a></div>
+<div class="go-up"><a href="cpp/beginners_guide.html#std-lib-algorithms">Beginner's Guide <span class="hxwide">/ Algorithms</span></a></div>
+<div class="go-next"><a href="cpp/std/algorithms/element_modification.html"><span class="hwide">Change</span></a></div>
+</div></div>
+</section>
+<section class="epilog">
+<div class="panel-fold " open><h3 class="cat-link">Related <span class="if-closed">&hellip;</span></h3></div>
+<div class="panel "><ul class="resources "><li class="cat-youtube"><a href="https://www.youtube.com/watch?v=ENg-CXKXzKM&list=PLVFrD1dmDdve4h3Shk0uePpXp8JUMM1w5&index=3&t=1s">reverse, rotate <small>by Conor Hoekstra</small></a></li>
+<li class="cat-youtube"><a href="https://www.youtube.com/watch?v=_dC6Pvk0awA&list=PLVFrD1dmDdve4h3Shk0uePpXp8JUMM1w5&index=1&t=223s">sort, stable_sort <small>by Conor Hoekstra</small></a></li>
+<li class="cat-youtube"><a href="https://www.youtube.com/watch?v=kf67rbbR6nk&list=PLVFrD1dmDdve4h3Shk0uePpXp8JUMM1w5&index=10">partition, stable_partition and more <small>by Conor Hoekstra</small></a></li>
+<li class="cat-youtube"><a href="https://www.youtube.com/watch?v=bRxzCeyOKD0&list=PLVFrD1dmDdve4h3Shk0uePpXp8JUMM1w5&index=4">next_permutation, prev_permutation <small>by Conor Hoekstra</small></a></li>
+<li class="cat-book"><a href="https://isocpp.org/files/papers/4-Tour-Algo-draft.pdf">A Tour of C++: Containers and Algorithms</a></li>
+
+<hr>
+<li class="cat-overview"><a href="cpp/std/algorithms.html">Standard Algorithms Overview</a></li>
+
+<li class="cat-article"><a href="cpp/std/algorithms/intro.html">Standard Algorithms Introduction</a></li>
+
+<hr>
+<li class="cat-article"><a href="cpp/std/sequence_containers.html">Standard Sequence Containers <small>(<code>vector</code>, <code>deque</code>, <code>list</code>, &hellip;)</small></a></li>
+
+<li class="cat-article"><a href="cpp/std/associative_containers.html">Standard Associative Containers <small>(<code>map</code>, <code>set</code>, &hellip;)</small></a></li>
+
+<li class="cat-article"><a href="cpp/std/sequence_views.html">Standard Sequence Views</a></li>
+
+<hr>
+<li class="cat-cppreference"><a href="https://en.cppreference.com/w/cpp/algorithm">cppreference: Algorithms Library</a></li>
+<li class="cat-cppreference"><a href="https://en.cppreference.com/w/cpp/container">cppreference: Containers Library</a></li>
+<hr>
+<li class="cat-image"><a href="cpp/std/algorithms.png">Algorithms Overview Sheet</a></li>
+</ul></div>
+</section>
+<section class="context">
+<ul class="linear-tags "><li><a href="tags/c++.html">C++</a></li><li><a href="tags/c++11.html">C++11</a></li><li><a href="tags/c++20.html">C++20</a></li><li><a href="tags/algorithms.html">algorithms</a></li><li><a href="tags/article.html">article</a></li><li><a href="tags/beginner-level.html">beginner-level</a></li><li><a href="tags/std-algorithms.html">std-algorithms</a></li><li><a href="tags/std-library.html">std-library</a></li></ul>
+</section>
+<section class="metadata">
+<p><span class="cat-date">Last updated: 2021-01-31</span></p>
+</section>
+</article></div>
+<footer>
+<div id="footer-top"><div id="footer-top-content"><div id="footer-top-left"><nav><ul class="plain ">
+<li>
+<a href="index.html" class="cat-home" >Home</a>
+</li>
+
+<li>
+<a href="tags/news.html" class="cat-news" >News</a>
+</li>
+
+<li>
+<a href="tags/article.html" class="cat-article" >Articles</a>
+</li>
+
+<li>
+<a href="tags/featured.html" class="cat-featured" >Featured</a>
+</li>
+
+<li>
+<a href="tags/guide.html" class="cat-guide" >Guides</a>
+</li>
+
+<li>
+<a href="tags/list.html" class="cat-list" >Lists</a>
+</li>
+
+<li>
+<a href="about.html" class="cat-about" >About</a>
+</li>
+
+<li>
+<a href="privacy.html" class="cat-contact" >Privacy</a>
+</li>
+
+<li>
+<a href="https://twitter.com/hackingcpp" class="cat-twitter" >Twitter</a>
+</li></ul></nav></div>
+<div id="footer-top-right"><h2 class="cat-tags nav-none">
+<a href="tags.html" >Tags</a>
+</h2>
+<ul class="topic-cloud "><li><a style="font-size:117.3739395094748%;" href="tags/algorithms.html">algorithms</a></li> <li><a style="font-size:74.685320232403%;" href="tags/allocators.html">allocators</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/arrays.html">arrays</a></li> <li><a style="font-size:154.85882183899798%;" href="tags/article.html">article</a></li> <li><a style="font-size:150.60732445608994%;" href="tags/beginner-level.html">beginner-level</a></li> <li><a style="font-size:60.0%;" href="tags/blogs.html">blogs</a></li> <li><a style="font-size:60.0%;" href="tags/books.html">books</a></li> <li><a style="font-size:60.0%;" href="tags/build-systems.html">build-systems</a></li> <li><a style="font-size:160.1565121053651%;" href="tags/c++.html">C++</a></li> <li><a style="font-size:60.0%;" href="tags/c++-standardization.html">C++-standardization</a></li> <li><a style="font-size:132.0592597418778%;" href="tags/c++11.html">C++11</a></li> <li><a style="font-size:118.74128092961203%;" href="tags/c++14.html">C++14</a></li> <li><a style="font-size:118.74128092961203%;" href="tags/c++17.html">C++17</a></li> <li><a style="font-size:124.50258791586917%;" href="tags/c++20.html">C++20</a></li> <li><a style="font-size:74.685320232403%;" href="tags/c++98.html">C++98</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/c-style.html">C-style</a></li> <li><a style="font-size:60.0%;" href="tags/c-vs-c++.html">C-vs-C++</a></li> <li><a style="font-size:60.0%;" href="tags/cat-casts.html">cat-casts</a></li> <li><a style="font-size:106.55136375888092%;" href="tags/classes.html">classes</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/code-editors.html">code-editors</a></li> <li><a style="font-size:74.685320232403%;" href="tags/code-formatters.html">code-formatters</a></li> <li><a style="font-size:74.685320232403%;" href="tags/command-line.html">command-line</a></li> <li><a style="font-size:106.55136375888092%;" href="tags/community.html">community</a></li> <li><a style="font-size:60.0%;" href="tags/comparisons.html">comparisons</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/compilers.html">compilers</a></li> <li><a style="font-size:60.0%;" href="tags/concepts.html">concepts</a></li> <li><a style="font-size:60.0%;" href="tags/conferences.html">conferences</a></li> <li><a style="font-size:60.0%;" href="tags/const.html">const</a></li> <li><a style="font-size:60.0%;" href="tags/constexpr.html">constexpr</a></li> <li><a style="font-size:110.802861141789%;" href="tags/containers.html">containers</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/control-flow.html">control-flow</a></li> <li><a style="font-size:114.34214226160506%;" href="tags/custom-types.html">custom-types</a></li> <li><a style="font-size:74.685320232403%;" href="tags/data-structures.html">data-structures</a></li> <li><a style="font-size:60.0%;" href="tags/debugging.html">debugging</a></li> <li><a style="font-size:104.05596069720902%;" href="tags/design.html">design</a></li> <li><a style="font-size:106.55136375888092%;" href="tags/diagnostics.html">diagnostics</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/exceptions.html">exceptions</a></li> <li><a style="font-size:89.370640464806%;" href="tags/featured.html">featured</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/file-io.html">file-io</a></li> <li><a style="font-size:60.0%;" href="tags/find.html">find</a></li> <li><a style="font-size:60.0%;" href="tags/find_if.html">find_if</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/functional-prog.html">functional-prog</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/functions.html">functions</a></li> <li><a style="font-size:60.0%;" href="tags/gallery.html">gallery</a></li> <li><a style="font-size:94.09825763003434%;" href="tags/generic-prog.html">generic-prog</a></li> <li><a style="font-size:60.0%;" href="tags/groups.html">groups</a></li> <li><a style="font-size:60.0%;" href="tags/guide.html">guide</a></li> <li><a style="font-size:74.685320232403%;" href="tags/guidelines.html">guidelines</a></li> <li><a style="font-size:60.0%;" href="tags/hash-map.html">hash-map</a></li> <li><a style="font-size:60.0%;" href="tags/hash-set.html">hash-set</a></li> <li><a style="font-size:60.0%;" href="tags/hashing.html">hashing</a></li> <li><a style="font-size:60.0%;" href="tags/header-files.html">header-files</a></li> <li><a style="font-size:74.685320232403%;" href="tags/heap.html">heap</a></li> <li><a style="font-size:60.0%;" href="tags/ides.html">ides</a></li> <li><a style="font-size:97.96100211184347%;" href="tags/idiom.html">idiom</a></li> <li><a style="font-size:97.96100211184347%;" href="tags/io.html">io</a></li> <li><a style="font-size:94.09825763003434%;" href="tags/iostreams.html">iostreams</a></li> <li><a style="font-size:74.685320232403%;" href="tags/iterators.html">iterators</a></li> <li><a style="font-size:74.685320232403%;" href="tags/language-mechanism.html">language-mechanism</a></li> <li><a style="font-size:60.0%;" href="tags/language-references.html">language-references</a></li> <li><a style="font-size:60.0%;" href="tags/learning.html">learning</a></li> <li><a style="font-size:60.0%;" href="tags/libraries.html">libraries</a></li> <li><a style="font-size:74.685320232403%;" href="tags/linker.html">linker</a></li> <li><a style="font-size:129.82704563832138%;" href="tags/list.html">list</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/low-level.html">low-level</a></li> <li><a style="font-size:60.0%;" href="tags/map.html">map</a></li> <li><a style="font-size:108.78357786243735%;" href="tags/memory.html">memory</a></li> <li><a style="font-size:120.02570076180908%;" href="tags/modern-c++.html">modern-C++</a></li> <li><a style="font-size:74.685320232403%;" href="tags/move-semantics.html">move-semantics</a></li> <li><a style="font-size:126.42995591581257%;" href="tags/news.html">news</a></li> <li><a style="font-size:74.685320232403%;" href="tags/oop.html">oop</a></li> <li><a style="font-size:60.0%;" href="tags/organizations.html">organizations</a></li> <li><a style="font-size:60.0%;" href="tags/package-manager.html">package-manager</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/paradigm.html">paradigm</a></li> <li><a style="font-size:60.0%;" href="tags/pattern.html">pattern</a></li> <li><a style="font-size:60.0%;" href="tags/people.html">people</a></li> <li><a style="font-size:60.0%;" href="tags/podcasts.html">podcasts</a></li> <li><a style="font-size:60.0%;" href="tags/pointers.html">pointers</a></li> <li><a style="font-size:60.0%;" href="tags/preprocessor.html">preprocessor</a></li> <li><a style="font-size:60.0%;" href="tags/profiling.html">profiling</a></li> <li><a style="font-size:74.685320232403%;" href="tags/randomness.html">randomness</a></li> <li><a style="font-size:60.0%;" href="tags/ranges.html">ranges</a></li> <li><a style="font-size:60.0%;" href="tags/references.html">references</a></li> <li><a style="font-size:60.0%;" href="tags/set.html">set</a></li> <li><a style="font-size:60.0%;" href="tags/social-media.html">social-media</a></li> <li><a style="font-size:60.0%;" href="tags/sorted-sequences.html">sorted-sequences</a></li> <li><a style="font-size:89.370640464806%;" href="tags/stack.html">stack</a></li> <li><a style="font-size:60.0%;" href="tags/standardization.html">standardization</a></li> <li><a style="font-size:114.34214226160506%;" href="tags/std-algorithms.html">std-algorithms</a></li> <li><a style="font-size:89.370640464806%;" href="tags/std-containers.html">std-containers</a></li> <li><a style="font-size:127.33164257664949%;" href="tags/std-library.html">std-library</a></li> <li><a style="font-size:60.0%;" href="tags/std-macros.html">std-macros</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/std-vector.html">std-vector</a></li> <li><a style="font-size:60.0%;" href="tags/strings.html">strings</a></li> <li><a style="font-size:60.0%;" href="tags/style.html">style</a></li> <li><a style="font-size:60.0%;" href="tags/taste.html">taste</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/templates.html">templates</a></li> <li><a style="font-size:60.0%;" href="tags/testing.html">testing</a></li> <li><a style="font-size:74.685320232403%;" href="tags/toolchain.html">toolchain</a></li> <li><a style="font-size:115.91222626883169%;" href="tags/tools.html">tools</a></li> <li><a style="font-size:74.685320232403%;" href="tags/traversal.html">traversal</a></li> <li><a style="font-size:117.3739395094748%;" href="tags/types.html">types</a></li> <li><a style="font-size:60.0%;" href="tags/user.html">user</a></li> <li><a style="font-size:60.0%;" href="tags/version-control.html">version-control</a></li> <li><a style="font-size:60.0%;" href="tags/views.html">views</a></li> <li><a style="font-size:60.0%;" href="tags/vim.html">VIM</a></li> <li><a style="font-size:60.0%;" href="tags/vim-plugins.html">VIM-plugins</a></li> <li><a style="font-size:60.0%;" href="tags/warnings.html">warnings</a></li> <li><a style="font-size:114.34214226160506%;" href="tags/websites.html">websites</a></li> 
+</ul></div></div></div>
+<div id="footer-bottom"><div id="footer-bottom-content">&copy;&nbsp;2019-2021&ensp;André&nbsp;Müller&emsp;&emsp;</div></div>
+</footer>
+<script src="assets/content.js?v=26-1"></script>
+</body>
+</html>
