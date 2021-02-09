@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang='en-US'>
+<head>
+<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+<base href="https://vip666mylife999.github.io/hackingcpp.com">
+<link rel="icon" href="assets/hcpp-icon.png">
+<link rel="stylesheet" type="text/css" href="assets/style.css?v=26">
+<link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<title>h/cpp - Tool Ecosystem</title>
+<meta name="description" content="An overview of the C++ tool ecosystem: compilers, build systems, debuggers, sanitizers, analyzers, profilers, package managers and online tools.">
+<meta name="keyword" content="cpp eco tool tooling toolchain compile compiler debug debugging analyze analysis static dynamic instrument intrumentation version">
+<meta name="author" content="André Müller">
+<meta name="date" content="2021-01-31">
+<meta name="copyright" content="2019-2021&ensp;André Müller">
+<meta name="hcpp-page-category" content="cat-overview">
+<meta name="hcpp-tags" content="C++ article tools ">
+</head>
+<body>
+<div id="top-nav"><div id="titlebar" class="boxed-wide"><div id="main-branding">
+<a href="index.html"  id="main-logo" title="home"><span class="hwide"><img src="assets/hcpp.svg" style="max-width:100%;height:40;"></img></span>
+<span class="hslim"><img src="assets/hcpp-square.svg" style="max-width:100%;height:40;"></img></span></a>
+
+<div id="main-title">
+<a href="index.html"  title="home">hacking&nbsp;C++</a>
+</div></div>
+<div id="main-menu"><div class="entry "><a href="tags/news.html">News</a></div>
+<div class="submenu "><a>Learning</a><div class="submenu-dropdown">
+<a href="cpp/beginners_guide.html" >Beginner's Guide to C++</a>
+
+<hr>
+
+<a href="cpp/std/containers.html" >Standard Library Containers</a>
+
+
+<a href="cpp/std/algorithms.html" >Standard Library Algorithms</a>
+
+<hr>
+
+<a href="cpp/cheat_sheets.html" >Infographics / Cheat Sheets</a>
+
+
+<a href="tags/article.html" >All Articles</a>
+
+<hr>
+
+<a href="dev/web_learning.html" >Online Learning</a>
+
+
+<a href="cpp/books.html" >Books</a>
+</div></div>
+<div class="submenu "><a>Links</a><div class="submenu-dropdown">
+<a href="cpp/community.html" >Community Resources</a>
+
+
+<a href="cpp/tools/ecosystem.html" >Tool Ecosystem</a>
+
+<hr>
+
+<a href="tags/list.html" >All Resource Lists</a>
+
+<hr>
+
+<a href="dev/vim_plugins.html" >VIM Plugins</a>
+</div></div>
+<div class="submenu "><a>About</a><div class="submenu-dropdown">
+<a href="about.html" >Why &amp; Who</a>
+
+
+<a href="privacy.html" >Privacy</a>
+</div></div></div>
+<div id="main-socialbar">
+<a href="https://twitter.com/hackingcpp" ><span class="cat-twitter"></span></a>
+</div>
+<div class="navlinks" id="nav-path"></div>
+<div id="searchbar"><div id="searchbox"><input id="search-input"></input>
+<button id="search-clear"></button>
+<button id="search-run"></button>
+<button id="search-close"></button></div></div>
+<div class="hamburger " id="main-hamburger"><button title=""></button><div class="hamburger-dropdown"><a class="nav-icon-collapse-all" onclick="collapse_all_major_folds()">Collapse <strong>All</strong> Levels</a>
+
+<a class="nav-icon-collapse" onclick="collapse_major_folds()">Collapse Top Level</a>
+
+<a class="nav-icon-expand" onclick="expand_major_folds()">Expand Top Level</a>
+
+<a class="nav-icon-expand-all" onclick="expand_all_major_folds()">Expand <strong>All</strong> Levels</a>
+
+<hr>
+
+<a href="tags/news.html" class="cat-news" >News</a>
+
+
+<a href="tags/featured.html" class="cat-featured" >Featured</a>
+
+
+<a href="tags/article.html" class="cat-article" >Articles</a>
+
+
+<a href="cpp/beginners_guide.html" class="cat-guide" >Beginner's Guide to C++</a>
+
+
+<a href="tags/list.html" class="cat-list" >Lists</a>
+
+<hr>
+
+<a href="https://twitter.com/hackingcpp" ><span class="cat-twitter"></span> @hackingcpp</a>
+
+
+<a href="about.html" class="cat-about" >About</a>
+
+
+<a href="privacy.html" class="cat-contact" >Privacy</a>
+
+
+<a href="index.html" class="cat-home" >Home</a>
+</div></div></div>
+<nav id="guide-bar" class="boxed-wide"></nav></div>
+<div id="drawer-top" class="boxed-wide"><div id="search-results"><div id="search-header"><h1 class="cat-search" id="search-title"></h1></div>
+<div id="search-locations"><ul class="resources" id="search-location-items"></ul></div>
+<div id="search-footer"></div></div></div>
+
+<div id="main-content" class="boxed-wide "><article class="boxed-normal ">
+<header class="plain">
+<h1>
+<span class="hwide">C++ Tool Ecosystem</span><span class="hslim">C++ Tool Ecosystem</span><span class="hnavi">C++ Tools</span></h1>
+<nav id="page-navbar" class=""></nav>
+</header>
+<section class="main plain"><h2 class="hfold " open><span class="nav-none">Compilers</span>
+<span class="nav-only">Compile</span></h2>
+<div class="content " ><div class="panel-fold " open><h3><span class="nav-none">Offline Compilers</span>
+<span class="nav-only">Offline</span></h3></div>
+<div class="panel-col "{style=""><table class="hborders vstriped resources "><tbody><tr><td><strong>
+<a href="https://www.gnu.org/software/gcc" >GNU g++</a>
+</strong></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-osx "></li></ul>
+<ul class="symbols vcompact">
+<li class="cat-windows">Windows 10: 
+<a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10" >WSL (Windows Subsystem for Linux)</a>
+</li>
+
+<li class="cat-windows">Windows: 
+<a href="https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/installer/mingw-w64-install.exe/download" >MinGW-w64</a>
+ project or 
+<a href="https://nuwen.net/mingw.html" >STL's MinGW distro</a>
+</li></ul></td></tr>
+<tr><td><strong>
+<a href="https://llvm.org" >LLVM clang++</a>
+</strong></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-windows "></li><li class="cat-osx "></li></ul>
+<p>
+<a href="http://releases.llvm.org/download.html" >download page</a>
+</p></td></tr>
+<tr><td><strong>
+<a href="https://docs.microsoft.com/en-us/cpp" >Microsoft Visual C++</a>
+</strong></td>
+<td><ul class="symbols vcompact linear"><li class="cat-windows "></li><li class="cat-osx "></li></ul>
+<p>Only newer versions are largely conforming to the 
+modern ISO C++ standard(s).</p></td></tr>
+<tr><td><strong>
+<a href="https://software.intel.com/en-us/c-compilers" >Intel ICC</a>
+</strong></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-windows "></li><li class="cat-osx "></li></ul></td></tr>
+<tr><td><strong>
+<a href="https://www.pgroup.com" >NVIDIA PGI</a>
+</strong></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-windows "></li><li class="cat-osx "></li></ul></td></tr>
+<tr><td><strong>
+<a href="https://www.embarcadero.com/free-tools/ccompile" >Embarcadero C++ Compiler</a>
+</strong></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-windows "></li><li class="cat-osx "></li><li class="cat-ios "></li><li class="cat-android "></li></ul>
+<p>bundled with 
+<a href="https://www.embarcadero.com/products/cbuilder" >C++Builder</a>
+</p></td></tr>
+<tr><td><strong>
+<a href="https://www.oracle.com/tools/developerstudio" >Oracle C++ Compiler</a>
+</strong></td>
+<td><ul class="symbols vcompact linear"><li class="cat-red-hat "></li><li class="cat-solaris "></li></ul>
+<p>bundled with 
+<a href="https://www.oracle.com/technetwork/server-storage/developerstudio/overview/index.html" >Oracle Developer Studio</a>
+</p></td></tr>
+<tr><td><strong>
+<a href="https://www.ibm.com/us-en/marketplace/xl-cpp-linux-compiler-power" >IBM XL C++</a>
+</strong></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-ibm-aix "></li><li class="cat-ibm-zos "></li><li class="cat-ibm-zvm "></li></ul></td></tr></tbody></table></div>
+<div class="panel-fold " open><h3><span class="nav-none">Online Compilers</span>
+<span class="nav-only">Online</span></h3></div>
+<div class="panel-col "{style=""><table class="hborders vstriped resources "><tbody><tr><td><p><strong>
+<a href="https://godbolt.org" class="cat-star" >Compiler Explorer</a>
+</strong></p></td>
+<td><ul>
+<li>lets you run code through many different compilers</li>
+
+<li>shows nicely annotated assembly output</li>
+
+<li>lots of compilers with lots of different versions,
+also with experimental features</li>
+
+<li>supports several popular libraries (ranges, {fmt}, &hellip;)</li>
+
+<li>great text editor with multiple cursors, VIM mode, dark mode, &hellip;</li>
+
+<li>code round-trip between Compiler Explorer, C++ Insights and Quick Bench possible</li></ul></td></tr>
+<tr><td><strong>
+<a href="https://wandbox.org" >Wandbox</a>
+</strong></td>
+<td><ul class="linear-comma ">
+<li>gcc</li>
+
+<li>clang</li>
+
+<li>C++03 - C++2a</li>
+
+<li>Boost</li></ul></td></tr>
+<tr><td><strong>
+<a href="http://cpp.sh" >C++ shell</a>
+</strong></td>
+<td><ul class="linear-comma ">
+<li>gcc 4.9</li>
+
+<li>Boost 1.55</li>
+
+<li>C++03 - 14</li></ul></td></tr>
+<tr><td><strong>
+<a href="https://ideone.com" >IDEone</a>
+</strong></td>
+<td><ul class="linear-comma ">
+<li>C++14</li></ul></td></tr></tbody></table></div></div>
+<h2 class="hfold " open><span class="nav-none">Debugging</span>
+<span class="nav-only">Debug</span></h2>
+<div class="content " ><div class="panel-col "{style=""><table class="hborders vstriped resources "><tbody><tr><td><p><strong>
+<a href="https://www.gnu.org/software/gdb" >gdb</a>
+</strong></p>
+<ul class="resources-small "><li class="cat-slides"><a href="cpp/tools/gdb_intro.html">Intro</a></li>
+</ul></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-windows "></li><li class="cat-osx "></li></ul>
+<p>the GNU debugger</p></td></tr>
+<tr><td><p><strong>
+<a href="https://lldb.llvm.org" >lldb</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-windows "></li><li class="cat-osx "></li></ul>
+<p>the LLVM project's debugger</p></td></tr>
+<tr><td><p><strong>
+<a href="https://rr-project.org" >rr</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-wsl "></li><li class="cat-osx "></li></ul>
+<ul>
+<li>records program state over time</li>
+
+<li>replay &amp; debug same recording many times</li>
+
+<li>reverse execution</li>
+
+<li>chaos mode for catching intermittent bugs</li>
+
+<li>claims to be faster and more memory efficient than gdb</li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/debugger-download-tools" >WinDbg</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-windows "></li></ul>
+<p>does also provide record &amp; replay debugging like rr
+(here called <q>time travel debugging</q>)</p></td></tr></tbody></table></div>
+<div class="panel-fold " open><h3><span class="nav-none"><code>gdb</code> Frontends</span>
+<span class="nav-only">gdb</span></h3></div>
+<div class="panel-col "{style=""><table class="hborders vstriped resources "><tbody><tr><td><p><strong>
+<a href="https://cgdb.github.io" >cgdb</a>
+</strong></p>
+<ul class="resources-small "><li class="cat-slides"><a href="cpp/tools/gdb_intro.html">Example Session</a></li>
+</ul></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-windows "></li><li class="cat-wsl "></li><li class="cat-osx "></li></ul>
+<ul>
+<li>runs in the command line</li>
+
+<li>split screen with source code window</li>
+
+<li>shows break points and current instruction</li>
+
+<li>install on Ubuntu/Debian/WSL: 
+<kbd>sudo apt-get install -y cgdb</kbd></li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://gdbgui.com" >gdbgui</a>
+</strong></p></td>
+<td><ul>
+<li>browser-based frontend for gdb</li>
+
+<li>install via pip: 
+<kbd>sudo pip install gdbgui</kbd></li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://www.gnu.org/software/ddd" >DDD</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-windows "></li><li class="cat-wsl-x "></li></ul>
+<ul>
+<li>official GNU debugger frontend</li>
+
+<li>The UI is a bit old-fashioned, but it is actually 
+quite usable if you spend some time with it.</li>
+
+<li>install on Ubuntu/Debian/WSL: 
+<kbd>sudo apt-get install -y ddd</kbd></li></ul></td></tr>
+<tr><td><p><strong>
+<a href="http://www.wingdb.com" >WinGDB</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-windows "></li></ul>
+<p>debugging with GDB in 
+
+<a href="https://visualstudio.microsoft.com" >Microsoft Visual Studio</a>
+</p></td></tr>
+<tr><td><p><strong>
+<a href="https://www.onlinegdb.com/" >Online GDB</a>
+</strong></p></td>
+<td>Online compiler and debugger tool for C, C++, Python and many other languages.</td></tr></tbody></table></div></div>
+<h2 class="hfold " open><span class="nav-none">Code Analysis</span>
+<span class="nav-only">Analyze</span></h2>
+<div class="content " ><div class="panel-fold " open><h3>Sanitizers</h3></div>
+<div class="panel-col "{style=""><table class="hborders vstriped resources "><tbody><tr><td><p><strong>
+<a href="https://clang.llvm.org/docs/AddressSanitizer.html" >ASAN</a>
+</strong></p>
+<ul class="resources-small "><li class="cat-slides"><a href="cpp/tools/asan.html">Intro</a></li>
+</ul></td>
+<td><ul class="plain vcompact">
+<li><kbd>g++ -fsanitize=address</kbd></li>
+
+<li><kbd>clang++ -fsanitize=address</kbd></li>
+
+<li>MSVC (as of 10/2019)</li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html" >UBSAN</a>
+</strong></p>
+<ul class="resources-small "><li class="cat-slides"><a href="cpp/tools/ubsan.html">Intro</a></li>
+</ul></td>
+<td><ul class="plain vcompact">
+<li><kbd>g++ -fsanitize=undefined</kbd></li>
+
+<li><kbd>clang++ -fsanitize=undefined</kbd></li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://clang.llvm.org/docs/LeakSanitizer.html" >LeakSanitizer</a>
+</strong></p></td>
+<td><ul class="plain vcompact">
+<li><kbd>g++ -fsanitize=leak</kbd></li>
+
+<li><kbd>clang++ -fsanitize=leak</kbd></li></ul></td></tr>
+<tr><td><p><strong><a>ThreadSanitizer</a>
+</strong></p></td>
+<td><ul class="plain vcompact">
+<li><kbd>g++ -fsanitize=thread</kbd></li>
+
+<li><kbd>clang++ -fsanitize=thread</kbd></li></ul></td></tr></tbody></table></div>
+<div class="panel-fold " open><h3><span class="hwide">Stand-Alone Analysis Tools</span>
+<span class="hslim">Stand-Alone Tools</span>
+<span class="hnavi">Stand-Alone</span></h3></div>
+<div class="panel-col "{style=""><table class="hborders vstriped resources "><tbody><tr><td><p><strong>
+<a href="http://valgrind.org" >valgrind</a>
+</strong></p>
+<ul class="plain vcompact">
+<li><a class="cat-slides" href="cpp/tools/valgrind.html" title="click to go to page &quot;valgrind&quot;">
+
+Intro
+</a></li>
+<li class="cat-tutorial"><a href="http://valgrind.org/docs/manual/quick-start.html">Quick Start</a></li>
+</ul></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-wsl "></li><li class="cat-osx "></li></ul>
+<ul class="vcompact">
+<li>code instrumentation framework</li>
+
+<li>runs program on a VM</li>
+
+<li><kbd>--tool=memcheck</kbd> leak, invalid read/write detection</li>
+
+<li><kbd>--tool=callgrind</kbd> runtime profiling</li>
+
+<li><kbd>--tool=cachegrind</kbd> cache profiling</li>
+
+<li><kbd>--tool=massif</kbd> heap memory profiling</li>
+
+<li>integration into various IDEs</li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://drmemory.org" >Dr. Memory</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-windows "></li><li class="cat-osx "></li><li class="cat-android "></li></ul>
+<ul class="vcompact">
+<li>dynamic instrumentation (runs on unmodified binaries)</li>
+
+<li>leak detection</li>
+
+<li>invalid memory read/write detection</li></ul></td></tr>
+<tr><td><p><strong><a>HeapTrack</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li></ul>
+<ul class="vcompact">
+<li>heap memory profiler</li>
+
+<li>annotation of memory allocations</li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/application-verifier" >Application Verifier</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-windows "></li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://www.deleaker.com/" >Deleaker</a>
+</strong></p>
+<ul class="plain vcompact">
+<li>
+<a href="https://www.deleaker.com/docs/deleaker/tutorial.html" class="cat-tutorial" >Official Tutorial</a>
+</li></ul></td>
+<td><ul class="symbols vcompact linear"><li class="cat-windows "></li></ul>
+<ul class="vcompact">
+<li>memory leak detection</li>
+
+<li>integration into various IDEs</li></ul></td></tr></tbody></table></div></div>
+<h2 class="hfold " open><span class="nav-none">Profiling &amp; Benchmarking</span>
+<span class="nav-only">Profile</span></h2>
+<div class="content " ><div class="panel-fold " open><h3><span class="nav-none">Profiling Applications</span>
+<span class="nav-only">Applications</span></h3></div>
+<div class="panel-col "{style=""><table class="hborders vstriped resources "><tbody><tr><td><p><strong>
+<a href="https://sourceware.org/binutils/docs/gprof" >GNU Profiler (gprof)</a>
+
+<ul class="resources-small "><li class="cat-tutorial"><a href="cpp/tools/profiling.html#gprof">Quick Tutorial</a></li>
+</ul></strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-windows "></li><li class="cat-osx "></li></ul>
+<ul class="vcompact">
+<li>ubiquitous</li>
+
+<li>free software</li>
+
+<li>some IDEs can present gprof results in a GUI</li></ul></td></tr>
+<tr><td><p><strong class="cat-star">
+<a href="https://software.intel.com/en-us/vtune" >Intel VTune Profiler</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-windows "></li><li class="cat-osx "></li></ul>
+<ul class="vcompact">
+<li>free of charge</li>
+
+<li>GUI &amp; command line interface</li>
+
+<li>sampling-based profiling</li>
+
+<li>hardware event sampling for Intel chips</li>
+
+<li>locks &amp; waits analysis</li>
+
+<li>memory access analysis</li>
+
+<li>storage analysis</li>
+
+<li>integrates with MS Visual Studio</li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://oprofile.sourceforge.io/news" >OProfile</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://perf.wiki.kernel.org/index.php/Main_Page" >perf</a>
+</strong></p>
+<ul class="resources-small "><li class="cat-tutorial"><a href="https://perf.wiki.kernel.org/index.php/Tutorial">Official Tutorial</a></li>
+
+<li class="cat-tutorial"><a href="http://sandsoftwaresound.net/perf/perf-tutorial-hot-spots">Tutorial</a></li>
+</ul></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li></ul>
+<ul class="plain vcompact">
+<li>free software</li></ul></td></tr>
+<tr><td><p><strong>
+<a href="http://www.valgrind.org/info/tools.html" >Valgrind</a>
+</strong></p>
+(cachegrind, callgrind)</td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-wsl "></li><li class="cat-osx "></li><li class="cat-solaris "></li><li class="cat-bsd "></li></ul>
+<ul class="plain vcompact">
+<li>free software</li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://help.apple.com/instruments/mac/current" >Apple Instruments</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-osx "></li></ul>
+<ul class="plain vcompact">
+<li>part of XCode</li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://developer.nvidia.com/nsight-compute-2019_5" >NVIDIA Nsight Compute</a>
+</strong></p></td>
+<td>Host:
+<ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-osx "></li><li class="cat-windows "></li></ul>
+<ul class="plain vcompact">
+<li>profiling for NVIDIA GPUs (architectures: Paspal, Volta, Turing)</li>
+
+<li>supplants NVIDIA Visual Profiler</li></ul></td></tr>
+<tr><td><p><strong>
+<a href="http://dtrace.org/blogs/about" >DTrace</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-osx "></li><li class="cat-solaris "></li><li class="cat-bsd "></li><li class="cat-windows "></li></ul>
+<ul class="plain vcompact">
+<li>free software</li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://optick.dev" >Optick</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-windows "></li><li class="cat-osx "></li></ul>
+<ul class="plain vcompact">
+<li>instrumentation-based and sampling-based profiling</li>
+
+<li>GPU counters</li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://www.glowcode.com" >GlowCode</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-windows "></li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://smartbear.de/product/aqtime-pro/overview" >SmartBear AQTime</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-windows "></li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://www.arm.com/products/development-tools/server-and-hpc/forge/map" >Arm MAP</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://www.oracle.com/technetwork/server-storage/solarisstudio/features/performance-analyzer-2292312.html" >Oracle Performance Analyzer</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-windows "></li><li class="cat-osx "></li><li class="cat-solaris "></li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://github.com/yse/easy_profiler" >Easy Profiler</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-windows "></li><li class="cat-osx "></li><li class="cat-android "></li><li class="cat-qnx "></li></ul></td></tr></tbody></table></div>
+<div class="panel-fold " open><h3><span class="hwide">Benchmarking Libraries / Frameworks</span>
+<span class="hslim">Libraries / Frameworks</span>
+<span class="hnavi">Libraries</span></h3></div>
+<div class="panel-col "{style=""><table class="hborders vstriped resources "><tbody><tr><td><p><strong>
+<a href="https://github.com/google/benchmark" >Google Benchmark</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-license">Apache-2.0
+</li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://github.com/gperftools/gperftools/wiki" >gperftools</a>
+
+<small>(originally Google Performance Tools)</small></strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-license">BSD-3-Clause
+</li></ul>
+<ul class="vcompact">
+<li>high-performance multithreaded <code>malloc()</code></li>
+
+<li>heap checker</li>
+
+<li>heap profiler</li>
+
+<li>cpu profiler</li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://github.com/DigitalInBlue/Celero" >Celero</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-license">Apache-2.0
+</li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://plflib.org/nanotimer.htm" ><code>plf::nanotimer</code></a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-license">zlib
+</li></ul>
+simple, cross-platform microsecond-precision timer class</td></tr></tbody></table></div></div>
+<h2 class="hfold " open><span class="nav-none">Build Systems</span>
+<span class="nav-only">Build</span></h2>
+<div class="content " ><div class="panel-col "{style=""><table class="hborders vstriped resources "><tbody><tr><td><p><strong>
+<a href="https://www.gnu.org/software/make" >GNU Make</a>
+</strong></p>
+<ul class="symbols "><li class="cat-tutorial"><a href="https://gist.github.com/isaacs/62a2d1825d04437c6f08">Tutorial 1</a></li>
+
+<li class="cat-tutorial"><a href="https://makefiletutorial.com">Tutorial 2</a></li>
+
+<li class="cat-tutorial"><a href="http://web.mit.edu/gnu/doc/html/make_2.html">Tutorial 3</a></li>
+
+<li class="cat-docs"><a href="https://www.gnu.org/software/make/manual/make.html">Manual</a></li>
+
+<li class="cat-image"><a href="https://devhints.io/makefile">Cheat Sheet</a></li>
+</ul></td>
+<td><p>Quite OK for (very) small projects.
+Every C++ programmer should know how to use Make.</p>
+<ul class="symbols vcompact">
+<li class="cat-positive">ubiquitous, portable</li>
+
+<li class="cat-negative">a lot of limitations</li>
+
+<li class="cat-negative">not very expressive syntax</li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://cmake.org" >CMake</a>
+</strong></p>
+<ul class="symbols "><li class="cat-tutorial"><a href="https://cliutils.gitlab.io/modern-cmake">Tutorial</a></li>
+</ul></td>
+<td><p>Seems to be(come) the de-facto standard in the C++ world.</p>
+<ul class="symbols vcompact">
+<li class="cat-positive">available on a lot of platforms</li>
+
+<li class="cat-positive">lot of tutorials, resources, etc.</li>
+
+<li class="cat-positive">used as project model by some IDEs</li>
+
+<li class="cat-negative">can be slow at times</li>
+
+<li class="cat-negative">carries a lot of techincal debt</li>
+
+<li class="cat-negative">clumsy syntax</li></ul>
+<hr>
+<ul class="symbols links-like-text"><li class="cat-code"><a href="https://https://github.com/lefticus/cpp_starter_project">C++ Starter Project with Complete CMake Setup <small>by Jason Turner</small></a></li>
+
+<li class="cat-youtube"><a href="https://www.youtube.com/watch?v=y7ndUhdQuU8&feature=youtu.be"><q>More Modern CMake</q> <small>Deniz Bahadir (Meeting C++ 2018)</small></a></li>
+<li class="cat-youtube"><a href="https://www.youtube.com/watch?v=bsXLMQ6WgIk"><q>Effective CMake</q> <small>Daniel Pfeifer (C++Now 2017)</small></a></li>
+<li class="cat-youtube"><a href="https://www.youtube.com/watch?v=eC9-iRN2b04&feature=youtu.be"><q>Using Modern CMake Patterns&hellip;</q> <small>Mathieu Ropert (CppCon 2017)</small></a></li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://bazel.build/" >Bazel</a>
+</strong></p>
+<ul class="symbols "><li class="cat-tutorial"><a href="https://docs.bazel.build/versions/master/tutorial/cpp.html">Tutorial</a></li>
+</ul></td>
+<td><ul class="symbols vcompact">
+<li class="cat-positive">fast, seems to scale well</li>
+
+<li class="cat-negative">rather rigid project organization</li>
+
+<li class="cat-negative">has many dependencies itself</li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://docs.microsoft.com/visualstudio/msbuild/msbuild" >MSBuild</a>
+</strong></p></td>
+<td><ul>
+<li>Command-line based build system from Microsoft packaged 
+with 
+<a href="https://visualstudio.microsoft.com" >Microsoft Visual Studio</a>
+, but also available as stand-alone application.</li>
+
+<li>XML-based build files</li>
+
+<li>supported by , 
+<a href="https://www.embarcadero.com/products/cbuilder" >C++Builder</a>
+</li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://build2.org" >build2</a>
+</strong></p></td>
+<td><ul class="symbols vcompact">
+<li class="cat-positive">uniform across platforms, no project generation step</li>
+
+<li class="cat-positive">supports wildcard patterns</li>
+
+<li class="cat-positive">support for C++ Modules</li>
+
+<li class="cat-positive">support for cross-compilation</li>
+
+<li class="cat-positive">skips recompilation of ignorable changes (comments, whitespaces, etc).</li>
+
+<li class="cat-positive">dependency management</li>
+
+<li class="cat-positive">no dependencies, only C++ compiler required</li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://doc.qt.io/qt-5/qmake-manual.html" >QMake</a>
+</strong></p></td>
+<td>Part of the 
+<a href="https://www.qt.io" >Qt Project</a>
+.</td></tr>
+<tr><td><p><strong>
+<a href="https://scons.org" >SCons</a>
+</strong></p></td>
+<td><ul class="symbols vcompact">
+<li class="cat-positive">automatic dependency analysis</li>
+
+<li class="cat-positive">uses a real programming language (Python) for config files</li>
+
+<li class="cat-negative">pretty verbose; even common tasks require a lot of code</li>
+
+<li class="cat-negative">can be slow for big projects</li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://premake.github.io" >Premake</a>
+</strong></p></td>
+<td></td></tr>
+<tr><td><p><strong>
+<a href="https://ninja-build.org" >Ninja</a>
+</strong></p></td>
+<td></td></tr>
+<tr><td><p><strong>
+<a href="http://mesonbuild.com" >Meson</a>
+</strong></p></td>
+<td></td></tr>
+<tr><td><p><strong><a>FASTbuild</a>
+</strong></p></td>
+<td></td></tr>
+<tr><td><p><strong>
+<a href="https://gradle.org" >Gradle</a>
+</strong></p></td>
+<td></td></tr>
+<tr><td><p><strong>
+<a href="https://waf.io" >Waf</a>
+</strong></p></td>
+<td></td></tr>
+<tr><td><p><strong>
+<a href="https://github.com/dascandy/evoke" >Evoke</a>
+</strong></p></td>
+<td>Fairly new system still under development.</td></tr>
+<tr><td><p><strong>
+<a href="https://www.gnu.org/software/automake/manual/html_node/Autotools-Introduction.html" >GNU autotools</a>
+</strong></p></td>
+<td><p>My advice: stay away from autotools if you can.</p></td></tr></tbody></table></div></div>
+<h2 class="hfold " open><span class="nav-none">Unit Testing Frameworks</span>
+<span class="nav-only">Test</span></h2>
+<div class="content " ><div class="panel-col "{style=""><table class="hborders vstriped resources "><tbody><tr><td><p><strong>
+<a href="https://github.com/catchorg/Catch2" >Catch2</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-license">BSL-1.0
+</li></ul>
+<ul class="plain vcompact">
+<li>one header only</li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://github.com/onqtam/doctest" >DocTest</a>
+</strong></p>
+<ul class="symbols vcompact"><li class="cat-docs"><a href="http://bit.ly/doctest-docs">Manual</a></li>
+</ul></td>
+<td><ul class="symbols vcompact linear"><li class="cat-license">MIT
+</li></ul>
+<ul class="plain vcompact">
+<li>one header only</li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://github.com/boostorg/test" >Boost Test</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-license">BSL-1.0
+</li></ul>
+<ul class="plain vcompact">
+<li></li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://github.com/google/googletest" >Google Test</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-license">BSD 3-Clause "New" or "Revised"
+</li></ul>
+<ul class="plain vcompact">
+<li></li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://cute-test.com/" >CUTE</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-license">LGPL3
+</li></ul>
+<ul class="plain vcompact">
+<li>header only</li>
+
+<li>part of 
+<a href="https://www.cevelop.com" >Cevelop</a>
+</li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://doc.qt.io/qt-5/qttest-index.html" >QtTest</a>
+</strong></p></td>
+<td>Part of the 
+<a href="https://www.qt.io" >Qt Project</a>
+.</td></tr>
+<tr><td><p><strong>
+<a href="https://github.com/mull-project/mull" >Mull</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-license">Apache-2.0
+</li></ul>
+<ul class="plain vcompact">
+<li>LLVM-based</li></ul></td></tr>
+<tr><td><p><strong>
+<a href="http://banditcpp.github.io/bandit" >Bandit</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-license">MIT
+</li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://cpputest.github.io" >CppUTest</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-license">BSD-3-Clause
+</li></ul></td></tr></tbody></table></div></div>
+<h2 class="hfold " open><span class="nav-none">Package Management</span>
+<span class="nav-only">Package</span></h2>
+<div class="content " ><div class="panel-col "{style=""><table class="hborders vstriped resources "><tbody><tr><td><p><strong>
+<a href="https://conan.io" >conan</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-windows "></li><li class="cat-osx "></li></ul>
+<ul class="vcompact">
+<li>decentralized</li>
+
+<li>build systems: CMake, MSBuild, &hellip;</li>
+
+<li>binary packages</li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://github.com/microsoft/vcpkg" >vcpkg</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-windows "></li><li class="cat-osx "></li></ul>
+<ul class="vcompact">
+<li>Visual Studio integration</li>
+
+<li>CMake support</li>
+
+<li>only builds from source</li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://github.com/cpp-pm/hunter" >Hunter</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-windows "></li><li class="cat-osx "></li></ul>
+<ul class="vcompact">
+<li>CMake only</li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://buckaroo.pm" >Buckaroo</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-windows "></li><li class="cat-osx "></li></ul>
+<ul class="vcompact">
+<li>GitHub, BitBucket, GitLab, &hellip;</li>
+
+<li>integrates into various IDEs</li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://nixos.org/nix" >NIX</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-osx "></li></ul></td></tr></tbody></table></div></div>
+<h2 class="hfold " open><span class="nav-none">Code Editing / IDEs</span>
+<span class="nav-only">Code</span></h2>
+<div class="content " ><div class="panel-fold " open><h3>IDEs</h3></div>
+<div class="panel-col "{style=""><table class="hborders vstriped resources "><tbody><tr><td><p><strong>
+<a href="https://www.qt.io/qt-features-libraries-apis-tools-and-ide/#ide" >Qt Creator</a>
+</strong></p></td>
+<td class="vcompact"><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-windows "></li><li class="cat-osx "></li></ul>
+<ul>
+<li>quite beginner-friendly</li>
+
+<li>very responsive UI</li>
+
+<li>has a VIM emulation mode (could be better, but it works)</li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://www.jetbrains.com/clion" >JetBrains CLion</a>
+</strong></p></td>
+<td class="vcompact"><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-windows "></li><li class="cat-osx "></li></ul>
+<ul>
+<li>lots of features; highly customizable UI</li>
+
+<li>uses CMake as project model, however recent versions can also use traditional Makefiles</li>
+
+<li>has a VIM emulation mode (could be better, but it works)</li>
+
+<li>can be a bit slow for very large projects</li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://visualstudio.microsoft.com" >Microsoft Visual Studio</a>
+</strong></p></td>
+<td class="vcompact"><ul class="symbols vcompact linear"><li class="cat-windows "></li><li class="cat-osx "></li></ul>
+Only newer versions of the compiler are largely conforming to the 
+modern ISO C++ standard(s).</td></tr>
+<tr><td><p><strong>
+<a href="https://www.eclipse.org/downloads" >Eclipse CDT</a>
+</strong></p></td>
+<td class="vcompact"><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-windows "></li><li class="cat-osx "></li></ul>
+<ul>
+<li>good static analysis &amp; linting</li>
+
+<li>supports several project build models: fully managed, Makefile-based, &hellip;</li>
+
+<li>setup of compilers can be a bit confusing to beginners</li>
+
+<li>great VIM emulation with <q>Vrapper</q> plugin</li>
+
+<li>can be a bit slow for very large projects</li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://developer.apple.com/xcode" >Apple XCode</a>
+</strong></p></td>
+<td class="vcompact"><ul class="symbols vcompact linear"><li class="cat-osx "></li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://developer.android.com/studio" >Android Studio</a>
+</strong></p></td>
+<td class="vcompact"><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-windows "></li><li class="cat-osx "></li><li class="cat-chrome-os "></li><li class="cat-Chrome "></li><li class="cat-ensp "></li><li class="cat-OS "></li></ul>
+based on JetBrains IntelliJ IDEA which is also the base of CLion</td></tr>
+<tr><td><ul class="plain ">
+<li><strong>
+<a href="https://www.embarcadero.com/products/cbuilder" >C++Builder</a>
+</strong></li>
+
+<li><strong>
+<a href="https://www.embarcadero.com/products/cbuilder/starter" >C++Builder (Community Edition)</a>
+</strong></li></ul></td>
+<td class="vcompact"><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-windows "></li><li class="cat-osx "></li></ul>
+the free community edition includes 
+a (very) small business commercial license</td></tr>
+<tr><td><p><strong>
+<a href="https://www.cevelop.com" >Cevelop</a>
+</strong></p></td>
+<td class="vcompact"><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-windows "></li><li class="cat-osx "></li></ul>
+<ul>
+<li>Eclipse-based IDE</li>
+
+<li>some unique features regarding static analysis and refactoring, 
+like e.g., visualizing template instantiationsA</li>
+
+<li>can be a bit slow for very large projects</li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://www.kdevelop.org" >Kdevelop</a>
+</strong></p></td>
+<td class="vcompact"><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-windows "></li><li class="cat-osx "></li></ul>
+OS X version is experimental</td></tr>
+<tr><td><p><strong>
+<a href="https://www.oracle.com/technetwork/server-storage/developerstudio/overview/index.html" >Oracle Developer Studio</a>
+</strong></p></td>
+<td class="vcompact"><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-Linux "></li><li class="cat-solaris "></li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://codelite.org" >CodeLite</a>
+</strong></p></td>
+<td class="vcompact"><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-windows "></li><li class="cat-osx "></li></ul></td></tr>
+<tr><td><p><strong>
+<a href="http://codeblocks.org" >CodeBlocks</a>
+</strong></p></td>
+<td class="vcompact"><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-windows "></li><li class="cat-osx "></li></ul>
+OS X version is outdated</td></tr></tbody></table></div>
+<div class="panel-fold " open><h3><span class="nav-none">Text Editors</span>
+<span class="nav-only">Editors</span></h3></div>
+<div class="panel-col "{style=""><table class="hborders vstriped resources "><tbody><tr><td><p><strong>
+<a href="https://code.visualstudio.com" >Visual Studio <em>Code</em></a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-windows "></li><li class="cat-osx "></li></ul>
+<p>nice modern UI, thriving extension ecosystem;
+origin of the Language Server Protocol</p></td></tr>
+<tr><td><p><strong>
+<a href="https://www.vim.org" >VIM</a>
+</strong></p>
+<ul class="symbols "><li class="cat-list"><a href="dev/vim_plugins.html">VIM plugins</a></li>
+
+<li class="cat-youtube"><a href="https://www.youtube.com/watch?v=a6Q8Na575qc">Introductory Lecture</a></li></ul></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-windows "></li><li class="cat-osx "></li></ul>
+<p>A classic and insanely powerful. Has quite a steep learning curve,
+but the modal editing paradigm is really worth learning.
+Only real drawback: once you grok it, you want VIM-style editing
+<em>everywhere</em>.
+highly customizable, large plugin ecosystem</p></td></tr>
+<tr><td><p><strong>
+<a href="https://www.gnu.org/software/emacs" >Emacs</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-windows "></li><li class="cat-osx "></li></ul>
+<p>Also a classic; also super powerful.</p></td></tr>
+<tr><td><p><strong>
+<a href="https://www.sublimetext.com" >Sublime Text</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-windows "></li><li class="cat-osx "></li></ul>
+<p>sleek UI, probably the fastest of all text editors, 
+highly customizable</p></td></tr>
+<tr><td><p><strong>
+<a href="https://atom.io" >atom.io</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-windows "></li><li class="cat-osx "></li></ul>
+<p>nice UI, customizable, large plugin ecosystem;
+sometimes a bit sluggish</p></td></tr>
+<tr><td><p><strong>
+<a href="https://notepad-plus-plus.org" >Notepad++</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-windows "></li></ul>
+<p>A classic in the Windows world. Quite OK, but not as powerful
+as the other editors in this list.</p></td></tr></tbody></table></div>
+<div class="panel-fold " open><h3><span class="nav-none">Code Formatters</span>
+<span class="nav-only">Formatters</span></h3></div>
+<div class="panel-col "{style=""><table class="hborders vstriped resources "><tbody><tr><td><p><strong>
+<a href="https://clang.llvm.org/docs/ClangFormat.html" >clang format</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-windows "></li><li class="cat-osx "></li></ul>
+part of the llvm/clang project</td></tr>
+<tr><td><p><strong>
+<a href="http://astyle.sourceforge.net" >Artistic Style</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-windows "></li><li class="cat-osx "></li></ul>
+stand-alone tool</td></tr></tbody></table></div></div>
+<h2 class="hfold " open><span class="nav-none">Source Code Management</span>
+<span class="nav-only">SCM</span></h2>
+<div class="content " ><div class="panel-fold " open><h3><span class="nav-none">SCM Systems</span>
+<span class="nav-only">Systems</span></h3></div>
+<div class="panel-col "{style=""><table class="hborders vstriped resources "><tbody><tr><td><p><strong>
+<a href="https://git-scm.com" >Git</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-windows "></li><li class="cat-osx "></li></ul>
+<p>The de-facto industry standard for version control.</p>
+<ul class="symbols vcompact">
+<li class="cat-positive">very fast</li>
+
+<li class="cat-positive">possible to set up elaborate workflows</li>
+
+<li class="cat-negative">complex command line interface</li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://www.mercurial-scm.org" >Mercurial</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-windows "></li><li class="cat-osx "></li></ul>
+<p>Python-based source control management system.</p>
+<ul class="symbols vcompact">
+<li class="cat-positive">easier to learn than git</li>
+
+<li class="cat-positive">beginner-friendly documentation</li>
+
+<li class="cat-negative">a bit slower than git</li>
+
+<li class="cat-negative">some, more involved workflows not possible out-of-the box</li></ul></td></tr></tbody></table></div>
+<div class="panel-fold " open><h3>Tools</h3></div>
+<div class="panel-col "{style=""><table class="hborders vstriped resources "><tbody><tr><td><p>
+<a href="https://jonas.github.io/tig" ><strong>tig</strong></a>
+</p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-osx "></li><li class="cat-windows "></li><li class="cat-wsl "></li></ul>
+<p>Command Line Git Frontend</p>
+<ul class="vcompact">
+<li>VIM-style key mapping</li>
+
+<li>commit view with branch graph</li>
+
+<li>(un-)staging, diff, stash, log, grep</li>
+
+<li>configurable UI</li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://www.sublimemerge.com" >Sublime Merge</a>
+</strong></p></td>
+<td><ul class="symbols vcompact linear"><li class="cat-linux "></li><li class="cat-windows "></li><li class="cat-osx "></li></ul>
+<p>Git Merging / Commit Crafting Tool</p>
+<ul class="vcompact">
+<li>very fast UI</li>
+
+<li>line-by-line staging</li>
+
+<li>commit editing</li>
+
+<li>diff view, same syntax highlighting as Sublime Text</li>
+
+<li>multiple repositories (in tabs)</li>
+
+<li>can use external or bundled git client</li></ul></td></tr></tbody></table></div></div>
+<h2 class="hfold " open><span class="nav-none">Web Tools</span>
+<span class="nav-only">Web</span></h2>
+<div class="content " ><div class="panel-col "{style=""><table class="hborders vstriped resources "><tbody><tr><td><p><strong>
+<a href="https://godbolt.org" class="cat-star" >Compiler Explorer</a>
+</strong></p></td>
+<td><ul>
+<li>lets you run code through many different compilers</li>
+
+<li>shows nicely annotated assembly output</li>
+
+<li>lots of compilers with lots of different versions,
+also with experimental features</li>
+
+<li>supports several popular libraries (ranges, {fmt}, &hellip;)</li>
+
+<li>great text editor with multiple cursors, VIM mode, dark mode, &hellip;</li>
+
+<li>code round-trip between Compiler Explorer, C++ Insights and Quick Bench possible</li></ul></td></tr>
+<tr><td><p><strong>
+<a href="https://cppinsights.io" >C++ Insights</a>
+</strong></p></td>
+<td>Source-to-source transformation tool that makes
+behind-the-scenes <q>compiler magic</q> visible and understandable.
+Shows the code that <code>clang</code> generates for
+lambdas, range-based <code>for</code> loops, structured bindings, etc.</td></tr>
+<tr><td><p><strong>
+<a href="http://quick-bench.com" >Quick Bench</a>
+</strong></p></td>
+<td>Benchmark code (using Google Benchmark) and get a nice graphical runtime breakdown. 
+You can choose from various versions of <code>gcc</code> or <code>clang</code>.</td></tr>
+<tr><td><p><strong>
+<a href="https://www.onlinegdb.com/" >Online GDB</a>
+</strong></p></td>
+<td>Online compiler and debugger tool for C, C++, Python and many other languages.</td></tr></tbody></table></div></div></section>
+<section class="epilog">
+<div class="panel-fold " open><h3 class="cat-link">Related <span class="if-closed">&hellip;</span></h3></div>
+<div class="panel "><ul class="resources "><li class="cat-article"><a href="cpp/tools/beginner_dev_setup.html">Development Setup</a></li>
+
+<hr>
+<li class="cat-github"><a href="https://github.com/fffaraz/awesome-cpp">Curated List of C++ Libraries, Resources, &hellip;</a></li>
+</ul></div>
+</section>
+<section class="context">
+<ul class="linear-tags "><li><a href="tags/c++.html">C++</a></li><li><a href="tags/article.html">article</a></li><li><a href="tags/tools.html">tools</a></li></ul>
+</section>
+<section class="metadata">
+<p><span class="cat-date">Last updated: 2020-10-19</span></p>
+</section>
+</article></div>
+<footer>
+<div id="footer-top"><div id="footer-top-content"><div id="footer-top-left"><nav><ul class="plain ">
+<li>
+<a href="index.html" class="cat-home" >Home</a>
+</li>
+
+<li>
+<a href="tags/news.html" class="cat-news" >News</a>
+</li>
+
+<li>
+<a href="tags/article.html" class="cat-article" >Articles</a>
+</li>
+
+<li>
+<a href="tags/featured.html" class="cat-featured" >Featured</a>
+</li>
+
+<li>
+<a href="tags/guide.html" class="cat-guide" >Guides</a>
+</li>
+
+<li>
+<a href="tags/list.html" class="cat-list" >Lists</a>
+</li>
+
+<li>
+<a href="about.html" class="cat-about" >About</a>
+</li>
+
+<li>
+<a href="privacy.html" class="cat-contact" >Privacy</a>
+</li>
+
+<li>
+<a href="https://twitter.com/hackingcpp" class="cat-twitter" >Twitter</a>
+</li></ul></nav></div>
+<div id="footer-top-right"><h2 class="cat-tags nav-none">
+<a href="tags.html" >Tags</a>
+</h2>
+<ul class="topic-cloud "><li><a style="font-size:119.09832775265055%;" href="tags/algorithms.html">algorithms</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/allocators.html">allocators</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/arrays.html">arrays</a></li> <li><a style="font-size:155.67625418551208%;" href="tags/article.html">article</a></li> <li><a style="font-size:151.4520701280242%;" href="tags/beginner-level.html">beginner-level</a></li> <li><a style="font-size:60.0%;" href="tags/blogs.html">blogs</a></li> <li><a style="font-size:60.0%;" href="tags/books.html">books</a></li> <li><a style="font-size:60.0%;" href="tags/build-systems.html">build-systems</a></li> <li><a style="font-size:160.9530933887302%;" href="tags/c++.html">C++</a></li> <li><a style="font-size:60.0%;" href="tags/c++-standardization.html">C++-standardization</a></li> <li><a style="font-size:122.76135311474769%;" href="tags/c++11.html">C++11</a></li> <li><a style="font-size:112.96632221214513%;" href="tags/c++14.html">C++14</a></li> <li><a style="font-size:104.32374581448789%;" href="tags/c++17.html">C++17</a></li> <li><a style="font-size:109.08009883059783%;" href="tags/c++20.html">C++20</a></li> <li><a style="font-size:60.0%;" href="tags/c++98.html">C++98</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/c-style.html">C-style</a></li> <li><a style="font-size:60.0%;" href="tags/c-vs-c++.html">C-vs-C++</a></li> <li><a style="font-size:60.0%;" href="tags/cat-casts.html">cat-casts</a></li> <li><a style="font-size:106.83431667163975%;" href="tags/classes.html">classes</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/code-editors.html">code-editors</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/code-formatters.html">code-formatters</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/command-line.html">command-line</a></li> <li><a style="font-size:106.83431667163975%;" href="tags/community.html">community</a></li> <li><a style="font-size:60.0%;" href="tags/comparisons.html">comparisons</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/compilers.html">compilers</a></li> <li><a style="font-size:60.0%;" href="tags/concepts.html">concepts</a></li> <li><a style="font-size:60.0%;" href="tags/conferences.html">conferences</a></li> <li><a style="font-size:60.0%;" href="tags/const.html">const</a></li> <li><a style="font-size:60.0%;" href="tags/constexpr.html">constexpr</a></li> <li><a style="font-size:111.11165590902733%;" href="tags/containers.html">containers</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/control-flow.html">control-flow</a></li> <li><a style="font-size:114.67244982290701%;" href="tags/custom-types.html">custom-types</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/data-structures.html">data-structures</a></li> <li><a style="font-size:60.0%;" href="tags/debugging.html">debugging</a></li> <li><a style="font-size:104.32374581448789%;" href="tags/design.html">design</a></li> <li><a style="font-size:106.83431667163975%;" href="tags/diagnostics.html">diagnostics</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/exceptions.html">exceptions</a></li> <li><a style="font-size:89.54916387632527%;" href="tags/featured.html">featured</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/file-io.html">file-io</a></li> <li><a style="font-size:60.0%;" href="tags/find.html">find</a></li> <li><a style="font-size:60.0%;" href="tags/find_if.html">find_if</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/functional-prog.html">functional-prog</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/functions.html">functions</a></li> <li><a style="font-size:60.0%;" href="tags/gallery.html">gallery</a></li> <li><a style="font-size:94.30551689243521%;" href="tags/generic-prog.html">generic-prog</a></li> <li><a style="font-size:60.0%;" href="tags/groups.html">groups</a></li> <li><a style="font-size:60.0%;" href="tags/guide.html">guide</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/guidelines.html">guidelines</a></li> <li><a style="font-size:60.0%;" href="tags/hash-map.html">hash-map</a></li> <li><a style="font-size:60.0%;" href="tags/hash-set.html">hash-set</a></li> <li><a style="font-size:60.0%;" href="tags/hashing.html">hashing</a></li> <li><a style="font-size:60.0%;" href="tags/header-files.html">header-files</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/heap.html">heap</a></li> <li><a style="font-size:60.0%;" href="tags/ides.html">ides</a></li> <li><a style="font-size:98.1917402739825%;" href="tags/idiom.html">idiom</a></li> <li><a style="font-size:98.1917402739825%;" href="tags/io.html">io</a></li> <li><a style="font-size:94.30551689243521%;" href="tags/iostreams.html">iostreams</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/iterators.html">iterators</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/language-mechanism.html">language-mechanism</a></li> <li><a style="font-size:60.0%;" href="tags/language-references.html">language-references</a></li> <li><a style="font-size:60.0%;" href="tags/learning.html">learning</a></li> <li><a style="font-size:60.0%;" href="tags/libraries.html">libraries</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/linker.html">linker</a></li> <li><a style="font-size:130.25147500745962%;" href="tags/list.html">list</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/low-level.html">low-level</a></li> <li><a style="font-size:60.0%;" href="tags/map.html">map</a></li> <li><a style="font-size:109.08009883059783%;" href="tags/memory.html">memory</a></li> <li><a style="font-size:120.39055466724817%;" href="tags/modern-c++.html">modern-C++</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/move-semantics.html">move-semantics</a></li> <li><a style="font-size:126.83373677211958%;" href="tags/news.html">news</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/oop.html">oop</a></li> <li><a style="font-size:60.0%;" href="tags/organizations.html">organizations</a></li> <li><a style="font-size:60.0%;" href="tags/package-manager.html">package-manager</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/paradigm.html">paradigm</a></li> <li><a style="font-size:60.0%;" href="tags/pattern.html">pattern</a></li> <li><a style="font-size:60.0%;" href="tags/people.html">people</a></li> <li><a style="font-size:60.0%;" href="tags/podcasts.html">podcasts</a></li> <li><a style="font-size:60.0%;" href="tags/pointers.html">pointers</a></li> <li><a style="font-size:60.0%;" href="tags/preprocessor.html">preprocessor</a></li> <li><a style="font-size:60.0%;" href="tags/profiling.html">profiling</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/randomness.html">randomness</a></li> <li><a style="font-size:60.0%;" href="tags/ranges.html">ranges</a></li> <li><a style="font-size:60.0%;" href="tags/references.html">references</a></li> <li><a style="font-size:60.0%;" href="tags/set.html">set</a></li> <li><a style="font-size:60.0%;" href="tags/social-media.html">social-media</a></li> <li><a style="font-size:60.0%;" href="tags/sorted-sequences.html">sorted-sequences</a></li> <li><a style="font-size:89.54916387632527%;" href="tags/stack.html">stack</a></li> <li><a style="font-size:60.0%;" href="tags/standardization.html">standardization</a></li> <li><a style="font-size:116.25207726360686%;" href="tags/std-algorithms.html">std-algorithms</a></li> <li><a style="font-size:89.54916387632527%;" href="tags/std-containers.html">std-containers</a></li> <li><a style="font-size:128.6110337848704%;" href="tags/std-library.html">std-library</a></li> <li><a style="font-size:60.0%;" href="tags/std-macros.html">std-macros</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/std-vector.html">std-vector</a></li> <li><a style="font-size:60.0%;" href="tags/strings.html">strings</a></li> <li><a style="font-size:60.0%;" href="tags/style.html">style</a></li> <li><a style="font-size:60.0%;" href="tags/taste.html">taste</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/templates.html">templates</a></li> <li><a style="font-size:60.0%;" href="tags/testing.html">testing</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/toolchain.html">toolchain</a></li> <li><a style="font-size:116.25207726360686%;" href="tags/tools.html">tools</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/traversal.html">traversal</a></li> <li><a style="font-size:117.72267522825506%;" href="tags/types.html">types</a></li> <li><a style="font-size:60.0%;" href="tags/user.html">user</a></li> <li><a style="font-size:60.0%;" href="tags/version-control.html">version-control</a></li> <li><a style="font-size:60.0%;" href="tags/views.html">views</a></li> <li><a style="font-size:60.0%;" href="tags/vim.html">VIM</a></li> <li><a style="font-size:60.0%;" href="tags/vim-plugins.html">VIM-plugins</a></li> <li><a style="font-size:60.0%;" href="tags/warnings.html">warnings</a></li> <li><a style="font-size:114.67244982290701%;" href="tags/websites.html">websites</a></li> 
+</ul></div></div></div>
+<div id="footer-bottom"><div id="footer-bottom-content">&copy;&nbsp;2019-2021&ensp;André&nbsp;Müller&emsp;&emsp;</div></div>
+</footer>
+<script src="assets/content.js?v=26"></script>
+</body>
+</html>

@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang='en-US'>
+<head>
+<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+<base href="https://vip666mylife999.github.io/hackingcpp.com">
+<link rel="icon" href="assets/hcpp-icon.png">
+<link rel="stylesheet" type="text/css" href="assets/style.css?v=26-1">
+<link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<title>h/cpp - Standard Library Algorithms</title>
+<meta name="description" content="A quick overview of the C++ standard library algorithms with one small picture per algorithm.">
+<meta name="keyword" content="cpp std standard library algorithm iterator range">
+<meta name="author" content="André Müller">
+<meta name="date" content="2021-02-02">
+<meta name="copyright" content="2019-2021&ensp;André Müller">
+<meta name="hcpp-page-category" content="cat-overview">
+<meta name="hcpp-tags" content="C++ algorithms article std-algorithms std-library ">
+</head>
+<body>
+<div id="top-nav"><div id="titlebar" class="boxed-wide"><div id="main-branding">
+<a href="index.html"  id="main-logo" title="home"><span class="hwide"><img src="assets/hcpp.svg" style="max-width:100%;height:40;"></img></span>
+<span class="hslim"><img src="assets/hcpp-square.svg" style="max-width:100%;height:40;"></img></span></a>
+
+<div id="main-title">
+<a href="index.html"  title="home">hacking&nbsp;C++</a>
+</div></div>
+<div id="main-menu"><div class="entry "><a href="tags/news.html">News</a></div>
+<div class="submenu "><a>Learning</a><div class="submenu-dropdown">
+<a href="cpp/beginners_guide.html" >Beginner's Guide to C++</a>
+
+<hr>
+
+<a href="cpp/std/containers.html" >Standard Library Containers</a>
+
+
+<a href="cpp/std/algorithms.html" >Standard Library Algorithms</a>
+
+<hr>
+
+<a href="cpp/cheat_sheets.html" >Infographics / Cheat Sheets</a>
+
+
+<a href="tags/article.html" >All Articles</a>
+
+<hr>
+
+<a href="dev/web_learning.html" >Online Learning</a>
+
+
+<a href="cpp/books.html" >Books</a>
+</div></div>
+<div class="submenu "><a>Links</a><div class="submenu-dropdown">
+<a href="cpp/community.html" >Community Resources</a>
+
+
+<a href="cpp/tools/ecosystem.html" >Tool Ecosystem</a>
+
+<hr>
+
+<a href="tags/list.html" >All Resource Lists</a>
+
+<hr>
+
+<a href="dev/vim_plugins.html" >VIM Plugins</a>
+</div></div>
+<div class="submenu "><a>About</a><div class="submenu-dropdown">
+<a href="about.html" >Why &amp; Who</a>
+
+
+<a href="privacy.html" >Privacy</a>
+</div></div></div>
+<div id="main-socialbar">
+<a href="https://twitter.com/hackingcpp" ><span class="cat-twitter"></span></a>
+</div>
+<div class="navlinks" id="nav-path"></div>
+<div id="searchbar"><div id="searchbox"><input id="search-input"></input>
+<button id="search-clear"></button>
+<button id="search-run"></button>
+<button id="search-close"></button></div></div>
+<div class="hamburger " id="main-hamburger"><button title=""></button><div class="hamburger-dropdown"><a class="nav-icon-collapse-all" onclick="collapse_all_major_folds()">Collapse <strong>All</strong> Levels</a>
+
+<a class="nav-icon-collapse" onclick="collapse_major_folds()">Collapse Top Level</a>
+
+<a class="nav-icon-expand" onclick="expand_major_folds()">Expand Top Level</a>
+
+<a class="nav-icon-expand-all" onclick="expand_all_major_folds()">Expand <strong>All</strong> Levels</a>
+
+<hr>
+
+<a href="tags/news.html" class="cat-news" >News</a>
+
+
+<a href="tags/featured.html" class="cat-featured" >Featured</a>
+
+
+<a href="tags/article.html" class="cat-article" >Articles</a>
+
+
+<a href="cpp/beginners_guide.html" class="cat-guide" >Beginner's Guide to C++</a>
+
+
+<a href="tags/list.html" class="cat-list" >Lists</a>
+
+<hr>
+
+<a href="https://twitter.com/hackingcpp" ><span class="cat-twitter"></span> @hackingcpp</a>
+
+
+<a href="about.html" class="cat-about" >About</a>
+
+
+<a href="privacy.html" class="cat-contact" >Privacy</a>
+
+
+<a href="index.html" class="cat-home" >Home</a>
+</div></div></div>
+<nav id="guide-bar" class="boxed-wide"></nav></div>
+<div id="drawer-top" class="boxed-wide"><div id="search-results"><div id="search-header"><h1 class="cat-search" id="search-title"></h1></div>
+<div id="search-locations"><ul class="resources" id="search-location-items"></ul></div>
+<div id="search-footer"></div></div></div>
+<div id="drawer-left"><div id="drawer-left-heading">Contents A-Z</div>
+<div id="drawer-left-content"><div class="tree-fold plain" open><h5>A-B</h5></div>
+<div class="content " ><ul class="plain "><li><a href="cpp/std/algorithms.html#accumulate"><code>accumulate</code></a></li>
+<li><a href="cpp/std/algorithms.html#adjacent_difference"><code>adjacent_difference</code></a></li>
+<li><a href="cpp/std/algorithms.html#adjacent_find"><code>adjacent_find</code></a></li>
+<li><a href="cpp/std/algorithms.html#advance"><code>advance</code></a></li>
+<li><a href="cpp/std/algorithms.html#all_of"><code>all_of</code></a></li>
+<li><a href="cpp/std/algorithms.html#any_of"><code>any_of</code></a></li>
+<li><a href="cpp/std/algorithms.html#binary_search"><code>binary_search</code></a></li></ul></div>
+<div class="tree-fold plain" open><h5>C</h5></div>
+<div class="content " ><ul class="plain "><li><a href="cpp/std/algorithms.html#clamp"><code>clamp</code></a></li>
+<li><a href="cpp/std/algorithms.html#equal">Compare Ranges</a></li>
+<li><a href="cpp/std/algorithms.html#copy"><code>copy</code></a></li>
+<li><a href="cpp/std/algorithms.html#copy_backward"><code>copy_backward</code></a></li>
+<li><a href="cpp/std/algorithms.html#copy_if"><code>copy_if</code></a></li>
+<li><a href="cpp/std/algorithms.html#copy_n"><code>copy_n</code></a></li>
+<li><a href="cpp/std/algorithms.html#count"><code>count</code></a></li>
+<li><a href="cpp/std/algorithms.html#count_if"><code>count_if</code></a></li>
+<li><a href="cpp/std/algorithms.html#next_permutation">Cycle Permutations</a></li></ul></div>
+<div class="tree-fold plain" open><h5>D-E</h5></div>
+<div class="content " ><ul class="plain "><li><a href="cpp/std/algorithms.html#set_difference">Difference of Sets</a></li>
+<li><a href="cpp/std/algorithms.html#distance"><code>distance</code></a></li>
+<li><a href="cpp/std/algorithms.html#equal"><code>equal</code></a></li>
+<li><a href="cpp/std/algorithms.html#equal_range"><code>equal_range</code></a></li>
+<li><a href="cpp/std/algorithms.html#erase"><code>erase</code></a></li>
+<li><a href="cpp/std/algorithms.html#erase_if"><code>erase_if</code></a></li>
+<li><a href="cpp/std/algorithms.html#exclusive_scan"><code>exclusive_scan</code></a></li>
+<li><a href="cpp/std/algorithms.html#any_of">Existence Queries</a></li></ul></div>
+<div class="tree-fold plain" open><h5>F</h5></div>
+<div class="content " ><ul class="plain "><li><a href="cpp/std/algorithms.html#fill"><code>fill</code></a></li>
+<li><a href="cpp/std/algorithms.html#fill_n"><code>fill_n</code></a></li>
+<li><a href="cpp/std/algorithms.html#find"><code>find</code></a></li>
+<li><a href="cpp/std/algorithms.html#find_end"><code>find_end</code></a></li>
+<li><a href="cpp/std/algorithms.html#find_first_of"><code>find_first_of</code></a></li>
+<li><a href="cpp/std/algorithms.html#find_if"><code>find_if</code></a></li>
+<li><a href="cpp/std/algorithms.html#find_if_not"><code>find_if_not</code></a></li>
+<li><a href="cpp/std/algorithms.html#search">Find Subranges</a></li>
+<li><a href="cpp/std/algorithms.html#adjacent_find">Find Consecutive Runs</a></li>
+<li><a href="cpp/std/algorithms.html#for_each"><code>for_each</code></a></li>
+<li><a href="cpp/std/algorithms.html#for_each_n"><code>for_each_n</code></a></li></ul></div>
+<div class="tree-fold plain" open><h5>G-H</h5></div>
+<div class="content " ><ul class="plain "><li><a href="cpp/std/algorithms.html#generate"><code>generate</code></a></li>
+<li><a href="cpp/std/algorithms.html#generate_n"><code>generate_n</code></a></li>
+<li><a href="cpp/std/algorithms.html#make_heap">Heap Operations</a></li></ul></div>
+<div class="tree-fold plain" open><h5>I</h5></div>
+<div class="content " ><ul class="plain "><li><a href="cpp/std/algorithms.html#includes"><code>includes</code></a></li>
+<li><a href="cpp/std/algorithms.html#inclusive_scan"><code>inclusive_scan</code></a></li>
+<li><a href="cpp/std/algorithms.html#inner_product"><code>inner_product</code></a></li>
+<li><a href="cpp/std/algorithms.html#inplace_merge"><code>inplace_merge</code></a></li>
+<li><a href="cpp/std/algorithms.html#set_intersection">Intersection of Sets</a></li>
+<li><a href="cpp/std/algorithms.html#iota"><code>iota</code></a></li>
+<li><a href="cpp/std/algorithms.html#is_heap"><code>is_heap</code></a></li>
+<li><a href="cpp/std/algorithms.html#is_heap"><code>is_heap</code></a></li>
+<li><a href="cpp/std/algorithms.html#is_heap_until"><code>is_heap_until</code></a></li>
+<li><a href="cpp/std/algorithms.html#is_partitioned"><code>is_partitioned</code></a></li>
+<li><a href="cpp/std/algorithms.html#is_permutation"><code>is_permutation</code></a></li>
+<li><a href="cpp/std/algorithms.html#is_sorted"><code>is_sorted</code></a></li>
+<li><a href="cpp/std/algorithms.html#is_sorted_until"><code>is_sorted_until</code></a></li>
+<li><a href="cpp/std/algorithms.html#iter_swap"><code>iter_swap</code></a></li></ul></div>
+<div class="tree-fold plain" open><h5>L</h5></div>
+<div class="content " ><ul class="plain "><li><a href="cpp/std/algorithms.html#shift_left">Left Shift</a></li>
+<li><a href="cpp/std/algorithms.html#lexicographical_compare"><code>lexicographical_compare</code></a></li>
+<li><a href="cpp/std/algorithms.html#lexicographical_compare_three_way"><code>lexico&hellip;compare_three_way</code></a></li>
+<li><a href="cpp/std/algorithms.html#for_each">Loop Over a Range</a></li>
+<li><a href="cpp/std/algorithms.html#lower_bound"><code>lower_bound</code></a></li></ul></div>
+<div class="tree-fold plain" open><h5>M</h5></div>
+<div class="content " ><ul class="plain "><li><a href="cpp/std/algorithms.html#transform">Map Function Over Elements</a></li>
+<li><a href="cpp/std/algorithms.html#transform_reduce">Map-Reduce</a></li>
+<li><a href="cpp/std/algorithms.html#make_heap"><code>make_heap</code></a></li>
+<li><a href="cpp/std/algorithms.html#max"><code>max</code></a></li>
+<li><a href="cpp/std/algorithms.html#max_element"><code>max_element</code></a></li>
+<li><a href="cpp/std/algorithms.html#merge"><code>merge</code></a></li>
+<li><a href="cpp/std/algorithms.html#inplace_merge">Merge in-place</a></li>
+<li><a href="cpp/std/algorithms.html#min"><code>min</code></a></li>
+<li><a href="cpp/std/algorithms.html#min_element"><code>min_element</code></a></li>
+<li><a href="cpp/std/algorithms.html#minmax"><code>minmax</code></a></li>
+<li><a href="cpp/std/algorithms.html#minmax_element"><code>minmax_element</code></a></li>
+<li><a href="cpp/std/algorithms.html#mismatch"><code>mismatch</code></a></li>
+<li><a href="cpp/std/algorithms.html#move"><code>move</code></a></li>
+<li><a href="cpp/std/algorithms.html#move_backward"><code>move_backward</code></a></li></ul></div>
+<div class="tree-fold plain" open><h5>N</h5></div>
+<div class="content " ><ul class="plain "><li><a href="cpp/std/algorithms.html#next"><code>next</code></a></li>
+<li><a href="cpp/std/algorithms.html#next_permutation"><code>next_permutation</code></a></li>
+<li><a href="cpp/std/algorithms.html#none_of"><code>none_of</code></a></li>
+<li><a href="cpp/std/algorithms.html#nth_element"><code>nth_element</code></a></li></ul></div>
+<div class="tree-fold plain" open><h5>P</h5></div>
+<div class="content " ><ul class="plain "><li><a href="cpp/std/algorithms.html#partial_sort"><code>partial_sort</code></a></li>
+<li><a href="cpp/std/algorithms.html#partial_sort_copy"><code>partial_sort_copy</code></a></li>
+<li><a href="cpp/std/algorithms.html#partial_sum"><code>partial_sum</code></a></li>
+<li><a href="cpp/std/algorithms.html#partition"><code>partition</code></a></li>
+<li><a href="cpp/std/algorithms.html#partition_copy"><code>partition_copy</code></a></li>
+<li><a href="cpp/std/algorithms.html#partition_point"><code>partition_point</code></a></li>
+<li><a href="cpp/std/algorithms.html#pop_heap"><code>pop_heap</code></a></li>
+<li><a href="cpp/std/algorithms.html#partial_sum">Prefix Sum</a></li>
+<li><a href="cpp/std/algorithms.html#prev"><code>prev</code></a></li>
+<li><a href="cpp/std/algorithms.html#prev_permutation"><code>prev_permutation</code></a></li>
+<li><a href="cpp/std/algorithms.html#push_heap"><code>push_heap</code></a></li></ul></div>
+<div class="tree-fold plain" open><h5>R</h5></div>
+<div class="content " ><ul class="plain "><li><a href="cpp/std/algorithms.html#sample">Random Sampling</a></li>
+<li><a href="cpp/std/algorithms.html#for_each">Range Loop</a></li>
+<li><a href="cpp/std/algorithms.html#distance">Range Size</a></li>
+<li><a href="cpp/std/algorithms.html#reduce"><code>reduce</code></a></li>
+<li><a href="cpp/std/algorithms.html#remove"><code>remove</code></a></li>
+<li><a href="cpp/std/algorithms.html#remove_copy"><code>remove_copy</code></a></li>
+<li><a href="cpp/std/algorithms.html#remove_copy_if"><code>remove_copy_if</code></a></li>
+<li><a href="cpp/std/algorithms.html#remove_if"><code>remove_if</code></a></li>
+<li><a href="cpp/std/algorithms.html#replace"><code>replace</code></a></li>
+<li><a href="cpp/std/algorithms.html#replace_copy"><code>replace_copy</code></a></li>
+<li><a href="cpp/std/algorithms.html#replace_copy_if"><code>replace_copy_if</code></a></li>
+<li><a href="cpp/std/algorithms.html#replace_if"><code>replace_if</code></a></li>
+<li><a href="cpp/std/algorithms.html#reverse"><code>reverse</code></a></li>
+<li><a href="cpp/std/algorithms.html#reverse_copy"><code>reverse_copy</code></a></li>
+<li><a href="cpp/std/algorithms.html#shift_right">Right Shift</a></li>
+<li><a href="cpp/std/algorithms.html#rotate"><code>rotate</code></a></li>
+<li><a href="cpp/std/algorithms.html#rotate_copy"><code>rotate_copy</code></a></li></ul></div>
+<div class="tree-fold plain" open><h5>S</h5></div>
+<div class="content " ><ul class="plain "><li><a href="cpp/std/algorithms.html#sample"><code>sample</code></a></li>
+<li><a href="cpp/std/algorithms.html#exclusive-scan">Scan</a></li>
+<li><a href="cpp/std/algorithms.html#search"><code>search</code></a></li>
+<li><a href="cpp/std/algorithms.html#search_n"><code>search_n</code></a></li>
+<li><a href="cpp/std/algorithms.html#set_difference"><code>set_difference</code></a></li>
+<li><a href="cpp/std/algorithms.html#set_intersection"><code>set_intersection</code></a></li>
+<li><a href="cpp/std/algorithms.html#set_symmetric_difference"><code>set_symmetric_difference</code></a></li>
+<li><a href="cpp/std/algorithms.html#set_union"><code>set_union</code></a></li>
+<li><a href="cpp/std/algorithms.html#shift_left"><code>shift_left</code></a></li>
+<li><a href="cpp/std/algorithms.html#shift_right"><code>shift_right</code></a></li>
+<li><a href="cpp/std/algorithms.html#distance">Size of a Range</a></li>
+<li><a href="cpp/std/algorithms.html#shuffle"><code>shuffle</code></a></li>
+<li><a href="cpp/std/algorithms.html#sort"><code>sort</code></a></li>
+<li><a href="cpp/std/algorithms.html#partial_sort">Sort Partially</a></li>
+<li><a href="cpp/std/algorithms.html#sort_heap"><code>sort_heap</code></a></li>
+<li><a href="cpp/std/algorithms.html#stable_partition"><code>stable_partition</code></a></li>
+<li><a href="cpp/std/algorithms.html#stable_sort"><code>stable_sort</code></a></li>
+<li><a href="cpp/std/algorithms.html#accumulate">Sum</a></li>
+<li><a href="cpp/std/algorithms.html#iter_swap">Swapping</a></li>
+<li><a href="cpp/std/algorithms.html#swap_ranges"><code>swap_ranges</code></a></li>
+<li><a href="cpp/std/algorithms.html#set_symmetric_difference">Symmetric Difference of Sets</a></li></ul></div>
+<div class="tree-fold plain" open><h5>T</h5></div>
+<div class="content " ><ul class="plain "><li><a href="cpp/std/algorithms.html#accumulate">Total</a></li>
+<li><a href="cpp/std/algorithms.html#transform"><code>transform</code></a></li>
+<li><a href="cpp/std/algorithms.html#transform_exclusive_scan"><code>transform_exclusive_scan</code></a></li>
+<li><a href="cpp/std/algorithms.html#transform_inclusive_scan"><code>transform_inclusive_scan</code></a></li>
+<li><a href="cpp/std/algorithms.html#transform_reduce"><code>transform_reduce</code></a></li>
+<li><a href="cpp/std/algorithms.html#for_each">Traversing Ranges</a></li></ul></div>
+<div class="tree-fold plain" open><h5>U-Z</h5></div>
+<div class="content " ><ul class="plain "><li><a href="cpp/std/algorithms.html#set_union">Union of sets</a></li>
+<li><a href="cpp/std/algorithms.html#unique"><code>unique</code></a></li>
+<li><a href="cpp/std/algorithms.html#unique_copy"><code>unique_copy</code></a></li>
+<li><a href="cpp/std/algorithms.html#upper_bound"><code>upper_bound</code></a></li></ul></div></div>
+<button id="drawer-left-toggle" title="Open Table of Contents"></button></div>
+<div id="main-content" class="boxed-wide "><article class="boxed-normal extended-fold-controls">
+<header class="plain">
+<h1>
+<span class="hwide">Standard Library Algorithms</span><span class="hslim">Standard Algorithms</span><span class="hnavi">Algorithms</span></h1>
+
+</header>
+<section class="main plain"><hr>
+<h2 class="hfold " ><span class="hwide">Non-Modifying Operations</span>
+<span class="hslim">Non-Modifying</span>
+<span class="hnavi">Non-Mod.</span></h2>
+<div class="content " ><h3 class="hfold " ><span class="nav-none">Existence Queries</span>
+<span class="nav-only">Existence</span></h3>
+<div class="content " ><div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="any_of" keywords="any_of "></a>
+<a class="img" href="cpp/std/algorithms/existence_queries.html#any_of">
+<img class="" src="cpp/std/algorithms/any_of_thumb.svg" style="width:100%; max-width:550px;"  alt="returns true if predicate check yields true for any element in the input range; otherwise returns false" title="returns true if predicate check yields true for any element in the input range; otherwise returns false"}></img>
+</a>
+<p><div class="if-shown1 ">returns <code><i>true</i></code> if predicate <code><span class="c1"><em>check</em></span></code> yields <code><i>true</i></code> for
+<em>any</em> element in the input range; otherwise returns <code><i>false</i></code></div></p></div>
+<div class="panel vcompact"><a class="nav" id="all_of" keywords="all_of "></a>
+<a class="img" href="cpp/std/algorithms/existence_queries.html#all_of">
+<img class="" src="cpp/std/algorithms/all_of_thumb.svg" style="width:100%; max-width:550px;"  alt="returns true if predicate check yields true for all elements in the input range; otherwise returns false" title="returns true if predicate check yields true for all elements in the input range; otherwise returns false"}></img>
+</a>
+<p><div class="if-shown1 ">returns <code><i>true</i></code> if predicate <code><span class="c1"><em>check</em></span></code> yields <code><i>true</i></code> for
+<em>all</em> elements in the input range; otherwise returns <code><i>false</i></code></div></p></div>
+<div class="panel vcompact"><a class="nav" id="none_of" keywords="none_of "></a>
+<a class="img" href="cpp/std/algorithms/existence_queries.html#none_of">
+<img class="" src="cpp/std/algorithms/none_of_thumb.svg" style="width:100%; max-width:550px;"  alt="returns true if predicate check yields false for all elements in the input range; otherwise returns false" title="returns true if predicate check yields false for all elements in the input range; otherwise returns false"}></img>
+</a>
+<p><div class="if-shown1 ">returns <code><i>true</i></code> if predicate <code><span class="c1"><em>check</em></span></code> yields <code><i>false</i></code> for
+<em>all</em> elements in the input range; otherwise returns <code><i>false</i></code></div></p></div></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="count" keywords="count "></a>
+<a class="img" href="cpp/std/algorithms/existence_queries.html#count">
+<img class="" src="cpp/std/algorithms/count_thumb.svg" style="width:100%; max-width:550px;"  alt="returns the number of elements equal to value" title="returns the number of elements equal to value"}></img>
+</a>
+<p><div class="if-shown1 ">returns the number of elements equal to <code><span class="c1">value</span></code></div></p></div>
+<div class="panel vcompact"><a class="nav" id="count_if" keywords="count_if "></a>
+<a class="img" href="cpp/std/algorithms/existence_queries.html#count_if">
+<img class="" src="cpp/std/algorithms/count_if_thumb.svg" style="width:100%; max-width:550px;"  alt="returns the number of elements for which predicate condition yields true" title="returns the number of elements for which predicate condition yields true"}></img>
+</a>
+<p><div class="if-shown1 ">returns the number of elements for which 
+predicate <code><span class="c1"><em>condition</em></span></code> yields <code><i>true</i></code></div></p></div></div></div>
+<h3 class="hfold " ><span class="nav-none">Finding&thinsp;/&thinsp;Locating Elements</span>
+<span class="nav-only">Locate</span></h3>
+<div class="content " ><h5>Find Single Elements</h5>
+<div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="find" keywords="find "></a>
+<a class="img" href="cpp/std/algorithms/finding.html#find">
+<img class="" src="cpp/std/algorithms/find_thumb.svg" style="width:100%; max-width:550px;"  alt="find the 1st matching position of a single element that compares equal to value" title="find the 1st matching position of a single element that compares equal to value"}></img>
+</a>
+<p><div class="if-shown1 ">find the 1<sup>st</sup> matching position of a single element 
+that compares equal to <code><span class="c1">value</span></code></div></p></div>
+<div class="panel vcompact"><a class="nav" id="find_if" keywords="find_if "></a>
+<a class="img" href="cpp/std/algorithms/finding.html#find_if">
+<img class="" src="cpp/std/algorithms/find_if_thumb.svg" style="width:100%; max-width:550px;"  alt="find the 1st matching position of a single element for which predicate f is true" title="find the 1st matching position of a single element for which predicate f is true"}></img>
+</a>
+<p><div class="if-shown1 ">find the 1<sup>st</sup> matching position of a single element
+for which predicate <code><span class="c1"><em>f</em></span></code> is <code><i>true</i></code></div></p></div>
+<div class="panel vcompact"><a class="nav" id="find_if_not" keywords="find_if_not "></a>
+<a class="img" href="cpp/std/algorithms/finding.html#find_if_not">
+<img class="" src="cpp/std/algorithms/find_if_not_thumb.svg" style="width:100%; max-width:550px;"  alt="find the 1st matching position of a single element for which predicate f is false" title="find the 1st matching position of a single element for which predicate f is false"}></img>
+</a>
+<p><div class="if-shown1 ">find the 1<sup>st</sup> matching position of a single element
+for which predicate <code><span class="c1"><em>f</em></span></code> is <code><i>false</i></code></div></p></div></div>
+<div class="panel vcompact"><a class="nav" id="find_first_of" keywords="find_first_of "></a>
+<a class="img" href="cpp/std/algorithms/finding.html#find_first_of">
+<img class="" src="cpp/std/algorithms/find_first_of_thumb.svg" style="width:100%; max-width:550px;"  alt="find the 1st matching position in range&nbsp;1 of any element contained in range&nbsp;2" title="find the 1st matching position in range&nbsp;1 of any element contained in range&nbsp;2"}></img>
+</a>
+<p><div class="if-hidden1 "><small>find the 1<sup>st</sup> matching position in <span class="c2">range&nbsp;1</span>
+of any element contained in <span class="c1">range&nbsp;2</span></small></div><div class="if-shown1 ">find the 1<sup>st</sup> matching position in <span class="c2">range&nbsp;1</span>
+of any element contained in <span class="c1">range&nbsp;2</span></div></p></div>
+<h5>Find Consecutive Runs of Equal Elements</h5>
+<div class="panel vcompact"><a class="nav" id="adjacent_find" keywords="adjacent_find "></a>
+<a class="img" href="cpp/std/algorithms/finding.html#adjacent_find">
+<img class="" src="cpp/std/algorithms/adjacent_find_thumb.svg" style="width:100%; max-width:550px;"  alt="find the starting position of a run of at least 2 consecutive identical elements" title="find the starting position of a run of at least 2 consecutive identical elements"}></img>
+</a>
+<p><div class="if-shown1 ">find the starting position of a run of at least 2 consecutive identical elements</div></p></div>
+<div class="panel vcompact"><a class="nav" id="search_n" keywords="search_n "></a>
+<a class="img" href="cpp/std/algorithms/finding.html#search_n">
+<img class="" src="cpp/std/algorithms/search_n_thumb.svg" style="width:100%; max-width:550px;"  alt="find the starting position of a run of at least n consecutive identical elements equal to value" title="find the starting position of a run of at least n consecutive identical elements equal to value"}></img>
+</a>
+<p><div class="if-shown1 ">find the starting position of a run of at least <code><span class="c1">n</span></code>
+consecutive identical elements equal to <code><span class="c1">value</span></code></div></p></div>
+<h5>Find Subranges</h5>
+<div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="search" keywords="search "></a>
+<a class="img" href="cpp/std/algorithms/finding.html#search">
+<img class="" src="cpp/std/algorithms/search_thumb.svg" style="width:100%; max-width:550px;"  alt="searches for the first occurrence of range&nbsp;2 inside range&nbsp;1" title="searches for the first occurrence of range&nbsp;2 inside range&nbsp;1"}></img>
+</a>
+<p><div class="if-shown1 ">searches for the first occurrence of <span class="c1">range&nbsp;2</span> inside <span class="c2">range&nbsp;1</span></div></p></div>
+<div class="panel vcompact"><a class="nav" id="find_end" keywords="find_end "></a>
+<a class="img" href="cpp/std/algorithms/finding.html#find_end">
+<img class="" src="cpp/std/algorithms/find_end_thumb.svg" style="width:100%; max-width:550px;"  alt="find last occurrence of range&nbsp;2 inside range&nbsp;1" title="find last occurrence of range&nbsp;2 inside range&nbsp;1"}></img>
+</a>
+<p><div class="if-shown1 ">find last occurrence of <span class="c1">range&nbsp;2</span> inside <span class="c2">range&nbsp;1</span></div></p></div></div></div>
+<h3 class="hfold " ><span class="nav-none">Comparing Ranges</span>
+<span class="nav-only">Compare</span></h3>
+<div class="content " ><div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="equal" keywords="equal "></a>
+<a class="img" href="cpp/std/algorithms/comparing_ranges.html#equal">
+<img class="" src="cpp/std/algorithms/equal_thumb.svg" style="width:100%; max-width:550px;"  alt="returns true if all elements in both ranges are equal; otherwise returns false" title="returns true if all elements in both ranges are equal; otherwise returns false"}></img>
+</a>
+<p><div class="if-shown1 ">returns <code><i>true</i></code> if all elements in both ranges are equal; otherwise returns <i>false</i></div></p></div>
+<div class="panel vcompact"><a class="nav" id="mismatch" keywords="mismatch "></a>
+<a class="img" href="cpp/std/algorithms/comparing_ranges.html#mismatch">
+<img class="" src="cpp/std/algorithms/mismatch_thumb.svg" style="width:100%; max-width:550px;"  alt="returns a pair of iterators to the first mismatching elements in 2 ranges" title="returns a pair of iterators to the first mismatching elements in 2 ranges"}></img>
+</a>
+<p><div class="if-shown1 ">returns a pair of iterators to the first mismatching elements in 2 ranges</div></p></div></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="lexicographical_compare" keywords="lexicographical_compare "></a>
+<a class="img" href="cpp/std/algorithms/comparing_ranges.html#lexicographical_compare">
+<img class="" src="cpp/std/algorithms/lexicographical_compare_thumb.svg" style="width:100%; max-width:550px;"  alt="returns true if range&nbsp;1 is lexicographically less than range&nbsp;2" title="returns true if range&nbsp;1 is lexicographically less than range&nbsp;2"}></img>
+</a>
+<p><div class="if-shown1 ">returns <code><i>true</i></code> if <span class="c2">range&nbsp;1</span> is lexicographically less than <span class="c1">range&nbsp;2</span></div></p></div>
+<div class="panel vcompact"><a class="nav" id="lexicographical_compare_three_way" keywords="lexicographical_compare_three_way "></a>
+<a class="img" href="cpp/std/algorithms/comparing_ranges.html#lexicographical_compare_three_way">
+<img class="" src="cpp/std/algorithms/lexicographical_compare_three_way_thumb.svg" style="width:100%; max-width:550px;"  alt="compares 2 ranges using 3-way comparisons and returns the result as a value of the strongest applicable comparsion category" title="compares 2 ranges using 3-way comparisons and returns the result as a value of the strongest applicable comparsion category"}></img>
+</a>
+<p><div class="if-shown1 ">compares 2 ranges using 3-way comparisons and returns the 
+result as a value of the strongest applicable comparsion category</div></p></div></div></div>
+<h3 class="hfold " ><span class="hwide">Binary Search of Sorted Ranges</span>
+<span class="hslim">Binary Search</span>
+<span class="hnavi">Binary Search</span></h3>
+<div class="content " ><div class="panel vcompact"><a class="nav" id="binary_search" keywords="binary_search "></a>
+<a class="img" href="https://en.cppreference.com/w/cpp/algorithm/binary_search">
+<img class="" src="cpp/std/algorithms/binary_search_thumb.svg" style="width:100%; max-width:550px;"  alt="returns true if the input range contains an element equivalent to value; otherwise returns false;  input range must be sorted" title="returns true if the input range contains an element equivalent to value; otherwise returns false;  input range must be sorted"}></img>
+</a>
+<p><div class="if-shown1 ">returns <code><i>true</i></code> if the input range contains an element 
+<em>equivalent</em> to <code><span class="c1">value</span></code>; otherwise returns <i>false</i>;<br>
+<span class="cat-important"></span> input range must be sorted</div></p></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="lower_bound" keywords="lower_bound "></a>
+<a class="img" href="https://en.cppreference.com/w/cpp/algorithm/lower_bound">
+<img class="" src="cpp/std/algorithms/lower_bound_thumb.svg" style="width:100%; max-width:550px;"  alt="returns the position of the first element greater than value;  input range must be sorted" title="returns the position of the first element greater than value;  input range must be sorted"}></img>
+</a>
+<p><div class="if-shown1 ">returns the position of the first element greater than <code><span class="c1">value</span></code>;<br>
+<span class="cat-important"></span> input range must be sorted</div></p></div>
+<div class="panel vcompact"><a class="nav" id="upper_bound" keywords="upper_bound "></a>
+<a class="img" href="https://en.cppreference.com/w/cpp/algorithm/upper_bound">
+<img class="" src="cpp/std/algorithms/upper_bound_thumb.svg" style="width:100%; max-width:550px;"  alt="returns the position of the first element not smaller than value;  input range must be sorted" title="returns the position of the first element not smaller than value;  input range must be sorted"}></img>
+</a>
+<p><div class="if-shown1 ">returns the position of the first element not smaller than <code><span class="c1">value</span></code>;<br>
+<span class="cat-important"></span> input range must be sorted</div></p></div>
+<div class="panel vcompact"><a class="nav" id="equal_range" keywords="equal_range "></a>
+<a class="img" href="https://en.cppreference.com/w/cpp/algorithm/equal_range">
+<img class="" src="cpp/std/algorithms/equal_range_thumb.svg" style="width:100%; max-width:550px;"  alt="returns an iterator range  of all elements equivalent to value;  input range must be sorted" title="returns an iterator range  of all elements equivalent to value;  input range must be sorted"}></img>
+</a>
+<p><div class="if-shown1 ">returns an 
+<a href="cpp/std/iterators_intro#iterator-ranges" >iterator range</a>
+
+of all elements <em>equivalent</em> to <code><span class="c1">value</span></code>;<br>
+<span class="cat-important"></span> input range must be sorted</div></p></div></div>
+<div class="panel vcompact"><a class="nav" id="includes" keywords="includes "></a>
+<a class="img" href="https://en.cppreference.com/w/cpp/algorithm/includes">
+<img class="" src="cpp/std/algorithms/includes_thumb.svg" style="width:100%; max-width:550px;"  alt="return true if sorted range&nbsp;2 was found inside sorted range&nbsp;1;  input ranges must be sorted" title="return true if sorted range&nbsp;2 was found inside sorted range&nbsp;1;  input ranges must be sorted"}></img>
+</a>
+<p><div class="if-shown1 ">return true if sorted <span class="c2">range&nbsp;2</span> was found inside sorted <span class="c1">range&nbsp;1</span>;<br>
+<span class="cat-important"></span> input ranges must be sorted</div></p></div></div>
+<h3 class="hfold " ><span class="nav-none">Minimum&thinsp;/&thinsp;Maximum</span>
+<span class="nav-only">Min/Max</span></h3>
+<div class="content " ><div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="min_element" keywords="min_element "></a>
+<a class="img" href="cpp/std/algorithms/min_max.html#min_element">
+<img class="" src="cpp/std/algorithms/min_element_thumb.svg" style="width:100%; max-width:550px;"  alt="returns an iterator to the smallest element; the 2nd version uses compare for comparing elements, while the 1st version uses operator&lt;" title="returns an iterator to the smallest element; the 2nd version uses compare for comparing elements, while the 1st version uses operator&lt;"}></img>
+</a>
+<p><div class="if-shown1 ">returns an iterator to the smallest element;<br>
+the 2<sup>nd</sup> version uses <code><span class="c1"><em>compare</em></span></code> for comparing elements,
+while the 1<sup>st</sup> version uses <code>operator<strong>&lt;</strong></code></div></p></div>
+<div class="panel vcompact"><a class="nav" id="max_element" keywords="max_element "></a>
+<a class="img" href="cpp/std/algorithms/min_max.html#max_element">
+<img class="" src="cpp/std/algorithms/max_element_thumb.svg" style="width:100%; max-width:550px;"  alt="returns an iterator to the largest element; the 2nd version uses compare for comparing elements, while the 1st version uses operator&lt;" title="returns an iterator to the largest element; the 2nd version uses compare for comparing elements, while the 1st version uses operator&lt;"}></img>
+</a>
+<p><div class="if-shown1 ">returns an iterator to the largest element;<br>
+the 2<sup>nd</sup> version uses <code><span class="c1"><em>compare</em></span></code> for comparing elements,
+while the 1<sup>st</sup> version uses <code>operator<strong>&lt;</strong></code></div></p></div>
+<div class="panel vcompact"><a class="nav" id="minmax_element" keywords="minmax_element "></a>
+<a class="img" href="cpp/std/algorithms/min_max.html#minmax_element">
+<img class="" src="cpp/std/algorithms/minmax_element_thumb.svg" style="width:100%; max-width:550px;"  alt="returns a pair of iterators to both the smallest and largest elements; the 2nd version uses comp for comparing elements, while the 1st version uses operator&lt;" title="returns a pair of iterators to both the smallest and largest elements; the 2nd version uses comp for comparing elements, while the 1st version uses operator&lt;"}></img>
+</a>
+<p><div class="if-shown1 ">returns a pair of iterators to both the smallest and largest elements;<br>
+the 2<sup>nd</sup> version uses <code><span class="c1"><em>comp</em></span></code> for comparing elements,
+while the 1<sup>st</sup> version uses <code>operator<strong>&lt;</strong></code></div></p></div></div>
+<div class="panel "><h4 class="hfold nav-none" >min/max/minmax/clamp</h4>
+<div class="content " ><a class="nav " id="min" keywords="min "></a>
+<div class="block vcompact"><p><code><a class="nav" id="" keywords=""></a>
+<a class="like-text" id="" href="https://en.cppreference.com/w/cpp/algorithm/min"><strong>min</strong></a>(<span class="c2">a</span>, <span class="c2">b</span>) &rarr;&ensp;</code>
+<span class="c2">a</span> if (<span class="c2">a</span> &lt; <span class="c2">b</span>) is <code><i>true</i></code>, <span class="c2">b</span> otherwise</p>
+<p><code><a class="nav" id="" keywords=""></a>
+<a class="like-text" id="" href="https://en.cppreference.com/w/cpp/algorithm/min"><strong>min</strong></a>(<span class="c2">a</span>, <span class="c2">b</span>, <span class="c1"><em>f</em>(</span><span class="c2">o</span>,<span class="c2">o</span><span class="c1">)&rarr;bool</span>) &rarr;&ensp;</code>
+<span class="c2">a</span> if <code><span class="c1"><em>f</em></span>(a,b)</code> is <code><i>true</i></code>, <span class="c2">b</span> otherwise</p>
+<p><code><a class="nav" id="" keywords=""></a>
+<a class="like-text" id="" href="https://en.cppreference.com/w/cpp/algorithm/min"><strong>min</strong></a>(<strong>{</strong><span class="c2">v1</span>,<span class="c2">v2</span>,<span class="c2">v3</span>, &hellip;<strong>}</strong>) &rarr;&ensp;</code>
+smallest value&emsp;<code><a class="lbl " href="tags/c++11.html">C++11</a></code></p></div>
+<hr>
+<a class="nav " id="max" keywords="max "></a>
+<div class="block vcompact"><p><code><a class="nav" id="" keywords=""></a>
+<a class="like-text" id="" href="https://en.cppreference.com/w/cpp/algorithm/max"><strong>max</strong></a>(<span class="c2">a</span>, <span class="c2">b</span>) &rarr;&ensp;</code>
+<span class="c2">b</span> if (<span class="c2">a</span> &lt; <span class="c2">b</span>) is <code><i>true</i></code>, <span class="c2">a</span> otherwise</p>
+<p><code><a class="nav" id="" keywords=""></a>
+<a class="like-text" id="" href="https://en.cppreference.com/w/cpp/algorithm/max"><strong>max</strong></a>(<span class="c2">a</span>, <span class="c2">b</span>, <span class="c1"><em>f</em>(</span><span class="c2">o</span>,<span class="c2">o</span><span class="c1">)&rarr;bool</span>) &rarr;&ensp;</code>
+<span class="c2">b</span> if <code><span class="c1"><em>f</em></span>(a,b)</code> is <code><i>true</i></code>, <span class="c2">a</span> otherwise</p>
+<p><code><a class="nav" id="" keywords=""></a>
+<a class="like-text" id="" href="https://en.cppreference.com/w/cpp/algorithm/max"><strong>max</strong></a>(<strong>{</strong><span class="c2">v1</span>,<span class="c2">v2</span>,<span class="c2">v3</span>,&hellip;<strong>}</strong>) &rarr;&ensp;</code>
+largest value&emsp;<code><a class="lbl " href="tags/c++11.html">C++11</a></code></p></div>
+<hr>
+<a class="nav " id="minmax" keywords="minmax "></a>
+<div class="block vcompact"><p><code><a class="nav" id="" keywords=""></a>
+<a class="like-text" id="" href="https://en.cppreference.com/w/cpp/algorithm/minmax"><strong>minmax</strong></a>(<span class="c2">a</span>, <span class="c2">b</span>) &rarr;&ensp;</code>
+<strong>{</strong> smallest <strong>,</strong> largest <strong>}</strong></p>
+<p><code><a class="nav" id="" keywords=""></a>
+<a class="like-text" id="" href="https://en.cppreference.com/w/cpp/algorithm/minmax"><strong>minmax</strong></a>(<span class="c2">a</span>, <span class="c2">b</span>, <span class="c1"><em>f</em>(</span><span class="c2">o</span>,<span class="c2">o</span><span class="c1">)&rarr;bool</span>) &rarr;&ensp;</code>
+<strong>{</strong> smallest <strong>,</strong> largest <strong>}</strong></p>
+<p><code><a class="nav" id="" keywords=""></a>
+<a class="like-text" id="" href="https://en.cppreference.com/w/cpp/algorithm/minmax"><strong>minmax</strong></a>(<strong>{</strong><span class="c2">v1</span>,<span class="c2">v2</span>,<span class="c2">v3</span>, &hellip;<strong>}</strong>) &rarr;&ensp;</code>
+<strong>{</strong> smallest <strong>,</strong> largest <strong>}</strong></p>
+<p><a class="lbl " href="tags/c++11.html">C++11</a>&emsp;
+custom comparison function/object: <code><span class="c1"><em>f</em></span>(a,b)</code>
+must return <code><i>true</i></code> if <code>a</code> should be ordered before <code>b</code></p></div>
+<hr>
+<a class="nav " id="clamp" keywords="clamp "></a>
+<div class="block vcompact"><p><code><a class="nav" id="" keywords=""></a>
+<a class="like-text" id="" href="https://en.cppreference.com/w/cpp/algorithm/clamp"><strong>clamp</strong></a>(<span class="c2">value</span>,<span class="c2">hi</span>,<span class="c2">lo</span>) &rarr; <span class="c2">clamped_value</span></code></p>
+<p><code><a class="nav" id="" keywords=""></a>
+<a class="like-text" id="" href="https://en.cppreference.com/w/cpp/algorithm/clamp"><strong>clamp</strong></a>(<span class="c2">value</span>,<span class="c2">hi</span>,<span class="c2">lo</span>,<span class="c1"><em>f</em>(</span><span class="c2">o</span>,<span class="c2">o</span><span class="c1">)&rarr;bool</span>) &rarr; <span class="c2">clamped_value</span></code></p></div>
+<p><a class="lbl " href="tags/c++17.html">C++17</a>&emsp;
+clamps <code><span class="c2">value</span></code> in the interval given by <code><span class="c2">hi</span></code> and <code><span class="c2">lo</span></code>;
+the second version uses <code><span class="c1"><em>f</em></span></code> to compare values instead of <code>operator<strong>&lt;</strong></code></p></div></div></div>
+<h3 class="hfold " ><span class="nav-none">Structural Properties</span>
+<span class="nav-only">Structural</span></h3>
+<div class="content " ><div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="is_sorted" keywords="is_sorted "></a>
+<a class="img" href="cpp/std/algorithms/reordering.html#is_sorted">
+<img class="" src="cpp/std/algorithms/is_sorted_thumb.svg" style="width:100%; max-width:550px;"  alt="returns true if the input range is sorted and false otherwise; the 2nd version uses compare for comparing elements, while the 1st version uses operator&lt;" title="returns true if the input range is sorted and false otherwise; the 2nd version uses compare for comparing elements, while the 1st version uses operator&lt;"}></img>
+</a>
+<p><div class="if-shown1 ">returns <code><i>true</i></code> if the input range is sorted and <code><i>false</i></code> otherwise;<br>
+the 2<sup>nd</sup> version uses <code><span class="c1"><em>compare</em></span></code> for comparing elements,
+while the 1<sup>st</sup> version uses <code>operator<strong>&lt;</strong></code></div></p></div>
+<div class="panel vcompact"><a class="nav" id="is_sorted_until" keywords="is_sorted_until "></a>
+<a class="img" href="cpp/std/algorithms/reordering.html#is_sorted_until">
+<img class="" src="cpp/std/algorithms/is_sorted_until_thumb.svg" style="width:100%; max-width:550px;"  alt="returns the first position where the input range is no longer sorted; the 2nd version uses compare for comparing elements, while the 1st version uses operator&lt;" title="returns the first position where the input range is no longer sorted; the 2nd version uses compare for comparing elements, while the 1st version uses operator&lt;"}></img>
+</a>
+<p><div class="if-shown1 ">returns the first position where the input range is no longer sorted;<br>
+the 2<sup>nd</sup> version uses <code><span class="c1"><em>compare</em></span></code> for comparing elements,
+while the 1<sup>st</sup> version uses <code>operator<strong>&lt;</strong></code></div></p></div></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="is_partitioned" keywords="is_partitioned "></a>
+<a class="img" href="cpp/std/algorithms/reordering.html#is_partitioned">
+<img class="" src="cpp/std/algorithms/is_partitioned_thumb.svg" style="width:100%; max-width:550px;"  alt="returns true if the input range is partitioned according to predicate f and false otherwise" title="returns true if the input range is partitioned according to predicate f and false otherwise"}></img>
+</a>
+<p><div class="if-shown1 ">returns <code><i>true</i></code> if the input range is partitioned according to 
+predicate <code><span class="c1"><em>f</em></span></code> and false otherwise</div></p></div>
+<div class="panel vcompact"><a class="nav" id="partition_point" keywords="partition_point "></a>
+<a class="img" href="cpp/std/algorithms/reordering.html#partition_point">
+<img class="" src="cpp/std/algorithms/partition_point_thumb.svg" style="width:100%; max-width:550px;"  alt="returns the start of the partition of elements for which predicate f; yields false; the input range must be partitioned according to f" title="returns the start of the partition of elements for which predicate f; yields false; the input range must be partitioned according to f"}></img>
+</a>
+<p><div class="if-shown1 ">returns the start of the partition of elements for which 
+predicate <code><span class="c1"><em>f</em></span></code>; yields <code><i>false</i></code>;<br>
+the <strong>input range must be partitioned</strong> according to <code><span class="c1"><em>f</em></span></code></div></p></div></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="is_permutation" keywords="is_permutation "></a>
+<a class="img" href="cpp/std/algorithms/reordering.html#is_permutation">
+<img class="" src="cpp/std/algorithms/is_permutation_thumb.svg" style="width:100%; max-width:550px;"  alt="return true if range&nbsp;2 is a permutation of range&nbsp;1, i.e., both ranges must contain the same elements, but not necessarily in the same order" title="return true if range&nbsp;2 is a permutation of range&nbsp;1, i.e., both ranges must contain the same elements, but not necessarily in the same order"}></img>
+</a>
+<p><div class="if-shown1 ">return <code><i>true</i></code> if <span class="c2">range&nbsp;2</span> is a permutation of <span class="c1">range&nbsp;1</span>, i.e.,
+both ranges must contain the same elements, but not necessarily in the same order</div></p></div></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="is_heap" keywords="is_heap "></a>
+<a class="img" href="https://en.cppreference.com/w/cpp/algorithm/is_heap">
+<img class="" src="cpp/std/algorithms/is_heap_thumb.svg" style="width:100%; max-width:550px;"  alt="returns true if the input range is a max heap and false otherwise" title="returns true if the input range is a max heap and false otherwise"}></img>
+</a>
+<p><div class="if-shown1 ">returns <code><i>true</i></code> if the input range is a max heap and <code><i>false</i></code> otherwise</div></p></div>
+<div class="panel vcompact"><a class="nav" id="is_heap_until" keywords="is_heap_until "></a>
+<a class="img" href="https://en.cppreference.com/w/cpp/algorithm/is_heap_until">
+<img class="" src="cpp/std/algorithms/is_heap_until_thumb.svg" style="width:100%; max-width:550px;"  alt="returns the first position where the input range is no longer a max heap" title="returns the first position where the input range is no longer a max heap"}></img>
+</a>
+<p><div class="if-shown1 ">returns the first position where the input range is no longer a max heap</div></p></div></div></div>
+<h3 class="hfold " ><span class="nav-none">Traversing Ranges</span>
+<span class="nav-only">Traversal</span></h3>
+<div class="content " ><div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="for_each" keywords="for_each "></a>
+<a class="img" href="cpp/std/algorithms/range_utilities.html#for_each">
+<img class="" src="cpp/std/algorithms/for_each_thumb.svg" style="width:100%; max-width:550px;"  alt="applies predicate f to all elements in the input range [begin, end)" title="applies predicate f to all elements in the input range [begin, end)"}></img>
+</a>
+<p><div class="if-shown1 ">applies predicate <code><span class="c1"><em>f</em></span></code> to all elements in the input range
+<code>[<span class="c2">begin</span>, <span class="c2">end</span>)</code></div></p></div>
+<div class="panel vcompact"><a class="nav" id="for_each_n" keywords="for_each_n "></a>
+<a class="img" href="cpp/std/algorithms/range_utilities.html#for_each_n">
+<img class="" src="cpp/std/algorithms/for_each_n_thumb.svg" style="width:100%; max-width:550px;"  alt="applies predicate f to all elements in the input range [begin, begin+n)" title="applies predicate f to all elements in the input range [begin, begin+n)"}></img>
+</a>
+<p><div class="if-shown1 ">applies predicate <code><span class="c1"><em>f</em></span></code> to all elements in the input range 
+<code>[<span class="c2">begin</span>, <span class="c2">begin</span>+<span class="c4">n</span>)</code></div></p></div></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="next" keywords="next "></a>
+<a class="img" href="cpp/std/algorithms/range_utilities.html#next">
+<img class="" src="cpp/std/algorithms/next_thumb.svg" style="width:100%; max-width:550px;" }></img>
+</a>
+<p><div class="if-shown1 "></div></p></div>
+<div class="panel vcompact"><a class="nav" id="prev" keywords="prev "></a>
+<a class="img" href="cpp/std/algorithms/range_utilities.html#prev">
+<img class="" src="cpp/std/algorithms/prev_thumb.svg" style="width:100%; max-width:550px;" }></img>
+</a>
+<p><div class="if-shown1 "></div></p></div>
+<div class="panel vcompact"><a class="nav" id="advance" keywords="advance "></a>
+<a class="img" href="cpp/std/algorithms/range_utilities.html#advance">
+<img class="" src="cpp/std/algorithms/advance_thumb.svg" style="width:100%; max-width:550px;" }></img>
+</a>
+<p><div class="if-shown1 "></div></p></div></div></div></div>
+<h2 class="hfold " ><span class="hwide">Copying&thinsp;/&thinsp;Moving&thinsp;/&thinsp;Swapping Elements</span>
+<span class="hslim">Copy/Move/Swap</span>
+<span class="hnavi">Copy/Move</span></h2>
+<div class="content " ><div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="copy" keywords="copy "></a>
+<a class="img" href="https://en.cppreference.com/w/cpp/algorithm/copy">
+<img class="" src="cpp/std/algorithms/copy_thumb.svg" style="width:100%; max-width:550px;"  alt="copies all elements in the input range to a target (range) beginning at target_begin and returns an iterator one behind the last target value;  the target must be able to recieve distance(begin,end) many elements" title="copies all elements in the input range to a target (range) beginning at target_begin and returns an iterator one behind the last target value;  the target must be able to recieve distance(begin,end) many elements"}></img>
+</a>
+<p><div class="if-shown1 ">copies all elements in the <span class="c1">input range</span> to a target (range)
+beginning at <code><span class="c3">target_begin</span></code> and returns an iterator one behind the
+last target value;<br>
+<span class="cat-important"></span> the target must be able to recieve distance(begin,end) many elements</div></p></div>
+<div class="panel vcompact"><a class="nav" id="copy_n" keywords="copy_n "></a>
+<a class="img" href="https://en.cppreference.com/w/cpp/algorithm/copy_n">
+<img class="" src="cpp/std/algorithms/copy_n_thumb.svg" style="width:100%; max-width:550px;"  alt="copies all elements in the range starting at begin to a target (range) beginning at target_begin and returns an iterator one behind the last target value;  the target must be able to recieve n elements" title="copies all elements in the range starting at begin to a target (range) beginning at target_begin and returns an iterator one behind the last target value;  the target must be able to recieve n elements"}></img>
+</a>
+<p><div class="if-shown1 ">copies all elements in the range starting at <code><span class="c2">begin</span></code> to a target (range)
+beginning at <code><span class="c3">target_begin</span></code> and returns an iterator one behind the
+last target value;<br>
+<span class="cat-important"></span> the target must be able to recieve <code><span class="c1">n</span></code> elements</div></p></div>
+<div class="panel vcompact"><a class="nav" id="copy_backward" keywords="copy_backward "></a>
+<a class="img" href="https://en.cppreference.com/w/cpp/algorithm/copy_backward">
+<img class="" src="cpp/std/algorithms/copy_backward_thumb.svg" style="width:100%; max-width:550px;"  alt="copies all elements in the input range to a target (range) ending at target_end and returns an iterator to the first target value;  the target must be able to recieve distance(begin,end) many elements" title="copies all elements in the input range to a target (range) ending at target_end and returns an iterator to the first target value;  the target must be able to recieve distance(begin,end) many elements"}></img>
+</a>
+<p><div class="if-shown1 ">copies all elements in the <span class="c1">input range</span> to a target (range) <em>ending</em>
+at <code><span class="c3">target_end</span></code> and returns an iterator to the first target value;<br>
+<span class="cat-important"></span> the target must be able to recieve distance(begin,end) many elements</div></p></div></div>
+<div class="panel vcompact"><a class="nav" id="copy_if" keywords="copy_if "></a>
+<a class="img" href="https://en.cppreference.com/w/cpp/algorithm/copy_if">
+<img class="" src="cpp/std/algorithms/copy_if_thumb.svg" style="width:100%; max-width:550px;"  alt="copies all elements in the input range for which select yields true to a target (range) beginning at tgt and returns an iterator one behind the last target value;  the target must be able to recieve the copied elements" title="copies all elements in the input range for which select yields true to a target (range) beginning at tgt and returns an iterator one behind the last target value;  the target must be able to recieve the copied elements"}></img>
+</a>
+<p><div class="if-shown1 ">copies all elements in the <span class="c1">input range</span> for which <code><span class="c1"><em>select</em></span></code> yields 
+<code><i>true</i></code> to a target (range) beginning at <code><span class="c3">tgt</span></code> and returns an iterator 
+one behind the last target value;<br>
+<span class="cat-important"></span> the target must be able to recieve the copied elements</div></p></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="move" keywords="move "></a>
+<a class="img" href="https://en.cppreference.com/w/cpp/algorithm/move">
+<img class="" src="cpp/std/algorithms/move_thumb.svg" style="width:100%; max-width:550px;"  alt="moves all elements in the input range to a target (range) beginning at target_begin and returns an iterator one behind the last target value;  the target must be able to recieve distance(begin,end) many elements" title="moves all elements in the input range to a target (range) beginning at target_begin and returns an iterator one behind the last target value;  the target must be able to recieve distance(begin,end) many elements"}></img>
+</a>
+<p><div class="if-shown1 ">moves all elements in the <span class="c1">input range</span> to a target (range)
+beginning at <code><span class="c3">target_begin</span></code> and returns an iterator one behind the
+last target value;<br>
+<span class="cat-important"></span> the target must be able to recieve distance(begin,end) many elements</div></p></div>
+<div class="panel vcompact"><a class="nav" id="move_backward" keywords="move_backward "></a>
+<a class="img" href="https://en.cppreference.com/w/cpp/algorithm/move_backward">
+<img class="" src="cpp/std/algorithms/move_backward_thumb.svg" style="width:100%; max-width:550px;"  alt="moves all elements in the input range to a target (range) ending at target_end and returns an iterator to the first target value;  the target must be able to recieve distance(begin,end) many elements" title="moves all elements in the input range to a target (range) ending at target_end and returns an iterator to the first target value;  the target must be able to recieve distance(begin,end) many elements"}></img>
+</a>
+<p><div class="if-shown1 ">moves all elements in the <span class="c1">input range</span> to a target (range) <em>ending</em>
+at <code><span class="c3">target_end</span></code> and returns an iterator to the first target value;<br>
+<span class="cat-important"></span> the target must be able to recieve distance(begin,end) many elements</div></p></div></div>
+<h5>Random Sampling</h5>
+<div class="panel vcompact"><a class="nav" id="sample" keywords="sample "></a>
+<a class="img" href="https://en.cppreference.com/w/cpp/algorithm/sample">
+<img class="" src="cpp/std/algorithms/sample_thumb.svg" style="width:100%; max-width:550px;"  alt="Selects n elements (without replacement) with equal probability from an input population range using a random_generator (uniform random bit engine) and writes them to an output range." title="Selects n elements (without replacement) with equal probability from an input population range using a random_generator (uniform random bit engine) and writes them to an output range."}></img>
+</a>
+<p><div class="if-shown1 ">Selects <code><span class="c1">n</span></code> elements (without replacement) with equal probability from 
+an <span class="c2">input population range</span> using a <span class="c4">random_generator (uniform random bit engine)</span>
+and writes them to an <span class="c3">output range</span>.</div></p></div>
+<h5>Swapping
+<div class="panel vcompact"><a class="nav" id="iter_swap" keywords="iter_swap "></a>
+<a class="img" href="cpp/std/algorithms/range_utilities.html#iter_swap">
+<img class="" src="cpp/std/algorithms/iter_swap_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div>
+<div class="panel vcompact"><a class="nav" id="swap_ranges" keywords="swap_ranges "></a>
+<a class="img" href="https://en.cppreference.com/w/cpp/algorithm/swap_ranges">
+<img class="" src="cpp/std/algorithms/swap_ranges_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div></h5></div>
+<h2 class="hfold " ><span class="hwide">Reordering Elements</span>
+<span class="hslim">Reordering</span>
+<span class="hnavi">Reorder</span></h2>
+<div class="content " ><h3 class="hfold " ><span class="nav-none">Shifting</span>
+<span class="nav-only">Shift</span></h3>
+<div class="content " ><div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="reverse" keywords="reverse "></a>
+<a class="img" href="cpp/std/algorithms/reordering.html#reverse">
+<img class="" src="cpp/std/algorithms/reverse_thumb.svg" style="width:100%; max-width:550px;"  alt="reverses the order of the elements in the input range" title="reverses the order of the elements in the input range"}></img>
+</a>
+<p><div class="if-shown1 ">reverses the order of the elements in the input range</div></p></div>
+<div class="panel vcompact"><a class="nav" id="reverse_copy" keywords="reverse_copy "></a>
+<a class="img" href="cpp/std/algorithms/reordering.html#reverse_copy">
+<img class="" src="cpp/std/algorithms/reverse_copy_thumb.svg" style="width:100%; max-width:550px;"  alt="copies all elements in the input range to an output (range) beginning at out and returns an iterator one behind the last output value;  the output must be able to recieve distance(begin,end) many elements" title="copies all elements in the input range to an output (range) beginning at out and returns an iterator one behind the last output value;  the output must be able to recieve distance(begin,end) many elements"}></img>
+</a>
+<p><div class="if-shown1 ">copies all elements in the <span class="c2">input range</span> to an output (range)
+beginning at <code><span class="c3">out</span></code> and returns an iterator one behind the
+last output value;<br>
+<span class="cat-important"></span> the output must be able to recieve distance(begin,end) many elements</div></p></div></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="rotate" keywords="rotate "></a>
+<a class="img" href="cpp/std/algorithms/reordering.html#rotate">
+<img class="" src="cpp/std/algorithms/rotate_thumb.svg" style="width:100%; max-width:550px;"  alt="performs a cyclic left rotation: elements in the range [begin, new_first) are put behind end (in their original order) so that new_fist" title="performs a cyclic left rotation: elements in the range [begin, new_first) are put behind end (in their original order) so that new_fist"}></img>
+</a>
+<p><div class="if-shown1 ">performs a cyclic left rotation: elements in the range
+<code>[<span class="c1">begin</span>, <span class="c1">new_first</span>) are put behind <code><span class="c1">end</span></code></code>
+(in their original order) so that <code><span class="c1">new_fist</span></code></div></p></div>
+<div class="panel vcompact"><a class="nav" id="rotate_copy" keywords="rotate_copy "></a>
+<a class="img" href="cpp/std/algorithms/reordering.html#rotate_copy">
+<img class="" src="cpp/std/algorithms/rotate_copy_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="shift_left" keywords="shift_left "></a>
+<a class="img" href="cpp/std/algorithms/reordering.html#shift_left">
+<img class="" src="cpp/std/algorithms/shift_left_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div>
+<div class="panel vcompact"><a class="nav" id="shift_right" keywords="shift_right "></a>
+<a class="img" href="cpp/std/algorithms/reordering.html#shift_right">
+<img class="" src="cpp/std/algorithms/shift_right_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div></div>
+<h5><span class="nav-none">Shift Randomly</span>
+<span class="nav-only">Randomly</span></h5>
+<div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="shuffle" keywords="shuffle "></a>
+<a class="img" href="cpp/std/algorithms/reordering.html#shuffle">
+<img class="" src="cpp/std/algorithms/shuffle_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div></div></div>
+<h3 class="hfold " ><span class="nav-none">Sorting</span>
+<span class="nav-only">Sort</span></h3>
+<div class="content " ><div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="sort" keywords="sort "></a>
+<a class="img" href="cpp/std/algorithms/reordering.html#sort">
+<img class="" src="cpp/std/algorithms/sort_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div>
+<div class="panel vcompact"><a class="nav" id="stable_sort" keywords="stable_sort "></a>
+<a class="img" href="cpp/std/algorithms/reordering.html#stable_sort">
+<img class="" src="cpp/std/algorithms/stable_sort_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="partial_sort" keywords="partial_sort "></a>
+<a class="img" href="cpp/std/algorithms/reordering.html#partial_sort">
+<img class="" src="cpp/std/algorithms/partial_sort_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div>
+<div class="panel vcompact"><a class="nav" id="partial_sort_copy" keywords="partial_sort_copy "></a>
+<a class="img" href="cpp/std/algorithms/reordering.html#partial_sort_copy">
+<img class="" src="cpp/std/algorithms/partial_sort_copy_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="nth_element" keywords="nth_element "></a>
+<a class="img" href="cpp/std/algorithms/reordering.html#nth_element">
+<img class="" src="cpp/std/algorithms/nth_element_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="is_sorted" keywords="is_sorted "></a>
+<a class="img" href="cpp/std/algorithms/reordering.html#is_sorted">
+<img class="" src="cpp/std/algorithms/is_sorted_thumb.svg" style="width:100%; max-width:550px;"  alt="returns true if the input range is sorted and false otherwise; the 2nd version uses compare for comparing elements, while the 1st version uses operator&lt;" title="returns true if the input range is sorted and false otherwise; the 2nd version uses compare for comparing elements, while the 1st version uses operator&lt;"}></img>
+</a>
+<p><div class="if-shown1 ">returns <code><i>true</i></code> if the input range is sorted and <code><i>false</i></code> otherwise;<br>
+the 2<sup>nd</sup> version uses <code><span class="c1"><em>compare</em></span></code> for comparing elements,
+while the 1<sup>st</sup> version uses <code>operator<strong>&lt;</strong></code></div></p></div>
+<div class="panel vcompact"><a class="nav" id="is_sorted_until" keywords="is_sorted_until "></a>
+<a class="img" href="cpp/std/algorithms/reordering.html#is_sorted_until">
+<img class="" src="cpp/std/algorithms/is_sorted_until_thumb.svg" style="width:100%; max-width:550px;"  alt="returns the first position where the input range is no longer sorted; the 2nd version uses compare for comparing elements, while the 1st version uses operator&lt;" title="returns the first position where the input range is no longer sorted; the 2nd version uses compare for comparing elements, while the 1st version uses operator&lt;"}></img>
+</a>
+<p><div class="if-shown1 ">returns the first position where the input range is no longer sorted;<br>
+the 2<sup>nd</sup> version uses <code><span class="c1"><em>compare</em></span></code> for comparing elements,
+while the 1<sup>st</sup> version uses <code>operator<strong>&lt;</strong></code></div></p></div></div></div>
+<h3 class="hfold " ><span class="nav-none">Partitioning</span>
+<span class="nav-only">Partition</span></h3>
+<div class="content " ><div class="panel vcompact"><a class="nav" id="partition" keywords="partition "></a>
+<a class="img" href="cpp/std/algorithms/reordering.html#partition">
+<img class="" src="cpp/std/algorithms/partition_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div>
+<div class="panel vcompact"><a class="nav" id="partition_copy" keywords="partition_copy "></a>
+<a class="img" href="cpp/std/algorithms/reordering.html#partition_copy">
+<img class="" src="cpp/std/algorithms/partition_copy_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div>
+<div class="panel vcompact"><a class="nav" id="stable_partition" keywords="stable_partition "></a>
+<a class="img" href="cpp/std/algorithms/reordering.html#stable_partition">
+<img class="" src="cpp/std/algorithms/stable_partition_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="is_partitioned" keywords="is_partitioned "></a>
+<a class="img" href="cpp/std/algorithms/reordering.html#is_partitioned">
+<img class="" src="cpp/std/algorithms/is_partitioned_thumb.svg" style="width:100%; max-width:550px;"  alt="returns true if the input range is partitioned according to predicate f and false otherwise" title="returns true if the input range is partitioned according to predicate f and false otherwise"}></img>
+</a>
+<p><div class="if-shown1 ">returns <code><i>true</i></code> if the input range is partitioned according to 
+predicate <code><span class="c1"><em>f</em></span></code> and false otherwise</div></p></div>
+<div class="panel vcompact"><a class="nav" id="partition_point" keywords="partition_point "></a>
+<a class="img" href="cpp/std/algorithms/reordering.html#partition_point">
+<img class="" src="cpp/std/algorithms/partition_point_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div></div></div>
+<h3 class="hfold " ><span class="nav-none">Permutations</span>
+<span class="nav-only">Permute</span></h3>
+<div class="content " ><div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="next_permutation" keywords="next_permutation "></a>
+<a class="img" href="cpp/std/algorithms/reordering.html#next_permutation">
+<img class="" src="cpp/std/algorithms/next_permutation_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div>
+<div class="panel vcompact"><a class="nav" id="prev_permutation" keywords="prev_permutation "></a>
+<a class="img" href="cpp/std/algorithms/reordering.html#prev_permutation">
+<img class="" src="cpp/std/algorithms/prev_permutation_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div></div>
+<div class="panel vcompact"><a class="nav" id="is_permutation" keywords="is_permutation "></a>
+<a class="img" href="cpp/std/algorithms/reordering.html#is_permutation">
+<img class="" src="cpp/std/algorithms/is_permutation_thumb.svg" style="width:100%; max-width:550px;"  alt="return true if range&nbsp;2 is a permutation of range&nbsp;1, i.e., both ranges must contain the same elements, but not necessarily in the same order" title="return true if range&nbsp;2 is a permutation of range&nbsp;1, i.e., both ranges must contain the same elements, but not necessarily in the same order"}></img>
+</a>
+<p><div class="if-shown1 ">return <code><i>true</i></code> if <span class="c2">range&nbsp;2</span> is a permutation of <span class="c1">range&nbsp;1</span>, i.e.,
+both ranges must contain the same elements, but not necessarily in the same order</div></p></div></div>
+<h3 class="hfold " ><span class="nav-none">Heap Operations</span>
+<span class="nav-only">Heaps</span></h3>
+<div class="content " ><div class="panel "><p>for using contiguous containers (<code><span class="c6 ">std::</span>array</code>, <code><span class="c6 ">std::</span>vector</code>, &hellip;)
+as a max heap, i.e., a (conceptual) binary tree where each parent 
+has a larger value than its children</p></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="make_heap" keywords="make_heap "></a>
+<a class="img" href="https://en.cppreference.com/w/cpp/algorithm/make_heap">
+<img class="" src="cpp/std/algorithms/make_heap_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div>
+<div class="panel vcompact"><a class="nav" id="sort_heap" keywords="sort_heap "></a>
+<a class="img" href="https://en.cppreference.com/w/cpp/algorithm/sort_heap">
+<img class="" src="cpp/std/algorithms/sort_heap_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="push_heap" keywords="push_heap "></a>
+<a class="img" href="https://en.cppreference.com/w/cpp/algorithm/push_heap">
+<img class="" src="cpp/std/algorithms/push_heap_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div>
+<div class="panel vcompact"><a class="nav" id="pop_heap" keywords="pop_heap "></a>
+<a class="img" href="https://en.cppreference.com/w/cpp/algorithm/pop_heap">
+<img class="" src="cpp/std/algorithms/pop_heap_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="is_heap" keywords="is_heap "></a>
+<a class="img" href="https://en.cppreference.com/w/cpp/algorithm/is_heap">
+<img class="" src="cpp/std/algorithms/is_heap_thumb.svg" style="width:100%; max-width:550px;"  alt="returns true if the input range is a max heap and false otherwise" title="returns true if the input range is a max heap and false otherwise"}></img>
+</a>
+<p><div class="if-shown1 ">returns <code><i>true</i></code> if the input range is a max heap and <code><i>false</i></code> otherwise</div></p></div>
+<div class="panel vcompact"><a class="nav" id="is_heap_until" keywords="is_heap_until "></a>
+<a class="img" href="https://en.cppreference.com/w/cpp/algorithm/is_heap_until">
+<img class="" src="cpp/std/algorithms/is_heap_until_thumb.svg" style="width:100%; max-width:550px;"  alt="returns the first position where the input range is no longer a max heap" title="returns the first position where the input range is no longer a max heap"}></img>
+</a>
+<p><div class="if-shown1 ">returns the first position where the input range is no longer a max heap</div></p></div></div></div></div>
+<h2 class="hfold " ><span class="nav-none">Modifying Elements</span>
+<span class="nav-only">Modify</span></h2>
+<div class="content " ><h3 class="hfold " ><span class="nav-none">Changing&thinsp;/&thinsp;Replacing</span>
+<span class="nav-only">Values</span></h3>
+<div class="content " ><div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="fill" keywords="fill "></a>
+<a class="img" href="cpp/std/algorithms/element_modification.html#fill">
+<img class="" src="cpp/std/algorithms/fill_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div>
+<div class="panel vcompact"><a class="nav" id="fill_n" keywords="fill_n "></a>
+<a class="img" href="cpp/std/algorithms/element_modification.html#fill_n">
+<img class="" src="cpp/std/algorithms/fill_n_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="generate" keywords="generate "></a>
+<a class="img" href="cpp/std/algorithms/element_modification.html#generate">
+<img class="" src="cpp/std/algorithms/generate_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div>
+<div class="panel vcompact"><a class="nav" id="generate_n" keywords="generate_n "></a>
+<a class="img" href="cpp/std/algorithms/element_modification.html#generate_n">
+<img class="" src="cpp/std/algorithms/generate_n_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div></div>
+<div class="panel vcompact"><a class="nav" id="transform" keywords="transform map"></a>
+<a class="img" href="cpp/std/algorithms/element_modification.html#transform">
+<img class="" src="cpp/std/algorithms/transform_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="replace" keywords="replace "></a>
+<a class="img" href="cpp/std/algorithms/element_modification.html#replace">
+<img class="" src="cpp/std/algorithms/replace_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div>
+<div class="panel vcompact"><a class="nav" id="replace_if" keywords="replace_if "></a>
+<a class="img" href="cpp/std/algorithms/element_modification.html#replace_if">
+<img class="" src="cpp/std/algorithms/replace_if_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="replace_copy" keywords="replace_copy "></a>
+<a class="img" href="cpp/std/algorithms/element_modification.html#replace_copy">
+<img class="" src="cpp/std/algorithms/replace_copy_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div>
+<div class="panel vcompact"><a class="nav" id="replace_copy_if" keywords="replace_copy_if "></a>
+<a class="img" href="cpp/std/algorithms/element_modification.html#replace_copy_if">
+<img class="" src="cpp/std/algorithms/replace_copy_if_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div></div></div>
+<h3 class="hfold " ><span class="nav-none">Removing</span>
+<span class="nav-only">Remove</span></h3>
+<div class="content " ><div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="remove" keywords="remove "></a>
+<a class="img" href="cpp/std/algorithms/element_modification.html#remove">
+<img class="" src="cpp/std/algorithms/remove_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div>
+<div class="panel vcompact"><a class="nav" id="remove_if" keywords="remove_if "></a>
+<a class="img" href="cpp/std/algorithms/element_modification.html#remove_if">
+<img class="" src="cpp/std/algorithms/remove_if_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="remove_copy" keywords="remove_copy "></a>
+<a class="img" href="cpp/std/algorithms/element_modification.html#remove_copy">
+<img class="" src="cpp/std/algorithms/remove_copy_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div>
+<div class="panel vcompact"><a class="nav" id="remove_copy_if" keywords="remove_copy_if "></a>
+<a class="img" href="cpp/std/algorithms/element_modification.html#remove_copy_if">
+<img class="" src="cpp/std/algorithms/remove_copy_if_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="erase" keywords="erase "></a>
+<a class="img" href="cpp/std/algorithms/element_modification.html#erase">
+<img class="" src="cpp/std/algorithms/erase_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div>
+<div class="panel vcompact"><a class="nav" id="erase_if" keywords="erase_if "></a>
+<a class="img" href="cpp/std/algorithms/element_modification.html#erase_if">
+<img class="" src="cpp/std/algorithms/erase_if_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="unique" keywords="unique "></a>
+<a class="img" href="cpp/std/algorithms/element_modification.html#unique">
+<img class="" src="cpp/std/algorithms/unique_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div>
+<div class="panel vcompact"><a class="nav" id="unique_copy" keywords="unique_copy "></a>
+<a class="img" href="cpp/std/algorithms/element_modification.html#unique_copy">
+<img class="" src="cpp/std/algorithms/unique_copy_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div></div></div>
+<h3 class="hfold " ><span class="nav-none">Sorted Range Operations</span>
+<span class="nav-only">Sorted Ranges</span></h3>
+<div class="content " ><div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="merge" keywords="merge "></a>
+<a class="img" href="https://en.cppreference.com/w/cpp/algorithm/merge">
+<img class="" src="cpp/std/algorithms/merge_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div>
+<div class="panel vcompact"><a class="nav" id="inplace_merge" keywords="inplace_merge "></a>
+<a class="img" href="https://en.cppreference.com/w/cpp/algorithm/inplace_merge">
+<img class="" src="cpp/std/algorithms/inplace_merge_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div></div>
+<h5>Sorted Ranges As Sets</h5>
+<div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="set_union" keywords="set_union "></a>
+<a class="img" href="https://en.cppreference.com/w/cpp/algorithm/set_union">
+<img class="" src="cpp/std/algorithms/set_union_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div>
+<div class="panel vcompact"><a class="nav" id="set_intersection" keywords="set_intersection "></a>
+<a class="img" href="https://en.cppreference.com/w/cpp/algorithm/set_intersection">
+<img class="" src="cpp/std/algorithms/set_intersection_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div>
+<div class="panel vcompact"><a class="nav" id="set_difference" keywords="set_difference "></a>
+<a class="img" href="https://en.cppreference.com/w/cpp/algorithm/set_difference">
+<img class="" src="cpp/std/algorithms/set_difference_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div>
+<div class="panel vcompact"><a class="nav" id="set_symmetric_difference" keywords="set_symmetric_difference "></a>
+<a class="img" href="https://en.cppreference.com/w/cpp/algorithm/set_symmetric_difference">
+<img class="" src="cpp/std/algorithms/set_symmetric_difference_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div></div></div></div>
+<h2 class="hfold " ><span class="hwide">Numeric Operations</span>
+<span class="hslim">Numeric Operations</span>
+<span class="hnavi">Numeric</span></h2>
+<div class="content " ><h4 class="nav-none"><code><span class="c6">#include &lt;numeric&gt;</span></code></h4>
+<div class="panel vcompact"><a class="nav" id="iota" keywords="iota "></a>
+<a class="img" href="https://en.cppreference.com/w/cpp/algorithm/iota">
+<img class="" src="cpp/std/algorithms/iota_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div>
+<h4 class="nav-none">Reductions</h4>
+<div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="accumulate" keywords="accumulate sum total"></a>
+<a class="img" href="https://en.cppreference.com/w/cpp/algorithm/accumulate">
+<img class="" src="cpp/std/algorithms/accumulate_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div>
+<div class="panel vcompact"><a class="nav" id="reduce" keywords="reduce "></a>
+<a class="img" href="https://en.cppreference.com/w/cpp/algorithm/reduce">
+<img class="" src="cpp/std/algorithms/reduce_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="inner_product" keywords="inner_product "></a>
+<a class="img" href="https://en.cppreference.com/w/cpp/algorithm/inner_product">
+<img class="" src="cpp/std/algorithms/inner_product_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div>
+<div class="panel ">
+<a href="https://en.cppreference.com/w/cpp/algorithm/transform_reduce" ><div class="block"><img class="" src="cpp/std/algorithms/transform_reduce1_thumb.svg" style="width:100%; max-width:580px;"}></img></div></a>
+
+<hr>
+
+<a href="https://en.cppreference.com/w/cpp/algorithm/transform_reduce" ><div class="block"><img class="" src="cpp/std/algorithms/transform_reduce2_thumb.svg" style="width:100%; max-width:580px;"}></img></div></a>
+</div></div>
+<h4 class="nav-none">Scans <small>(<q>Prefix Sums</q>)</small></h4>
+<div class="panel vcompact"><a class="nav" id="adjacent_difference" keywords="adjacent_difference "></a>
+<a class="img" href="https://en.cppreference.com/w/cpp/algorithm/adjacent_difference">
+<img class="" src="cpp/std/algorithms/adjacent_difference_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="partial_sum" keywords="partial_sum prefix sum"></a>
+<a class="img" href="https://en.cppreference.com/w/cpp/algorithm/partial_sum">
+<img class="" src="cpp/std/algorithms/partial_sum_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div>
+<div class="panel vcompact"><a class="nav" id="inclusive_scan" keywords="inclusive_scan "></a>
+<a class="img" href="https://en.cppreference.com/w/cpp/algorithm/inclusive_scan">
+<img class="" src="cpp/std/algorithms/inclusive_scan_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div>
+<div class="panel vcompact"><a class="nav" id="exclusive_scan" keywords="exclusive_scan "></a>
+<a class="img" href="https://en.cppreference.com/w/cpp/algorithm/exclusive_scan">
+<img class="" src="cpp/std/algorithms/exclusive_scan_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><a class="nav" id="transform_inclusive_scan" keywords="transform_inclusive_scan "></a>
+<a class="img" href="https://en.cppreference.com/w/cpp/algorithm/transform_inclusive_scan">
+<img class="" src="cpp/std/algorithms/transform_inclusive_scan_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div>
+<div class="panel vcompact"><a class="nav" id="transform_exclusive_scan" keywords="transform_exclusive_scan "></a>
+<a class="img" href="https://en.cppreference.com/w/cpp/algorithm/transform_exclusive_scan">
+<img class="" src="cpp/std/algorithms/transform_exclusive_scan_thumb.svg" style="width:100%; max-width:550px;"  alt="TODO" title="TODO"}></img>
+</a>
+<p><div class="if-shown1 ">TODO</div></p></div></div></div>
+<hr></section>
+<section class="plain">
+<div class="panel-fold minor" open><h3 class="nav-none"><span class="hwide">Algorithm Parameters Iconography</span>
+<span class="hslim">Parameters Iconography</span></h3></div>
+<div class="panel "><img src="cpp/std/algorithms/legend_thumb.svg" style="max-width:100%;"></img></div>
+</section>
+<section class="main"><div class="panel-fold " open><h2><span class="nav-none">Beginner's Guide Articles</span>
+<span class="nav-only">Guide Articles</span></h2></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><h5>std:: Algorithms are</h5>
+</div>
+<div class="panel "><ul class="resources "><li class="cat-article"><a href="cpp/std/algorithms/intro.html">Introduction &amp; Basic Paradigms</a></li>
+
+<li class="cat-article"><a href="cpp/design/function_objects.html">Function Objects</a></li>
+
+<li class="cat-slides"><a href="cpp/lang/lambda_basics.html">Lambdas (Basics)</a></li>
+
+<li class="cat-article"><a href="cpp/std/container_traversal.html">Container Traversal</a></li>
+
+<hr>
+<li class="cat-article"><a href="cpp/std/algorithms/min_max.html">Minimum / Maximum</a></li>
+
+<li class="cat-article"><a href="cpp/std/algorithms/existence_queries.html">Existence Queries <small>(<code>count</code>, <code>any_of</code>, &hellip;)</small></a></li>
+
+<li class="cat-article"><a href="cpp/std/algorithms/finding.html">Finding Elements <small>(<code>find</code>, <code>find_if</code>, &hellip;)</small></a></li>
+
+<li class="cat-article"><a href="cpp/std/algorithms/comparing_ranges.html">Comparing Ranges <small>(<code>equal</code>, <code>mismatch</code>, &hellip;)</small></a></li>
+
+<li class="cat-article"><a href="cpp/std/algorithms/reordering.html">Sequence Reordering <small>(<code>reverse</code>, <code>rotate</code>, &hellip;)</small></a></li>
+
+<li class="cat-article"><a href="cpp/std/algorithms/element_modification.html">Changing Elements <small>(<code>replace</code>, <code>transform</code>, &hellip;)</small></a></li>
+
+<li class="cat-slides"><a href="cpp/std/algorithms/numeric.html">Numeric Algorithms <small>(<code>accumulate</code>, <code>iota</code>, &hellip;)</small></a></li>
+
+<li class="cat-slides"><a href="cpp/std/algorithms/sorted_sequence_operations.html">Sorted Sequence Operations <small>(<code>binary_search</code>, &hellip;)</small></a></li>
+
+<li class="cat-slides"><a href="cpp/std/random.html">Random Number Generation</a></li>
+</ul></div></div>
+<div class="panel-fold " open><h2 class="nav-none">Overview Sheet <span class="if-opened"><small>(click/zoom)</small></span></h2></div>
+<div class="panel ">
+<a class="img hcentered" href="cpp/std/algorithms.png""_crop">
+<img style="max-width:100%;" src="cpp/std/algorithms.png""_crop" title="click to enlarge"></img>
+
+</a>
+</div></section>
+<section class="epilog">
+<div class="panel-fold " open><h3 class="cat-link">Related <span class="if-closed">&hellip;</span></h3></div>
+<div class="panel "><ul class="resources "><li class="cat-guide"><a href="cpp/beginners_guide.html">Beginner's Guide To C++</a></li>
+
+<li class="cat-overview"><a href="cpp/std/containers.html">Standard Library Containers</a></li>
+
+<hr>
+<li class="cat-cppreference"><a href="https://en.cppreference.com/w/cpp/algorithm">cppreference: Algorithms Library</a></li>
+<hr>
+<li class="cat-youtube"><a href="https://www.youtube.com/playlist?list=PLVFrD1dmDdve4h3Shk0uePpXp8JUMM1w5">C++ Standard Algorithms (Video Series) <small>by Conor Hoekstra</small></a></li>
+<li class="cat-youtube"><a href="https://www.youtube.com/watch?v=yTi46Pb32qg&list=PLVFrD1dmDdvcMhTpiO410-4LXX9L7n4hq&index=1&t=2s"><q>C++ Iterators</q> <small>by Conor Hoekstra</small></a></li>
+<hr>
+<li class="cat-book"><a href="https://isocpp.org/files/papers/4-Tour-Algo-draft.pdf">A Tour of C++: Containers and Algorithms</a></li>
+</ul></div>
+</section>
+<section class="context">
+<ul class="linear-tags "><li><a href="tags/c++.html">C++</a></li><li><a href="tags/algorithms.html">algorithms</a></li><li><a href="tags/article.html">article</a></li><li><a href="tags/std-algorithms.html">std-algorithms</a></li><li><a href="tags/std-library.html">std-library</a></li></ul>
+</section>
+<section class="metadata">
+<p><span class="cat-date">Last updated: 2020-10-19</span></p>
+</section>
+</article></div>
+<footer>
+<div id="footer-top"><div id="footer-top-content"><div id="footer-top-left"><nav><ul class="plain ">
+<li>
+<a href="index.html" class="cat-home" >Home</a>
+</li>
+
+<li>
+<a href="tags/news.html" class="cat-news" >News</a>
+</li>
+
+<li>
+<a href="tags/article.html" class="cat-article" >Articles</a>
+</li>
+
+<li>
+<a href="tags/featured.html" class="cat-featured" >Featured</a>
+</li>
+
+<li>
+<a href="tags/guide.html" class="cat-guide" >Guides</a>
+</li>
+
+<li>
+<a href="tags/list.html" class="cat-list" >Lists</a>
+</li>
+
+<li>
+<a href="about.html" class="cat-about" >About</a>
+</li>
+
+<li>
+<a href="privacy.html" class="cat-contact" >Privacy</a>
+</li>
+
+<li>
+<a href="https://twitter.com/hackingcpp" class="cat-twitter" >Twitter</a>
+</li></ul></nav></div>
+<div id="footer-top-right"><h2 class="cat-tags nav-none">
+<a href="tags.html" >Tags</a>
+</h2>
+<ul class="topic-cloud "><li><a style="font-size:117.3739395094748%;" href="tags/algorithms.html">algorithms</a></li> <li><a style="font-size:74.685320232403%;" href="tags/allocators.html">allocators</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/arrays.html">arrays</a></li> <li><a style="font-size:154.85882183899798%;" href="tags/article.html">article</a></li> <li><a style="font-size:150.60732445608994%;" href="tags/beginner-level.html">beginner-level</a></li> <li><a style="font-size:60.0%;" href="tags/blogs.html">blogs</a></li> <li><a style="font-size:60.0%;" href="tags/books.html">books</a></li> <li><a style="font-size:60.0%;" href="tags/build-systems.html">build-systems</a></li> <li><a style="font-size:160.1565121053651%;" href="tags/c++.html">C++</a></li> <li><a style="font-size:60.0%;" href="tags/c++-standardization.html">C++-standardization</a></li> <li><a style="font-size:132.0592597418778%;" href="tags/c++11.html">C++11</a></li> <li><a style="font-size:118.74128092961203%;" href="tags/c++14.html">C++14</a></li> <li><a style="font-size:118.74128092961203%;" href="tags/c++17.html">C++17</a></li> <li><a style="font-size:124.50258791586917%;" href="tags/c++20.html">C++20</a></li> <li><a style="font-size:74.685320232403%;" href="tags/c++98.html">C++98</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/c-style.html">C-style</a></li> <li><a style="font-size:60.0%;" href="tags/c-vs-c++.html">C-vs-C++</a></li> <li><a style="font-size:60.0%;" href="tags/cat-casts.html">cat-casts</a></li> <li><a style="font-size:106.55136375888092%;" href="tags/classes.html">classes</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/code-editors.html">code-editors</a></li> <li><a style="font-size:74.685320232403%;" href="tags/code-formatters.html">code-formatters</a></li> <li><a style="font-size:74.685320232403%;" href="tags/command-line.html">command-line</a></li> <li><a style="font-size:106.55136375888092%;" href="tags/community.html">community</a></li> <li><a style="font-size:60.0%;" href="tags/comparisons.html">comparisons</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/compilers.html">compilers</a></li> <li><a style="font-size:60.0%;" href="tags/concepts.html">concepts</a></li> <li><a style="font-size:60.0%;" href="tags/conferences.html">conferences</a></li> <li><a style="font-size:60.0%;" href="tags/const.html">const</a></li> <li><a style="font-size:60.0%;" href="tags/constexpr.html">constexpr</a></li> <li><a style="font-size:110.802861141789%;" href="tags/containers.html">containers</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/control-flow.html">control-flow</a></li> <li><a style="font-size:114.34214226160506%;" href="tags/custom-types.html">custom-types</a></li> <li><a style="font-size:74.685320232403%;" href="tags/data-structures.html">data-structures</a></li> <li><a style="font-size:60.0%;" href="tags/debugging.html">debugging</a></li> <li><a style="font-size:104.05596069720902%;" href="tags/design.html">design</a></li> <li><a style="font-size:106.55136375888092%;" href="tags/diagnostics.html">diagnostics</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/exceptions.html">exceptions</a></li> <li><a style="font-size:89.370640464806%;" href="tags/featured.html">featured</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/file-io.html">file-io</a></li> <li><a style="font-size:60.0%;" href="tags/find.html">find</a></li> <li><a style="font-size:60.0%;" href="tags/find_if.html">find_if</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/functional-prog.html">functional-prog</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/functions.html">functions</a></li> <li><a style="font-size:60.0%;" href="tags/gallery.html">gallery</a></li> <li><a style="font-size:94.09825763003434%;" href="tags/generic-prog.html">generic-prog</a></li> <li><a style="font-size:60.0%;" href="tags/groups.html">groups</a></li> <li><a style="font-size:60.0%;" href="tags/guide.html">guide</a></li> <li><a style="font-size:74.685320232403%;" href="tags/guidelines.html">guidelines</a></li> <li><a style="font-size:60.0%;" href="tags/hash-map.html">hash-map</a></li> <li><a style="font-size:60.0%;" href="tags/hash-set.html">hash-set</a></li> <li><a style="font-size:60.0%;" href="tags/hashing.html">hashing</a></li> <li><a style="font-size:60.0%;" href="tags/header-files.html">header-files</a></li> <li><a style="font-size:74.685320232403%;" href="tags/heap.html">heap</a></li> <li><a style="font-size:60.0%;" href="tags/ides.html">ides</a></li> <li><a style="font-size:97.96100211184347%;" href="tags/idiom.html">idiom</a></li> <li><a style="font-size:97.96100211184347%;" href="tags/io.html">io</a></li> <li><a style="font-size:94.09825763003434%;" href="tags/iostreams.html">iostreams</a></li> <li><a style="font-size:74.685320232403%;" href="tags/iterators.html">iterators</a></li> <li><a style="font-size:74.685320232403%;" href="tags/language-mechanism.html">language-mechanism</a></li> <li><a style="font-size:60.0%;" href="tags/language-references.html">language-references</a></li> <li><a style="font-size:60.0%;" href="tags/learning.html">learning</a></li> <li><a style="font-size:60.0%;" href="tags/libraries.html">libraries</a></li> <li><a style="font-size:74.685320232403%;" href="tags/linker.html">linker</a></li> <li><a style="font-size:129.82704563832138%;" href="tags/list.html">list</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/low-level.html">low-level</a></li> <li><a style="font-size:60.0%;" href="tags/map.html">map</a></li> <li><a style="font-size:108.78357786243735%;" href="tags/memory.html">memory</a></li> <li><a style="font-size:120.02570076180908%;" href="tags/modern-c++.html">modern-C++</a></li> <li><a style="font-size:74.685320232403%;" href="tags/move-semantics.html">move-semantics</a></li> <li><a style="font-size:126.42995591581257%;" href="tags/news.html">news</a></li> <li><a style="font-size:74.685320232403%;" href="tags/oop.html">oop</a></li> <li><a style="font-size:60.0%;" href="tags/organizations.html">organizations</a></li> <li><a style="font-size:60.0%;" href="tags/package-manager.html">package-manager</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/paradigm.html">paradigm</a></li> <li><a style="font-size:60.0%;" href="tags/pattern.html">pattern</a></li> <li><a style="font-size:60.0%;" href="tags/people.html">people</a></li> <li><a style="font-size:60.0%;" href="tags/podcasts.html">podcasts</a></li> <li><a style="font-size:60.0%;" href="tags/pointers.html">pointers</a></li> <li><a style="font-size:60.0%;" href="tags/preprocessor.html">preprocessor</a></li> <li><a style="font-size:60.0%;" href="tags/profiling.html">profiling</a></li> <li><a style="font-size:74.685320232403%;" href="tags/randomness.html">randomness</a></li> <li><a style="font-size:60.0%;" href="tags/ranges.html">ranges</a></li> <li><a style="font-size:60.0%;" href="tags/references.html">references</a></li> <li><a style="font-size:60.0%;" href="tags/set.html">set</a></li> <li><a style="font-size:60.0%;" href="tags/social-media.html">social-media</a></li> <li><a style="font-size:60.0%;" href="tags/sorted-sequences.html">sorted-sequences</a></li> <li><a style="font-size:89.370640464806%;" href="tags/stack.html">stack</a></li> <li><a style="font-size:60.0%;" href="tags/standardization.html">standardization</a></li> <li><a style="font-size:114.34214226160506%;" href="tags/std-algorithms.html">std-algorithms</a></li> <li><a style="font-size:89.370640464806%;" href="tags/std-containers.html">std-containers</a></li> <li><a style="font-size:127.33164257664949%;" href="tags/std-library.html">std-library</a></li> <li><a style="font-size:60.0%;" href="tags/std-macros.html">std-macros</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/std-vector.html">std-vector</a></li> <li><a style="font-size:60.0%;" href="tags/strings.html">strings</a></li> <li><a style="font-size:60.0%;" href="tags/style.html">style</a></li> <li><a style="font-size:60.0%;" href="tags/taste.html">taste</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/templates.html">templates</a></li> <li><a style="font-size:60.0%;" href="tags/testing.html">testing</a></li> <li><a style="font-size:74.685320232403%;" href="tags/toolchain.html">toolchain</a></li> <li><a style="font-size:115.91222626883169%;" href="tags/tools.html">tools</a></li> <li><a style="font-size:74.685320232403%;" href="tags/traversal.html">traversal</a></li> <li><a style="font-size:117.3739395094748%;" href="tags/types.html">types</a></li> <li><a style="font-size:60.0%;" href="tags/user.html">user</a></li> <li><a style="font-size:60.0%;" href="tags/version-control.html">version-control</a></li> <li><a style="font-size:60.0%;" href="tags/views.html">views</a></li> <li><a style="font-size:60.0%;" href="tags/vim.html">VIM</a></li> <li><a style="font-size:60.0%;" href="tags/vim-plugins.html">VIM-plugins</a></li> <li><a style="font-size:60.0%;" href="tags/warnings.html">warnings</a></li> <li><a style="font-size:114.34214226160506%;" href="tags/websites.html">websites</a></li> 
+</ul></div></div></div>
+<div id="footer-bottom"><div id="footer-bottom-content">&copy;&nbsp;2019-2021&ensp;André&nbsp;Müller&emsp;&emsp;</div></div>
+</footer>
+<script src="assets/content.js?v=26-1"></script>
+</body>
+</html>

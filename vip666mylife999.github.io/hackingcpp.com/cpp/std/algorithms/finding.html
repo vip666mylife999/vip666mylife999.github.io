@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang='en-US'>
+<head>
+<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+<base href="https://vip666mylife999.github.io/hackingcpp.com">
+<link rel="icon" href="assets/hcpp-icon.png">
+<link rel="stylesheet" type="text/css" href="assets/style.css?v=26-1">
+<link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<title>h/cpp - Standard Library Finding Algorithms</title>
+<meta name="description" content="">
+<meta name="keyword" content="cpp std standard library algorithm">
+<meta name="author" content="André Müller">
+<meta name="date" content="2021-02-02">
+<meta name="copyright" content="2019-2021&ensp;André Müller">
+<meta name="hcpp-page-category" content="cat-article">
+<meta name="hcpp-tags" content="C++ C++11 C++20 algorithms article beginner-level find find_if std-algorithms std-library ">
+</head>
+<body>
+<div id="top-nav"><div id="titlebar" class="boxed-wide"><div id="main-branding">
+<a href="index.html"  id="main-logo" title="home"><span class="hwide"><img src="assets/hcpp.svg" style="max-width:100%;height:40;"></img></span>
+<span class="hslim"><img src="assets/hcpp-square.svg" style="max-width:100%;height:40;"></img></span></a>
+
+<div id="main-title">
+<a href="index.html"  title="home">hacking&nbsp;C++</a>
+</div></div>
+<div id="main-menu"><div class="entry "><a href="tags/news.html">News</a></div>
+<div class="submenu "><a>Learning</a><div class="submenu-dropdown">
+<a href="cpp/beginners_guide.html" >Beginner's Guide to C++</a>
+
+<hr>
+
+<a href="cpp/std/containers.html" >Standard Library Containers</a>
+
+
+<a href="cpp/std/algorithms.html" >Standard Library Algorithms</a>
+
+<hr>
+
+<a href="cpp/cheat_sheets.html" >Infographics / Cheat Sheets</a>
+
+
+<a href="tags/article.html" >All Articles</a>
+
+<hr>
+
+<a href="dev/web_learning.html" >Online Learning</a>
+
+
+<a href="cpp/books.html" >Books</a>
+</div></div>
+<div class="submenu "><a>Links</a><div class="submenu-dropdown">
+<a href="cpp/community.html" >Community Resources</a>
+
+
+<a href="cpp/tools/ecosystem.html" >Tool Ecosystem</a>
+
+<hr>
+
+<a href="tags/list.html" >All Resource Lists</a>
+
+<hr>
+
+<a href="dev/vim_plugins.html" >VIM Plugins</a>
+</div></div>
+<div class="submenu "><a>About</a><div class="submenu-dropdown">
+<a href="about.html" >Why &amp; Who</a>
+
+
+<a href="privacy.html" >Privacy</a>
+</div></div></div>
+<div id="main-socialbar">
+<a href="https://twitter.com/hackingcpp" ><span class="cat-twitter"></span></a>
+</div>
+<div class="navlinks" id="nav-path"></div>
+<div id="searchbar"><div id="searchbox"><input id="search-input"></input>
+<button id="search-clear"></button>
+<button id="search-run"></button>
+<button id="search-close"></button></div></div>
+<div class="hamburger " id="main-hamburger"><button title=""></button><div class="hamburger-dropdown"><a class="nav-icon-collapse-all" onclick="collapse_all_major_folds()">Collapse <strong>All</strong> Levels</a>
+
+<a class="nav-icon-collapse" onclick="collapse_major_folds()">Collapse Top Level</a>
+
+<a class="nav-icon-expand" onclick="expand_major_folds()">Expand Top Level</a>
+
+<a class="nav-icon-expand-all" onclick="expand_all_major_folds()">Expand <strong>All</strong> Levels</a>
+
+<hr>
+
+<a href="tags/news.html" class="cat-news" >News</a>
+
+
+<a href="tags/featured.html" class="cat-featured" >Featured</a>
+
+
+<a href="tags/article.html" class="cat-article" >Articles</a>
+
+
+<a href="cpp/beginners_guide.html" class="cat-guide" >Beginner's Guide to C++</a>
+
+
+<a href="tags/list.html" class="cat-list" >Lists</a>
+
+<hr>
+
+<a href="https://twitter.com/hackingcpp" ><span class="cat-twitter"></span> @hackingcpp</a>
+
+
+<a href="about.html" class="cat-about" >About</a>
+
+
+<a href="privacy.html" class="cat-contact" >Privacy</a>
+
+
+<a href="index.html" class="cat-home" >Home</a>
+</div></div></div>
+<nav id="guide-bar" class="boxed-wide"><div class="guide-nav">
+<div class="go-prev"><a href="cpp/std/algorithms/existence_queries.html"><span class="hwide">Query</span></a></div>
+<div class="go-up"><a href="cpp/beginners_guide.html#std-lib-algorithms">Beginner's Guide <span class="hxwide">/ Algorithms</span></a></div>
+<div class="go-next"><a href="cpp/std/algorithms/comparing_ranges.html"><span class="hwide">Compare</span></a></div>
+</div></nav></div>
+<div id="drawer-top" class="boxed-wide"><div id="search-results"><div id="search-header"><h1 class="cat-search" id="search-title"></h1></div>
+<div id="search-locations"><ul class="resources" id="search-location-items"></ul></div>
+<div id="search-footer"></div></div></div>
+<div id="drawer-left"><div id="drawer-left-heading"><a class="cat-guide" href="cpp/beginners_guide.html#intro">Beginner's Guide</a></div>
+<div id="drawer-left-content"><div class="tree-fold plain" ><h5>First Steps</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/tools/beginner_dev_setup.html" >Development Setup</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/hello_world.html" >Hello World</a>
+</li>
+
+<li>
+<a href="cpp/std/io_basics.html" >Input &amp; Output <small>(Basics)</small></a>
+</li>
+
+<li>
+<a href="cpp/lang/fundamental_types.html" >Fundamental Types</a>
+</li>
+
+<li>
+<a href="cpp/std/vector_intro.html" >std::vector Introduction</a>
+</li>
+
+<li>
+<a href="cpp/lang/enumerations.html" >Enumerations</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/lang/control_flow_basics.html" >Control Flow <small>(Basics)</small></a>
+</li>
+
+<li>
+<a href="cpp/lang/type_system_basics.html" >Type System <small>(Basics)</small></a>
+</li>
+
+<li>
+<a href="cpp/lang/function_basics.html" >Functions <small>(Basics)</small></a>
+</li>
+
+<li>
+<a href="cpp/lang/memory_basics.html" >Memory <small>(Basics)</small></a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/std/string_basics.html" >String <small>(Basics)</small></a>
+</li>
+
+<li>
+<a href="cpp/lang/references.html" >References</a>
+</li>
+
+<li>
+<a href="cpp/lang/aggregates.html" >Simple Aggregates</a>
+</li>
+
+<li>
+<a href="cpp/lang/function_call_mechanics.html" >Function Call Mechanics</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Input &amp; Output</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/command_line_arguments.html" >Command Line Arguments</a>
+</li>
+
+<li>
+<a href="cpp/std/file_streams.html" >File Input &amp; Output</a>
+</li>
+
+<li>
+<a href="cpp/std/io_streams.html" >Stream Input &amp; Output</a>
+</li>
+
+<li>
+<a href="cpp/std/istream_recover_from_errors.html" >Recover From Input Errors</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Custom Types &ndash; Part 1</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/custom_type_basics.html" >Simple Classes / Custom Types</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/lang/pointers.html" >Pointers</a>
+</li>
+
+<li>
+<a href="cpp/lang/destructors.html" >Destructors</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/lang/exceptions.html" >Exceptions</a>
+</li>
+
+<li>
+<a href="cpp/lang/noexcept.html" >Noexcept</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Diagnostics</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/tools/compiler_warnings.html" >Compiler Warnings</a>
+</li>
+
+<li>
+<a href="cpp/tools/gdb_intro.html" >Debugging With gdb</a>
+</li>
+
+<li>
+<a href="cpp/tools/asan.html" >Address Sanitizer</a>
+</li>
+
+<li>
+<a href="cpp/tools/ubsan.html" >Undefined Behavior Sanitizer</a>
+</li>
+
+<li>
+<a href="cpp/tools/valgrind.html" >valgrind</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Standard Library</h5></div>
+<div class="content " ><div class="tree-fold plain" ><h6>Containers &amp; Views</h6></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/std/iterators_intro.html" >Iterators</a>
+</li>
+
+<li>
+<a href="cpp/std/sequence_containers.html" >Sequence Containers</a>
+</li>
+
+<li>
+<a href="cpp/std/sequence_views.html" >Sequence Views</a>
+</li>
+
+<li>
+<a href="cpp/std/associative_containers.html" >Associative Containers</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h6>Standard Algorithms</h6></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/std/algorithms/intro.html" >Basic Paradigms</a>
+</li>
+
+<li>
+<a href="cpp/std/container_traversal.html" >Container Traversal</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/std/algorithms/min_max.html" >Minimum / Maximum</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/existence_queries.html" >Existence Queries</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/finding.html" >Finding Elements</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/comparing_ranges.html" >Comparing Ranges</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/design/function_objects.html" >Function Objects</a>
+</li>
+
+<li>
+<a href="cpp/lang/lambda_basics.html" >Lambdas <small>(Basics)</small></a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/std/algorithms/reordering.html" >Sequence Reordering</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/element_modification.html" >Changing Elements</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/numeric.html" >Numeric Algorithms</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/sorted_sequence_operations.html" >Sorted Sequence Operations</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h6>Utilities</h6></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/std/special_containers.html" >Special Containers</a>
+</li>
+
+<li>
+<a href="cpp/std/special_iterators.html" >Special Iterators</a>
+</li>
+
+<li>
+<a href="cpp/std/random.html" >Random Numbers</a>
+</li></ul></div></div>
+<div class="tree-fold plain" ><h5>Code Organization</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/separate_compilation.html" >Separate Compilation</a>
+</li>
+
+<li>
+<a href="cpp/lang/namespaces.html" >Namespaces</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Custom Types &ndash; Part 2</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/friends.html" >Friends</a>
+</li>
+
+<li>
+<a href="cpp/lang/comparisons.html" >Comparisons</a>
+</li>
+
+<li>
+<a href="cpp/design/literal_types.html" >Literal Types</a>
+</li>
+
+<li>
+<a href="cpp/design/arithmetic_types.html" >Arithmetic Types</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/std/unique_ownership.html" >Unique Resource Ownership</a>
+</li>
+
+<li>
+<a href="cpp/design/node_based_data_structures.html" >Node-Based Data Structures</a>
+</li>
+
+<li>
+<a href="cpp/lang/special_class_members.html" >Special Class Members</a>
+</li>
+
+<li>
+<a href="cpp/std/shared_ownership.html" >Shared Resource Ownership</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/lang/object_oriented_programming.html" >Object Oriented Programming</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/lang/move_semantics.html" >Move Semantics</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Generic Programming</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/templates.html" >Templates</a>
+</li>
+
+<li>
+<a href="cpp/lang/type_casts.html" >Type Casts</a>
+</li>
+
+<li>
+<a href="cpp/lang/type_deduction.html" >Type Deduction</a>
+</li>
+
+<li>
+<a href="cpp/std/type_traits.html" >Type Traits</a>
+</li>
+
+<li>
+<a href="cpp/lang/perfect_forwarding.html" >Perfect Forwarding</a>
+</li>
+
+<li>
+<a href="cpp/lang/concepts.html" >Concepts &amp; Constrained Templates</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Memory Management</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/pointer_arithmetic.html" >Pointer Arithmetic</a>
+</li>
+
+<li>
+<a href="cpp/lang/c_arrays.html" >C-Style Arrays</a>
+</li>
+
+<li>
+<a href="cpp/lang/manual_memory_management.html" >Manual Memory Management</a>
+</li>
+
+<li>
+<a href="cpp/design/allocators.html" >Allocators</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Software Design Basics</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/design/principles.html" >Design Principles</a>
+</li>
+
+<li>
+<a href="cpp/design/function_interface_example1.html" >Design Study: Function Interfaces</a>
+</li>
+
+<li>
+<a href="cpp/design/angle_axis_rotation.html" >Design Study: Angle-Axis Rotation</a>
+</li>
+
+<li>
+<a href="cpp/design/traversal_approaches.html" >Traversal Approaches</a>
+</li>
+
+<li>
+<a href="cpp/design/pimpl.html" >The PIMPL Idiom</a>
+</li></ul></div></div>
+<button id="drawer-left-toggle" title=""></button></div>
+<div id="main-content" class="boxed-wide "><article class="boxed-normal ">
+<header class="plain">
+<h1>
+<span class="hwide">Standard&nbsp;Library Finding&nbsp;Algorithms</span><span class="hslim">Finding Algorithms</span><span class="hnavi">Find</span></h1>
+<nav id="page-navbar" class=""></nav>
+</header>
+<section>
+<h5 class="nav-none">New to C++'s standard library algorithms?&ensp;
+&rArr;&ensp;
+<a href="cpp/std/algorithms/intro.html" >Short&nbsp;Introduction</a>
+</h5>
+</section>
+<section class="main plain"><h2 class="hfold " open><span class="hwide">Find&thinsp;/&thinsp;Locate One Element</span>
+<span class="hslim">Find One Element</span>
+<span class="hnavi">One Element</span></h2>
+<div class="content " ><div class="panel-fold " open><h3>
+<span class="nav-none"><code>find <span class="c6 if-closed">&rarr; @value|@end</span></code></span>
+<span class="nav-only">find</span>
+</h3></div>
+<div class="panel hvtight bg-filled "><div class="panel-fold vexpand" open>
+<a class="nav" id="find"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/find_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6">#include &lt;vector&gt;</span>
+<span class="c6">#include &lt;algorithm&gt;</span>
+<span class="c6 ">std::</span>vector&lt;int&gt; v {9,0,4,1,3,8,5,2,9};
+<hr><span class="comment ">// find '8' in subrange (as shown in image):</span>
+auto i = <strong>find(</strong><span class="c2">begin(v)<strong>+2</strong></span>, <span class="c2">begin(v)<strong>+7</strong></span>, <span class="e1">8</span><strong>)</strong>;
+<span class="comment ">// i != end-of-range?</span>
+if(i != begin(v)+7) { <span class="annotation">&hellip;</span> }  <span class="comment ">// true &rArr; found</span>
+<hr><span class="comment ">// find '9' in entire vector:</span>
+auto j = <strong>find(</strong><span class="c2">begin(v)</span>, <span class="c2">end(v)</span>, <span class="e1">9</span><strong>)</strong>;
+if(j != end(v)) {   <span class="comment ">// true &rArr; found</span>
+  auto const value = *j;  <span class="comment ">// int value = 9</span>
+  auto const index = distance(begin(v),&nbsp;j);  <span class="comment ">//&nbsp;index&nbsp;=&nbsp;0</span>
+  <span class="comment ">// find next occurrence of '9'</span>
+  j = <strong>find(</strong><span class="c2">next(j)</span>, <span class="c2">end(v)</span>, <span class="e1">9</span><strong>)</strong>;
+  if(j != end(v)) { <span class="annotation">&hellip;</span> }  <span class="comment ">// true &rArr; found</span>
+}
+<hr><span class="comment ">// find '7' in entire vector:       <span class="hwide"><ul class="array x2"><li class="">9</li><li class="">0</li><li class="">4</li><li class="">1</li><li class="">3</li><li class="">8</li><li class="">5</li><li class="">2</li><li class="">9</li><li class="x0 dotted"> </li></ul></span></span>
+auto k = <strong>find(</strong><span class="c2">begin(v)</span>, <span class="c2">end(v)</span>, <span class="e1">7</span><strong>)</strong>; <span class="hwide"><ul class="array plain"><li class=""> </li><li class=""> </li><li class=""> </li><li class=""> </li><li class=""> </li><li class=""> </li><li class=""> </li><li class=""> </li><li class=""><span class="comment ">k</span></li><li class=""><span class="sym-iter-up e2"></span></li></ul></span>
+if(k != end(v)) { <span class="annotation">&hellip;</span> }  <span class="comment ">// false &rArr; NOT found</span></code></pre>
+</div>
+<div class="panel-fold vexpand" open>
+<a class="nav" id="ranges-find"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/ranges-find_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; v {4,1,3,8,5};
+auto i = <span class="c6 hwide">std::</span><span class="c6 ">ranges::</span><strong>find</strong>(<span class="c2">v</span>, <span class="e1">8</span>);
+if(i != end(v)) {   <span class="comment ">// true &rArr; found</span>
+  auto const value = *i;  <span class="comment ">// int value = 8</span>
+  auto const index = distance(begin(v),&nbsp;i);  <span class="comment ">//&nbsp;index&nbsp;=&nbsp;3</span>
+}</code></pre>
+</div></div>
+<div class="panel-fold " open><h3>
+<span class="nav-none"><code>find_if <span class="c6 "><span class="if-closed">&rarr; @(<em>f</em>=true)|@end</span></span></code></span>
+<span class="nav-only">find_if</span>
+</h3></div>
+<div class="panel hvtight bg-filled "><div class="panel-fold vexpand" open>
+<a class="nav" id="find_if"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/find_if_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; v {9,0,4,1,3,8,5,2,9};
+<span class="spacer"></span>auto const <span class="e1">f</span> = <strong>[](</strong>int x<strong>)</strong> { <span class="hslim-br"></span><span class="hslim">  </span>return x &gt;= 6; };
+<span class="spacer"></span><span class="comment ">// find in subrange (as shown in image):</span>
+auto i = <strong>find_if(</strong><span class="c2">begin(v)<strong>+2</strong></span>, <span class="c2">begin(v)<strong>+7</strong></span>, <span class="e1">f</span><strong>)</strong>;
+<span class="comment ">// i != end-of-range?</span>
+if(i != begin(v)+7) {  <span class="comment ">// true &rArr; found</span>
+  auto const value = *i;     <span class="comment ">//&nbsp;int&nbsp;value&nbsp;=&nbsp;8</span>
+}
+<span class="spacer"></span><span class="comment ">// find in entire vector:</span>
+auto j = <strong>find_if(</strong><span class="c2">begin(v)</span>, <span class="c2">end(v)</span>, <span class="e1">f</span><strong>)</strong>;
+if(j != end(v)) {   <span class="comment ">// true &rArr; found</span>
+  auto const value = *j;  <span class="comment ">// int value = 9</span>
+  auto const index = distance(begin(v),&nbsp;j);  <span class="comment ">//&nbsp;index&nbsp;=&nbsp;0</span>
+}</code></pre>
+</div>
+<div class="panel-fold vexpand" open>
+<a class="nav" id="ranges-find_if"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/ranges-find_if_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; v {4,1,3,8,5};
+<span class="spacer"></span>auto const <span class="e1">f</span> = <strong>[](</strong>int x<strong>)</strong> { <span class="hslim-br"></span><span class="hslim">  </span>return x &gt;= 6; };
+<span class="spacer"></span>auto i = <span class="c6 hwide">std::</span><span class="c6 ">ranges::</span><strong>find_if(</strong><span class="c2">v</span>, <span class="e1">f</span><strong>)</strong>;  
+if(i != end(v)) {   <span class="comment ">// true &rArr; found</span>
+  auto const value = *i;  <span class="comment ">// int value = 8</span>
+  auto const index = distance(begin(v),&nbsp;i);  <span class="comment ">//&nbsp;index&nbsp;=&nbsp;3</span>
+}</code></pre>
+</div></div>
+<div class="panel-fold " ><h3>
+<span class="nav-none"><code>find_if_not <span class="c6 "><span class="if-closed">&rarr; @(<em>f</em>=false)|@end</span></span></code></span>
+<span class="nav-only">find_if_not</span>
+<div class="labels "><a class="lbl " href="tags/c++11.html">C++11</a></div>
+</h3></div>
+<div class="panel hvtight bg-filled "><div class="panel-fold vexpand">
+<a class="nav" id="find_if_not"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/find_if_not_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; v {9,0,4,1,3,8,5,2,9};
+<span class="spacer"></span>auto const <span class="e1">f</span> = <strong>[](</strong>int x<strong>)</strong> { <span class="hslim-br"></span><span class="hslim">  </span>return x &gt;= 2; };
+<span class="spacer"></span><span class="comment ">// find in subrange (as shown in image):</span>
+auto i = <strong>find_if_not(</strong><span class="c2">begin(v)<strong>+2</strong></span>, <span class="c2">begin(v)<strong>+7</strong></span>, <span class="e1">f</span><strong>)</strong>;
+<span class="comment ">// i != end-of-range?</span>
+if(i != begin(v)+7) {  <span class="comment ">// true &rArr; found</span>
+  auto const value = *i;     <span class="comment ">//&nbsp;int&nbsp;value&nbsp;=&nbsp;1</span>
+}
+<span class="spacer"></span><span class="comment ">// find in entire vector:</span>
+auto j = <strong>find_if_not(</strong><span class="c2">begin(v)</span>, <span class="c2">end(v)</span>, <span class="e1">f</span><strong>)</strong>;
+if(j != end(v)) {   <span class="comment ">// true &rArr; found</span>
+  auto const value = *j;  <span class="comment ">// int value = 0</span>
+  auto const index = distance(begin(v),&nbsp;j);  <span class="comment ">//&nbsp;index&nbsp;=&nbsp;1</span>
+}</code></pre>
+</div>
+<div class="panel-fold vexpand">
+<a class="nav" id="ranges-find_if_not"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/ranges-find_if_not_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; v {4,1,3,8};
+<span class="spacer"></span>auto const <span class="e1">f</span> = <strong>[](</strong>int x<strong>)</strong> { <span class="hslim-br"></span><span class="hslim">  </span>return x &gt;= 2; };
+<span class="spacer"></span>auto i = <span class="c6 hwide">std::</span><span class="c6 ">ranges::</span><strong>find_if_not(</strong><span class="c2">v</span>, <span class="e1">f</span><strong>)</strong>;  
+if(i != end(v)) {   <span class="comment ">// true &rArr; found</span>
+  auto const value = *i;  <span class="comment ">// int value = 1</span>
+  auto const index = distance(begin(v),&nbsp;i);  <span class="comment ">//&nbsp;index&nbsp;=&nbsp;1</span>
+}</code></pre>
+</div></div>
+<div class="panel-fold " open><h3>
+<span class="nav-none"><code>find_first_of <span class="c6 if-closed">&rarr; @elem|@end</span></code></span>
+<span class="nav-only">find_first_of</span>
+</h3></div>
+<div class="panel hvtight bg-filled "><div class="panel-fold vexpand">
+<a class="nav" id="find_first_of"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/find_first_of_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+<p class="if-opened">returns an iterator to the 1<sup>st</sup> element in <span class="c2">range <code>s</code></span> that
+compares equal to any of the elements in <span class="c1">range <code>w</code></span>;
+otherwise returns <code><span class="c2">@s<sub>end</sub></span></code> if no such element was found</p>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; <span class="c2">s</span> {0,1,3,2,5,7,4,8,9,9};
+<span class="c6 ">std::</span>vector&lt;int&gt; <span class="c1">w</span> {1,4,6,5,8,7};
+<span class="spacer"></span><span class="comment ">// find in subrange of v (as shown in image):</span>
+auto i = <strong>find_first_of(</strong><span class="c2">begin(s)<strong>+1</strong></span>, <span class="c2">begin(s)<strong>+9</strong></span>, <span class="c1">begin(w)<strong>+1</strong></span>, <span class="c1">begin(w)<strong>+4</strong></span><strong>)</strong>;
+<span class="comment ">// i != end-of-range?</span>
+if(i != begin(s)+9) {  <span class="comment ">// true &rArr; found one</span>
+  auto const value = *i;     <span class="comment ">// int value = 5</span>
+  auto const index = distance(begin(s),&nbsp;i);  <span class="comment ">//&nbsp;index&nbsp;=&nbsp;4</span>
+}
+<span class="spacer"></span><span class="comment ">// find any of 'w' in all of 's':</span>
+auto j = <strong>find_first_of(</strong><span class="c2">begin(s)</span>, <span class="c2">end(s)</span>, <span class="c1">begin(w)</span>, <span class="c1">end(w)</span><strong>)</strong>;
+if(j != end(s)) {   <span class="comment ">// true &rArr; found one</span>
+  auto const value = *j;  <span class="comment ">// int value = 1</span>
+  auto const index = distance(begin(s),&nbsp;j);  <span class="comment ">//&nbsp;index&nbsp;=&nbsp;1</span>
+}</code></pre>
+</div>
+<div class="panel-fold vexpand">
+<a class="nav" id="ranges-find_first_of"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/ranges-find_first_of_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+<p class="if-opened">returns an iterator to the 1<sup>st</sup> element in <span class="c2">range <code>s</code></span> that
+compares equal to any of the elements in <span class="c1">range w</span>;
+otherwise returns <code><span class="c2">@end(s)</span></code> if no such element was found</p>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; <span class="c2">s</span> {3,2,5,7,4,8};
+<span class="c6 ">std::</span>vector&lt;int&gt; <span class="c1">w</span> {4,6,5};
+<span class="spacer"></span>auto i = <span class="c6 hwide">std::</span><span class="c6 ">ranges::</span><strong>find_first_of(</strong><span class="c2">s</span>, <span class="c1">w</span><strong>)</strong>;  
+if(i != end(s)) {   <span class="comment ">// true &rArr; found one</span>
+  auto const value = *i;  <span class="comment ">// int value = 5</span>
+  auto const index = distance(begin(s),&nbsp;i);  <span class="comment ">//&nbsp;index&nbsp;=&nbsp;2</span>
+}</code></pre>
+</div></div></div>
+<h2 class="hfold " open><span class="hwide">Find Subrange in Range</span>
+<span class="hslim">Find Subrange</span>
+<span class="hnavi">Subrange</span></h2>
+<div class="content " ><div class="panel-fold " open><h3>
+<span class="nav-none"><code>search <span class="c6 if-closed">&rarr; @pos|@end</span></code></span>
+<span class="nav-only">search</span>
+</h3></div>
+<div class="panel hvtight bg-filled "><div class="panel-fold vexpand">
+<a class="nav" id="search"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/search_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; <span class="c1">s</span> {0,4,6,5,1,4,6,5,8,9};
+<span class="c6 ">std::</span>vector&lt;int&gt; <span class="c2">w</span> {1,4,6,5,8,9};
+<span class="spacer"></span><span class="comment ">// find subrange of 'w' in subrange of 's' (as shown in image):</span>
+auto i = <strong>search(</strong><span class="c2">begin(s)<strong>+1</strong></span>, <span class="c2">begin(s)<strong>+9</strong></span>, <span class="c1">begin(w)<strong>+1</strong></span>, <span class="c1">begin(w)<strong>+4</strong></span><strong>)</strong>;
+<span class="comment ">// i != end-of-range?</span>
+if(i != begin(s)+9) {  <span class="comment ">// true &rArr; found</span>
+  auto const value = *i;     <span class="comment ">// int value = 4</span>
+  auto const index = distance(begin(s),&nbsp;i);  <span class="comment ">//&nbsp;index&nbsp;=&nbsp;1</span>
+}
+<span class="comment ">// find all of 'w' in all of 's':</span>
+auto j = <strong>search(</strong><span class="c2">begin(s)</span>, <span class="c2">end(s)</span>, <span class="c1">begin(w)</span>, <span class="c1">end(w)</span><strong>)</strong>;
+if(j != end(s)) {   <span class="comment ">// true &rArr; found</span>
+  auto const value = *j;  <span class="comment ">// int value = 1</span>
+  auto const index = distance(begin(s),&nbsp;j);  <span class="comment ">//&nbsp;index&nbsp;=&nbsp;4</span>
+}</code></pre>
+</div>
+<div class="panel-fold vexpand">
+<a class="nav" id="ranges-search"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/ranges-search_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; <span class="c2">s</span> {1,4,6,5,8,4,6,5};
+<span class="c6 ">std::</span>vector&lt;int&gt; <span class="c1">w</span> {4,6,5};
+<span class="spacer"></span>auto i = <span class="c6 hwide">std::</span><span class="c6 ">ranges::</span><strong>search(</strong><span class="c2">s</span>, <span class="c1">w</span><strong>)</strong>;  
+if(i != end(s)) {   <span class="comment ">// true &rArr; found</span>
+  auto const value = *i;  <span class="comment ">// int value = 4</span>
+  auto const index = distance(begin(s),&nbsp;i);  <span class="comment ">//&nbsp;index&nbsp;=&nbsp;1</span>
+}</code></pre>
+</div></div>
+<div class="panel-fold " open><h3>
+<span class="nav-none"><code>find_end <span class="c6 if-closed">&rarr; @pos|@end</span></code></span>
+<span class="nav-only">find_end</span>
+</h3></div>
+<div class="panel hvtight bg-filled "><div class="panel-fold vexpand">
+<a class="nav" id="find_end"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/find_end_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; <span class="c1">s</span> {0,4,6,5,1,4,6,5,8,9};
+<span class="c6 ">std::</span>vector&lt;int&gt; <span class="c2">w</span> {1,4,6,5,8,9};
+<span class="spacer"></span><span class="comment ">// find subrange of 'w' in subrange of 's' (as shown in image):</span>
+auto i = <strong>find_end(</strong><span class="c2">begin(s)<strong>+1</strong></span>, <span class="c2">begin(s)<strong>+9</strong></span>, <span class="c1">begin(w)<strong>+1</strong></span>, <span class="c1">begin(w)<strong>+4</strong></span><strong>)</strong>;
+<span class="comment ">// i != end-of-range?</span>
+if(i != begin(s)+9) {  <span class="comment ">// true &rArr; found</span>
+  auto const value = *i;     <span class="comment ">// int value = 4</span>
+  auto const index = distance(begin(s),&nbsp;i);  <span class="comment ">//&nbsp;index&nbsp;=&nbsp;5</span>
+}
+<span class="comment ">// find all of 'w' in all of 's':</span>
+auto j = <strong>find_end(</strong><span class="c2">begin(s)</span>, <span class="c2">end(s)</span>, <span class="c1">begin(w)</span>, <span class="c1">end(w)</span><strong>)</strong>;
+if(j != end(s)) {   <span class="comment ">// true &rArr; found</span>
+  auto const value = *j;  <span class="comment ">// int value = 1</span>
+  auto const index = distance(begin(s),&nbsp;j);  <span class="comment ">//&nbsp;index&nbsp;=&nbsp;4</span>
+}</code></pre>
+</div>
+<div class="panel-fold vexpand">
+<a class="nav" id="ranges-find_end"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/ranges-find_end_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; <span class="c2">s</span> {4,6,5,8,4,6,5};
+<span class="c6 ">std::</span>vector&lt;int&gt; <span class="c1">w</span> {4,6,5};
+<span class="spacer"></span>auto i = <span class="c6 hwide">std::</span><span class="c6 ">ranges::</span><strong>find_end(</strong><span class="c2">s</span>, <span class="c1">w</span><strong>)</strong>;  
+if(i != end(s)) {   <span class="comment ">// true &rArr; found</span>
+  auto const value = *i;  <span class="comment ">// int value = 4</span>
+  auto const index = distance(begin(s),&nbsp;i);  <span class="comment ">//&nbsp;index&nbsp;=&nbsp;4</span>
+}</code></pre>
+</div></div></div>
+<h2 class="hfold " open><span class="hwide">Find Run of Equal Elements</span>
+<span class="hslim">Find Run</span>
+<span class="hnavi">Runs Of Elements</span></h2>
+<div class="content " ><div class="panel-fold " open><h3>
+<span class="nav-none"><code>adjacent_find <span class="c6 if-closed">&rarr; @pos|@end</span></code></span>
+<span class="nav-only">adjacent_find</span>
+</h3></div>
+<div class="panel hvtight bg-filled "><div class="panel-fold vexpand">
+<a class="nav" id="adjacent_find"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/adjacent_find_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+<p class="if-opened">a custom function(object) for comparing elements can be passed as 3<sup>rd</sup> argument</p>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; v {5,5,2,8,2,2,3,3,2,8};
+<span class="spacer"></span><span class="comment ">// find in subrange (as shown in image):</span>
+auto i = <strong>adjacent_find(</strong><span class="c2">begin(v)<strong>+1</strong></span>, <span class="c2">begin(v)<strong>+8</strong></span><strong>)</strong>;
+<span class="comment ">// i != end-of-range?</span>
+if(i != begin(v)+8) {  <span class="comment ">// true &rArr; found</span>
+  auto const value = *i;     <span class="comment ">// int value = 2</span>
+  auto const index = distance(begin(v),&nbsp;i);  <span class="comment ">//&nbsp;index&nbsp;=&nbsp;4</span>
+}
+<span class="spacer"></span><span class="comment ">// find in entire vector:</span>
+auto j = <strong>adjacent_find(</strong><span class="c2">begin(v)</span>, <span class="c2">end(v)</span><strong>)</strong>;
+if(j != end(v)) {   <span class="comment ">// true &rArr; found</span>
+  auto const value = *j;  <span class="comment ">// int value = 5</span>
+  auto const index = distance(begin(v),&nbsp;j);  <span class="comment ">//&nbsp;index&nbsp;=&nbsp;0</span>
+}</code></pre>
+</div>
+<div class="panel-fold vexpand">
+<a class="nav" id="ranges-adjacent_find"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/ranges-adjacent_find_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+<p class="if-opened">a custom function(object) for comparing elements can be passed as 2<sup>nd</sup> argument</p>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; v {5,2,8,2,2,3,3};
+auto i = <span class="c6 hwide">std::</span><span class="c6 ">ranges::</span><strong>adjacent_find(</strong><span class="c2">v</span><strong>)</strong>;  
+if(i != end(v)) {   <span class="comment ">// true &rArr; found</span>
+  auto const value = *i;  <span class="comment ">// int value = 2</span>
+  auto const index = distance(begin(v),&nbsp;i);  <span class="comment ">//&nbsp;index&nbsp;=&nbsp;3</span>
+}</code></pre>
+</div></div>
+<div class="panel-fold " open><h3>
+<span class="nav-none"><code>search_n <span class="c6 if-closed">&rarr; @pos|@end</span></code></span>
+<span class="nav-only">search_n</span>
+</h3></div>
+<div class="panel hvtight bg-filled "><div class="panel-fold vexpand">
+<a class="nav" id="search_n"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/search_n_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+<p class="if-opened">a custom function(object) for comparing elements can be passed as 3<sup>rd</sup> argument</p>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; v {0,5,2,2,8,2,2,2,9,9,9};
+<span class="spacer"></span><span class="comment ">// find run of 3 '2's in subrange (as shown in image):</span>
+const auto <span class="c1">n</span> = 3;
+auto i = <strong>search_n(</strong><span class="c2">begin(v)<strong>+1</strong></span>, <span class="c2">begin(v)<strong>+9</strong></span>, <span class="c1">n</span>, <span class="c4">2</span><strong>)</strong>;
+<span class="comment ">// i != end-of-range?</span>
+if(i != begin(v)+9) {  <span class="comment ">// true &rArr; found</span>
+  cout &lt;&lt; *i;  <span class="comment ">// 2</span>
+  auto const index = distance(begin(v),&nbsp;i);  <span class="comment ">//&nbsp;index&nbsp;=&nbsp;5</span>
+}
+<span class="spacer"></span><span class="comment ">// find run of 3 '9's in entire vector:</span>
+auto j = <strong>search_n(</strong><span class="c2">begin(v)</span>, <span class="c2">end(v)</span>, <span class="c1">n</span>, <span class="c4">9</span><strong>)</strong>;
+if(j != end(v)) {   <span class="comment ">// true &rArr; found</span>
+  cout &lt;&lt; *j;  <span class="comment ">// 9</span>
+  auto const index = distance(begin(v),&nbsp;j);  <span class="comment ">//&nbsp;index&nbsp;=&nbsp;8</span>
+}</code></pre>
+</div>
+<div class="panel-fold vexpand">
+<a class="nav" id="ranges-search_n"></a>
+
+<div class="block last-if-closed"><img class="first-visible" src="cpp/std/algorithms/ranges-search_n_thumb.svg" style="width:100%; max-width:580px;"}></img></div>
+<p class="if-opened">a custom function(object) for comparing elements can be passed as 2<sup>nd</sup> argument</p>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;int&gt; v {2,2,8,2,2,2,9};
+const auto <span class="c1">n</span> = 3;
+auto i = <span class="c6 hwide">std::</span><span class="c6 ">ranges::</span><strong>search_n(</strong><span class="c2">v</span>, <span class="c1">n</span>, <span class="c4">2</span><strong>)</strong>;  
+if(i != end(v)) {   <span class="comment ">// true &rArr; found</span>
+  cout &lt;&lt; *i;  <span class="comment ">// 2</span>
+  auto const index = distance(begin(v),&nbsp;i);  <span class="comment ">//&nbsp;index&nbsp;=&nbsp;3</span>
+}</code></pre>
+</div></div></div></section>
+<section class="epilog">
+<div class="panel-col bg-filled"{style=""><div class="guide-nav">
+<div class="go-prev"><a href="cpp/std/algorithms/existence_queries.html"><span class="hwide">Query</span></a></div>
+<div class="go-up"><a href="cpp/beginners_guide.html#std-lib-algorithms">Beginner's Guide <span class="hxwide">/ Algorithms</span></a></div>
+<div class="go-next"><a href="cpp/std/algorithms/comparing_ranges.html"><span class="hwide">Compare</span></a></div>
+</div></div>
+</section>
+<section class="epilog">
+<div class="panel-fold " open><h3 class="cat-link">Related <span class="if-closed">&hellip;</span></h3></div>
+<div class="panel "><ul class="resources "><li class="cat-youtube"><a href="https://www.youtube.com/watch?v=UN_twk5w0RM&list=PLVFrD1dmDdve4h3Shk0uePpXp8JUMM1w5&index=8">adjacent_find <small>by Conor Hoekstra</small></a></li>
+<li class="cat-book"><a href="https://isocpp.org/files/papers/4-Tour-Algo-draft.pdf">A Tour of C++: Containers and Algorithms</a></li>
+
+<hr>
+<li class="cat-overview"><a href="cpp/std/algorithms.html">Standard Algorithms Overview</a></li>
+
+<li class="cat-article"><a href="cpp/std/algorithms/intro.html">Standard Algorithms Introduction</a></li>
+
+<hr>
+<li class="cat-article"><a href="cpp/std/sequence_containers.html">Standard Sequence Containers <small>(<code>vector</code>, <code>deque</code>, <code>list</code>, &hellip;)</small></a></li>
+
+<li class="cat-article"><a href="cpp/std/associative_containers.html">Standard Associative Containers <small>(<code>map</code>, <code>set</code>, &hellip;)</small></a></li>
+
+<li class="cat-article"><a href="cpp/std/sequence_views.html">Standard Sequence Views</a></li>
+
+<hr>
+<li class="cat-cppreference"><a href="https://en.cppreference.com/w/cpp/algorithm">cppreference: Algorithms Library</a></li>
+<li class="cat-cppreference"><a href="https://en.cppreference.com/w/cpp/container">cppreference: Containers Library</a></li>
+<hr>
+<li class="cat-image"><a href="cpp/std/algorithms.png">Algorithms Overview Sheet</a></li>
+</ul></div>
+</section>
+<section class="context">
+<ul class="linear-tags "><li><a href="tags/c++.html">C++</a></li><li><a href="tags/c++11.html">C++11</a></li><li><a href="tags/c++20.html">C++20</a></li><li><a href="tags/algorithms.html">algorithms</a></li><li><a href="tags/article.html">article</a></li><li><a href="tags/beginner-level.html">beginner-level</a></li><li><a href="tags/find.html">find</a></li><li><a href="tags/find_if.html">find_if</a></li><li><a href="tags/std-algorithms.html">std-algorithms</a></li><li><a href="tags/std-library.html">std-library</a></li></ul>
+</section>
+<section class="metadata">
+<p><span class="cat-date">Last updated: 2021-01-10</span></p>
+</section>
+</article></div>
+<footer>
+<div id="footer-top"><div id="footer-top-content"><div id="footer-top-left"><nav><ul class="plain ">
+<li>
+<a href="index.html" class="cat-home" >Home</a>
+</li>
+
+<li>
+<a href="tags/news.html" class="cat-news" >News</a>
+</li>
+
+<li>
+<a href="tags/article.html" class="cat-article" >Articles</a>
+</li>
+
+<li>
+<a href="tags/featured.html" class="cat-featured" >Featured</a>
+</li>
+
+<li>
+<a href="tags/guide.html" class="cat-guide" >Guides</a>
+</li>
+
+<li>
+<a href="tags/list.html" class="cat-list" >Lists</a>
+</li>
+
+<li>
+<a href="about.html" class="cat-about" >About</a>
+</li>
+
+<li>
+<a href="privacy.html" class="cat-contact" >Privacy</a>
+</li>
+
+<li>
+<a href="https://twitter.com/hackingcpp" class="cat-twitter" >Twitter</a>
+</li></ul></nav></div>
+<div id="footer-top-right"><h2 class="cat-tags nav-none">
+<a href="tags.html" >Tags</a>
+</h2>
+<ul class="topic-cloud "><li><a style="font-size:117.3739395094748%;" href="tags/algorithms.html">algorithms</a></li> <li><a style="font-size:74.685320232403%;" href="tags/allocators.html">allocators</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/arrays.html">arrays</a></li> <li><a style="font-size:154.85882183899798%;" href="tags/article.html">article</a></li> <li><a style="font-size:150.60732445608994%;" href="tags/beginner-level.html">beginner-level</a></li> <li><a style="font-size:60.0%;" href="tags/blogs.html">blogs</a></li> <li><a style="font-size:60.0%;" href="tags/books.html">books</a></li> <li><a style="font-size:60.0%;" href="tags/build-systems.html">build-systems</a></li> <li><a style="font-size:160.1565121053651%;" href="tags/c++.html">C++</a></li> <li><a style="font-size:60.0%;" href="tags/c++-standardization.html">C++-standardization</a></li> <li><a style="font-size:132.0592597418778%;" href="tags/c++11.html">C++11</a></li> <li><a style="font-size:118.74128092961203%;" href="tags/c++14.html">C++14</a></li> <li><a style="font-size:118.74128092961203%;" href="tags/c++17.html">C++17</a></li> <li><a style="font-size:124.50258791586917%;" href="tags/c++20.html">C++20</a></li> <li><a style="font-size:74.685320232403%;" href="tags/c++98.html">C++98</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/c-style.html">C-style</a></li> <li><a style="font-size:60.0%;" href="tags/c-vs-c++.html">C-vs-C++</a></li> <li><a style="font-size:60.0%;" href="tags/cat-casts.html">cat-casts</a></li> <li><a style="font-size:106.55136375888092%;" href="tags/classes.html">classes</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/code-editors.html">code-editors</a></li> <li><a style="font-size:74.685320232403%;" href="tags/code-formatters.html">code-formatters</a></li> <li><a style="font-size:74.685320232403%;" href="tags/command-line.html">command-line</a></li> <li><a style="font-size:106.55136375888092%;" href="tags/community.html">community</a></li> <li><a style="font-size:60.0%;" href="tags/comparisons.html">comparisons</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/compilers.html">compilers</a></li> <li><a style="font-size:60.0%;" href="tags/concepts.html">concepts</a></li> <li><a style="font-size:60.0%;" href="tags/conferences.html">conferences</a></li> <li><a style="font-size:60.0%;" href="tags/const.html">const</a></li> <li><a style="font-size:60.0%;" href="tags/constexpr.html">constexpr</a></li> <li><a style="font-size:110.802861141789%;" href="tags/containers.html">containers</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/control-flow.html">control-flow</a></li> <li><a style="font-size:114.34214226160506%;" href="tags/custom-types.html">custom-types</a></li> <li><a style="font-size:74.685320232403%;" href="tags/data-structures.html">data-structures</a></li> <li><a style="font-size:60.0%;" href="tags/debugging.html">debugging</a></li> <li><a style="font-size:104.05596069720902%;" href="tags/design.html">design</a></li> <li><a style="font-size:106.55136375888092%;" href="tags/diagnostics.html">diagnostics</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/exceptions.html">exceptions</a></li> <li><a style="font-size:89.370640464806%;" href="tags/featured.html">featured</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/file-io.html">file-io</a></li> <li><a style="font-size:60.0%;" href="tags/find.html">find</a></li> <li><a style="font-size:60.0%;" href="tags/find_if.html">find_if</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/functional-prog.html">functional-prog</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/functions.html">functions</a></li> <li><a style="font-size:60.0%;" href="tags/gallery.html">gallery</a></li> <li><a style="font-size:94.09825763003434%;" href="tags/generic-prog.html">generic-prog</a></li> <li><a style="font-size:60.0%;" href="tags/groups.html">groups</a></li> <li><a style="font-size:60.0%;" href="tags/guide.html">guide</a></li> <li><a style="font-size:74.685320232403%;" href="tags/guidelines.html">guidelines</a></li> <li><a style="font-size:60.0%;" href="tags/hash-map.html">hash-map</a></li> <li><a style="font-size:60.0%;" href="tags/hash-set.html">hash-set</a></li> <li><a style="font-size:60.0%;" href="tags/hashing.html">hashing</a></li> <li><a style="font-size:60.0%;" href="tags/header-files.html">header-files</a></li> <li><a style="font-size:74.685320232403%;" href="tags/heap.html">heap</a></li> <li><a style="font-size:60.0%;" href="tags/ides.html">ides</a></li> <li><a style="font-size:97.96100211184347%;" href="tags/idiom.html">idiom</a></li> <li><a style="font-size:97.96100211184347%;" href="tags/io.html">io</a></li> <li><a style="font-size:94.09825763003434%;" href="tags/iostreams.html">iostreams</a></li> <li><a style="font-size:74.685320232403%;" href="tags/iterators.html">iterators</a></li> <li><a style="font-size:74.685320232403%;" href="tags/language-mechanism.html">language-mechanism</a></li> <li><a style="font-size:60.0%;" href="tags/language-references.html">language-references</a></li> <li><a style="font-size:60.0%;" href="tags/learning.html">learning</a></li> <li><a style="font-size:60.0%;" href="tags/libraries.html">libraries</a></li> <li><a style="font-size:74.685320232403%;" href="tags/linker.html">linker</a></li> <li><a style="font-size:129.82704563832138%;" href="tags/list.html">list</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/low-level.html">low-level</a></li> <li><a style="font-size:60.0%;" href="tags/map.html">map</a></li> <li><a style="font-size:108.78357786243735%;" href="tags/memory.html">memory</a></li> <li><a style="font-size:120.02570076180908%;" href="tags/modern-c++.html">modern-C++</a></li> <li><a style="font-size:74.685320232403%;" href="tags/move-semantics.html">move-semantics</a></li> <li><a style="font-size:126.42995591581257%;" href="tags/news.html">news</a></li> <li><a style="font-size:74.685320232403%;" href="tags/oop.html">oop</a></li> <li><a style="font-size:60.0%;" href="tags/organizations.html">organizations</a></li> <li><a style="font-size:60.0%;" href="tags/package-manager.html">package-manager</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/paradigm.html">paradigm</a></li> <li><a style="font-size:60.0%;" href="tags/pattern.html">pattern</a></li> <li><a style="font-size:60.0%;" href="tags/people.html">people</a></li> <li><a style="font-size:60.0%;" href="tags/podcasts.html">podcasts</a></li> <li><a style="font-size:60.0%;" href="tags/pointers.html">pointers</a></li> <li><a style="font-size:60.0%;" href="tags/preprocessor.html">preprocessor</a></li> <li><a style="font-size:60.0%;" href="tags/profiling.html">profiling</a></li> <li><a style="font-size:74.685320232403%;" href="tags/randomness.html">randomness</a></li> <li><a style="font-size:60.0%;" href="tags/ranges.html">ranges</a></li> <li><a style="font-size:60.0%;" href="tags/references.html">references</a></li> <li><a style="font-size:60.0%;" href="tags/set.html">set</a></li> <li><a style="font-size:60.0%;" href="tags/social-media.html">social-media</a></li> <li><a style="font-size:60.0%;" href="tags/sorted-sequences.html">sorted-sequences</a></li> <li><a style="font-size:89.370640464806%;" href="tags/stack.html">stack</a></li> <li><a style="font-size:60.0%;" href="tags/standardization.html">standardization</a></li> <li><a style="font-size:114.34214226160506%;" href="tags/std-algorithms.html">std-algorithms</a></li> <li><a style="font-size:89.370640464806%;" href="tags/std-containers.html">std-containers</a></li> <li><a style="font-size:127.33164257664949%;" href="tags/std-library.html">std-library</a></li> <li><a style="font-size:60.0%;" href="tags/std-macros.html">std-macros</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/std-vector.html">std-vector</a></li> <li><a style="font-size:60.0%;" href="tags/strings.html">strings</a></li> <li><a style="font-size:60.0%;" href="tags/style.html">style</a></li> <li><a style="font-size:60.0%;" href="tags/taste.html">taste</a></li> <li><a style="font-size:83.27568187944046%;" href="tags/templates.html">templates</a></li> <li><a style="font-size:60.0%;" href="tags/testing.html">testing</a></li> <li><a style="font-size:74.685320232403%;" href="tags/toolchain.html">toolchain</a></li> <li><a style="font-size:115.91222626883169%;" href="tags/tools.html">tools</a></li> <li><a style="font-size:74.685320232403%;" href="tags/traversal.html">traversal</a></li> <li><a style="font-size:117.3739395094748%;" href="tags/types.html">types</a></li> <li><a style="font-size:60.0%;" href="tags/user.html">user</a></li> <li><a style="font-size:60.0%;" href="tags/version-control.html">version-control</a></li> <li><a style="font-size:60.0%;" href="tags/views.html">views</a></li> <li><a style="font-size:60.0%;" href="tags/vim.html">VIM</a></li> <li><a style="font-size:60.0%;" href="tags/vim-plugins.html">VIM-plugins</a></li> <li><a style="font-size:60.0%;" href="tags/warnings.html">warnings</a></li> <li><a style="font-size:114.34214226160506%;" href="tags/websites.html">websites</a></li> 
+</ul></div></div></div>
+<div id="footer-bottom"><div id="footer-bottom-content">&copy;&nbsp;2019-2021&ensp;André&nbsp;Müller&emsp;&emsp;</div></div>
+</footer>
+<script src="assets/content.js?v=26-1"></script>
+</body>
+</html>

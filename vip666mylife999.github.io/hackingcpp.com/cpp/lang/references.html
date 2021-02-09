@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang='en-US'>
+<head>
+<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+<base href="https://vip666mylife999.github.io/hackingcpp.com">
+<link rel="icon" href="assets/hcpp-icon.png">
+<link rel="stylesheet" type="text/css" href="assets/style.css?v=26">
+<link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<title>h/cpp - References</title>
+<meta name="description" content="C++ references for beginners - properties, usage, guidelines, pitfalls: declaration, properties, const references, usage as function parameters, dangling, binding rules, etc.">
+<meta name="keyword" content="cpp design memory indirection optional observation observe access interface pass passing function parameter argument invalidation invalidate invalidated guidelines scope scoped lifetime extension declaration binding lvalue rvalue move std::move">
+<meta name="author" content="André Müller">
+<meta name="date" content="2021-01-31">
+<meta name="copyright" content="2019-2021&ensp;André Müller">
+<meta name="hcpp-page-category" content="cat-article">
+<meta name="hcpp-tags" content="C++ article beginner-level ">
+</head>
+<body>
+<div id="top-nav"><div id="titlebar" class="boxed-wide"><div id="main-branding">
+<a href="index.html"  id="main-logo" title="home"><span class="hwide"><img src="assets/hcpp.svg" style="max-width:100%;height:40;"></img></span>
+<span class="hslim"><img src="assets/hcpp-square.svg" style="max-width:100%;height:40;"></img></span></a>
+
+<div id="main-title">
+<a href="index.html"  title="home">hacking&nbsp;C++</a>
+</div></div>
+<div id="main-menu"><div class="entry "><a href="tags/news.html">News</a></div>
+<div class="submenu "><a>Learning</a><div class="submenu-dropdown">
+<a href="cpp/beginners_guide.html" >Beginner's Guide to C++</a>
+
+<hr>
+
+<a href="cpp/std/containers.html" >Standard Library Containers</a>
+
+
+<a href="cpp/std/algorithms.html" >Standard Library Algorithms</a>
+
+<hr>
+
+<a href="cpp/cheat_sheets.html" >Infographics / Cheat Sheets</a>
+
+
+<a href="tags/article.html" >All Articles</a>
+
+<hr>
+
+<a href="dev/web_learning.html" >Online Learning</a>
+
+
+<a href="cpp/books.html" >Books</a>
+</div></div>
+<div class="submenu "><a>Links</a><div class="submenu-dropdown">
+<a href="cpp/community.html" >Community Resources</a>
+
+
+<a href="cpp/tools/ecosystem.html" >Tool Ecosystem</a>
+
+<hr>
+
+<a href="tags/list.html" >All Resource Lists</a>
+
+<hr>
+
+<a href="dev/vim_plugins.html" >VIM Plugins</a>
+</div></div>
+<div class="submenu "><a>About</a><div class="submenu-dropdown">
+<a href="about.html" >Why &amp; Who</a>
+
+
+<a href="privacy.html" >Privacy</a>
+</div></div></div>
+<div id="main-socialbar">
+<a href="https://twitter.com/hackingcpp" ><span class="cat-twitter"></span></a>
+</div>
+<div class="navlinks" id="nav-path"></div>
+<div id="searchbar"><div id="searchbox"><input id="search-input"></input>
+<button id="search-clear"></button>
+<button id="search-run"></button>
+<button id="search-close"></button></div></div>
+<div class="hamburger " id="main-hamburger"><button title=""></button><div class="hamburger-dropdown"><a class="nav-icon-collapse-all" onclick="collapse_all_major_folds()">Collapse <strong>All</strong> Levels</a>
+
+<a class="nav-icon-collapse" onclick="collapse_major_folds()">Collapse Top Level</a>
+
+<a class="nav-icon-expand" onclick="expand_major_folds()">Expand Top Level</a>
+
+<a class="nav-icon-expand-all" onclick="expand_all_major_folds()">Expand <strong>All</strong> Levels</a>
+
+<hr>
+
+<a href="tags/news.html" class="cat-news" >News</a>
+
+
+<a href="tags/featured.html" class="cat-featured" >Featured</a>
+
+
+<a href="tags/article.html" class="cat-article" >Articles</a>
+
+
+<a href="cpp/beginners_guide.html" class="cat-guide" >Beginner's Guide to C++</a>
+
+
+<a href="tags/list.html" class="cat-list" >Lists</a>
+
+<hr>
+
+<a href="https://twitter.com/hackingcpp" ><span class="cat-twitter"></span> @hackingcpp</a>
+
+
+<a href="about.html" class="cat-about" >About</a>
+
+
+<a href="privacy.html" class="cat-contact" >Privacy</a>
+
+
+<a href="index.html" class="cat-home" >Home</a>
+</div></div></div>
+<nav id="guide-bar" class="boxed-wide"><div class="guide-nav">
+<div class="go-prev"><a href="cpp/std/string_basics.html"><span class="hwide">Strings</span></a></div>
+<div class="go-up"><a href="cpp/beginners_guide.html#first-steps">Beginner's Guide <span class="hxwide">/ First Steps</span></a></div>
+<div class="go-next"><a href="cpp/lang/aggregates.html"><span class="hwide">Aggregates</span></a></div>
+</div></nav></div>
+<div id="drawer-top" class="boxed-wide"><div id="search-results"><div id="search-header"><h1 class="cat-search" id="search-title"></h1></div>
+<div id="search-locations"><ul class="resources" id="search-location-items"></ul></div>
+<div id="search-footer"></div></div></div>
+<div id="drawer-left"><div id="drawer-left-heading"><a class="cat-guide" href="cpp/beginners_guide.html#intro">Beginner's Guide</a></div>
+<div id="drawer-left-content"><div class="tree-fold plain" ><h5>First Steps</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/tools/beginner_dev_setup.html" >Development Setup</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/hello_world.html" >Hello World</a>
+</li>
+
+<li>
+<a href="cpp/std/io_basics.html" >Input &amp; Output <small>(Basics)</small></a>
+</li>
+
+<li>
+<a href="cpp/lang/fundamental_types.html" >Fundamental Types</a>
+</li>
+
+<li>
+<a href="cpp/std/vector_intro.html" >std::vector Introduction</a>
+</li>
+
+<li>
+<a href="cpp/lang/enumerations.html" >Enumerations</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/lang/control_flow_basics.html" >Control Flow <small>(Basics)</small></a>
+</li>
+
+<li>
+<a href="cpp/lang/type_system_basics.html" >Type System <small>(Basics)</small></a>
+</li>
+
+<li>
+<a href="cpp/lang/function_basics.html" >Functions <small>(Basics)</small></a>
+</li>
+
+<li>
+<a href="cpp/lang/memory_basics.html" >Memory <small>(Basics)</small></a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/std/string_basics.html" >String <small>(Basics)</small></a>
+</li>
+
+<li>
+<a href="cpp/lang/references.html" >References</a>
+</li>
+
+<li>
+<a href="cpp/lang/aggregates.html" >Simple Aggregates</a>
+</li>
+
+<li>
+<a href="cpp/lang/function_call_mechanics.html" >Function Call Mechanics</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Input &amp; Output</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/command_line_arguments.html" >Command Line Arguments</a>
+</li>
+
+<li>
+<a href="cpp/std/file_streams.html" >File Input &amp; Output</a>
+</li>
+
+<li>
+<a href="cpp/std/io_streams.html" >Stream Input &amp; Output</a>
+</li>
+
+<li>
+<a href="cpp/std/istream_recover_from_errors.html" >Recover From Input Errors</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Custom Types &ndash; Part 1</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/custom_type_basics.html" >Simple Classes / Custom Types</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/lang/pointers.html" >Pointers</a>
+</li>
+
+<li>
+<a href="cpp/lang/destructors.html" >Destructors</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/lang/exceptions.html" >Exceptions</a>
+</li>
+
+<li>
+<a href="cpp/lang/noexcept.html" >Noexcept</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Diagnostics</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/tools/compiler_warnings.html" >Compiler Warnings</a>
+</li>
+
+<li>
+<a href="cpp/tools/gdb_intro.html" >Debugging With gdb</a>
+</li>
+
+<li>
+<a href="cpp/tools/asan.html" >Address Sanitizer</a>
+</li>
+
+<li>
+<a href="cpp/tools/ubsan.html" >Undefined Behavior Sanitizer</a>
+</li>
+
+<li>
+<a href="cpp/tools/valgrind.html" >valgrind</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Standard Library</h5></div>
+<div class="content " ><div class="tree-fold plain" ><h6>Containers &amp; Views</h6></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/std/iterators_intro.html" >Iterators</a>
+</li>
+
+<li>
+<a href="cpp/std/sequence_containers.html" >Sequence Containers</a>
+</li>
+
+<li>
+<a href="cpp/std/sequence_views.html" >Sequence Views</a>
+</li>
+
+<li>
+<a href="cpp/std/associative_containers.html" >Associative Containers</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h6>Standard Algorithms</h6></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/std/algorithms/intro.html" >Basic Paradigms</a>
+</li>
+
+<li>
+<a href="cpp/std/container_traversal.html" >Container Traversal</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/std/algorithms/min_max.html" >Minimum / Maximum</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/existence_queries.html" >Existence Queries</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/finding.html" >Finding Elements</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/comparing_ranges.html" >Comparing Ranges</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/design/function_objects.html" >Function Objects</a>
+</li>
+
+<li>
+<a href="cpp/lang/lambda_basics.html" >Lambdas <small>(Basics)</small></a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/std/algorithms/reordering.html" >Sequence Reordering</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/element_modification.html" >Changing Elements</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/numeric.html" >Numeric Algorithms</a>
+</li>
+
+<li>
+<a href="cpp/std/algorithms/sorted_sequence_operations.html" >Sorted Sequence Operations</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h6>Utilities</h6></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/std/special_containers.html" >Special Containers</a>
+</li>
+
+<li>
+<a href="cpp/std/special_iterators.html" >Special Iterators</a>
+</li>
+
+<li>
+<a href="cpp/std/random.html" >Random Numbers</a>
+</li></ul></div></div>
+<div class="tree-fold plain" ><h5>Code Organization</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/separate_compilation.html" >Separate Compilation</a>
+</li>
+
+<li>
+<a href="cpp/lang/namespaces.html" >Namespaces</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Custom Types &ndash; Part 2</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/friends.html" >Friends</a>
+</li>
+
+<li>
+<a href="cpp/lang/comparisons.html" >Comparisons</a>
+</li>
+
+<li>
+<a href="cpp/design/literal_types.html" >Literal Types</a>
+</li>
+
+<li>
+<a href="cpp/design/arithmetic_types.html" >Arithmetic Types</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/std/unique_ownership.html" >Unique Resource Ownership</a>
+</li>
+
+<li>
+<a href="cpp/design/node_based_data_structures.html" >Node-Based Data Structures</a>
+</li>
+
+<li>
+<a href="cpp/lang/special_class_members.html" >Special Class Members</a>
+</li>
+
+<li>
+<a href="cpp/std/shared_ownership.html" >Shared Resource Ownership</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/lang/object_oriented_programming.html" >Object Oriented Programming</a>
+</li>
+<hr>
+
+<li>
+<a href="cpp/lang/move_semantics.html" >Move Semantics</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Generic Programming</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/templates.html" >Templates</a>
+</li>
+
+<li>
+<a href="cpp/lang/type_casts.html" >Type Casts</a>
+</li>
+
+<li>
+<a href="cpp/lang/type_deduction.html" >Type Deduction</a>
+</li>
+
+<li>
+<a href="cpp/std/type_traits.html" >Type Traits</a>
+</li>
+
+<li>
+<a href="cpp/lang/perfect_forwarding.html" >Perfect Forwarding</a>
+</li>
+
+<li>
+<a href="cpp/lang/concepts.html" >Concepts &amp; Constrained Templates</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Memory Management</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/lang/pointer_arithmetic.html" >Pointer Arithmetic</a>
+</li>
+
+<li>
+<a href="cpp/lang/c_arrays.html" >C-Style Arrays</a>
+</li>
+
+<li>
+<a href="cpp/lang/manual_memory_management.html" >Manual Memory Management</a>
+</li>
+
+<li>
+<a href="cpp/design/allocators.html" >Allocators</a>
+</li></ul></div>
+<div class="tree-fold plain" ><h5>Software Design Basics</h5></div>
+<div class="content " ><ul class="plain ">
+<li>
+<a href="cpp/design/principles.html" >Design Principles</a>
+</li>
+
+<li>
+<a href="cpp/design/function_interface_example1.html" >Design Study: Function Interfaces</a>
+</li>
+
+<li>
+<a href="cpp/design/angle_axis_rotation.html" >Design Study: Angle-Axis Rotation</a>
+</li>
+
+<li>
+<a href="cpp/design/traversal_approaches.html" >Traversal Approaches</a>
+</li>
+
+<li>
+<a href="cpp/design/pimpl.html" >The PIMPL Idiom</a>
+</li></ul></div></div>
+<button id="drawer-left-toggle" title=""></button></div>
+<div id="main-content" class="boxed-wide "><article class="boxed-normal ">
+<header class="plain">
+<h1>
+<span class="hwide">References</span><span class="hslim">References</span><span class="hnavi">References</span></h1>
+<nav id="page-navbar" class=""></nav>
+</header>
+<section class="main plain"><h2 class="hfold " open><span class="nav-none">Capabilities <small>(&amp; Limitations)</small></span>
+<span class="nav-only">Capabilities</span></h2>
+<div class="content " ><div class="panel-fold " open><h3><span class="nav-none">non-<code>const</code> References</span>
+<span class="nav-only">non-<code>const</code></span></h3></div>
+<div class="panel hvtight bg-filled "><div class="panel "><div class="block large">
+<pre class="notranslate"><code>int   i = 2;
+int<span class="e1">&amp;</span> ri = i;  <span class="comment ">// reference to i</span></code></pre>
+</div></div>
+<div class="panel-col "{style=""><div class="panel title vcompact "><p><code><strong>ri</strong></code> and <code><strong>i</strong></code> refer to the same object / memory location:</p></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>cout &lt;&lt; i  &lt;&lt;'\n';   <span class="comment ">// 2</span>
+cout &lt;&lt; ri &lt;&lt;'\n';   <span class="comment ">// 2</span>
+<span class="spacer"></span>i <strong>=</strong> 5;
+cout &lt;&lt; i  &lt;&lt;'\n';   <span class="comment ">// 5</span>
+cout &lt;&lt; ri &lt;&lt;'\n';   <span class="comment ">// 5</span>
+<span class="spacer"></span>ri <strong>=</strong> 88;
+cout &lt;&lt; i  &lt;&lt;'\n';   <span class="comment ">// 88</span>
+cout &lt;&lt; ri &lt;&lt;'\n';   <span class="comment ">// 88</span></code></pre>
+</div></div>
+<div class="panel-col "{style=""><div class="panel title vcompact "><ul>
+<li>references cannot be "null", i.e., they must always refer to an object</li>
+
+<li>a reference must always refer to the same memory location</li>
+
+<li>reference type must agree with the type of the referenced object</li></ul></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>int  i  = 2;
+int  k  = 3;
+int&amp; ri = i;    <span class="comment ">// reference to i</span>
+<span class="spacer"></span>ri <span class="e1">=</span> k;         <span class="comment ">// <span class="sym-err"></span><span class="hwide e-err"> COMPILER ERROR:</span> <span class="c-err">ref<span class="hwide">erence</span> can't be redirected</span></span>
+<span class="spacer"></span>int<strong>&amp;</strong> r2<span class="e1">;</span>        <span class="comment ">// <span class="sym-err"></span><span class="hwide e-err"> COMPILER ERROR:</span> <span class="c-err">ref<span class="hwide">erence</span> must be initialized</span></span>
+<span class="spacer"></span><span class="e1">double</span><strong>&amp;</strong> r3 = i; <span class="comment ">// <span class="sym-err"></span><span class="hwide e-err"> COMPILER ERROR:</span> <span class="c-err">types must agree</span></span></code></pre>
+</div></div></div>
+<div class="panel-fold " open><h3><span class="nav-none"><code><strong>const</strong></code> References</span>
+<span class="nav-only"><code><strong>const&amp;</strong></code></span></h3>
+<a class="nav " id="const-ref" keywords="const-ref const"></a></div>
+<div class="panel-col "{style=""><div class="panel title vcompact "><h6 class="nav-none">= Read-Only Access To An Object</h6></div>
+<div class="panel "><div class="block large">
+<pre class="notranslate"><code>int i = 2;
+int <span class="e1">const&amp;</span> cri = i;  <span class="comment ">// const ref<span class="hwide">erence</span> to i</span></code></pre>
+</div></div>
+<div class="panel "><ul>
+<li><code><strong>cri</strong></code> and <code><strong>i</strong></code>
+refer to the same object / memory location</li>
+
+<li>but <code>const</code> means that value of <code><strong>i</strong></code>
+cannot be changed through <code><strong>cri</strong></code></li></ul></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>cout &lt;&lt; i   &lt;&lt;'\n';   <span class="comment ">// 2</span>
+cout &lt;&lt; cri &lt;&lt;'\n';   <span class="comment ">// 2</span>
+<span class="spacer"></span>i <strong>=</strong> 5;
+cout &lt;&lt; i   &lt;&lt;'\n';   <span class="comment ">// 5</span>
+cout &lt;&lt; cri &lt;&lt;'\n';   <span class="comment ">// 5</span>
+<span class="spacer"></span>cri <strong>=</strong> 88;  <span class="comment ">// <span class="sym-err"></span><span class="hwide e-err"> COMPILER ERROR:</span> <span class="c-err"><span class="e1">const!</span></span></span></code></pre>
+</div></div>
+<div class="panel-fold " open><h3><span class="nav-none"><code><strong>auto</strong></code> References</span>
+<span class="nav-only"><code><strong>auto&amp;</strong></code></span></h3></div>
+<div class="panel-col "{style=""><div class="panel ">reference type is deduced from right hand side of assignment</div>
+<div class="panel cs-light vstretch">
+<pre class="notranslate"><code>int i = 2;           
+double d = 2.023;       
+double x = i + d;       
+<span class="e1">auto &amp;</span> ri = i;        <span class="comment ">// ri:  <strong>int</strong> &amp;</span>
+<span class="e1">auto const&amp;</span> crx = x;  <span class="comment ">// crx: <strong>double</strong> const&amp;</span></code></pre>
+</div></div></div>
+<h2 class="hfold " open>Usage</h2>
+<div class="content " ><div class="panel-fold " open><h3><span class="hwide">References in Range-Based <code>for</code> Loops</span>
+<span class="hslim">In Range-Based <code>for</code> Loops</span>
+<span class="hnavi">Range for</span></h3></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;<span class="c6 ">std::</span>string&gt; v;
+v.resize(10);
+<hr><span class="comment ">// modify vector elements:</span>
+for(<span class="c6 ">std::</span>string <span class="e1">&amp;</span> s : v) { cin &gt;&gt; s; }
+<span class="comment ">// read-only access to vector elements:</span>
+for(<span class="c6 ">std::</span>string <span class="e1">const&amp;</span> s : v) { cout &lt;&lt; s; }
+<hr><span class="comment ">// modify:</span>
+for(<strong>auto </strong><span class="e1">&amp;</span> s : v) { cin &gt;&gt; s; }
+<span class="comment ">//read-only access:</span>
+for(<strong>auto</strong> <span class="e1">const&amp;</span> s : v) { cout &lt;&lt; s; }</code></pre>
+</div>
+<div class="panel-fold " open><h3><span class="hwide"><code><strong>const</strong></code> Reference Parameters</span>
+<span class="hslim"><code><strong>const&amp;</strong></code> Parameters</span>
+<span class="hnavi">const Parameters</span></h3></div>
+<div class="panel hvtight bg-filled "><div class="panel "><h5>Read-Only Access &rArr; <code><strong>const&amp;</strong></code></h5>
+<ul>
+<li>avoids expensive copies</li>
+
+<li>clearly communicates read-only intent to users of function</li></ul></div>
+<div class="panel-fold " open><h4 class="nav-none"><span class="hwide">Example: Function that computes median</span>
+<span class="hslim">Example: median</span></h4></div>
+<div class="panel-col "{style=""><div class="panel "><p class="cat-important">only needs to <em>read</em> values from vector!</p></div>
+<div class="panel-row responsive"{style=""><div class="panel-col "{style=""><div class="panel title vcompact "><h6 class="cat-wrong">pass by <span class="e-err">value</span> &rArr; copy<code> </code></h6></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>int <strong>median</strong>(<span class="e1">vector&lt;int&gt;</span>);
+<span class="spacer"></span>auto v = get_samples("huge.dat");
+auto m = median(<span class="e-err">v</span>);  
+<span class="e1">// runtime &amp; memory overhead!</span></code></pre>
+</div></div>
+<div class="panel-col "{style=""><div class="panel title vcompact "><h6 class="cat-right">pass by <code><span class="e-ok">const&amp;</span></code> &rArr; no copy</h6></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>int <strong>median</strong>(vector&lt;int&gt; <span class="e-ok">const&amp;</span>);
+<span class="spacer"></span>auto v = get_samples("huge.dat");
+auto m = median(<span class="e-ok">v</span>);  
+<span class="e-ok">// no copy &rArr; no overhead!</span></code></pre>
+</div></div></div></div>
+<div class="panel-fold " open><h4 class="nav-none"><span class="hslim">Example: Mixed passing</span>
+<span class="hwide">Example: Mixed passing (by ref + by value)</span></h4></div>
+<div class="panel-col "{style=""><div class="panel "><p><code>incl_first_last({1,2,4},{<span class="e1">6</span>,7,8,<span class="e2">9</span>}) &rarr; {1,2,4,<span class="e1">6</span>,<span class="e2">9</span>}</code></p>
+<p>The implementation works on a local copy '<code>x</code>' of the first vector
+and only reads from the second vector via const reference '<code>y</code>':</p></div>
+<div class="panel cs-light vstretch">
+<pre class="notranslate"><code>auto <strong>incl_first_last</strong>(<span class="hslim-br"></span><span class="hslim">  </span><span class="c6 ">std::</span>vector&lt;int&gt; x, <span class="hslim-br"></span><span class="hslim">  </span><span class="c6 ">std::</span>vector&lt;int&gt; <span class="e1">const&amp;</span> y) <span class="hslim-br"></span><span class="hslim"></span>{
+  if(y.empty() return x;
+  <span class="comment ">// append to local copy 'x'</span>
+  x.push_back(y.front());
+  x.push_back(y.back());
+  return x;
+}</code></pre>
+</div></div></div>
+<div class="panel-fold " open><h3><span class="hwide"><strong>non-</strong><code><strong>const</strong></code> Reference Parameters</span>
+<span class="hslim"><strong>non-</strong><code><strong>const</strong></code> Ref. Parameters</span>
+<span class="hnavi">non-const Parameters</span></h3></div>
+<div class="panel-col "{style=""><div class="panel "><h4>Example: Function that exchanges values of two variables</h4></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>void <strong>swap</strong>(int<span class="e1">&amp;</span> i, int<span class="e1">&amp;</span> j) {
+  int temp = i;  <span class="comment hslim">// copy value: i &rarr; temp</span><span class="comment hwide">// copy i's value to temp</span>
+  i = j;         <span class="comment hslim">// copy value: j &rarr; i</span><span class="comment hwide">// copy j's value to i</span>
+  j = temp;      <span class="comment hslim">// copy value: temp &rarr; j</span><span class="comment hwide">// copy temp's (i's original value) to j</span>
+}
+<span class="spacer"></span>int <strong>main</strong>() {
+  int a = 5;
+  int b = 3;
+  <span class="e2">swap(a,b);</span>
+  cout &lt;&lt; a &lt;&lt; '\n'  <span class="comment ">// 3</span>
+       &lt;&lt; b;         <span class="comment ">// 5</span>
+}</code></pre>
+</div>
+<div class="panel "><p class="cat-info">Use <code><strong><span class="c6 ">std::</span>swap</strong></code>
+to exchange values of objects (<code><span class="c6">#include &lt;utility&gt;</span></code>).</p>
+<p>It can be used like the function above, but avoids expensive temporary 
+copies for <q>move-enabled</q> objects like <code><span class="c6 ">std::</span>vector</code>
+(it's implementation will be explained in chapter
+<a class="" href="cpp/lang/move_semantics.html" title="click to go to page &quot;Move Semantics&quot;">
+
+Move Semantics
+</a>).</p></div>
+<div class="panel cat-guideline"><p>As useful as non-const references might be in some situations, you should
+avoid such <q>output parameters</q> in <em>general</em>
+(see the next panels for more details).</p></div></div>
+<hr>
+<div class="panel-fold " open><h3 class="cat-guideline"><span class="hwide">Function Parameters: copy / <code>const&amp;</code> / <code>&amp;</code>?</span>
+<span class="hslim">Parameters: copy / <code>const&amp;</code> / <code>&amp;</code>?</span>
+<span class="hnavi">copy / <code>const&amp;</code> / <code>&amp;</code>?</span></h3>
+<a class="nav " id="input-param-choice" keywords="input-param-choice "></a></div>
+<div class="panel hvtight bg-filled "><div class="panel cs-light medium vstretch">
+<pre class="notranslate"><code>void <strong>read_from</strong> (<span class="e1">int</span>);  <span class="comment ">// fundamental<span class="hwide"> type</span>s</span>
+void <strong>read_from</strong> (<span class="hwide"><span class="c6 ">std::</span></span>vector&lt;int&gt; <span class="e4">const&amp;</span>);
+void <strong>copy_sink</strong> (<span class="hwide"><span class="c6 ">std::</span></span><span class="e1">vector&lt;int&gt;</span>);
+void <strong>write_to</strong>  (<span class="hwide"><span class="c6 ">std::</span></span>vector&lt;int&gt; <span class="e2">&amp;</span>);</code></pre>
+</div>
+<div class="panel-col "{style=""><div class="panel title vcompact "><h6>Read from cheaply copyable object (all fundamental types) 
+&rArr; <span class="e1"><span class="hwide">pass by</span> value</span></h6></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>double <strong>sqrt</strong>(<span class="e1">double</span> x) { &hellip; }</code></pre>
+</div></div>
+<div class="panel-col "{style=""><div class="panel title vcompact "><h6>Read from object with larger (> 64bit) memory footprint  
+&rArr; <span class="hwide">pass by</span> <code><span class="e4">const&amp;</span></code></h6></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>void <strong>print</strong>(<span class="c6 ">std::</span>vector&lt;<span class="c6 ">std::</span>string&gt; <span class="e4">const&amp;</span> v) {
+  for(<span class="e4">auto const&amp;</span> s : v) { cout &lt;&lt; s &lt;&lt; ' '; }
+}</code></pre>
+</div></div>
+<div class="panel-col "{style=""><div class="panel title vcompact "><h6>Copy needed inside function <span class="hwide">anyway</span>
+&rArr; <span class="e1"><span class="hwide">pass by</span> value</span></h6>
+<p>Pass by value instead of copying explictly inside the function. 
+The reasons for this will be explained in more advanced articles.</p></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>auto <strong>without_umlauts</strong>(<span class="e1"><span class="c6 ">std::</span>string</span> s) {
+  s.replace('ö', "oe");  <span class="comment ">// modify local copy</span>
+  <span class="comment ">&hellip;</span>
+  return s;  <span class="comment ">// return by value!</span>
+}</code></pre>
+</div></div>
+<div class="panel-col "{style=""><div class="panel title vcompact "><h6>Write to <span class="hwide">function-</span>external object
+&rArr; <span class="hwide">pass by</span> non-const<span class="e2">&</span></h6>
+<p class="cat-guideline">As useful as they might be in some situations, you should
+avoid such <q>output parameters</q> <em>in general</em>, see 
+<a class="" href="cpp/lang/references.html#avoid-out-params" onclick="reveal_anchor()">
+
+here
+</a> why.</p></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>void <strong>swap</strong>(int<span class="e2">&amp;</span> x, int<span class="e2">&amp;</span> y) { &hellip; }</code></pre>
+</div></div></div>
+<div class="panel-fold " open><h3 class="cat-guideline"><span class="nav-none">Avoid Output Parameters!</span>
+<span class="nav-only">Avoid Out Params!</span></h3>
+<a class="nav " id="avoid-out-params" keywords="avoid-out-params "></a></div>
+<div class="panel hvtight bg-filled "><div class="panel "><h5>Functions with non-const ref parameters like</h5>
+<div class="block medium">
+<pre class="notranslate"><code>void <strong>foo</strong>(int, <span class="c6 ">std::</span>vector&lt;int&gt;<span class="e2">&amp;</span>, double);</code></pre>
+</div>
+<p>can create confusion/ambiguity at the call site:</p>
+<div class="block medium">
+<pre class="notranslate"><code>foo(i, v, j);</code></pre>
+</div>
+<ul>
+<li>Which of the arguments (<code>i</code>, <code>v</code>, <code>j</code>)
+is changed and which remains unchanged?</li>
+
+<li>How and when is the referenced object changed and is it changed at all?</li>
+
+<li>Does the reference parameter only act as output (function only writes to it)
+or also as input (function also reads from it)?</li></ul>
+<p>&rArr; in general <strong>hard to debug and to reason about!</strong></p></div>
+<div class="panel-col "{style=""><div class="panel title vcompact "><h5 class="cat-bad">Example: An interface that creates nothing but confusion</h5></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>void <strong>bad_minimum</strong>(int x, int<span class="e2">&amp;</span> y) {
+  if(x &lt; y) y = x;
+}
+<span class="spacer"></span>int a = 2;
+int b = 3;
+bad_minimum(a,b);  
+<span class="comment ">// Which variable holds the smaller value again?</span></code></pre>
+</div></div></div></div>
+<h2 class="hfold " open><span class="nav-none">Binding Rules</span>
+<span class="nav-only">Binding</span></h2>
+<div class="content " ><div class="panel-fold " open><h3><span class="nav-none"><strong>R</strong>values vs. <strong>L</strong>values</span>
+<span class="nav-only"><strong>R</strong>/<strong>L</strong>values</span></h3>
+<a class="nav " id="r-l-values" keywords="r-l-values lvalue rvalue temporary"></a></div>
+<div class="panel-col "{style=""><div class="panel vcompact"><h6><span class="e2">Lvalues</span> = expressions of which we <span class="e2">can</span> get memory address</h6>
+<ul>
+<li>refer to objects that persist in memory</li>
+
+<li>everything that has a name (variables, function parameters, &hellip;)</li></ul>
+<hr>
+<h6><span class="e1">Rvalues</span> = expressions of which we <span class="e1">can't</span> get memory address</h6>
+<ul>
+<li>literals (<code>123</code>, <code>"string literal"</code>, &hellip;)</li>
+
+<li>temporary results of operations</li>
+
+<li>temporary objects returned from functions</li></ul></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>int <span class="e2">a</span> = <span class="e1">1</span>;      <span class="comment ">// <span class="c2">a</span> and <span class="c2">b</span> are both <span class="c2"><strong>l</strong>values</span></span>
+int <span class="e2">b</span> = <span class="e1">2</span>;      <span class="comment ">// <span class="c1">1</span> and <span class="c1">2</span> are both <span class="c1"><strong>r</strong>values</span></span>
+<span class="e2">a</span> = <span class="e2">b</span>;
+<span class="e2">b</span> = <span class="e2">a</span>;
+<span class="spacer"></span><span class="e2">a</span> = <span class="e1">a * b</span>;      <span class="comment ">// <span class="c1">(a * b)</span> is an <span class="c1">rvalue</span></span>
+int <span class="e2">c</span> = <span class="e1">a * b</span>;  <span class="comment ">// OK</span>
+<span class="spacer"></span><span class="e1">a * b</span> = <span class="e1">3</span>;      <span class="comment ">// <span class="sym-err"></span><span class="hwide e-err"> COMPILER ERROR:</span> <span class="c-err">cannot assign to rvalue</span></span>
+<span class="spacer"></span><span class="c6 ">std::</span>vector&lt;int&gt; <strong>read_samples</strong>(int n) { &hellip; }
+auto <span class="e2">v</span> = <span class="e1">read_samples(1000)</span>;</code></pre>
+</div></div>
+<div class="panel-fold " open><h3><span class="nav-none">Reference Binding Rules</span>
+<span class="nav-only">Rules</span></h3>
+<a class="nav " id="ref-binding-rules" keywords="ref-binding-rules binding rules"></a></div>
+<div class="panel hvtight bg-filled "><div class="panel-col "{style=""><table class="large left-justify"><tbody><tr><td><code><span class="e2">&amp;</span></code></td>
+<td>only binds to <span class="e2">L</span>values</td></tr>
+<tr><td><code><span class="e1">const&amp;</span></code></td>
+<td>binds to <span class="e2">const L</span>values <em>and</em> <span class="e1">R</span>values</td></tr></tbody></table></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>bool <strong>is_palindrome</strong>(<span class="c6 ">std::</span>string <span class="e1">const&amp;</span> s) { &hellip; }
+<span class="spacer"></span><span class="c6 ">std::</span>string s = "uhu"; 
+cout &lt;&lt; is_palindrome(<span class="mark b-ok">s</span>) &lt;&lt;", "
+     &lt;&lt; is_palindrome(<span class="mark b-ok">"otto"</span>) &lt;&lt;'\n';  <span class="comment ">// <span class="hslim sym-ok"></span><span class="hwide e-ok">OK</span>,<span class="hwide"> const&amp;</span></span></code></pre>
+</div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>void <strong>swap</strong>(int<span class="e2">&amp;</span> i, int<span class="e2">&amp;</span> j) { &hellip; }
+<span class="spacer"></span>int i = 0; 
+swap(i, <span class="mark b-err">5</span>);  <span class="comment ">// <span class="sym-err"></span><span class="hwide e-err"> COMPILER ERROR:</span> <span class="c-err">can't bind <span class="hwide">ref. </span>to literal</span></span></code></pre>
+</div></div></div>
+<h2 class="hfold " open>Pitfalls</h2>
+<div class="content " ><div class="panel-fold " open><h4 class="cat-wrong"><span class="hwide">Never Return A Reference To A Function-<em>Local</em> Object!</span>
+<span class="hslim">Don't Return Refs To <em>Locals</em>!</span>
+<span class="hnavi">Ref Returning</span></h4>
+<a class="nav " id="no-ref-to-local" keywords="no-ref-to-local "></a></div>
+<div class="panel hvtight bg-filled "><div class="panel cs-light ">
+<pre class="notranslate"><code>int<span class="e1">&amp;</span> <strong>increase</strong>(int x, int delta) {
+    x += delta;
+    return x;
+}  <span class="comment ">// <span class="sym-problem"></span> <span class="e-err">local x destroyed</span></span>
+<span class="spacer"></span>int <strong>main</strong>() {
+  int i = 2;
+  int j <span class="e1">=</span> increase(i,4);  <span class="comment ">// <span class="sym-problem"></span> <span class="e-err"><span class="hwide">accesses</span> invalid ref<span class="hwide">erence</span>!</span></span>
+}</code></pre>
+</div>
+<div class="panel-col "{style=""><div class="panel title vcompact "><h5><em>Only</em> valid if referenced object <em>outlives</em> the function!</h5></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>int<span class="e2">&amp;</span> increase(int<span class="e2">&amp;</span> x, int delta) {
+    x += delta;
+    return x;  <span class="comment ">// x references non-local int</span>
+}  <span class="comment ">// <span class="hslim sym-ok"></span><span class="hwide e-ok">OK</span><span class="hwide">,</span> reference still valid</span>
+<span class="spacer"></span>int <strong>main</strong>() {
+  int i = 2;
+  int j = increase(i,4);<span class="hslim-br"></span><span class="hslim"></span>  <span class="comment ">// <span class="hslim sym-ok"></span><span class="hwide e-ok">OK</span><span class="hwide">,</span> i and j are 6 now</span>
+}</code></pre>
+</div></div></div>
+<div class="panel-fold " open><h4 class="cat-warning"><span class="hwide">Careful With Referencing <code>vector</code> Elements!</span>
+<span class="hslim">Careful With <code>vector</code> Elements!</span>
+<span class="hnavi">Careful With <code>vector</code>!</span></h4></div>
+<div class="panel hvtight bg-filled "><div class="panel-col "{style=""><div class="panel cat-warning"><h6>References to elements of a <code><span class="c6 ">std::</span>vector</code> might be 
+invalidated after any operation that changes the number of 
+elements in the vector!</h6></div>
+<div class="panel cs-light ">
+<pre class="notranslate"><code>vector&lt;int&gt; v {0,1,2,3};
+int<strong>&amp;</strong> i = v[2];
+v.resize(20);  
+i = 5; <span class="comment ">// <span class="sym-problem"></span><span class="hwide e-err"> UNDEFINED BEHAVIOR:</span> <span class="c-err">original memory might be gone!</span></span></code></pre>
+</div></div>
+<div class="panel "><ul class="defn regular"><li><span class="term">Dangling Reference
+</span> = <span class="defn">Reference that refers to a memory location that is no longer valid.
+</span></li></ul>
+<p>The internal memory buffer where <code><span class="c6 ">std::</span>vector</code> stores 
+its elements can be exchanged for a new one during some vector operations,
+so any reference into the old buffer might be dangling.</p></div></div>
+<div class="panel-fold " open><h4 class="cat-warning"><span class="nav-none">Avoid Lifetime Extension!</span>
+<span class="nav-only">Avoid Extension!</span></h4>
+<a class="nav " id="lifetime-extension" keywords="lifetime-extension lifetime extension"></a></div>
+<div class="panel hvtight bg-filled "><div class="panel "><h5>References can extend the lifetime of temporaries (<strong>r</strong>values)</h5>
+<div class="block ">
+<pre class="notranslate"><code>auto <span class="e1">const&amp;</span> r <strong>=</strong> vector&lt;int&gt;{1,2,3,4};</code></pre>
+</div>
+<p>&rArr; vector exists as long as reference <code>r</code> exists</p></div>
+<div class="panel vcompact"><h5>What about an object returned from a function?</h5>
+<div class="block ">
+<pre class="notranslate"><code><span class="c6 ">std::</span>vector&lt;<span class="c6 ">std::</span>string&gt; <strong>foo</strong>() { &hellip; }</code></pre>
+</div>
+<hr>
+<h6 class="cat-right">take it by value (recommended):</h6>
+<div class="block indented">
+<pre class="notranslate"><code>vector&lt;string&gt; v1 = foo();  
+auto v2 = foo();</code></pre>
+</div>
+<hr>
+<h6 class="cat-avoid">ignore it &rArr; gets destroyed right away</h6>
+<div class="block indented">
+<pre class="notranslate"><code>foo();</code></pre>
+</div>
+<hr>
+<h6 class="cat-avoid">get const reference to it &rArr; lifetime of temporary is extended</h6>
+<p class="indented">&hellip; for as long as the reference lives</p>
+<div class="block indented">
+<pre class="notranslate"><code>vector&lt;string&gt; <span class="e1">const&amp;</span> v3 = foo();  
+auto <span class="e1">const&amp;</span> v4 = foo();</code></pre>
+</div>
+<hr>
+<h6 class="cat-wrong"><strong>don't</strong> take a reference to its members!</h6>
+<p class="cat-warning indented">No lifetime extension for members of returned objects (here: the vector's content)!</p>
+<div class="block indented">
+<pre class="notranslate"><code>string const&amp; s = foo()<span class="e1">[0]</span>;  <span class="comment ">// dangling <span class="hwide">reference!</span></span>
+cout &lt;&lt; s;                   <span class="comment ">// <span class="sym-problem"></span><span class="hwide e-err"> UNDEFINED BEHAVIOR</span></span></code></pre>
+</div></div>
+<div class="panel cat-guideline"><h5>Don't use lifetime extension through references!</h5>
+<ul class="vcompact">
+<li>easy to create confusion</li>
+
+<li>easy to write bugs</li>
+
+<li>no real benefit</li></ul>
+<p><strong>Just take returned objects by value.</strong>
+This does not involve expensive copies for most functions 
+and types in modern C++, especially in C++17 and above.</p></div></div></div></section>
+<section class="epilog">
+<div class="panel-col bg-filled"{style=""><div class="guide-nav">
+<div class="go-prev"><a href="cpp/std/string_basics.html"><span class="hwide">Strings</span></a></div>
+<div class="go-up"><a href="cpp/beginners_guide.html#first-steps">Beginner's Guide <span class="hxwide">/ First Steps</span></a></div>
+<div class="go-next"><a href="cpp/lang/aggregates.html"><span class="hwide">Aggregates</span></a></div>
+</div></div>
+</section>
+<section class="epilog">
+<div class="panel-fold " open><h3 class="cat-link">Related <span class="if-closed">&hellip;</span></h3></div>
+<div class="panel "><ul class="resources "><li class="cat-article"><a href="cpp/design/east_vs_west_const.html"><q>East const vs. West const</q> &ndash; an ongoing debate about style</a></li>
+
+<li class="cat-slides"><a href="cpp/lang/move_semantics.html">Move Semantics (rvalue references &hellip;)</a></li>
+</ul></div>
+</section>
+<section class="context">
+<ul class="linear-tags "><li><a href="tags/c++.html">C++</a></li><li><a href="tags/article.html">article</a></li><li><a href="tags/beginner-level.html">beginner-level</a></li></ul>
+</section>
+<section class="metadata">
+<p><span class="cat-date">Last updated: 2020-03-01</span></p>
+</section>
+</article></div>
+<footer>
+<div id="footer-top"><div id="footer-top-content"><div id="footer-top-left"><nav><ul class="plain ">
+<li>
+<a href="index.html" class="cat-home" >Home</a>
+</li>
+
+<li>
+<a href="tags/news.html" class="cat-news" >News</a>
+</li>
+
+<li>
+<a href="tags/article.html" class="cat-article" >Articles</a>
+</li>
+
+<li>
+<a href="tags/featured.html" class="cat-featured" >Featured</a>
+</li>
+
+<li>
+<a href="tags/guide.html" class="cat-guide" >Guides</a>
+</li>
+
+<li>
+<a href="tags/list.html" class="cat-list" >Lists</a>
+</li>
+
+<li>
+<a href="about.html" class="cat-about" >About</a>
+</li>
+
+<li>
+<a href="privacy.html" class="cat-contact" >Privacy</a>
+</li>
+
+<li>
+<a href="https://twitter.com/hackingcpp" class="cat-twitter" >Twitter</a>
+</li></ul></nav></div>
+<div id="footer-top-right"><h2 class="cat-tags nav-none">
+<a href="tags.html" >Tags</a>
+</h2>
+<ul class="topic-cloud "><li><a style="font-size:119.09832775265055%;" href="tags/algorithms.html">algorithms</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/allocators.html">allocators</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/arrays.html">arrays</a></li> <li><a style="font-size:155.67625418551208%;" href="tags/article.html">article</a></li> <li><a style="font-size:151.4520701280242%;" href="tags/beginner-level.html">beginner-level</a></li> <li><a style="font-size:60.0%;" href="tags/blogs.html">blogs</a></li> <li><a style="font-size:60.0%;" href="tags/books.html">books</a></li> <li><a style="font-size:60.0%;" href="tags/build-systems.html">build-systems</a></li> <li><a style="font-size:160.9530933887302%;" href="tags/c++.html">C++</a></li> <li><a style="font-size:60.0%;" href="tags/c++-standardization.html">C++-standardization</a></li> <li><a style="font-size:122.76135311474769%;" href="tags/c++11.html">C++11</a></li> <li><a style="font-size:112.96632221214513%;" href="tags/c++14.html">C++14</a></li> <li><a style="font-size:104.32374581448789%;" href="tags/c++17.html">C++17</a></li> <li><a style="font-size:109.08009883059783%;" href="tags/c++20.html">C++20</a></li> <li><a style="font-size:60.0%;" href="tags/c++98.html">C++98</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/c-style.html">C-style</a></li> <li><a style="font-size:60.0%;" href="tags/c-vs-c++.html">C-vs-C++</a></li> <li><a style="font-size:60.0%;" href="tags/cat-casts.html">cat-casts</a></li> <li><a style="font-size:106.83431667163975%;" href="tags/classes.html">classes</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/code-editors.html">code-editors</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/code-formatters.html">code-formatters</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/command-line.html">command-line</a></li> <li><a style="font-size:106.83431667163975%;" href="tags/community.html">community</a></li> <li><a style="font-size:60.0%;" href="tags/comparisons.html">comparisons</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/compilers.html">compilers</a></li> <li><a style="font-size:60.0%;" href="tags/concepts.html">concepts</a></li> <li><a style="font-size:60.0%;" href="tags/conferences.html">conferences</a></li> <li><a style="font-size:60.0%;" href="tags/const.html">const</a></li> <li><a style="font-size:60.0%;" href="tags/constexpr.html">constexpr</a></li> <li><a style="font-size:111.11165590902733%;" href="tags/containers.html">containers</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/control-flow.html">control-flow</a></li> <li><a style="font-size:114.67244982290701%;" href="tags/custom-types.html">custom-types</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/data-structures.html">data-structures</a></li> <li><a style="font-size:60.0%;" href="tags/debugging.html">debugging</a></li> <li><a style="font-size:104.32374581448789%;" href="tags/design.html">design</a></li> <li><a style="font-size:106.83431667163975%;" href="tags/diagnostics.html">diagnostics</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/exceptions.html">exceptions</a></li> <li><a style="font-size:89.54916387632527%;" href="tags/featured.html">featured</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/file-io.html">file-io</a></li> <li><a style="font-size:60.0%;" href="tags/find.html">find</a></li> <li><a style="font-size:60.0%;" href="tags/find_if.html">find_if</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/functional-prog.html">functional-prog</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/functions.html">functions</a></li> <li><a style="font-size:60.0%;" href="tags/gallery.html">gallery</a></li> <li><a style="font-size:94.30551689243521%;" href="tags/generic-prog.html">generic-prog</a></li> <li><a style="font-size:60.0%;" href="tags/groups.html">groups</a></li> <li><a style="font-size:60.0%;" href="tags/guide.html">guide</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/guidelines.html">guidelines</a></li> <li><a style="font-size:60.0%;" href="tags/hash-map.html">hash-map</a></li> <li><a style="font-size:60.0%;" href="tags/hash-set.html">hash-set</a></li> <li><a style="font-size:60.0%;" href="tags/hashing.html">hashing</a></li> <li><a style="font-size:60.0%;" href="tags/header-files.html">header-files</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/heap.html">heap</a></li> <li><a style="font-size:60.0%;" href="tags/ides.html">ides</a></li> <li><a style="font-size:98.1917402739825%;" href="tags/idiom.html">idiom</a></li> <li><a style="font-size:98.1917402739825%;" href="tags/io.html">io</a></li> <li><a style="font-size:94.30551689243521%;" href="tags/iostreams.html">iostreams</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/iterators.html">iterators</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/language-mechanism.html">language-mechanism</a></li> <li><a style="font-size:60.0%;" href="tags/language-references.html">language-references</a></li> <li><a style="font-size:60.0%;" href="tags/learning.html">learning</a></li> <li><a style="font-size:60.0%;" href="tags/libraries.html">libraries</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/linker.html">linker</a></li> <li><a style="font-size:130.25147500745962%;" href="tags/list.html">list</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/low-level.html">low-level</a></li> <li><a style="font-size:60.0%;" href="tags/map.html">map</a></li> <li><a style="font-size:109.08009883059783%;" href="tags/memory.html">memory</a></li> <li><a style="font-size:120.39055466724817%;" href="tags/modern-c++.html">modern-C++</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/move-semantics.html">move-semantics</a></li> <li><a style="font-size:126.83373677211958%;" href="tags/news.html">news</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/oop.html">oop</a></li> <li><a style="font-size:60.0%;" href="tags/organizations.html">organizations</a></li> <li><a style="font-size:60.0%;" href="tags/package-manager.html">package-manager</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/paradigm.html">paradigm</a></li> <li><a style="font-size:60.0%;" href="tags/pattern.html">pattern</a></li> <li><a style="font-size:60.0%;" href="tags/people.html">people</a></li> <li><a style="font-size:60.0%;" href="tags/podcasts.html">podcasts</a></li> <li><a style="font-size:60.0%;" href="tags/pointers.html">pointers</a></li> <li><a style="font-size:60.0%;" href="tags/preprocessor.html">preprocessor</a></li> <li><a style="font-size:60.0%;" href="tags/profiling.html">profiling</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/randomness.html">randomness</a></li> <li><a style="font-size:60.0%;" href="tags/ranges.html">ranges</a></li> <li><a style="font-size:60.0%;" href="tags/references.html">references</a></li> <li><a style="font-size:60.0%;" href="tags/set.html">set</a></li> <li><a style="font-size:60.0%;" href="tags/social-media.html">social-media</a></li> <li><a style="font-size:60.0%;" href="tags/sorted-sequences.html">sorted-sequences</a></li> <li><a style="font-size:89.54916387632527%;" href="tags/stack.html">stack</a></li> <li><a style="font-size:60.0%;" href="tags/standardization.html">standardization</a></li> <li><a style="font-size:116.25207726360686%;" href="tags/std-algorithms.html">std-algorithms</a></li> <li><a style="font-size:89.54916387632527%;" href="tags/std-containers.html">std-containers</a></li> <li><a style="font-size:128.6110337848704%;" href="tags/std-library.html">std-library</a></li> <li><a style="font-size:60.0%;" href="tags/std-macros.html">std-macros</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/std-vector.html">std-vector</a></li> <li><a style="font-size:60.0%;" href="tags/strings.html">strings</a></li> <li><a style="font-size:60.0%;" href="tags/style.html">style</a></li> <li><a style="font-size:60.0%;" href="tags/taste.html">taste</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/templates.html">templates</a></li> <li><a style="font-size:60.0%;" href="tags/testing.html">testing</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/toolchain.html">toolchain</a></li> <li><a style="font-size:116.25207726360686%;" href="tags/tools.html">tools</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/traversal.html">traversal</a></li> <li><a style="font-size:117.72267522825506%;" href="tags/types.html">types</a></li> <li><a style="font-size:60.0%;" href="tags/user.html">user</a></li> <li><a style="font-size:60.0%;" href="tags/version-control.html">version-control</a></li> <li><a style="font-size:60.0%;" href="tags/views.html">views</a></li> <li><a style="font-size:60.0%;" href="tags/vim.html">VIM</a></li> <li><a style="font-size:60.0%;" href="tags/vim-plugins.html">VIM-plugins</a></li> <li><a style="font-size:60.0%;" href="tags/warnings.html">warnings</a></li> <li><a style="font-size:114.67244982290701%;" href="tags/websites.html">websites</a></li> 
+</ul></div></div></div>
+<div id="footer-bottom"><div id="footer-bottom-content">&copy;&nbsp;2019-2021&ensp;André&nbsp;Müller&emsp;&emsp;</div></div>
+</footer>
+<script src="assets/content.js?v=26"></script>
+</body>
+</html>

@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang='en-US'>
+<head>
+<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+<base href="https://vip666mylife999.github.io/hackingcpp.com">
+<link rel="icon" href="assets/hcpp-icon.png">
+<link rel="stylesheet" type="text/css" href="assets/style.css?v=26">
+<link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<title>h/cpp - VIM Plugins</title>
+<meta name="description" content="An opinionated list of useful and well-rounded VIM plugins (as of 2020).">
+<meta name="keyword" content="dev tool editor editing source modal LSP grep vim vi">
+<meta name="author" content="André Müller">
+<meta name="date" content="2021-01-31">
+<meta name="copyright" content="2019-2021&ensp;André Müller">
+<meta name="hcpp-page-category" content="cat-list">
+<meta name="hcpp-tags" content="VIM VIM-plugins code-editors list tools ">
+</head>
+<body>
+<div id="top-nav"><div id="titlebar" class="boxed-wide"><div id="main-branding">
+<a href="index.html"  id="main-logo" title="home"><span class="hwide"><img src="assets/hcpp.svg" style="max-width:100%;height:40;"></img></span>
+<span class="hslim"><img src="assets/hcpp-square.svg" style="max-width:100%;height:40;"></img></span></a>
+
+<div id="main-title">
+<a href="index.html"  title="home">hacking&nbsp;C++</a>
+</div></div>
+<div id="main-menu"><div class="entry "><a href="tags/news.html">News</a></div>
+<div class="submenu "><a>Learning</a><div class="submenu-dropdown">
+<a href="cpp/beginners_guide.html" >Beginner's Guide to C++</a>
+
+<hr>
+
+<a href="cpp/std/containers.html" >Standard Library Containers</a>
+
+
+<a href="cpp/std/algorithms.html" >Standard Library Algorithms</a>
+
+<hr>
+
+<a href="cpp/cheat_sheets.html" >Infographics / Cheat Sheets</a>
+
+
+<a href="tags/article.html" >All Articles</a>
+
+<hr>
+
+<a href="dev/web_learning.html" >Online Learning</a>
+
+
+<a href="cpp/books.html" >Books</a>
+</div></div>
+<div class="submenu "><a>Links</a><div class="submenu-dropdown">
+<a href="cpp/community.html" >Community Resources</a>
+
+
+<a href="cpp/tools/ecosystem.html" >Tool Ecosystem</a>
+
+<hr>
+
+<a href="tags/list.html" >All Resource Lists</a>
+
+<hr>
+
+<a href="dev/vim_plugins.html" >VIM Plugins</a>
+</div></div>
+<div class="submenu "><a>About</a><div class="submenu-dropdown">
+<a href="about.html" >Why &amp; Who</a>
+
+
+<a href="privacy.html" >Privacy</a>
+</div></div></div>
+<div id="main-socialbar">
+<a href="https://twitter.com/hackingcpp" ><span class="cat-twitter"></span></a>
+</div>
+<div class="navlinks" id="nav-path"></div>
+<div id="searchbar"><div id="searchbox"><input id="search-input"></input>
+<button id="search-clear"></button>
+<button id="search-run"></button>
+<button id="search-close"></button></div></div>
+<div class="hamburger " id="main-hamburger"><button title=""></button><div class="hamburger-dropdown"><a class="nav-icon-collapse-all" onclick="collapse_all_major_folds()">Collapse <strong>All</strong> Levels</a>
+
+<a class="nav-icon-collapse" onclick="collapse_major_folds()">Collapse Top Level</a>
+
+<a class="nav-icon-expand" onclick="expand_major_folds()">Expand Top Level</a>
+
+<a class="nav-icon-expand-all" onclick="expand_all_major_folds()">Expand <strong>All</strong> Levels</a>
+
+<hr>
+
+<a href="tags/news.html" class="cat-news" >News</a>
+
+
+<a href="tags/featured.html" class="cat-featured" >Featured</a>
+
+
+<a href="tags/article.html" class="cat-article" >Articles</a>
+
+
+<a href="cpp/beginners_guide.html" class="cat-guide" >Beginner's Guide to C++</a>
+
+
+<a href="tags/list.html" class="cat-list" >Lists</a>
+
+<hr>
+
+<a href="https://twitter.com/hackingcpp" ><span class="cat-twitter"></span> @hackingcpp</a>
+
+
+<a href="about.html" class="cat-about" >About</a>
+
+
+<a href="privacy.html" class="cat-contact" >Privacy</a>
+
+
+<a href="index.html" class="cat-home" >Home</a>
+</div></div></div>
+<nav id="guide-bar" class="boxed-wide"></nav></div>
+<div id="drawer-top" class="boxed-wide"><div id="search-results"><div id="search-header"><h1 class="cat-search" id="search-title"></h1></div>
+<div id="search-locations"><ul class="resources" id="search-location-items"></ul></div>
+<div id="search-footer"></div></div></div>
+
+<div id="main-content" class="boxed-wide "><article class="boxed-normal ">
+<header>
+<h1>VIM Plugins</h1>
+<nav id="page-navbar" class=""></nav>
+<div class="panel "><p>This list contains all VIM plugins that I’ve used at some time in the past
+and found potentially helpful and of sufficient quality.</p>
+<p>Nowadays I only load a small set of plugins at startup and add whatever
+I need on demand with VIM 8's <kbd>:packadd</kbd>.  I think that a lot of
+VIM plugins out there aren't very useful anyways.  They either
+replicate features that are already available in vanilla VIM or try to
+do things in a very <q>un-vimmy</q> way.</p></div>
+</header>
+<section class="main plain"><h2 class="hfold " open><span class="nav-none">Plugin Management</span>
+<span class="nav-only">Management</span></h2>
+<div class="content " ><div class="panel-fold " ><h4>VIM 8 or NeoVIM</h4></div>
+<div class="panel "><ul>
+<li>create a folder named <code>pack</code> inside your
+<code>.vim</code> (<code>vimfiles</code> on Windows) configuration folder</li>
+
+<li>direct subfolders of <code>pack</code> can be used to organize 
+packages/plugins into collections (e.g., text editing, file management, &hellip;)</li>
+
+<li><p>put plugins that should be loaded at startup into</p>
+<p><code><strong>.vim/pack/</strong>&lt;collection&gt;/<span class="e1">start</span>/&lt;plugin&gt;</code></p></li>
+
+<li><p>put plugins that should be added on demand with <kbd>:packadd</kbd> into</p>
+<p><code><strong>.vim/pack/</strong>&lt;collection&gt;/<span class="e1">opt</span>/&lt;plugin&gt;</code></p></li></ul>
+<p>See 
+<a href="https://shapeshed.com/vim-packages" >here</a>
+ for more.</p></div>
+<div class="panel-fold " ><h4><span class="nav-none">3rd Party Plugin Managers</span>
+<span class="nav-only">3rd Party</span></h4></div>
+<div class="panel-col "{style=""><table class="hborders vstriped resources "><tbody><tr><td>
+<a href="https://github.com/tpope/vim-pathogen" >Pathogen</a>
+</td>
+<td>Very simple: can be used to add a bunch of plugin folders to
+VIM's <kbd>runtimepath</kbd>. Does neither download nor update plugins.</td></tr>
+<tr><td>
+<a href="https://github.com/junegunn/vim-plug" >Vim-Plug</a>
+</td>
+<td>can download and update plugins</td></tr>
+<tr><td>
+<a href="https://github.com/VundleVim/Vundle.vim" >Vundle</a>
+</td>
+<td>can download and update plugins</td></tr></tbody></table></div></div>
+<h2 class="hfold " open><span class="nav-none">Coding (C++, Python)</span>
+<span class="nav-only">Coding</span></h2>
+<div class="content " ><div class="panel-col "{style=""><table class="hborders vstriped resources "><tbody><tr><td>
+<a href="https://github.com/w0rp/ale" class="cat-star" ><strong>ALE</strong></a>
+</td>
+<td><p>Superb integration of linters, compilers as linters,
+fixers/formatting tools and LSP language servers 
+(as linters and for completion and code navigation).
+Requires VIM 8 or NeoVim.</p>
+<p>works well with <code>cquery</code>, <code>clangd</code>, <code>gcc</code></p></td></tr>
+<tr><td>
+<a href="https://github.com/tomtom/tcomment_vim" class="cat-star" ><strong>TComment</strong></a>
+</td>
+<td>(un-)commenting commands and text objects for
+selecting comments</td></tr>
+<tr><td>
+<a href="https://github.com/skywind3000/asynctasks.vim" class="cat-star" >asynctasks.vim</a>
+</td>
+<td>manage and excute tasks asynchronously (build, clean, run, &hellip;) 
+based on simple taks files; different profiles for release, build, Linux,
+Windows, etc. possible; easy to integrate with 
+<a class="" href="dev/vim_plugins.html#vim-clap" onclick="reveal_anchor()">
+
+vim-clap
+</a> or <a class="" href="dev/vim_plugins.html#vim-fzf" onclick="reveal_anchor()">
+
+vim-fzf
+</a></td></tr>
+<tr><td>
+<a href="https://github.com/tweekmonster/braceless.vim" class="cat-star" >braceless</a>
+</td>
+<td>commands, text objects and visual aides for coding in whitespace-aware
+languages like Python</td></tr>
+<tr><td>
+<a href="https://github.com/cpiger/NeoDebug" >NeoDebug</a>
+</td>
+<td><p>Debug with <kbd>gdb</kbd>/<kbd>pdb</kbd>/<kbd>lldb</kbd> in VIM.
+Shows current instruction and breakpoints
+in code; windows for debugger console, locals, registers, stacks,
+threads, breakpoints, disassembly, expressions, watchs.</p>
+<p>Similar to, but more user friendly and feature-rich than VIM's 
+<kbd>termdebug</kbd> package.
+I found that <q>it just works</q> without any setup hassle.</p></td></tr>
+<tr><td>
+<a href="https://github.com/vim-scripts/DoxygenToolkit.vim" >Doxygen Toolkit</a>
+</td>
+<td></td></tr></tbody></table></div></div>
+<h2 class="hfold " open><span class="nav-none">Productivity &amp; Automation</span>
+<span class="nav-only">Productivity</span></h2>
+<div class="content " ><div class="panel-col "{style=""><table class="hborders vstriped resources "><tbody><tr><td><a class="nav " id="vim-clap" keywords="vim-clap "></a>
+
+<a href="https://github.com/liuchengxu/vim-clap" class="cat-star" ><strong>vim-clap</strong></a>
+</td>
+<td><p>Generic finder and dispatcher (like <a class="" href="dev/vim_plugins.html#vim-fzf" onclick="reveal_anchor()">
+
+vim-fzf
+</a>).
+Lets you fuzzy find files, commands, help topics, &hellip;</p>
+<p>Still very young, but seems very promising and works smoothly.</p>
+<p>You should use it together with the insanely fast 
+
+<a href="https://github.com/BurntSushi/ripgrep" ><code>ripgrep</code></a>
+
+(instead of <code>grep</code>) as file system crawler.</p></td></tr>
+<tr><td><a class="nav " id="vim-fzf" keywords="vim-fzf "></a>
+
+<a href="https://github.com/junegunn/fzf.vim" class="cat-star" ><strong>vim-fzf</strong></a>
+</td>
+<td><p>VIM integration of the 
+
+<a href="https://github.com/junegunn/fzf" ><code>FZF</code></a>
+
+fuzzy selection command line tool.
+Lets you fuzzy find files, commands, help topics, &hellip;</p>
+<p>You should use it together with the insanely fast 
+
+<a href="https://github.com/BurntSushi/ripgrep" ><code>ripgrep</code></a>
+
+(instead of <code>grep</code>) as file system crawler.</p></td></tr>
+<tr><td>
+<a href="https://github.com/stefandtw/quickfix-reflector.vim" class="cat-star" ><strong>Quickfix Reflector</strong></a>
+</td>
+<td><p>Super intuitive mass-editing via quickfix list.
+Let's you</p>
+<ul class="vcompact">
+<li>remove quickfix lines to reduce visual clutter.</li>
+
+<li>edit quickfix entries with all VIM tools.</li>
+
+<li>apply all changes to the actual target locations.</li></ul></td></tr></tbody></table></div></div>
+<h2 class="hfold " open><span class="nav-none">Version Control</span>
+<span class="nav-only">VCS</span></h2>
+<div class="content " ><div class="panel-col "{style=""><table class="hborders vstriped resources "><tbody><tr><td>
+<a href="https://github.com/airblade/vim-gitgutter" class="cat-star" ><strong>Git Gutter</strong></a>
+</td>
+<td>Shows a git-based <q>quick diff</q> (working dir vs. HEAD) in the sign column. 
+Also comes with a lot of usefule commands for hunk-wise staging, undoing etc.
+Could be faster, but you can turn it on and off as you see fit.</td></tr>
+<tr><td>
+<a href="https://github.com/tpope/vim-fugitive" >Fugitive</a>
+</td>
+<td>A suite of git wrapper commands. Nowadays I use
+VIM's integrated terminal together with
+
+<a href="https://jonas.github.io/tig" ><code>tig</code></a>
+ instead.</td></tr>
+<tr><td>
+<a href="https://github.com/vim-scripts/ConflictMotions" >ConflictMotions</a>
+</td>
+<td>Motions for navigating version control merge conflicts.</td></tr></tbody></table></div></div>
+<h2 class="hfold " open>Text Editing</h2>
+<div class="content " ><div class="panel-col "{style=""><table class="hborders vstriped resources "><tbody><tr><td>
+<a href="https://github.com/tpope/vim-repeat" class="cat-star" ><strong>Repeat</strong></a>
+</td>
+<td><p>Repeat more actions with the <kbd>.</kbd> command.</p>
+<p>Should be built-in.</p></td></tr>
+<tr><td>
+<a href="https://github.com/tpope/vim-surround" class="cat-star" ><strong>Surround</strong></a>
+</td>
+<td><p>Commands &amp; text objects for surrounding selections with
+parentheses, braces, quotes, XML tags, &hellip;</p>
+<p>A must have for coding; should be built-in.</p></td></tr>
+<tr><td>
+<a href="https://github.com/tommcdo/vim-exchange" class="cat-star" ><strong>Exchange</strong></a>
+</td>
+<td><p>Exchange the contents of selections/text objects.</p>
+<p>Should be built-in.</p></td></tr>
+<tr><td>
+<a href="https://github.com/reedes/vim-pencil" class="cat-star" ><strong>Pencil</strong></a>
+</td>
+<td>Makes writing prose in VIM a lot less painful.</td></tr>
+<tr><td>
+<a href="https://github.com/rhysd/clever-f.vim" class="cat-star" ><strong>CleverF</strong></a>
+</td>
+<td>Improves the <kbd>f</kbd>/<kbd>t</kbd> commands in a
+very intuitive way and also frees up the 
+<kbd>,</kbd> and <kbd>;</kbd> keys.</td></tr>
+<tr><td>
+<a href="https://github.com/mg979/vim-visual-multi" class="cat-star" >vim-visual-multi</a>
+</td>
+<td><p>Multiple Cursors for VIM. For the occasions when VIM's <kbd>gn</kbd>
+motion isn't powerful enough or you need more visual feedback.</p>
+<p>Very nice plugin! Substantially faster, less buggy, 
+better visual feedback and a lot more features than the old
+
+<a href="https://github.com/terryma/vim-multiple-cursors" >Multiple Cursors</a>
+
+plugin. Actually the first incarnation of multiple cursors in VIM
+that I really like.</p>
+<p>As an alternative to multiple cursor editing you can put mappings like 
+<kbd>nnoremap &lt;silent&gt; M *``cgn</kbd> in your vimrc to quickly
+replace the word under the curser. Since it can be repeated with
+<kbd>.</kbd>, one can jump to the next occurrence and replace it or
+use <kbd>n</kbd> to skip to the next occurrence without replacing.</p></td></tr>
+<tr><td>
+<a href="https://github.com/junegunn/vim-easy-align" class="cat-star" >EasyAlign</a>
+</td>
+<td>Align text into columns; lots of neat options.</td></tr>
+<tr><td>
+<a href="https://github.com/t9md/vim-textmanip" class="cat-star" >Textmanip</a>
+</td>
+<td>Move or duplicate selections/lines around.</td></tr>
+<tr><td>
+<a href="https://github.com/b4winckler/vim-angry" class="cat-star" >Angry Text Object</a>
+</td>
+<td>Text objects for comma-separated regions; e.g., 
+in function parameter lists.</td></tr>
+<tr><td>
+<a href="https://github.com/bkad/CamelCaseMotion" class="cat-star" >CamelCaseMotion</a>
+</td>
+<td>Motions based on sub-words in CamelCase, 
+snake_case, dash-case, etc.</td></tr>
+<tr><td>
+<a href="https://github.com/Julian/vim-textobj-variable-segment" class="cat-star" >Variable Segment Text Object</a>
+</td>
+<td>Text objects that select sub-words in CamelCase, 
+snake_case, dash-case, etc.</td></tr>
+<tr><td>
+<a href="https://github.com/kurkale6ka/vim-pairs" class="cat-star" >Pairs Text Object</a>
+</td>
+<td>Adds several text objects for regions that are delimited by
+quotes, points, etc.</td></tr>
+<tr><td>
+<a href="https://github.com/kana/vim-niceblock" class="cat-star" >Niceblock</a>
+</td>
+<td>Makes block-wise prepending/appending with <kbd>I</kbd> and <kbd>A</kbd>
+available in all visual modes (not just block-wise mode).
+Should probably also be built-in functionality.</td></tr>
+<tr><td>
+<a href="https://github.com/michaeljsmith/vim-indent-object" class="cat-star" >Indent Text Object</a>
+</td>
+<td>Text objects based on the current indent level.
+Great for indentation-based languages or markup (Python, HAML, etc.)</td></tr>
+<tr><td>
+<a href="https://github.com/vim-scripts/ReplaceWithRegister" >Replace With Register</a>
+</td>
+<td>Replace a motion/text object with the contents of the default
+register without changing the register content.</td></tr>
+<tr><td>
+<a href="https://github.com/jeetsukumaran/vim-indentwise" >IndentWise</a>
+</td>
+<td>Motions based on indent levels. Lets you jump to prev/next block with 
+same/less/more indent.</td></tr>
+<tr><td>
+<a href="https://github.com/tpope/vim-endwise" >Endwise</a>
+</td>
+<td>Automatically insert end-of-block delimiters in languages that 
+don't use braces (<code>fi</code>, <code>endfunction</code>, etc.)</td></tr>
+<tr><td>
+<a href="https://github.com/tpope/vim-abolish" >abolish</a>
+</td>
+<td><p>Easily search for, substitute, and abbreviate multiple 
+variants of a word.</p>
+<p>Has a nice <q>coerce</q> feature that let's you transform 
+between case styles (<code>snake_case</code>, <code>CamelCase</code>, 
+<code>Title Case</code>).</p></td></tr>
+<tr><td>
+<a href="https://github.com/inkarkat/vim-SpellCheck" >SpellCheck</a>
+</td>
+<td>Collects all spelling errors in the quickfix list.</td></tr>
+<tr><td>
+<a href="https://github.com/zef/vim-cycle" >Cycle</a>
+</td>
+<td>A vim plugin to toggle words between pairs or lists of related words.</td></tr>
+<tr><td>
+<a href="https://github.com/dhruvasagar/vim-table-mode" >TableMode</a>
+</td>
+<td>Useful if you have to work with a lot of Markdown tables.</td></tr>
+<tr><td>
+<a href="https://github.com/vim-utils/vim-space" >Whitespace Text Object</a>
+</td>
+<td>Let's you quickly delete/select contiguous regions of whitespace.</td></tr>
+<tr><td>
+<a href="https://github.com/coderifous/textobj-word-column.vim" >Word Column Text Object</a>
+</td>
+<td>Text object for selecting whitespace-separated columns.
+Useful for working with tab-separated data.</td></tr>
+<tr><td>
+<a href="https://github.com/rbonvall/vim-textobj-latex" >LaTeX Text Object</a>
+</td>
+<td>Text objects for various LaTeX regions (math, environments,&hellip;).</td></tr>
+<tr><td>
+<a href="https://github.com/joom/latex-unicoder.vim" >LaTeX Unicoder</a>
+</td>
+<td>A plugin to type Unicode chars in Vim, using their LaTeX names.</td></tr>
+<tr><td>
+<a href="https://github.com/kana/vim-textobj-line" >Line Text Object</a>
+</td>
+<td>Adds a text object for selecting the content of the current line
+(without the whitespace before and after).</td></tr>
+<tr><td>
+<a href="https://github.com/junegunn/vim-after-object" >After Text Object</a>
+</td>
+<td>Adds text object to select text <em>after</em> designated characters.</td></tr>
+<tr><td>
+<a href="https://github.com/christoomey/vim-titlecase" >Titlecase</a>
+</td>
+<td>Teach Vim about <q>Title Case</q>, with support for motions and 
+text objects.</td></tr>
+<tr><td>
+<a href="https://github.com/Shougo/vinarise.vim" >Vinarise</a>
+</td>
+<td>Hex editing for VIM.</td></tr></tbody></table></div></div>
+<h2 class="hfold " open><span class="nav-none">UI Enhancements</span>
+<span class="nav-only">UI</span></h2>
+<div class="content " ><div class="panel-col "{style=""><table class="hborders vstriped resources "><tbody><tr><td>
+<a href="https://github.com/markonm/traces.vim" class="cat-star" ><strong>Traces</strong></a>
+</td>
+<td>Live highlight of patterns and range commands 
+(<kbd>substitute</kbd>, <kbd>global</kbd>, &hellip;).
+Super useful when crafting complex regex searches
+and/or replacements. Should be built-in functionality.</td></tr>
+<tr><td>
+<a href="https://github.com/bounceme/poppy.vim" class="cat-star" ><strong>Poppy</strong></a>
+</td>
+<td>Highlights different levels of matching delimiters (parentheses,
+braces, &hellip;) in different colors.</td></tr>
+<tr><td>
+<a href="https://github.com/itchyny/vim-cursorword" class="cat-star" ><strong>Cursorword</strong></a>
+</td>
+<td>Underlines all occurrences of the word under the cursor.
+Fast; useful for spotting spelling errors in code
+and redundancy in prose.</td></tr>
+<tr><td>
+<a href="https://github.com/ap/vim-css-color" class="cat-star" >CssColor</a>
+</td>
+<td>Live preview of colors for constants like <code>red</code>,
+<code>#ffa</code>, <code>rgb(0,0,255)</code>, &hellip;</td></tr>
+<tr><td>
+<a href="https://github.com/christoomey/vim-tmux-navigator" class="cat-star" >TMUX Navigator</a>
+</td>
+<td>Seamless window/split navigation between TMUX windows and VIM windows.</td></tr>
+<tr><td>
+<a href="https://github.com/google/vim-searchindex" >Search Index</a>
+</td>
+<td>Shows the number of search pattern occurrences 
+and the index of the current match for the current buffer 
+in the command line.</td></tr>
+<tr><td>
+<a href="https://github.com/machakann/vim-highlightedyank" >Highlighted Yank</a>
+</td>
+<td>Shortly flashes the text range that is selected by a 
+yank command like <kbd>yip</kbd>. Speed and color can be configured.</td></tr>
+<tr><td>
+<a href="https://github.com/jlanzarotta/bufexplorer" >BufExplorer</a>
+</td>
+<td>Shows a list of all open,unlisted,etc. buffers and provides
+commands for managing them.</td></tr>
+<tr><td>
+<a href="https://github.com/kshenoy/vim-signature" >Signature</a>
+</td>
+<td>Shows marks in the sign column.</td></tr>
+<tr><td>
+<a href="https://github.com/mbbill/undotree" >UndoTree</a>
+</td>
+<td>Show the undo tree and let's you navigate it (switch between revisions).</td></tr></tbody></table></div></div>
+<h2 class="hfold " open><span class="nav-none">Filetype/Language Plugins</span>
+<span class="nav-only">Filetypes</span></h2>
+<div class="content " ><div class="panel-col "{style=""><table class="hborders vstriped resources "><tbody><tr><td>
+<a href="https://github.com/octol/vim-cpp-enhanced-highlight" >C++</a>
+</td>
+<td>enhances the built-in filetype plugin;
+adds additional keywords for modern C++</td></tr>
+<tr><td>
+<a href="https://github.com/fedorenchik/qt-support.vim" >Qt</a>
+</td>
+<td>C++ (additional keywords), qmake, qml, qbs, qrc xml, ui xml, ts xml</td></tr>
+<tr><td>
+<a href="https://github.com/chrisbra/csv.vim" >CSV</a>
+</td>
+<td></td></tr>
+<tr><td>
+<a href="https://github.com/vim-scripts/GCov-plugin" >GCOV</a>
+</td>
+<td></td></tr>
+<tr><td>
+<a href="https://github.com/othree/html5.vim" >HTML5</a>
+</td>
+<td></td></tr></tbody></table></div></div>
+<h2 class="hfold " open>File Management</h2>
+<div class="content " ><div class="panel-col "{style=""><table class="hborders vstriped resources "><tbody><tr><td class="cat-star">
+<a href="https://github.com/scrooloose/nerdtree" >NERD Tree</a>
+</td>
+<td><p>A very popular file browsing plugin. 
+Believe it or not, VIM already has a built-in file manager called <q>netrw</q>. 
+However some people (including me) feel that it is too clumsy to use.
+I've had enough bad experiences with netrw that I finally switched to NERDTree.</p>
+<p>That said, there's less of a need for a file drawer in VIM than you might think.
+I mostly use a fuzzy finder like
+<a class="" href="dev/vim_plugins.html#vim-clap" onclick="reveal_anchor()">
+
+vim-clap
+</a> (nowadays) or
+<a class="" href="dev/vim_plugins.html#vim-fzf" onclick="reveal_anchor()">
+
+vim-fzf
+</a> (in the past) 
+for file opening, buffer switching, etc.</p>
+<p>Plugins augmenting NERD Tree:</p>
+<ul class="resources-small "><li class="cat-plugin"><a href="https://github.com/Xuyuanp/nerdtree-git-plugin">Show git Status</a></li>
+
+<li class="cat-plugin"><a href="https://github.com/PhilRunninger/nerdtree-visual-selection">Open Multiple, Visually Selected Files</a></li>
+</ul></td></tr>
+<tr><td>
+<a href="https://github.com/qpkorr/vim-renamer" >File Renamer</a>
+</td>
+<td>Lets you (mass) rename files in a directory using vim editing commands.
+Can be quite useful and way faster and a lot more usable than other 
+renaming tools or shell scripts.</td></tr>
+<tr><td>
+<a href="https://github.com/will133/vim-dirdiff" >dirdiff</a>
+</td>
+<td>vim-diff two directories</td></tr></tbody></table></div></div>
+<h2 class="hfold " open><span class="nav-none">My VIM Plugins</span>
+<span class="nav-only">My Plugins</span></h2>
+<div class="content " ><div class="panel-col "{style=""><table class="hborders vstriped resources "><tbody><tr><td>
+<a href="https://github.com/muellan/vim-brace-for-umlauts" >Brace for Umlauts</a>
+</td>
+<td>Makes the German QUERTZ keyboard more developer friendly by
+re-mapping the umlaut keys. I actually find that mapping
+<kbd>ü</kbd><kbd>Ü</kbd> &rarr; <kbd>[</kbd><kbd>{</kbd>,
+<kbd>ä</kbd><kbd>Ä</kbd> &rarr; <kbd>]</kbd><kbd>}</kbd>,
+and
+<kbd>ö</kbd><kbd>Ö</kbd> &rarr; <kbd>:</kbd><kbd>\</kbd>
+results in an even better positioning of those characters than 
+on QUERTY keyboards. Can be switched on and off.</td></tr>
+<tr><td>
+<a href="https://github.com/muellan/am-colors" >AM Colors</a>
+</td>
+<td>My preferred color scheme.</td></tr>
+<tr><td>
+<a href="https://github.com/muellan/vim-toggle-ui-elements" >Toggle UI Elements</a>
+</td>
+<td>Quick toggle commands for UI elements (
+maximize editing area, toggle quickfix list, toggle location list,
+toggle statusbar, &hellip;).</td></tr>
+<tr><td>
+<a href="https://github.com/muellan/vim-fzf-extensions" >FZF Extensions</a>
+</td>
+<td>Some extensions for the <a class="" href="dev/vim_plugins.html#vim-fzf" onclick="reveal_anchor()">
+
+vim-fzf
+</a> plugin
+for fuzzy browsing and selecting (CC, LL, Args, CHistory, Changes,
+Registers, Messages, SpellSuggestions, Undo, Unicode Chars, Tasks,
+&hellip;)</td></tr></tbody></table></div></div>
+<h2 class="hfold " open><span class="nav-none">Learning VIM &amp; Scripting</span>
+<span class="nav-only">Learning</span></h2>
+<div class="content " ><div class="panel "><ul class="resources vborders ">
+<li class="cat-tutorial"><p>
+<a href="http://learnvimscriptthehardway.stevelosh.com/" >Learn Vimscript The Hard Way</a>
+</p>
+<p class="small">excellent step-by-step tutorial with examples and exercises</p></li>
+
+<li class="cat-gallery"><p>
+<a href="https://devhints.io/vimscript-functions" >Vimscript Snippets</a>
+</p>
+<p class="small">short examples for how to use the most common vimscript functions</p></li></ul></div></div>
+<h2 class="hfold " open><span class="hwide">All Tool &amp; Plugin Sources/URLs</span>
+<span class="hslim">Tool &amp; Plugin URLs</span>
+<span class="hnavi">URLs</span></h2>
+<div class="content " ><div class="panel-fold " open><h4 class="cat-cmdline"><span class="nav-none">Command Line Tools</span>
+<span class="nav-only">Install Tools</span>
+<small>(Ubuntu 18+)</small></h4></div>
+<div class="panel-col "{style=""><table class="hborders"><tbody><tr><td><h6><code>fzf    </code></h6></td>  <td class="cs-dark"><code>sudo apt-get install -y fzf</code></td></tr>
+<tr><td><h6><code>ripgrep</code></h6></td>  <td class="cs-dark"><code>sudo apt-get install -y ripgrep</code></td></tr>
+<tr><td><h6><code>tig    </code></h6></td>  <td class="cs-dark"><code>sudo apt-get install -y tig</code></td></tr></tbody></table></div>
+<div class="panel-fold " open><h4><span class="nav-none">All Plugin Repositories<span class="if-closed">&hellip;</span></span>
+<span class="nav-only">Repositories</span></h4></div>
+<div class="panel cs-light cs-dark">
+<pre class="notranslate"><code>git clone git@github.com:Julian/vim-textobj-variable-segment.git
+git clone git@github.com:PhilRunninger/nerdtree-visual-selection.git
+git clone git@github.com:Shougo/vinarise.vim.git
+git clone git@github.com:Xuyuanp/nerdtree-git-plugin.git
+git clone git@github.com:airblade/vim-gitgutter.git
+git clone git@github.com:ap/vim-css-color.git
+git clone git@github.com:b4winckler/vim-angry.git
+git clone git@github.com:bkad/CamelCaseMotion.git
+git clone git@github.com:bounceme/poppy.vim.git
+git clone git@github.com:chrisbra/csv.vim.git
+git clone git@github.com:christoomey/vim-titlecase.git
+git clone git@github.com:christoomey/vim-tmux-navigator.git
+git clone git@github.com:coderifous/textobj-word-column.vim.git
+git clone git@github.com:cpiger/NeoDebug.git
+git clone git@github.com:dhruvasagar/vim-table-mode.git
+git clone git@github.com:fedorenchik/qt-support.vim.git
+git clone git@github.com:google/vim-searchindex.git
+git clone git@github.com:inkarkat/vim-SpellCheck.git
+git clone git@github.com:itchyny/vim-cursorword.git
+git clone git@github.com:jeetsukumaran/vim-indentwise.git
+git clone git@github.com:jlanzarotta/bufexplorer.git
+git clone git@github.com:joom/latex-unicoder.vim.git
+git clone git@github.com:junegunn/fzf.vim.git
+git clone git@github.com:junegunn/vim-after-object.git
+git clone git@github.com:junegunn/vim-easy-align.git
+git clone git@github.com:junegunn/vim-plug.git
+git clone git@github.com:kana/vim-niceblock.git
+git clone git@github.com:kana/vim-textobj-line.git
+git clone git@github.com:kshenoy/vim-signature.git
+git clone git@github.com:kurkale6ka/vim-pairs.git
+git clone git@github.com:liuchengxu/vim-clap.git
+git clone git@github.com:machakann/vim-highlightedyank.git
+git clone git@github.com:markonm/traces.vim.git
+git clone git@github.com:mbbill/undotree.git
+git clone git@github.com:mg979/vim-visual-multi.git
+git clone git@github.com:michaeljsmith/vim-indent-object.git
+git clone git@github.com:muellan/am-colors.git
+git clone git@github.com:muellan/vim-brace-for-umlauts.git
+git clone git@github.com:muellan/vim-fzf-extensions.git
+git clone git@github.com:muellan/vim-toggle-ui-elements.git
+git clone git@github.com:octol/vim-cpp-enhanced-highlight.git
+git clone git@github.com:othree/html5.vim.git
+git clone git@github.com:pangloss/vim-javascript.git
+git clone git@github.com:qpkorr/vim-renamer.git
+git clone git@github.com:rbonvall/vim-textobj-latex.git
+git clone git@github.com:reedes/vim-pencil.git
+git clone git@github.com:rhysd/clever-f.vim.git
+git clone git@github.com:scrooloose/nerdtree.git
+git clone git@github.com:skywind3000/asynctasks.vim.git
+git clone git@github.com:stefandtw/quickfix-reflector.vim.git
+git clone git@github.com:t9md/vim-textmanip.git
+git clone git@github.com:tommcdo/vim-exchange.git
+git clone git@github.com:tomtom/tcomment_vim.git
+git clone git@github.com:tpope/vim-abolish.git
+git clone git@github.com:tpope/vim-endwise.git
+git clone git@github.com:tpope/vim-fugitive.git
+git clone git@github.com:tpope/vim-repeat.git
+git clone git@github.com:tpope/vim-surround.git
+git clone git@github.com:tweekmonster/braceless.vim.git
+git clone git@github.com:vim-scripts/ConflictMotions.git
+git clone git@github.com:vim-scripts/DoxygenToolkit.vim.git
+git clone git@github.com:vim-scripts/GCov-plugin.git
+git clone git@github.com:vim-scripts/ReplaceWithRegister.git
+git clone git@github.com:vim-scripts/a.vim/blob/master/plugin/a.vim.git
+git clone git@github.com:vim-utils/vim-space.git
+git clone git@github.com:w0rp/ale.git
+git clone git@github.com:will133/vim-dirdiff.git
+git clone git@github.com:zef/vim-cycle.git</code></pre>
+</div></div></section>
+<section class="context">
+<ul class="linear-tags "><li><a href="tags/vim.html">VIM</a></li><li><a href="tags/vim-plugins.html">VIM-plugins</a></li><li><a href="tags/code-editors.html">code-editors</a></li><li><a href="tags/list.html">list</a></li><li><a href="tags/tools.html">tools</a></li></ul>
+</section>
+<section class="metadata">
+<p><span class="cat-date">Last updated: 2020-07-05</span></p>
+</section>
+</article></div>
+<footer>
+<div id="footer-top"><div id="footer-top-content"><div id="footer-top-left"><nav><ul class="plain ">
+<li>
+<a href="index.html" class="cat-home" >Home</a>
+</li>
+
+<li>
+<a href="tags/news.html" class="cat-news" >News</a>
+</li>
+
+<li>
+<a href="tags/article.html" class="cat-article" >Articles</a>
+</li>
+
+<li>
+<a href="tags/featured.html" class="cat-featured" >Featured</a>
+</li>
+
+<li>
+<a href="tags/guide.html" class="cat-guide" >Guides</a>
+</li>
+
+<li>
+<a href="tags/list.html" class="cat-list" >Lists</a>
+</li>
+
+<li>
+<a href="about.html" class="cat-about" >About</a>
+</li>
+
+<li>
+<a href="privacy.html" class="cat-contact" >Privacy</a>
+</li>
+
+<li>
+<a href="https://twitter.com/hackingcpp" class="cat-twitter" >Twitter</a>
+</li></ul></nav></div>
+<div id="footer-top-right"><h2 class="cat-tags nav-none">
+<a href="tags.html" >Tags</a>
+</h2>
+<ul class="topic-cloud "><li><a style="font-size:119.09832775265055%;" href="tags/algorithms.html">algorithms</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/allocators.html">allocators</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/arrays.html">arrays</a></li> <li><a style="font-size:155.67625418551208%;" href="tags/article.html">article</a></li> <li><a style="font-size:151.4520701280242%;" href="tags/beginner-level.html">beginner-level</a></li> <li><a style="font-size:60.0%;" href="tags/blogs.html">blogs</a></li> <li><a style="font-size:60.0%;" href="tags/books.html">books</a></li> <li><a style="font-size:60.0%;" href="tags/build-systems.html">build-systems</a></li> <li><a style="font-size:160.9530933887302%;" href="tags/c++.html">C++</a></li> <li><a style="font-size:60.0%;" href="tags/c++-standardization.html">C++-standardization</a></li> <li><a style="font-size:122.76135311474769%;" href="tags/c++11.html">C++11</a></li> <li><a style="font-size:112.96632221214513%;" href="tags/c++14.html">C++14</a></li> <li><a style="font-size:104.32374581448789%;" href="tags/c++17.html">C++17</a></li> <li><a style="font-size:109.08009883059783%;" href="tags/c++20.html">C++20</a></li> <li><a style="font-size:60.0%;" href="tags/c++98.html">C++98</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/c-style.html">C-style</a></li> <li><a style="font-size:60.0%;" href="tags/c-vs-c++.html">C-vs-C++</a></li> <li><a style="font-size:60.0%;" href="tags/cat-casts.html">cat-casts</a></li> <li><a style="font-size:106.83431667163975%;" href="tags/classes.html">classes</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/code-editors.html">code-editors</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/code-formatters.html">code-formatters</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/command-line.html">command-line</a></li> <li><a style="font-size:106.83431667163975%;" href="tags/community.html">community</a></li> <li><a style="font-size:60.0%;" href="tags/comparisons.html">comparisons</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/compilers.html">compilers</a></li> <li><a style="font-size:60.0%;" href="tags/concepts.html">concepts</a></li> <li><a style="font-size:60.0%;" href="tags/conferences.html">conferences</a></li> <li><a style="font-size:60.0%;" href="tags/const.html">const</a></li> <li><a style="font-size:60.0%;" href="tags/constexpr.html">constexpr</a></li> <li><a style="font-size:111.11165590902733%;" href="tags/containers.html">containers</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/control-flow.html">control-flow</a></li> <li><a style="font-size:114.67244982290701%;" href="tags/custom-types.html">custom-types</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/data-structures.html">data-structures</a></li> <li><a style="font-size:60.0%;" href="tags/debugging.html">debugging</a></li> <li><a style="font-size:104.32374581448789%;" href="tags/design.html">design</a></li> <li><a style="font-size:106.83431667163975%;" href="tags/diagnostics.html">diagnostics</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/exceptions.html">exceptions</a></li> <li><a style="font-size:89.54916387632527%;" href="tags/featured.html">featured</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/file-io.html">file-io</a></li> <li><a style="font-size:60.0%;" href="tags/find.html">find</a></li> <li><a style="font-size:60.0%;" href="tags/find_if.html">find_if</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/functional-prog.html">functional-prog</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/functions.html">functions</a></li> <li><a style="font-size:60.0%;" href="tags/gallery.html">gallery</a></li> <li><a style="font-size:94.30551689243521%;" href="tags/generic-prog.html">generic-prog</a></li> <li><a style="font-size:60.0%;" href="tags/groups.html">groups</a></li> <li><a style="font-size:60.0%;" href="tags/guide.html">guide</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/guidelines.html">guidelines</a></li> <li><a style="font-size:60.0%;" href="tags/hash-map.html">hash-map</a></li> <li><a style="font-size:60.0%;" href="tags/hash-set.html">hash-set</a></li> <li><a style="font-size:60.0%;" href="tags/hashing.html">hashing</a></li> <li><a style="font-size:60.0%;" href="tags/header-files.html">header-files</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/heap.html">heap</a></li> <li><a style="font-size:60.0%;" href="tags/ides.html">ides</a></li> <li><a style="font-size:98.1917402739825%;" href="tags/idiom.html">idiom</a></li> <li><a style="font-size:98.1917402739825%;" href="tags/io.html">io</a></li> <li><a style="font-size:94.30551689243521%;" href="tags/iostreams.html">iostreams</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/iterators.html">iterators</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/language-mechanism.html">language-mechanism</a></li> <li><a style="font-size:60.0%;" href="tags/language-references.html">language-references</a></li> <li><a style="font-size:60.0%;" href="tags/learning.html">learning</a></li> <li><a style="font-size:60.0%;" href="tags/libraries.html">libraries</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/linker.html">linker</a></li> <li><a style="font-size:130.25147500745962%;" href="tags/list.html">list</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/low-level.html">low-level</a></li> <li><a style="font-size:60.0%;" href="tags/map.html">map</a></li> <li><a style="font-size:109.08009883059783%;" href="tags/memory.html">memory</a></li> <li><a style="font-size:120.39055466724817%;" href="tags/modern-c++.html">modern-C++</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/move-semantics.html">move-semantics</a></li> <li><a style="font-size:126.83373677211958%;" href="tags/news.html">news</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/oop.html">oop</a></li> <li><a style="font-size:60.0%;" href="tags/organizations.html">organizations</a></li> <li><a style="font-size:60.0%;" href="tags/package-manager.html">package-manager</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/paradigm.html">paradigm</a></li> <li><a style="font-size:60.0%;" href="tags/pattern.html">pattern</a></li> <li><a style="font-size:60.0%;" href="tags/people.html">people</a></li> <li><a style="font-size:60.0%;" href="tags/podcasts.html">podcasts</a></li> <li><a style="font-size:60.0%;" href="tags/pointers.html">pointers</a></li> <li><a style="font-size:60.0%;" href="tags/preprocessor.html">preprocessor</a></li> <li><a style="font-size:60.0%;" href="tags/profiling.html">profiling</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/randomness.html">randomness</a></li> <li><a style="font-size:60.0%;" href="tags/ranges.html">ranges</a></li> <li><a style="font-size:60.0%;" href="tags/references.html">references</a></li> <li><a style="font-size:60.0%;" href="tags/set.html">set</a></li> <li><a style="font-size:60.0%;" href="tags/social-media.html">social-media</a></li> <li><a style="font-size:60.0%;" href="tags/sorted-sequences.html">sorted-sequences</a></li> <li><a style="font-size:89.54916387632527%;" href="tags/stack.html">stack</a></li> <li><a style="font-size:60.0%;" href="tags/standardization.html">standardization</a></li> <li><a style="font-size:116.25207726360686%;" href="tags/std-algorithms.html">std-algorithms</a></li> <li><a style="font-size:89.54916387632527%;" href="tags/std-containers.html">std-containers</a></li> <li><a style="font-size:128.6110337848704%;" href="tags/std-library.html">std-library</a></li> <li><a style="font-size:60.0%;" href="tags/std-macros.html">std-macros</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/std-vector.html">std-vector</a></li> <li><a style="font-size:60.0%;" href="tags/strings.html">strings</a></li> <li><a style="font-size:60.0%;" href="tags/style.html">style</a></li> <li><a style="font-size:60.0%;" href="tags/taste.html">taste</a></li> <li><a style="font-size:83.41715833581988%;" href="tags/templates.html">templates</a></li> <li><a style="font-size:60.0%;" href="tags/testing.html">testing</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/toolchain.html">toolchain</a></li> <li><a style="font-size:116.25207726360686%;" href="tags/tools.html">tools</a></li> <li><a style="font-size:74.77458193816263%;" href="tags/traversal.html">traversal</a></li> <li><a style="font-size:117.72267522825506%;" href="tags/types.html">types</a></li> <li><a style="font-size:60.0%;" href="tags/user.html">user</a></li> <li><a style="font-size:60.0%;" href="tags/version-control.html">version-control</a></li> <li><a style="font-size:60.0%;" href="tags/views.html">views</a></li> <li><a style="font-size:60.0%;" href="tags/vim.html">VIM</a></li> <li><a style="font-size:60.0%;" href="tags/vim-plugins.html">VIM-plugins</a></li> <li><a style="font-size:60.0%;" href="tags/warnings.html">warnings</a></li> <li><a style="font-size:114.67244982290701%;" href="tags/websites.html">websites</a></li> 
+</ul></div></div></div>
+<div id="footer-bottom"><div id="footer-bottom-content">&copy;&nbsp;2019-2021&ensp;André&nbsp;Müller&emsp;&emsp;</div></div>
+</footer>
+<script src="assets/content.js?v=26"></script>
+</body>
+</html>
